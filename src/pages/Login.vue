@@ -8,7 +8,7 @@
                 <div class="form-row">
                     <div class="col-7"> 
                         <div class="text-login p-4">
-                            <h5 class="pt-3">Đăng nhập  Risk</h5>
+                            <h5 class="pt-3">Đăng nhập Inventory Management</h5>
                             <p class="m-0">Chào mừng bạn quay trở lại !</p>
                         </div>
                     </div>
@@ -110,9 +110,6 @@ props: {
             BASE_URL: this.$store.getters.BASE_URL,
             dataPermission:[],
             errorMessage:"",
-            // playerId: localStorage.getItem('playerId'),
-            // playerId:"a4e415bf-3f6b-4fef-9160-5afb99084eab",
-            
         }
     },
     methods:{
@@ -155,17 +152,10 @@ axios({
     }
     })
     .catch((error) => {
-        if (error.response.status == 401) {
+        if (error.response.status) {
             this.$bvModal.show("bv-modal-example-error-login")
-            this.errorMessage = error.response.data.responseStatusMessage
+            this.errorMessage = error.response.data.message
         }
-        else if(error.response.status == 400) {
-            this.$bvModal.show("bv-modal-example-error-login")
-            this.errorMessage = error.response.data.message || error.response.data.responseStatusMessage
-        }
-        else(
-        this.$bvModal.show("bv-modal-example-error-login")
-        )
         return error.response;
     });
 },

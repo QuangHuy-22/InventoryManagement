@@ -31,8 +31,8 @@
                     type="text"
                     style="font-size: 13px;"
                     class="form-control"
-                    placeholder="Họ và tên"
-                    v-model.trim="search.fullName"
+                    placeholder="Name"
+                    v-model.trim="search.name"
                 />
                 </div>
             </div>
@@ -43,7 +43,7 @@
                     type="text"
                     style="font-size: 13px;"
                     class="form-control"
-                    placeholder="Email"
+                    placeholder="Address"
                     v-model.trim="search.address"
                 />
                 </div>
@@ -55,8 +55,8 @@
                     type="text"
                     style="font-size: 13px;"
                     class="form-control"
-                    placeholder="Điện thoại"
-                    v-model.trim="search.phoneNumber"
+                    placeholder="Phone"
+                    v-model.trim="search.phone"
                 />
                 </div>
             </div>
@@ -77,12 +77,6 @@
                 >
                     Bỏ lọc
                 </button>
-                <!-- <button
-                    class="btn btn-success"
-                    style="font-size: 13px; margin-right: 5px;"
-                >
-                    Xuất Excel
-                </button> -->
                 </div>
             </div>
             </div>
@@ -151,37 +145,26 @@
         </div>
     </div>
     </div>
-
+    <div class="showAddUser" >
+        <b-modal id="bv-modal-example-3" hide-footer hide-header >
+            <b-col class="iconLogout mb-2">
+            <div class="mb-img mb-4">
+                        <span><img src="@/assets/images/sussecc.svg" alt=""></span>
+                    </div>
+            </b-col>
+        <div class="d-block text-center" >
+        <h3 
+        style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;">Adding Successful</h3>
+        </div>
+        <div class="buttonSubmitLogout">
+        <button class="buttonOK mt-3" @click="$bvModal.hide('bv-modal-example-3')"  style="font-size: 13px;">OK</button>
+        <!-- <button class="buttonNo mt-3" @click="$bvModal.hide('bv-modal-example')" style="font-size: 13px;" >Không</button> -->
+        </div>
+        </b-modal>
+        </div>
     <footer-content />
 </div>
 
-<!-- -----------modal permission------- -->
-<b-modal id="bv-modal-example-error-permission" hide-footer hide-header>
-    <b-col class="iconLogout mb-2">
-    <b-icon
-        icon="x-circle"
-        class="iconsBox"
-        style="color: red!important;"
-    ></b-icon>
-    </b-col>
-    <div class="d-block text-center">
-    <h3
-        style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;"
-    >
-        Bạn không có quyền truy cập
-    </h3>
-    </div>
-    <div class="buttonSubmitLogout">
-    <button
-        class="buttonOK mt-3"
-        @click="$bvModal.hide('bv-modal-example-error-permission')"
-        style="font-size: 13px;"
-    >
-        OK
-    </button>
-    </div>
-</b-modal>
-<!-- -----------end modal permission------- -->
 </div>
 </template>
 
@@ -196,13 +179,14 @@ name: "customer",
 data() {
 return {
     token: localStorage.getItem("token"),
+    userName: localStorage.getItem("userName"),
     dataCustomer: [],
     dateRange: {
     from: null,
     to: null
     },
     search: {
-    page: 0,
+    page: 1,
     size: 10
     },
     pagination: {
@@ -229,23 +213,21 @@ detail(customerID){
 this.$router.push({ name: "CustomerDetail", params: { id: customerID } });
 },
 async createIssue(id){
-    const response = await CustomerService.createIssue(this.token, id)
+    const response = await CustomerService.createIssue(this.token, id,this.userName)
     if (response.status == 200) {
-        alert("Thanh cong")
+        this.$bvModal.show("bv-modal-example-3")
     }
-    else alert("lose")
+    else alert("Failure")
 },
 
 submitForm () {
-    this.pagination.page = 0
+    // this.pagination.page = 0
     this.fetchData()
 },
 
 clearSearch () {
-    this.dateRange.from = null
-    this.dateRange.to = null
     this.search = {
-    page: 0,
+    page: 1,
     size: 10
     }
     this.fetchData()

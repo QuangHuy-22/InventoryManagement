@@ -189,7 +189,7 @@ return {
     },
     search: {
     code: this.$route.params.code,
-    page: 0,
+    page: 1,
     size: 20,
     },
     pagination: {
@@ -221,7 +221,7 @@ submitForm() {
 clearSearch() {
     this.search = {
     code: this.$route.params.code,
-    page: 0,
+    page: 1,
     size: 20,
     };
     this.fetchData();

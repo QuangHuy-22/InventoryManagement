@@ -123,7 +123,7 @@
             </table>
             </div>
 
-            <!-- <div class="overflow-auto">
+            <div class="overflow-auto">
             <b-pagination
                 v-model="search.page"
                 :total-rows="pagination.total"
@@ -134,7 +134,7 @@
                 last-text="Last"
                 class="pagination mt-4"
             ></b-pagination>
-            </div> -->
+            </div>
         </div>
         </div>
     </div>
@@ -189,7 +189,7 @@ export default {
         to: null,
       },
       search: {
-        page: 0,
+        page: 1,
         size:20
       },
       pagination: {
@@ -206,7 +206,7 @@ export default {
         const response = await CategoryService.getList(this.token,this.search);
         if (response.status == 200) {
           this.dataCategory = response.data.listData;
-          this.pagination.total = response.data.total;
+          this.pagination.total = response.data.count;
         }
         console.log(response);
       } catch (error) {

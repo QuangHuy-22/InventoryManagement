@@ -211,22 +211,22 @@
             </li>
             </div>
             </router-link>
-            <div class="content-sidebar" >
+            <!-- <div class="content-sidebar" >
                 <router-link to='/list-user' style="color: #474D52;">
                         <li>
                 <b-icon icon="person-circle" style="padding-right: 25px; text-decoration: none;"></b-icon>
                 <span key="t-utility">Inventory</span>
                 </li>
                 </router-link>
-            </div>
-            <div class="content-sidebar" >
+            </div> -->
+            <!-- <div class="content-sidebar" >
                 <router-link to='/list-role' style="color: #474D52;">
                         <li>
                 <b-icon icon="diagram3" style="padding-right: 25px; text-decoration: none;"></b-icon>
                 <span key="t-utility">Management</span>
                 </li>
                 </router-link>
-            </div>
+            </div> -->
             <div class="content-sidebar" >
                 <router-link to='/customer' style="color: #474D52;">
                         <li>
@@ -256,6 +256,30 @@
                         <li>
                 <b-icon icon="diagram3" style="padding-right: 25px; text-decoration: none;"></b-icon>
                 <span key="t-utility">VAT Detail</span>
+                </li>
+                </router-link>
+            </div>
+            <div class="content-sidebar" >
+                <router-link to='/issue' style="color: #474D52;">
+                        <li>
+                <b-icon icon="diagram3" style="padding-right: 25px; text-decoration: none;"></b-icon>
+                <span key="t-utility">Issue</span>
+                </li>
+                </router-link>
+            </div>
+            <div class="content-sidebar" >
+                <router-link to='/product-info' style="color: #474D52;">
+                        <li>
+                <b-icon icon="diagram3" style="padding-right: 25px; text-decoration: none;"></b-icon>
+                <span key="t-utility">Product Info</span>
+                </li>
+                </router-link>
+            </div>
+            <div class="content-sidebar" >
+                <router-link to='/list-role' style="color: #474D52;">
+                        <li>
+                <b-icon icon="diagram3" style="padding-right: 25px; text-decoration: none;"></b-icon>
+                <span key="t-utility">Role</span>
                 </li>
                 </router-link>
             </div>

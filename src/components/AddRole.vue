@@ -90,132 +90,11 @@
             Please provide a valid city.
         </div>
     </div>
-    <div class="form-group">
-        <label for="validationCustom01" style="display: flex;">Khai báo quyền <p style="color: red;">*</p></label>
-    </div>
-    <div class="form-group">
-        <label for="validationCustom01" >Quyền sử dụng</label>
-    </div>
 </form>
 </div>
 
 
 
-<div class="card">
-<div class="card-body">
-<div class="row">
-    <!-- ----------check box user---------->
-
-    <div class="col-sm-3">
-    <div class="form-group">
-    <div class="checkAllUser">
-    <b-form-checkbox 
-    type="checkbox" 
-    style="margin: 3px 6px 0px 0px!important;" 
-    v-model="selectAllUser"
-    >
-    <label for="name">Quản lí User</label>
-    </b-form-checkbox>
-    <div style="display: flex; padding-left:20px"  v-for="dataUsers in dataUser" :key="dataUsers.id">
-    <b-form-checkbox 
-    type="checkbox" 
-    style="margin: 3px 6px 0px 0px!important;" 
-    :value="dataUsers.code" 
-    v-model="selectUser"
-    >
-    <label for="name">{{dataUsers.name}}</label>
-    </b-form-checkbox>
-    </div>
-    </div>
-        </div>
-    </div>
-<!----------end check box user---------- -->
-
-<!-- -- ----------check box app---------- -->
-    <div class="col-sm-3">
-        <div class="form-group">
-            <div class="checkAllApp">
-    <b-form-checkbox 
-    type="checkbox" 
-    style="margin: 3px 6px 0px 0px!important;" 
-    v-model="selectAllApp"
-    >
-    <label for="name">Quyền ứng dụng quản lý App</label>
-    </b-form-checkbox>
-    <div style="display: flex; padding-left:20px"  v-for="dataApps in dataApp" :key="dataApps.id">
-    <b-form-checkbox 
-    type="checkbox" 
-    style="margin: 3px 6px 0px 0px!important;" 
-    :value="dataApps.code" 
-    v-model="selectApp"
-    >
-    <label for="name">{{dataApps.name}}</label>
-    </b-form-checkbox>
-    </div>
-    </div>
-        </div>
-    </div>
-<!-- ----------end check box app----------  -->
-
-<!-- ----------check box role---------- -->
-
-    <div class="col-sm-3">
-        <div class="form-group">
-            <div class="checkAllRole">
-    <b-form-checkbox 
-    type="checkbox" 
-    style="margin: 3px 6px 0px 0px!important;" 
-    v-model="selectAllRole"
-    >
-    <label for="name">Quản lí phân quyền</label>
-    </b-form-checkbox>
-    <div style="display: flex; padding-left:20px"  v-for="dataRoles in dataRole" :key="dataRoles.id">
-    <b-form-checkbox 
-    type="checkbox" 
-    style="margin: 3px 6px 0px 0px!important;" 
-    :value="dataRoles.code"
-    v-model="selectRole"
-    >
-    <label for="name">{{dataRoles.name}}</label>
-    </b-form-checkbox>
-    </div>
-    </div>
-        </div>
-    </div>
-    <!-- ----------end check box role------------>
-    <!-- ---------- check box trans------------>
-
-    <!-- ----------end check box trans------------>
-        <div class="col-sm-3">
-        <div class="form-group">
-        <div class="checkAllTrans">
-    <b-form-checkbox 
-    type="checkbox" 
-    style="margin: 3px 6px 0px 0px!important;" 
-    v-model="selectAllTrans"
-    >
-    <label for="name">Quản lí phân quyền</label>
-    </b-form-checkbox>
-    <div style="display: flex; padding-left:20px"  v-for="dataTranss in dataTrans" :key="dataTranss.id">
-    <b-form-checkbox 
-    type="checkbox" 
-    style="margin: 3px 6px 0px 0px!important;" 
-    :value="dataTranss.code"
-    v-model="selectTrans"
-    >
-    <label for="name">{{dataTranss.name}}</label>
-    </b-form-checkbox>
-    </div>
-    </div>
-        </div>
-    </div>
-        <!-- ----------end check box trans------------>
-
-</div>
-        
-        
-</div>
-</div>
 <!-- ---------end check box all--------->
 
     </div>
@@ -239,98 +118,19 @@ components: { index },
     name:"add-role",
     data(){
         return{
-        code:"",
         name:"",
         description:"",
-        dataPermission:{},
-        selected:[],
-        userIds: [],
         token: localStorage.getItem("token"),
-        BASE_URL: this.$store.getters.BASE_URL,
         errorMessage:"",
-        codePermissions:[],
-        elementCheck:[],
-        checkBoxPermission:[],
-        elementCode:[],
-        dataGroupPermiss:{},
-        dataUser:{},
-        dataApp:{},
-        dataRole:{},
-        dataTrans:{},
-        selectRole:[],
-        selectTrans:[],
-        selectApp:[],
-        selectUser:[],
-        selectAll:[],
         
         }
         },
-    computed:{
-        selectAllTrans:{
-            get:function () {
-                return this.dataTrans ? this.selectTrans.length == this.dataTrans.length : false;
-            },
-            set: function (value) {
-                var selectTrans = []
-                if (value) {
-                    this.dataTrans.forEach((role) => {
-                        selectTrans.push(role.code)
-                    });
-                }
-                this.selectTrans = selectTrans;
-            }
-        },
-        selectAllRole:{
-            get:function () {
-                return this.dataRole ? this.selectRole.length == this.dataRole.length : false;
-            },
-            set: function (value) {
-                var selectRole = []
-                if (value) {
-                    this.dataRole.forEach((role) => {
-                        selectRole.push(role.code)
-                    });
-                }
-                this.selectRole = selectRole;
-            }
-        },
-        selectAllApp:{
-            get:function () {
-                return this.dataApp ? this.selectApp.length == this.dataApp.length : false;
-            },
-            set: function (value) {
-                var selectApp = []
-                if (value) {
-                    this.dataApp.forEach((app) => {
-                        selectApp.push(app.code)
-                    });
-                }
-                this.selectApp = selectApp;
-            }
-        },
-        selectAllUser:{
-            get:function () {
-                return this.dataUser ? this.selectUser.length == this.dataUser.length : false;
-            },
-            set: function (value) {
-                var selectUser = []
-                if (value) {
-                    this.dataUser.forEach((user) => {
-                        selectUser.push(user.code)
-                    });
-                }
-                this.selectUser = selectUser;
-            }
-        }
-    },
         
         methods:{
         async handleAddRole(){
-            const allPermission = this.selectRole.concat(this.selectUser.concat(this.selectApp.concat(this.selectTrans)))
             const data = {
             name: this.name,
             description: this.description,
-            codePermissions: allPermission
             }
             try{
                 const response = await  RoleService.createRole(this.token, data)

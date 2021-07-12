@@ -4,87 +4,79 @@
 <div class="content-page">
     <div class="main-content">
     <div class="addUser">
-        <h4 class="font-size-18">VAT Detail List</h4>
+        <h4 class="font-size-18">Issue List</h4>
+        <router-link to="/customer/create-customer">
+        <div
+            class="btn-group float-right"
+        >
+            <button
+            type="submit"
+            class="btn btn-outline-primary"
+            style="font-size: 13px;background-color: #EBF6FF;"
+            data-toggle="modal"
+            data-target=".Risk_QL-User_add"
+            ><b-icon icon="plus-circle"></b-icon> Thêm mới</button
+            >
+        </div>
+        </router-link>
     </div>
 
     <div class="searchInput">
         <form @submit.prevent="submitForm">
-        <div class="box-fillter" style="">
+        <div class="box-fillter" style="padding: 2px 14px 2px 14px;">
             <div class="form-row">
-            <div class="col-md-3 col-sm-3">
-                <div class="bf-detail">
-                <input
-                    type="text"
-                    style="font-size: 13px;"
-                    class="form-control"
-                    placeholder="Product Info"
-                    v-model.trim="search.productInfo"
-                />
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-3">
+            <div class="col-md-2 col-sm-4">
                 <div class="bf-detail">
                 <input
                     type="text"
                     style="font-size: 13px;"
                     class="form-control"
                     placeholder="Code"
-                    v-model.trim="search.vatCode"
-                />
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-3">
-                <div class="bf-detail">
-                <input
-                    type="text"
-                    style="font-size: 13px;"
-                    class="form-control"
-                    placeholder="Code"
-                    v-model.trim="search.tax"
-                />
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-3">
-                <div class="bf-detail">
-                <input
-                    type="text"
-                    style="font-size: 13px;"
-                    class="form-control"
-                    placeholder="Price Total From"
-                    v-model.trim="search.priceTotalFrom"
-                />
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-3">
-                <div class="bf-detail">
-                <input
-                    type="text"
-                    style="font-size: 13px;"
-                    class="form-control"
-                    placeholder="Price Total To"
-                    v-model.trim="search.priceTotalTo"
+                    v-model.trim="search.code"
                 />
                 </div>
             </div>
 
-            <div class="col-md-4 col-sm-4" style="padding-top:0px">
-                <div class="btn-fillter">
+            <div class="col-md-2 col-sm-4">
                 <div class="bf-detail">
-                    <button
+                <input
+                    type="text"
+                    style="font-size: 13px;"
+                    class="form-control"
+                    placeholder="Customer Name"
+                    v-model.trim="search.customerName"
+                />
+                </div>
+            </div>
+            
+            <div class="col-md-2 col-sm-4">
+                <div class="bf-detail">
+                <input
+                    type="text"
+                    style="font-size: 13px;"
+                    class="form-control"
+                    placeholder="User Name"
+                    v-model.trim="search.userName"
+                />
+                </div>
+            </div>
+            
+            <div class="btn-fillter">
+                <div class="bf-detail" style="margin-top: 16px">
+                <button
                     @click.prevent="submitForm"
                     class="btn btn-info"
                     style="font-size: 13px; margin-right: 5px; color:white;"
-                    >
-                    Filter
-                    </button>
-                    <button
+                >
+                    Lọc
+                </button>
+                <button
                     @click="clearSearch"
                     class="btn btn-secondary"
                     style="font-size: 13px; margin-right: 5px;"
-                    >
-                    Unfiltered
-                    </button>
-                </div>
+                >
+                    Bỏ lọc
+                </button>
                 </div>
             </div>
             </div>
@@ -102,25 +94,27 @@
                     <th style="text-align: center">No.</th>
                     <th>ID</th>
                     <th>Code</th>
-                    <th>Product Info</th>
-                    <th>QTY</th>
-                    <th>Price One</th>
-                    <th>Price Total</th>
+                    <th>User Name</th>
+                    <th>Customer Name</th>
+                    <th>Price</th>
+                    <th>Create Date</th>
+                    <th>Update Date</th>
                     <th>Action</th>
                 </tr>
                 </thead>
 
                 <tbody>
-                <tr v-for="(vat, index) in dataVAT" :key="index">
+                <tr v-for="(issue, index) in dataIssue" :key="index">
                     <td style="text-align: center">
-                    {{ index + 1 }}
+                    {{index + 1}}
                     </td>
-                    <td>{{ vat.id }}</td>
-                    <td>{{ vat.vatCode }}</td>
-                    <td>{{ vat.productInfo }}</td>
-                    <td>{{ vat.qty }}</td>
-                    <td>{{ vat.priceOne }}</td>
-                    <td>{{ vat.priceTotal }}</td>
+                    <td>{{ issue.id }}</td>
+                    <td>{{ issue.code }}</td>
+                    <td>{{ issue.userName }}</td>
+                    <td>{{ issue.customerName }}</td>
+                    <td>{{ issue.price }}</td>
+                    <td>{{ issue.createDate }}</td>
+                    <td>{{ issue.updateDate }}</td>
                     <td>
                     <b-dropdown
                         right
@@ -134,10 +128,13 @@
                         </template>
                         <div style="font-size: 13px;">
                         <b-dropdown-item>
-                            Edit
+                            Detail
                         </b-dropdown-item>
-                        <b-dropdown-item>
-                            Delete
+                        <b-dropdown-item >
+                            Update
+                        </b-dropdown-item>
+                        <b-dropdown-item @click="CreateIssue(issue.id)">
+                            Create Issue Detail
                         </b-dropdown-item>
                         </div>
                     </b-dropdown>
@@ -147,128 +144,119 @@
             </table>
             </div>
 
-            <!-- <div class="overflow-auto">
-        <b-pagination
-            v-model="search.page"
-            :total-rows="pagination.total"
-            :per-page="search.size"
-            first-text="First"
-            prev-text="Previous"
-            next-text="Next"
-            last-text="Last"
-            class="pagination mt-4"
-        ></b-pagination>
-        </div> -->
-        </div>
-        </div>
-    </div>
-    </div>
+            <div class="overflow-auto">
+            </div>
 
+        </div>
+        </div>
+    </div>
+    </div>
+    <div class="showAddUser" >
+        <b-modal id="bv-modal-example-3" hide-footer hide-header >
+            <b-col class="iconLogout mb-2">
+            <div class="mb-img mb-4">
+                        <span><img src="@/assets/images/sussecc.svg" alt=""></span>
+                    </div>
+            </b-col>
+        <div class="d-block text-center" >
+        <h3 
+        style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;">Adding Successful</h3>
+        </div>
+        <div class="buttonSubmitLogout">
+        <button class="buttonOK mt-3" @click="$bvModal.hide('bv-modal-example-3')"  style="font-size: 13px;">OK</button>
+        </div>
+        </b-modal>
+        </div>
     <footer-content />
 </div>
 
-<!-- -----------modal permission------- -->
-<b-modal id="bv-modal-example-error-permission" hide-footer hide-header>
-    <b-col class="iconLogout mb-2">
-    <b-icon
-        icon="x-circle"
-        class="iconsBox"
-        style="color: red!important;"
-    ></b-icon>
-    </b-col>
-    <div class="d-block text-center">
-    <h3
-        style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;"
-    >
-        Bạn không có quyền truy cập
-    </h3>
-    </div>
-    <div class="buttonSubmitLogout">
-    <button
-        class="buttonOK mt-3"
-        @click="$bvModal.hide('bv-modal-example-error-permission')"
-        style="font-size: 13px;"
-    >
-        OK
-    </button>
-    </div>
-</b-modal>
-<!-- -----------end modal permission------- -->
 </div>
 </template>
 
 <script>
 import index from "../../components/index.vue";
 import FooterContent from "../../components/FooterContent.vue";
-import { VATService } from "@/services/vat.service.js";
+import { IssueService } from "@/services/issue.service";
+
 export default {
-components: { index, FooterContent },
-name: "list-vat-detail",
+components: { index, FooterContent, },
+name: "issue",
 data() {
 return {
     token: localStorage.getItem("token"),
-    dataVAT: [],
+    userName: localStorage.getItem("userName"),
+    dataIssue: [],
     dateRange: {
     from: null,
-    to: null,
+    to: null
     },
     search: {
     page: 1,
     size: 20,
+    branchId:localStorage.getItem("branchId"), 
     },
     pagination: {
-    total: 20,
+    total: 20
     },
 };
 },
-mounted() {
+created() {
 this.fetchData();
 },
 methods: {
 async fetchData() {
     try {
-    const response = await VATService.getListVATDetail(this.token, this.search);
-    if (response.status == 200) {
-        this.dataVAT = response.data.listData;
-        this.pagination.total = response.data.total;
+    const response = await IssueService.getList(this.token, this.search);
+    if (response.status === 200) {
+        this.dataIssue = response.data.listData;
+        this.pagination.total = response.data.total
     }
-    console.log(response);
     } catch (error) {
-    console.log(error.response);
+    console.log(error);
     }
 },
-submitForm() {
-    this.pagination.page = 1;
-    this.fetchData();
+CreateIssue(issueId){
+    this.$router.push({ name: "CreateIssueDetail", params: { id: issueId } });
+},
+submitForm () {
+    this.pagination.page = 0
+    this.fetchData()
 },
 
-clearSearch() {
-    this.dateRange.from = null;
-    this.dateRange.to = null;
+clearSearch () {
     this.search = {
-    page: 0,
+    page: 1,
     size: 20,
-    };
-    this.fetchData();
+    branchId:localStorage.getItem("branchId"), 
+    }
+    this.fetchData()
+}
 },
+
+computed: {
+useInUrlQueryPropList () {
+    return this.prepareQueryParamsMixin({
+    page: this.search.page
+    })
+}
 },
-"search.page": function() {
-this.$router.push({
-    path: "/vat",
-    query: this.useInUrlQueryPropList,
-});
-this.fetchData();
-},
+
 };
 </script>
 
 <style scoped>
+/* .listUser{
+margin: 0px;
+padding: 0px ;
+font-size: 13px;
+} */
 .content-page {
 background-color: #ffff;
 padding-left: 230px !important;
 }
 .main-content {
 background-color: #f8f8fb !important;
+/* padding: 5px; */
 margin-top: 70px !important;
 }
 .list-groups {
@@ -276,6 +264,7 @@ margin: 50px;
 }
 .user-only {
 display: flex !important;
+/* align-items: flex-start!important; */
 justify-content: space-between;
 padding: 0px !important;
 }
@@ -287,6 +276,7 @@ background-color: #f8f8fb;
 .searchInput {
 display: flex;
 background-color: white;
+/* margin: 0 13px 8px 15px; */
 margin-bottom: 24px;
 }
 .broadUser {
@@ -308,6 +298,22 @@ text-decoration: none;
 display: inline-block;
 font-size: 16px;
 margin: 4px 2px;
+cursor: pointer;
+border-radius: 3px;
+font-size: 13px;
+}
+.buttonExcel {
+background-color: #3bb54a; /* Green */
+border: none;
+color: white;
+height: 41px !important;
+margin-top: 15px !important;
+padding: 0px;
+width: 72px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 16px;
 cursor: pointer;
 border-radius: 3px;
 font-size: 13px;
@@ -367,6 +373,7 @@ text-align: center;
 text-decoration: none;
 display: inline-block;
 font-size: 16px;
+/* margin: 4px 2px; */
 cursor: pointer;
 border-radius: 3px;
 }
@@ -374,7 +381,12 @@ border-radius: 3px;
 text-align: center;
 display: flex;
 justify-content: space-between;
+/* margin: 10px; */
 font-family: Roboto;
+/* padding-bottom: 10px;
+padding-left: 12px;
+padding-right: 12px;
+margin: 0 10px 0 10px; */
 }
 .addUser h4 {
 margin-top: 12px;
@@ -388,13 +400,17 @@ margin: 10px;
 }
 .table {
 font-family: "Open Sans", sans-serif;
+/* width: 750px; */
 border-collapse: collapse;
+/* border: 3px solid #44475C; */
+/* margin: 10px 10px 0 10px; */
 }
 .table th {
 text-transform: uppercase;
 text-align: left;
 background: #f8f9fa;
 color: black;
+/* padding: 8px; */
 min-width: 30px;
 padding-left: 5px !important;
 }
@@ -402,6 +418,7 @@ padding-left: 5px !important;
 .table td {
 padding: 5px !important;
 text-align: left;
+/* border-right: 2px solid #707070; */
 }
 .table td:last-child {
 border-right: none;

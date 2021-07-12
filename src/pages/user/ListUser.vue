@@ -8,7 +8,6 @@
           <router-link to="/list-user/add-user">
             <div
               class="btn-group float-right"
-              :class="this.DATA_PERMISSION.includes('ADD_USER') ? '' : 'd-none'"
             >
               <button
                 type="submit"
@@ -32,8 +31,8 @@
                       type="text"
                       style="font-size: 13px;"
                       class="form-control"
-                      placeholder="Họ và tên"
-                      v-model.trim="search.fullName"
+                      placeholder="Name"
+                      v-model.trim="search.name"
                     />
                   </div>
                 </div>
@@ -44,8 +43,8 @@
                       type="text"
                       style="font-size: 13px;"
                       class="form-control"
-                      placeholder="Email"
-                      v-model.trim="search.email"
+                      placeholder="Phone"
+                      v-model.trim="search.phone"
                     />
                   </div>
                 </div>
@@ -56,70 +55,12 @@
                       type="text"
                       style="font-size: 13px;"
                       class="form-control"
-                      placeholder="Điện thoại"
-                      v-model.trim="search.phoneNumber"
+                      placeholder="Branch"
+                      v-model.trim="search.branch"
                     />
                   </div>
                 </div>
               
-                <div class="col-md-2 col-sm-4">
-                  <div class="bf-detail">
-                    <div class="input-group input-daterange">
-                      <!-- <input
-                        type="date"
-                        class="form-control text-left"
-                        style="font-size: 13px;"
-                        placeholder="Thời gian"
-                        data-date-format="dd M, yyyy"
-                        data-provide="datepicker"
-                        data-date-autoclose="true"
-                      /> -->
-                      <date-picker
-                        v-model="dateRange.from"
-                        placeholder="Từ ngày"
-                        :clearable = "false"
-                      ></date-picker>
-                      <!-- <div class="input-group-append">
-                        <span class="input-group-text" style="font-size: 13px;">
-                          <i class="mdi mdi-calendar"></i>
-                        </span>
-                      </div> -->
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col-md-2 col-sm-4">
-                  <div class="bf-detail">
-                    <div class="input-group input-daterange">
-                      <date-picker
-                        v-model="dateRange.to"
-                        placeholder="Đến ngày"
-                        :clearable = "false"
-                      ></date-picker>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col-md-2 col-sm-4">
-                  <div class="bf-detail">
-                    <Select2
-                      v-model="search.position"
-                      :options="optionsPosition"
-                      placeholder="Vai trò"
-                    >
-                    </Select2>
-                  </div>
-                </div>
-                <div class="col-md-2 col-sm-4">
-                  <div class="bf-detail">
-                    <Select2
-                      v-model="search.status"
-                      :options="optionsStatus"
-                      placeholder="Trạng thái"
-                    >
-                    </Select2>
-                  </div>
-                </div>
                 <div class="btn-fillter">
                   <div class="bf-detail" style="margin-top: 16px">
                     <button
@@ -156,12 +97,13 @@
                 <table class="table table-striped table-bordered mb-0">
                   <thead>
                     <tr>
-                      <th style="text-align: center">STT</th>
-                      <th>Họ và tên</th>
+                      <th style="text-align: center">No.</th>
+                      <th>ID</th>
+                      <th>User Name</th>
                       <th>Email</th>
-                      <th>Số Điện Thoại</th>
-                      <th>Vai Trò</th>
-                      <th>Trạng Thái</th>
+                      <th>Name</th>
+                      <th>Phone</th>
+                      <th>branch Name</th>
                       <th>Thao tác</th>
                     </tr>
                   </thead>
@@ -171,34 +113,12 @@
                       <td style="text-align: center">
                         {{ search.size * (search.page - 1) + index + 1 }}
                       </td>
-                      <td>{{ user.fullName }}</td>
-                      <td>{{ user.username }}</td>
-                      <td>{{ user.phoneNumber }}</td>
-                      <td>
-                        <span v-if="user.position === 'BOD'">
-                          Bod
-                        </span>
-                        <span v-if="user.position === 'TECHNICIAN'">
-                          Kỹ thuật
-                        </span>
-                        <span v-if="user.position === 'OPERATOR'">
-                          Vận hành
-                        </span>
-                        <span v-if="user.position === 'ACCOUNTANT'">
-                          Kế toán
-                        </span>
-                      </td>
-                      <td>
-                        <span
-                          :class="
-                            user.status == 'INACTIVE'
-                              ? 'badge badge-pill badge-soft-danger'
-                              : 'badge badge-pill badge-soft-success'
-                          "
-                        >
-                          {{ user.status == "INACTIVE" ? "Khóa" : "Hoạt động" }}
-                        </span>
-                      </td>
+                      <td>{{ user.id }}</td>
+                      <td>{{ user.userName }}</td>
+                      <td>{{ user.email }}</td>
+                      <td>{{ user.name }}</td>
+                      <td>{{ user.phone }}</td>
+                      <td>{{ user.branchName }}</td>
                       <td>
                         <b-dropdown
                           right
@@ -335,20 +255,16 @@ import index from "../../components/index.vue";
 import FooterContent from "../../components/FooterContent.vue";
 import { UserService } from "@/services/user.service";
 import prepareQueryParamsMixin from '../../mixins/prepareQueryParamsMixin'
-import DatePicker from 'vue2-datepicker';
 import 'vue2-datepicker/index.css';
-import Select2 from 'v-select2-component';
-import moment from 'moment'
 
 export default {
-  components: { index, FooterContent, DatePicker, Select2 },
+  components: { index, FooterContent, },
   name: "list-user",
   mixins: [prepareQueryParamsMixin],
   data() {
     return {
       token: localStorage.getItem("token"),
       idUser: this.$route.params.id,
-      DATA_PERMISSION: localStorage.getItem("permission"),
       dataUsers: [],
       dateRange: {
         from: null,
@@ -361,16 +277,6 @@ export default {
       pagination: {
         total: 20
       },
-      optionsPosition: [
-        { id: 'BOD', text: 'Bod' },
-        { id: 'TECHNICIAN', text: 'Kỹ thuật' },
-        { id: 'OPERATOR', text: 'Vận hành' },
-        { id: 'ACCOUNTANT', text: 'Kế toán' }
-      ],
-      optionsStatus: [
-        { id: 'ACTIVE', text: 'Hoạt động' },
-        { id: 'INACTIVE', text: 'Khóa' }
-      ]
     };
   },
   created() {
@@ -378,53 +284,14 @@ export default {
   },
   methods: {
     async fetchData() {
+      console.log(this.token);
       try {
-        this.search.dateFrom = moment(this.dateRange.from).startOf('day').add('7', 'hours')
-        this.search.dateTo = moment(this.dateRange.to).endOf('day').add('7', 'hours')
-
         const response = await UserService.getList(this.token, this.search);
         if (response.status === 200) {
-          this.dataUsers = response.data.data;
-          this.pagination.total = response.data.total
+          this.dataUsers = response.data.listData;
         }
       } catch (error) {
         console.log(error);
-      }
-    },
-
-    detail(userId) {
-      if (this.DATA_PERMISSION.includes("VIEW_USER_DETAIL")) {
-        this.$router.push({ name: "Chi Tiết User", params: { id: userId } });
-      } else this.$bvModal.show("bv-modal-example-error-permission");
-    },
-
-    update(userId) {
-      if (this.DATA_PERMISSION.includes("UPDATE_USER")) {
-        this.$router.push({ name: "Cập nhật User", params: { id: userId } });
-      } else this.$bvModal.show("bv-modal-example-error-permission");
-    },
-
-    assign(userId) {
-      if (this.DATA_PERMISSION.includes("ASSIGN_USER_PERMISSION")) {
-        this.$router.push({ name: "Gán nhóm quyền", params: { id: userId } });
-      } else this.$bvModal.show("bv-modal-example-error-permission");
-    },
-
-    async lock(userId) {
-      if (this.DATA_PERMISSION.includes("LOCK_USER")) {
-        const response = await UserService.lockUser(userId, this.token);
-        if (response.status === 200) {
-          this.fetchData()
-        }
-      } else this.$bvModal.show("bv-modal-example-error-permission");
-    },
-
-    async unlock(userId) {
-      if (this.DATA_PERMISSION.includes("LOCK_USER")) {
-        const response = await UserService.unlockUser(userId, this.token);
-        if (response.status === 200) {
-          this.fetchData()
-        }
       }
     },
 
@@ -434,8 +301,6 @@ export default {
     },
 
     clearSearch () {
-      this.dateRange.from = null
-      this.dateRange.to = null
       this.search = {
         page: 1,
         size: 10

@@ -6,23 +6,21 @@ const headers = {
     "Access-Control-Allow-Origin": "*",
 }
 
-export class UserService extends BaseService {
+export class BranchService extends BaseService {
     static async getList(token, params) {
         try {
             const response = await axios({
                 method: "get",
-                url: `${BASE_URL}/api/users`,
+                url: `${BASE_URL}/api/branches`,
+                params,
                 headers: {
                     headers,
                     AuthToken: token
-                },
-                params: params
-            })
+                }
+            });
             return response;
         } catch (error) {
             return error.response
         }
     }
-
-
 }

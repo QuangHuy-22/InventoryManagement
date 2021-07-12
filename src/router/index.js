@@ -23,7 +23,8 @@ import Readiness from "../components/Readiness.vue"
 import index from "../components/index.vue"
 import ListCategory from "../pages/Category/ListCategory"
 import CreateCategory from "../pages/Category/CreateCategory"
-import CreateProducInfo from "../pages/ProductInfo/CreateProducInfo.vue"
+import CreateProductInfo from "../pages/ProductInfo/CreateProductInfo.vue"
+import ProductInfo from "../pages/ProductInfo/ProductInfo.vue"
 import Customer from "../pages/Customer/Customer.vue"
 import CreateCustomer from "../pages/Customer/CreateCustomer.vue"
 import CustomerDetail from "../pages/Customer/CustomerDetail.vue"
@@ -34,6 +35,9 @@ import VATDetail from "../pages/VAT/VATDetail.vue"
 import CreateVATDetail from "../pages/VAT/CreateVATDetail.vue"
 import ListVATCode from "../pages/VAT/ListVATCode.vue"
 import Product from "../pages/Product/Product.vue"
+import CreateProductDetail from "../pages/Product/CreateProductDetail.vue"
+import Issue from "../pages/Issue/Issue.vue"
+import CreateIssueDetail from "../pages/Issue/CreateIssueDetail.vue"
 // import health from "./health.js"
 
 
@@ -151,9 +155,14 @@ const routes = [{
         component: ListCategory,
     },
     {
-        path: '/produc-info/create-produc-info',
-        name: 'CreateProducInfo',
-        component: CreateProducInfo,
+        path: '/product-info/create-product-info',
+        name: 'CreateProductInfo',
+        component: CreateProductInfo,
+    },
+    {
+        path: '/product-info',
+        name: 'ProductInfo',
+        component: ProductInfo,
     },
     {
         path: '/category/create-category',
@@ -204,6 +213,21 @@ const routes = [{
         path: '/product',
         name: 'Product',
         component: Product,
+    },
+    {
+        path: '/issue',
+        name: 'Issue',
+        component: Issue,
+    },
+    {
+        path: '/issue/add-issue-detail/:id',
+        name: 'CreateIssueDetail',
+        component: CreateIssueDetail,
+    },
+    {
+        path: '/product/add-product-detail/:id',
+        name: 'CreateProductDetail',
+        component: CreateProductDetail,
     },
     {
         path: '/customer/detail-customer/:id',

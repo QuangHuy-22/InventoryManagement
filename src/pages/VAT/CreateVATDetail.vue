@@ -78,7 +78,7 @@
                 <form class="needs-validation">
                     <div class="col-sm-6">
                     <div class="form-group form-erross">
-                        <label for="validationCustom04">Vai trò</label>
+                        <label for="validationCustom04">Product Info</label>
                         <b-select
                         class="form-control select2" v-model="dataVAT.productId" >
                         <option  v-for="data in dataProductInfo" :key="data.id"  :value="data.id">{{data.name}}</option>
@@ -172,7 +172,7 @@ return {
     errorMessage: "",
     idVATDetail: this.$route.params.id,
     search: {
-    page: 0,
+    page: 1,
     size: 20,
     },
     dataProductInfo: {},

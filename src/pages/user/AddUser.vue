@@ -48,7 +48,41 @@
             <form class="needs-validation" >
             <div class="col-sm-6" >
                 <div class="form-group form-erross">
-                    <label for="validationCustom01">Họ và tên</label>
+                    <label for="validationCustom01">User Name</label>
+                    <v-text-field 
+                    type="text" 
+                    class="form-control" 
+                    style="padding: 3px 0px!important;"
+                    id="validationCustom01" 
+                    placeholder="" 
+                    value="" 
+                    required 
+                    v-model="fullName">
+                    </v-text-field>
+                    <!-- <div class="invalid-feedback">
+                        Please provide a valid city.
+                    </div> -->
+                </div>
+                <div class="form-group">
+                <label for="validationCustom01">Password</label>
+                <v-text-field 
+                class="form-control"
+                style="padding: 1px 0px!important; font-size: 14px; padding-bottom: 0px!important; "
+                id="validationCustom01" 
+                placeholder="******" 
+                @click:append="show1 = !show1"
+                :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                :type="show1 ? 'text' : 'password'"
+                value="" 
+                required 
+                v-model="oldPass">
+                </v-text-field>
+                <div class="invalid-feedback">
+                Please provide a valid city.
+                </div>
+                </div>
+                <div class="form-group form-erross">
+                    <label for="validationCustom01">Name</label>
                     <v-text-field 
                     type="text" 
                     class="form-control" 
@@ -105,12 +139,9 @@
                         </div>
                     </div>
                 </div>
-                <label for="validationCustom04">Vai trò</label>
-                <b-select class="form-control select2" :error-messages="positonErrors" v-model="position">
-                    <option value="OPERATOR">Vận hành</option>
-                    <option value="ACCOUNTANT">Kế toán</option>
-                    <option value="TECHNICIAN">Kĩ Thuật</option>
-                    <option value="BOD">BOD</option>
+                <label for="validationCustom04">Branch Id</label>
+                <b-select class="form-control select2"  v-model="position">
+                    <option v-for="data in dataBranch" :key="data.id" :value="data.id">{{data.name}}</option>
                 </b-select>
                 </div>
                 <div class="form-group form-erross">
@@ -119,8 +150,8 @@
                 <div class="col-sm-3" v-for="datas in dataRole" :key="datas.id"  >
                 <div class="form-group" >
                 <div class="custom-control custom-checkbox" >
-                    <input type="checkbox"  required :id="datas.id" :value="datas.code" v-model="listCodeRole" >
-                    <label style="padding-left:7px;" for="invalidCheck">{{datas.name}}</label>
+                    <input type="checkbox"  required :id="datas.id" :value="datas.id" v-model="listCodeRole" >
+                    <label style="padding-left:7px;" for="invalidCheck">{{datas.roleName}}</label>
                 </div>
                 </div>
                 </div>
@@ -155,6 +186,7 @@
 <script>
 import { RoleService } from "@/services/role.service";
 import { UserService } from "@/services/user.service";
+import { BranchService } from "@/services/branch.service";
 import index from '../../components/index.vue'
 import { required, } from "vuelidate/lib/validators";
 export default {
@@ -172,7 +204,6 @@ components: {
         errorMessage:"",
         token : localStorage.getItem('token'),
         BASE_URL: this.$store.getters.BASE_URL,
-        status: Number,
         error:"",
         dataUser: {},
         reg: /^[\w-._+%]+@(mpos|vimo|nextpay|gmail)\.vn|.com$/,
@@ -181,7 +212,13 @@ components: {
         regPhone:/(059|099|058|056|092|078|076|077|079|070|093|090|089|082|081|085|084|083|088|094|091|039|038|037|036|035|034|033|032|098|097|096|086)+([0-9]{7})\b/,
         // showAdd: false
         dataRole:{},
+        dataBranch:{},
         listCodeRole:[],
+        show1: false,
+        search:{
+            page:1,
+            size:10
+        }
         }
     },
     validations: {
@@ -202,17 +239,12 @@ components: {
     },
         async handleAddUser(){
         const data = {
-        username: this.username.toLowerCase(),
+        username: this.username,
         fullName: this.fullName,
         phoneNumber: this.phoneNumber.replace(/ +/g, ""),
         position: this.position,
         rolesNameList:[],
         rolesCodeList: this.listCodeRole,
-        search: {
-            page: 1,
-            size: 10,
-            roleName:''
-        }
         }
         try{
             const response = await UserService.createUser(this.token, data)
@@ -238,11 +270,21 @@ components: {
             return error.response;
         }
     },
-    async fetchData(){
+    async fetchDataRole(){
     try {
-        const response = await RoleService.getListAddUser(this.token)
+        const response = await RoleService.getList(this.token, this.search)
         if (response.status == 200) {
-            this.dataRole = response.data.data
+            this.dataRole = response.data.listData
+        }
+    }catch(error){
+        console.log(error.response);
+    }
+    },
+    async fetchDataBranch(){
+    try {
+        const response = await BranchService.getList(this.token, this.search)
+        if (response.status == 200) {
+            this.dataBranch = response.data.listData
         }
     }catch(error){
         console.log(error.response);
@@ -250,7 +292,8 @@ components: {
     },
     },
     mounted() {
-    this.fetchData()
+    this.fetchDataRole()
+    this.fetchDataBranch()
 },
     computed:{
         emailErrors() {

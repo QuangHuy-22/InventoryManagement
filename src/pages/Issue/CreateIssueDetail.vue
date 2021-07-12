@@ -8,16 +8,18 @@
         <!-- InstanceBeginEditable name="EditRegion1" -->
         <!-- box-title -->
         <div class="box-title box-title-fix">
-            <h2>Create Product Detail</h2>
+            <h2>Create Issue Detail</h2>
             <div class="btn-group float-right">
-            <form class="buttonAddUser" @submit.prevent="createAddProduct">
+            <form class="buttonAddUser" @submit.prevent="createAddIssue">
                 <router-link
-                to="/product"
+                to="/vat"
                 class="btn btn-secondary"
                 style="font-size: 13px;"
                 >
                 Cancel</router-link
                 >
+                <router-link to="/produc-info/create-produc-info">
+                </router-link>
                 <button
                 class="btn btn-secondary"
                 style="font-size: 13px;margin-left: 5px;"
@@ -50,7 +52,7 @@
                     </h3>
                     </div>
                     <div class="buttonSubmitLogout">
-                    <router-link to="/product">
+                    <router-link to="/vat">
                         <button
                         class="buttonOK mt-3"
                         style="font-size: 13px;"
@@ -72,18 +74,11 @@
             <div class="row">
             <div class="col-sm-12">
                 <div class="card-body">
-                <h4 class="card-title mb-3">Information VAT</h4>
+                <h4 class="card-title mb-3">Information Issue</h4>
                 <form class="needs-validation">
                     <div class="col-sm-6">
                     <div class="form-group form-erross">
-                        <label for="validationCustom04">Vai trò</label>
-                        <b-select
-                        class="form-control select2" v-model="dataProduct.productId" >
-                        <option  v-for="data in dataProductInfo" :key="data.id"  :value="data.id">{{data.name}}</option>
-                        </b-select>
-                    </div>
-                    <div class="form-group form-erross">
-                        <label for="validationCustom01">QTY</label>
+                        <label for="validationCustom01">Issue Id</label>
                         <v-text-field
                         type="text"
                         class="form-control"
@@ -92,7 +87,26 @@
                         placeholder=""
                         value=""
                         required
-                        v-model="dataProduct.qty"
+                        v-model="dataIssue.issueId"
+                        >
+                        </v-text-field>
+                    </div>
+                    <div class="form-group form-erross">
+                        <label for="validationCustom04">Product Info</label>
+                        <b-select
+                        class="form-control select2" v-model="dataIssue.productId" >
+                        <option  v-for="data in dataProductInfo" :key="data.id"  :value="data.id">{{data.name}}</option>
+                        </b-select>
+                    </div>
+                    <div class="form-group form-erross">
+                        <label for="validationCustom01">Imei</label>
+                        <v-text-field
+                        type="text"
+                        class="form-control"
+                        style="padding: 3px 0px!important;"
+                        id="validationCustom01"
+                        placeholder=""
+                        v-model="dataIssue.imei"
                         >
                         </v-text-field>
                     </div>
@@ -138,24 +152,22 @@
 
 <script>
 import index from "../../components/index.vue";
-import { ProducService } from "@/services/product.service.js";
+import { IssueService } from "@/services/issue.service.js";
 import { ProducInfoService } from "@/services/producInfo.service.js";
 export default {
-name: "create-product-detail",
+name: "create-VAT-detail",
 components: {
 index,
 },
 data() {
 return {
     token: localStorage.getItem("token"),
-    dataProduct: {
+    dataIssue: {
     productId: "",
-    qty: "",
+    issueId:  this.$route.params.id,
+    imei: "",
     },
-    // branchId: localStorage.getItem("branchId"),
-    // userName: localStorage.getItem("userName"),
     errorMessage: "",
-    idProductDetail: this.$route.params.id,
     search: {
     page: 1,
     size: 20,
@@ -164,15 +176,14 @@ return {
 };
 },
 methods: {
-async createAddProduct(){
+async createAddIssue(){
     try{
-        const response = await ProducService.createProductDetail(this.token, this.idProductDetail,this.dataProduct)
+        const response = await IssueService.createIssueDetail(this.token,this.dataIssue)
         if (response.status == 200) {
             this.$bvModal.show("bv-modal-example-3")
         }else{
             this.errorMessage = response.data.message
-            console.log(this.errorMessage);
-            this.$bvModal.show("bv-modal-example-error-add-user")  
+            this.$bvModal.show("bv-modal-example-error-add-user")
         }
         }
     catch(error){

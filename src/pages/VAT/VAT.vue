@@ -164,6 +164,33 @@
         </div>
     </div>
     </div>
+            <!-- ----------modal error-------->
+        <b-modal
+            id="bv-modal-example-error-add-user"
+            hide-footer
+            hide-header
+        >
+            <b-col class="iconLogout mb-2">
+            <b-icon
+                icon="x-circle"
+                class="iconsBox"
+                style="color: red!important;"
+            ></b-icon>
+            </b-col>
+            <div class="d-block text-center">
+            <span>{{ this.errorMessage }}</span>
+            </div>
+            <div class="buttonSubmitLogout">
+            <button
+                class="buttonOK mt-3"
+                @click="$bvModal.hide('bv-modal-example-error-add-user')"
+                style="font-size: 13px;"
+            >
+                OK
+            </button>
+            </div>
+        </b-modal>
+        <!-- ----------end modal error-------->
 
     <b-modal id="bv-modal-example-3" hide-footer hide-header>
     <b-col class="iconLogout mb-2">
@@ -209,13 +236,14 @@ return {
     to: null,
     },
     search: {
-    page: 0,
+    page: 1,
     size: 20,
     branchName: localStorage.getItem("branchName"),
     },
     pagination: {
     total: 20,
     },
+    errorMessage:""
 };
 },
 mounted() {
@@ -242,6 +270,10 @@ async createProductStatus(id) {
     const response = await VATService.createProductStatus(this.token,id,this.userName);
     if(response.status == 200) {
         this.$bvModal.show("bv-modal-example-3");
+    }
+    else{
+        this.errorMessage = response.data
+        this.$bvModal.show("bv-modal-example-error-add-user");
     }
     } catch (error) {
     return error.response;

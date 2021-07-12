@@ -53,7 +53,7 @@ export class CustomerService extends BaseService {
             return error.response
         }
     }
-    static async createIssue(token, id) {
+    static async createIssue(token, id, userName) {
         try {
             const response = await axios({
                 method: "post",
@@ -61,6 +61,9 @@ export class CustomerService extends BaseService {
                 headers: {
                     AuthToken: token,
                 },
+                params: {
+                    userName: userName
+                }
             });
             return response;
         } catch (error) {

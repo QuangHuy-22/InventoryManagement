@@ -4,7 +4,12 @@
 <div class="content-page">
     <div class="main-content">
     <div class="addUser">
-        <h4 class="font-size-18">VAT Detail List</h4>
+        <h4 class="font-size-18">Product Info List</h4>
+        <router-link to="/product-info/create-product-info" >
+        <div class="btn-group float-right" >
+            <Button type="submit" class="btn btn-outline-primary" style="font-size: 13px;background-color: #EBF6FF;" data-toggle="modal" data-target=".Risk_QL-User_add"><b-icon icon="plus-circle" ></b-icon> Thêm mới</button>
+        </div>
+    </router-link>
     </div>
 
     <div class="searchInput">
@@ -17,8 +22,8 @@
                     type="text"
                     style="font-size: 13px;"
                     class="form-control"
-                    placeholder="Product Info"
-                    v-model.trim="search.productInfo"
+                    placeholder="Name"
+                    v-model.trim="search.name"
                 />
                 </div>
             </div>
@@ -28,8 +33,8 @@
                     type="text"
                     style="font-size: 13px;"
                     class="form-control"
-                    placeholder="Code"
-                    v-model.trim="search.vatCode"
+                    placeholder="Category Name"
+                    v-model.trim="search.categoryName"
                 />
                 </div>
             </div>
@@ -39,8 +44,8 @@
                     type="text"
                     style="font-size: 13px;"
                     class="form-control"
-                    placeholder="Code"
-                    v-model.trim="search.tax"
+                    placeholder="Qty From"
+                    v-model.trim="search.qtyFrom"
                 />
                 </div>
             </div>
@@ -50,8 +55,8 @@
                     type="text"
                     style="font-size: 13px;"
                     class="form-control"
-                    placeholder="Price Total From"
-                    v-model.trim="search.priceTotalFrom"
+                    placeholder="Qty To"
+                    v-model.trim="search.qtyTo"
                 />
                 </div>
             </div>
@@ -61,8 +66,19 @@
                     type="text"
                     style="font-size: 13px;"
                     class="form-control"
-                    placeholder="Price Total To"
-                    v-model.trim="search.priceTotalTo"
+                    placeholder="Price From"
+                    v-model.trim="search.priceFrom"
+                />
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-3">
+                <div class="bf-detail">
+                <input
+                    type="text"
+                    style="font-size: 13px;"
+                    class="form-control"
+                    placeholder="Price To"
+                    v-model.trim="search.priceTo"
                 />
                 </div>
             </div>
@@ -101,26 +117,30 @@
                 <tr>
                     <th style="text-align: center">No.</th>
                     <th>ID</th>
-                    <th>Code</th>
-                    <th>Product Info</th>
-                    <th>QTY</th>
-                    <th>Price One</th>
-                    <th>Price Total</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Image</th>
+                    <th>Category Name</th>
+                    <th>qty</th>
+                    <th>Price In</th>
+                    <th>Price Out</th>
                     <th>Action</th>
                 </tr>
                 </thead>
 
                 <tbody>
-                <tr v-for="(vat, index) in dataVAT" :key="index">
+                <tr v-for="(producInfo, index) in dataProductInfo" :key="index">
                     <td style="text-align: center">
                     {{ index + 1 }}
                     </td>
-                    <td>{{ vat.id }}</td>
-                    <td>{{ vat.vatCode }}</td>
-                    <td>{{ vat.productInfo }}</td>
-                    <td>{{ vat.qty }}</td>
-                    <td>{{ vat.priceOne }}</td>
-                    <td>{{ vat.priceTotal }}</td>
+                    <td>{{ producInfo.id }}</td>
+                    <td>{{ producInfo.name }}</td>
+                    <td>{{ producInfo.description }}</td>
+                    <td><img :src="producInfo.imgPath" /></td>
+                    <td>{{ producInfo.categoryName }}</td>
+                    <td>{{ producInfo.qty }}</td>
+                    <td>{{ producInfo.priceIn }}</td>
+                    <td>{{ producInfo.priceOut }}</td>
                     <td>
                     <b-dropdown
                         right
@@ -166,52 +186,20 @@
 
     <footer-content />
 </div>
-
-<!-- -----------modal permission------- -->
-<b-modal id="bv-modal-example-error-permission" hide-footer hide-header>
-    <b-col class="iconLogout mb-2">
-    <b-icon
-        icon="x-circle"
-        class="iconsBox"
-        style="color: red!important;"
-    ></b-icon>
-    </b-col>
-    <div class="d-block text-center">
-    <h3
-        style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;"
-    >
-        Bạn không có quyền truy cập
-    </h3>
-    </div>
-    <div class="buttonSubmitLogout">
-    <button
-        class="buttonOK mt-3"
-        @click="$bvModal.hide('bv-modal-example-error-permission')"
-        style="font-size: 13px;"
-    >
-        OK
-    </button>
-    </div>
-</b-modal>
-<!-- -----------end modal permission------- -->
 </div>
 </template>
 
 <script>
 import index from "../../components/index.vue";
 import FooterContent from "../../components/FooterContent.vue";
-import { VATService } from "@/services/vat.service.js";
+import { ProducInfoService } from "@/services/producInfo.service.js";
 export default {
 components: { index, FooterContent },
-name: "list-vat-detail",
+name: "list-product-info",
 data() {
 return {
     token: localStorage.getItem("token"),
-    dataVAT: [],
-    dateRange: {
-    from: null,
-    to: null,
-    },
+    dataProductInfo: [],
     search: {
     page: 1,
     size: 20,
@@ -227,9 +215,9 @@ this.fetchData();
 methods: {
 async fetchData() {
     try {
-    const response = await VATService.getListVATDetail(this.token, this.search);
+    const response = await ProducInfoService.getList(this.token, this.search);
     if (response.status == 200) {
-        this.dataVAT = response.data.listData;
+        this.dataProductInfo = response.data.listData;
         this.pagination.total = response.data.total;
     }
     console.log(response);
@@ -243,8 +231,6 @@ submitForm() {
 },
 
 clearSearch() {
-    this.dateRange.from = null;
-    this.dateRange.to = null;
     this.search = {
     page: 0,
     size: 20,
@@ -254,7 +240,7 @@ clearSearch() {
 },
 "search.page": function() {
 this.$router.push({
-    path: "/vat",
+    path: "/product-info",
     query: this.useInUrlQueryPropList,
 });
 this.fetchData();

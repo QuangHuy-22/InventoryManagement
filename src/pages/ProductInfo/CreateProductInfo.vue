@@ -8,11 +8,14 @@
         <!-- InstanceBeginEditable name="EditRegion1" -->
         <!-- box-title -->
         <div class="box-title box-title-fix">
-            <h2>Create Product Detail</h2>
+            <h2>Create ProDuc Info</h2>
             <div class="btn-group float-right">
-            <form class="buttonAddUser" @submit.prevent="createAddProduct">
+            <form
+                class="buttonAddUser"
+                @submit.prevent="handleAddProducInfo"
+            >
                 <router-link
-                to="/product"
+                to="/category"
                 class="btn btn-secondary"
                 style="font-size: 13px;"
                 >
@@ -50,7 +53,7 @@
                     </h3>
                     </div>
                     <div class="buttonSubmitLogout">
-                    <router-link to="/product">
+                    <router-link to="/category">
                         <button
                         class="buttonOK mt-3"
                         style="font-size: 13px;"
@@ -72,18 +75,14 @@
             <div class="row">
             <div class="col-sm-12">
                 <div class="card-body">
-                <h4 class="card-title mb-3">Information VAT</h4>
-                <form class="needs-validation">
+                <h4 class="card-title mb-3">Information Produc Info</h4>
+                <form
+                    class="needs-validation"
+                    enctype="multipart/form-data"
+                >
                     <div class="col-sm-6">
                     <div class="form-group form-erross">
-                        <label for="validationCustom04">Vai trò</label>
-                        <b-select
-                        class="form-control select2" v-model="dataProduct.productId" >
-                        <option  v-for="data in dataProductInfo" :key="data.id"  :value="data.id">{{data.name}}</option>
-                        </b-select>
-                    </div>
-                    <div class="form-group form-erross">
-                        <label for="validationCustom01">QTY</label>
+                        <label for="validationCustom01">Category</label>
                         <v-text-field
                         type="text"
                         class="form-control"
@@ -92,10 +91,58 @@
                         placeholder=""
                         value=""
                         required
-                        v-model="dataProduct.qty"
+                        v-model="dataProducInfo.categoryId"
                         >
                         </v-text-field>
                     </div>
+                    <div class="form-group form-erross">
+                        <label for="validationCustom01">Name</label>
+                        <v-text-field
+                        type="text"
+                        class="form-control"
+                        style="padding: 3px 0px!important;"
+                        id="validationCustom01"
+                        placeholder=""
+                        value=""
+                        required
+                        v-model="dataProducInfo.name"
+                        >
+                        </v-text-field>
+                    </div>
+                    <div class="form-group form-erross">
+                        <label for="validationCustom01">Description</label>
+                        <v-text-field
+                        type="text"
+                        class="form-control"
+                        style="padding: 3px 0px!important;"
+                        id="validationCustom01"
+                        placeholder=""
+                        value=""
+                        v-model="dataProducInfo.description"
+                        >
+                        </v-text-field>
+                    </div>
+                    <!-- <div class="form-group form-erross">
+                        <label for="validationCustom01">Image</label>
+                        <div v-if="!image">
+                        <h2>Select an image</h2>
+                        <input type="file" @change="onFileChange">
+                        </div>
+                        <div v-else>
+                        <img :src="image" />
+                        <button @click="removeImage">Remove image</button>
+                        </div>
+                    </div> -->
+                    <form ref="uploadForm" @submit.prevent="submit">
+                    <input
+                    type="file"
+                    ref="uploadImage"
+                    @change="onFileChange"
+                    class="inputfile"
+                    id="file"
+                    />
+                    <label for="file">Chọn ảnh</label>
+                    </form>
                     </div>
                 </form>
                 </div>
@@ -137,57 +184,98 @@
 </template>
 
 <script>
+import axios from "axios";
 import index from "../../components/index.vue";
-import { ProducService } from "@/services/product.service.js";
-import { ProducInfoService } from "@/services/producInfo.service.js";
+import { required } from "vuelidate/lib/validators";
 export default {
-name: "create-product-detail",
+name: "create-product-info",
 components: {
 index,
 },
 data() {
 return {
     token: localStorage.getItem("token"),
-    dataProduct: {
-    productId: "",
-    qty: "",
-    },
-    // branchId: localStorage.getItem("branchId"),
-    // userName: localStorage.getItem("userName"),
+    dataProducInfo: {},
+    image: '',
+    formData: null,
+    productInfoData:{},
+    File:null,
+    someData: "",
     errorMessage: "",
-    idProductDetail: this.$route.params.id,
-    search: {
-    page: 1,
-    size: 20,
-    },
-    dataProductInfo: {},
+    reg: /^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêếìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂẾưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹý0-9 ]+$/,
 };
 },
+validations: {
+code: { required },
+name: { required },
+},
 methods: {
-async createAddProduct(){
-    try{
-        const response = await ProducService.createProductDetail(this.token, this.idProductDetail,this.dataProduct)
+onFileChange(e) {
+    const fileUp = e.target.files[0];
+    this.url = URL.createObjectURL(fileUp);
+    let file = this.$refs.uploadImage.files[0];
+    this.File = file;
+    // var files = e.target.files || e.dataTransfer.files;
+    // if (!files.length)
+    // return;
+    // this.createImage(files[0]);
+},
+createImage(file) {
+    var image = new Image();
+    console.log(image);
+    var reader = new FileReader();
+    var vm = this;
+
+    reader.onload = (e) => {
+    vm.image = e.target.result;
+    };
+    reader.readAsDataURL(file);
+},
+removeImage: function (e) {
+    console.log(e);
+    this.image = '';
+},
+handleAddProducInfo() {
+    this.formData = new FormData();
+    if ( this.File == null) {
+        this.formData.append("name", this.dataProducInfo.name,);
+        this.formData.append("description", this.dataProducInfo.description,);
+        this.formData.append("categoryId", this.dataProducInfo.categoryId,);
+        } else {
+        this.formData.append("image", this.File);
+        this.formData.append("name", this.dataProducInfo.name,);
+        this.formData.append("description", this.dataProducInfo.description,);
+        this.formData.append("categoryId", this.dataProducInfo.categoryId,);
+        }
+        console.log(this.File);
+    axios({
+    method: "post",
+    url: "http://localhost:8090/api/products-info/",
+    headers: {
+        headers:{ 
+            "Access-Control-Allow-Origin": "*",
+        },
+        AuthToken: this.token,
+    },
+    data: this.formData
+    })
+    .then((response) => {
+        console.log(response);
         if (response.status == 200) {
-            this.$bvModal.show("bv-modal-example-3")
-        }else{
-            this.errorMessage = response.data.message
-            console.log(this.errorMessage);
-            this.$bvModal.show("bv-modal-example-error-add-user")  
+        this.$bvModal.show("bv-modal-example-3") 
         }
-        }
-    catch(error){
-        return error.response
-    }
+    })
+    .catch((error) => {
+        this.errorMessage == error.response.data.message
+        this.$bvModal.show("bv-modal-example-error-add-user")
+    });
 },
-async fetchDataProductInfo() {
-    const response = await ProducInfoService.getList(this.token, this.search);
-    if (response.status == 200) {
-    this.dataProductInfo = response.data.listData;
-    }
+processFile(event) {
+    this.someData = event.target.files[0];
 },
+
 },
 mounted() {
-this.fetchDataProductInfo();
 },
 };
 </script>
@@ -277,6 +365,12 @@ max-width: 960px;
 .container-sm,
 .container-xl {
 max-width: 1140px;
+}
+img {
+  width: 30%;
+  margin: auto;
+  display: block;
+  margin-bottom: 10px;
 }
 }
 </style>

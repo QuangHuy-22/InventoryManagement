@@ -203,7 +203,7 @@ import FooterContent from "../../components/FooterContent.vue";
 import { VATService } from "@/services/vat.service.js";
 export default {
 components: { index, FooterContent },
-name: "list-vat-detail",
+name: "list-product-detail",
 data() {
 return {
     token: localStorage.getItem("token"),
@@ -254,7 +254,7 @@ clearSearch() {
 },
 "search.page": function() {
 this.$router.push({
-    path: "/vat",
+    path: "/product/product-detail",
     query: this.useInUrlQueryPropList,
 });
 this.fetchData();

@@ -127,6 +127,9 @@
                             <b-dropdown-item @click="createProductDetail(data.id)">
                                 Create Product Detail
                             </b-dropdown-item>
+                            <b-dropdown-item >
+                                Delete
+                            </b-dropdown-item>
                             </div>
                         </b-dropdown>
                         </td>
@@ -211,7 +214,11 @@ return {
     pagination: {
     total: 0,
     },
-    search: {},
+    search: {
+        page:1,
+        size:20,
+        type:1
+    },
     email: localStorage.getItem("email"),
     DATA_PERMISSION: localStorage.getItem("permission"),
     reasonTransfer: "",
@@ -257,9 +264,10 @@ async fetchData() {
     console.log(error);
     }
 },
-// async createProductDetail(id){
-// this.$router.push({ name: "CreateVATDetail", params: { id: VATId } });
-// }
+async createProductDetail(idProduct){
+
+this.$router.push({ name: "CreateProductDetail", params: { id: idProduct } });
+}
 },
 
 computed: {
@@ -276,7 +284,7 @@ buttonDisable() {
 watch: {
 "params.page": function() {
     this.$router.push({
-    path: "/home-page",
+    path: "/product",
     query: this.useInUrlQueryPropList,
     });
     this.fetchData();

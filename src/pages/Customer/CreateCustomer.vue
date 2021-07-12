@@ -142,7 +142,7 @@ components: {
             }
             if (response.status == 400) {
                 this.$bvModal.show('bv-modal-example-error-add-user')
-                this.errorMessage = response.data.name
+                this.errorMessage = response.data
             }
         } catch (error) {
             return error
