@@ -12,7 +12,7 @@
             <div class="btn-group float-right">
             <form class="buttonAddUser" @submit.prevent="createAddVAT">
                 <router-link
-                to="/vat"
+                to="/inventory/vat"
                 class="btn btn-secondary"
                 style="font-size: 13px;"
                 >
@@ -52,7 +52,7 @@
                     </h3>
                     </div>
                     <div class="buttonSubmitLogout">
-                    <router-link to="/vat">
+                    <router-link to="/inventory/vat">
                         <button
                         class="buttonOK mt-3"
                         style="font-size: 13px;"

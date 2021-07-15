@@ -11,9 +11,8 @@
         <h2>Create Category</h2>
         <div class="btn-group float-right">
         <form class="buttonAddUser"  @submit.prevent="handleAddUser">
-        <router-link to="/category" class="btn btn-secondary" style="font-size: 13px;"> Cancel</router-link>
+        <router-link to="/product/category" class="btn btn-secondary" style="font-size: 13px;"> Cancel</router-link>
         <router-link to="/produc-info/create-produc-info">
-        <button > huy</button>
         </router-link>
         <button class="btn btn-secondary"  style="font-size: 13px;margin-left: 5px;"> Reset</button>
         <button type="submit" class="btn btn-primary" data-toggle="modal" data-target=".Risk_Permission_Update" style="font-size: 13px;margin-left: 5px;">Submit</button>
@@ -29,7 +28,7 @@
         style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;">Adding Successful</h3>
         </div>
         <div class="buttonSubmitLogout">
-            <router-link to="/category">
+            <router-link to="/product/category">
         <button class="buttonOK mt-3"  style="font-size: 13px;">OK</button>
         </router-link>
         <!-- <button class="buttonNo mt-3" @click="$bvModal.hide('bv-modal-example')" style="font-size: 13px;" >Không</button> -->

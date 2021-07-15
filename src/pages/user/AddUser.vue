@@ -57,11 +57,8 @@
                     placeholder="" 
                     value="" 
                     required 
-                    v-model="fullName">
+                    v-model="dataUser.userName">
                     </v-text-field>
-                    <!-- <div class="invalid-feedback">
-                        Please provide a valid city.
-                    </div> -->
                 </div>
                 <div class="form-group">
                 <label for="validationCustom01">Password</label>
@@ -75,7 +72,7 @@
                 :type="show1 ? 'text' : 'password'"
                 value="" 
                 required 
-                v-model="oldPass">
+                v-model="dataUser.password">
                 </v-text-field>
                 <div class="invalid-feedback">
                 Please provide a valid city.
@@ -88,11 +85,10 @@
                     class="form-control" 
                     style="padding: 3px 0px!important;"
                     id="validationCustom01" 
-                    :error-messages="nameErrors"
                     placeholder="" 
                     value="" 
                     required 
-                    v-model="fullName">
+                    v-model="dataUser.name">
                     </v-text-field>
                     <!-- <div class="invalid-feedback">
                         Please provide a valid city.
@@ -111,7 +107,7 @@
                             placeholder="" 
                             value="" 
                             required 
-                            v-model="username">
+                            v-model="dataUser.email">
                             </v-text-field>
                             <div class="invalid-feedback">
                                 Please provide a valid city.
@@ -130,8 +126,7 @@
                             placeholder="" 
                             value="" 
                             required 
-                            @input="acceptNumber"
-                            v-model="phoneNumber">
+                            v-model="dataUser.phone">
                             </v-text-field>
                             <div class="invalid-feedback">
                                 Please provide a valid city.
@@ -140,7 +135,7 @@
                     </div>
                 </div>
                 <label for="validationCustom04">Branch Id</label>
-                <b-select class="form-control select2"  v-model="position">
+                <b-select class="form-control select2"  v-model="dataUser.branchId">
                     <option v-for="data in dataBranch" :key="data.id" :value="data.id">{{data.name}}</option>
                 </b-select>
                 </div>
@@ -150,7 +145,7 @@
                 <div class="col-sm-3" v-for="datas in dataRole" :key="datas.id"  >
                 <div class="form-group" >
                 <div class="custom-control custom-checkbox" >
-                    <input type="checkbox"  required :id="datas.id" :value="datas.id" v-model="listCodeRole" >
+                    <input type="checkbox"  required :id="datas.id" :value="datas.id" v-model="dataUser.roles" >
                     <label style="padding-left:7px;" for="invalidCheck">{{datas.roleName}}</label>
                 </div>
                 </div>
@@ -196,7 +191,8 @@ components: {
 },
     data(){
         return{
-            value:"",
+        value:"",
+        password:"",
         fullName:"",
         username:"",
         phoneNumber:"",
@@ -205,7 +201,9 @@ components: {
         token : localStorage.getItem('token'),
         BASE_URL: this.$store.getters.BASE_URL,
         error:"",
-        dataUser: {},
+        dataUser: {
+            roles:[]
+        },
         reg: /^[\w-._+%]+@(mpos|vimo|nextpay|gmail)\.vn|.com$/,
         reg1: /^[\w-._+%]+@(peacesoft)\.net$/,
         regName: /^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêếìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂẾưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹý ]+$/,
@@ -238,17 +236,10 @@ components: {
     this.$v.$touch()
     },
         async handleAddUser(){
-        const data = {
-        username: this.username,
-        fullName: this.fullName,
-        phoneNumber: this.phoneNumber.replace(/ +/g, ""),
-        position: this.position,
-        rolesNameList:[],
-        rolesCodeList: this.listCodeRole,
-        }
         try{
-            const response = await UserService.createUser(this.token, data)
+            const response = await UserService.createUser(this.token, this.dataUser)
             if (response.status == 200) {
+                this.$bvModal.show("bv-modal-example-3")
                 this.dataUser = response.data;
                 console.log(response.status);
             }
@@ -257,7 +248,7 @@ components: {
                     this.errorMessage = "Bạn phải điền đủ thông tin"
                 }
                 else{
-                    this.errorMessage = response.data.message
+                    this.errorMessage = response.data
                 }
                 this.$bvModal.show("bv-modal-example-error-add-user")
             }

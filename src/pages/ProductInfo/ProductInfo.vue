@@ -5,7 +5,7 @@
     <div class="main-content">
     <div class="addUser">
         <h4 class="font-size-18">Product Info List</h4>
-        <router-link to="/product-info/create-product-info" >
+        <router-link to="/product/product-info/create-product-info" >
         <div class="btn-group float-right" >
             <Button type="submit" class="btn btn-outline-primary" style="font-size: 13px;background-color: #EBF6FF;" data-toggle="modal" data-target=".Risk_QL-User_add"><b-icon icon="plus-circle" ></b-icon> Thêm mới</button>
         </div>
@@ -136,7 +136,7 @@
                     <td>{{ producInfo.id }}</td>
                     <td>{{ producInfo.name }}</td>
                     <td>{{ producInfo.description }}</td>
-                    <td><img :src="producInfo.imgPath" /></td>
+                    <td><img  :src="producInfo.imgUrl" /></td>
                     <td>{{ producInfo.categoryName }}</td>
                     <td>{{ producInfo.qty }}</td>
                     <td>{{ producInfo.priceIn }}</td>
@@ -213,14 +213,13 @@ mounted() {
 this.fetchData();
 },
 methods: {
-async fetchData() {
-    try {
-    const response = await ProducInfoService.getList(this.token, this.search);
+    async fetchData() {
+        try {
+            const response = await ProducInfoService.getList(this.token, this.search);
     if (response.status == 200) {
         this.dataProductInfo = response.data.listData;
         this.pagination.total = response.data.total;
     }
-    console.log(response);
     } catch (error) {
     console.log(error.response);
     }
@@ -240,7 +239,7 @@ clearSearch() {
 },
 "search.page": function() {
 this.$router.push({
-    path: "/product-info",
+    path: "/product/product-info",
     query: this.useInUrlQueryPropList,
 });
 this.fetchData();
@@ -280,6 +279,7 @@ margin: 0 20px 10px 20px;
 background-color: white;
 padding: 10px;
 }
+
 
 .buttonUnfilter {
 background-color: #74788d; /* Green */
@@ -401,6 +401,10 @@ border-radius: 4px;
 }
 .pagination {
 justify-content: flex-end !important;
+}
+img{
+    height: 120px;
+    width: 120px;
 }
 @media (max-width: 576px) {
 .content-page,

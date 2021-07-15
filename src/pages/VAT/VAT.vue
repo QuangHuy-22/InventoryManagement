@@ -206,7 +206,7 @@
         </h3>
     </div>
     <div class="buttonSubmitLogout">
-        <router-link to="/vat">
+        <router-link to="/inventory/vat">
         <button class="buttonOK mt-3" style="font-size: 13px;"  @click="$bvModal.hide('bv-modal-example-3')" >
             OK
         </button>
@@ -298,7 +298,7 @@ clearSearch() {
 },
 "search.page": function() {
 this.$router.push({
-    path: "/vat",
+    path: "/inventory/vat",
     query: this.useInUrlQueryPropList,
 });
 this.fetchData();

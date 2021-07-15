@@ -17,7 +17,7 @@
                     type="text"
                     style="font-size: 13px;"
                     class="form-control"
-                    placeholder="Product Info"
+                    placeholder="Product Info" 
                     v-model.trim="search.productInfo"
                 />
                 </div>
@@ -28,19 +28,8 @@
                     type="text"
                     style="font-size: 13px;"
                     class="form-control"
-                    placeholder="Code"
+                    placeholder="VatCode"
                     v-model.trim="search.vatCode"
-                />
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-3">
-                <div class="bf-detail">
-                <input
-                    type="text"
-                    style="font-size: 13px;"
-                    class="form-control"
-                    placeholder="Code"
-                    v-model.trim="search.tax"
                 />
                 </div>
             </div>
@@ -83,6 +72,12 @@
                     style="font-size: 13px; margin-right: 5px;"
                     >
                     Unfiltered
+                    </button>
+                    <button
+                    @click="exportExcel()"
+                    class="button-filter btn btn-success"
+                    >
+                    Xuất Excel
                     </button>
                 </div>
                 </div>
@@ -251,10 +246,17 @@ clearSearch() {
     };
     this.fetchData();
 },
+async exportExcel () {
+    try { 
+    await VATService.exportExcel(this.token,this.search)
+    } catch (error) {
+    console.log(error)
+    }
+},
 },
 "search.page": function() {
 this.$router.push({
-    path: "/vat",
+    path: "/inventory/vat-detail",
     query: this.useInUrlQueryPropList,
 });
 this.fetchData();

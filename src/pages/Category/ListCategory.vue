@@ -5,7 +5,7 @@
     <div class="main-content">
     <div class="addUser">
         <h4 class="font-size-18">Category List</h4>
-        <router-link to="/category/create-category">
+        <router-link to="/product/category/create-category">
         <div
             class="btn-group float-right"
         >
@@ -231,7 +231,7 @@ export default {
   },
   'search.page': function () {
       this.$router.push({
-        path: '/category',
+        path: '/product/category',
         query: this.useInUrlQueryPropList
       })
       this.fetchData()

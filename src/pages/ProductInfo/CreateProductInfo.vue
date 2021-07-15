@@ -15,7 +15,7 @@
                 @submit.prevent="handleAddProducInfo"
             >
                 <router-link
-                to="/category"
+                to="/product/category"
                 class="btn btn-secondary"
                 style="font-size: 13px;"
                 >
@@ -53,7 +53,7 @@
                     </h3>
                     </div>
                     <div class="buttonSubmitLogout">
-                    <router-link to="/category">
+                    <router-link to="/product/product-info">
                         <button
                         class="buttonOK mt-3"
                         style="font-size: 13px;"

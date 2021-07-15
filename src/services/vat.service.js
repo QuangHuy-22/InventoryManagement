@@ -1,5 +1,6 @@
-import { BaseService } from "./base.service";
 import axios from "axios";
+import { BaseService } from "./base.service";
+import fileDownload from 'js-file-download'
 const BASE_URL = process.env.VUE_APP_BASE_URL_USER;
 const headers = {
     "Content-Type": "application/json",
@@ -109,6 +110,29 @@ export class VATService extends BaseService {
             return response
         } catch (error) {
             return error.response
+        }
+    }
+
+    static async exportExcel(token, data) {
+        try {
+            const response = await axios({
+                method: 'get',
+                url: `${BASE_URL}/api/vat-details/get-file-report`,
+                params: {
+                    priceTotalFrom: data.priceTotalFrom,
+                    priceTotalTo: data.priceTotalTo,
+                    vatCode: data.vatCode,
+                    productInfo: data.productInfo
+                },
+                responseType: 'blob',
+                headers: {
+                    AuthToken: token
+                }
+            })
+            fileDownload(response.data, 'VatDetail.xlsx')
+            return response
+        } catch (error) {
+            console.log(error)
         }
     }
 }

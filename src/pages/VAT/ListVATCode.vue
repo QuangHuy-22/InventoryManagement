@@ -6,7 +6,7 @@
     <div class="addUser">
         <h4 class="font-size-18">List VAT Code </h4>
         <div>
-        <router-link to="/vat" class="btn btn-secondary" style="font-size: 13px;"> Cancel</router-link>
+        <router-link to="/inventory/vat" class="btn btn-secondary" style="font-size: 13px;"> Cancel</router-link>
         </div>
     </div>
     <div class="searchInput">

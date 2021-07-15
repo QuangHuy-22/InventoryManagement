@@ -195,94 +195,159 @@
     <!-- Left Menu Start -->
     <ul class="metismenu list-unstyled" id="side-menu">
         <div class="sidebar-container" style="margin-top: 80px; ">
-            <router-link to="/Product" style="color: #474D52;">
-            <div class="content-sidebar">
-                <li>
-                <b-icon icon="graph-up" style="padding-right: 25px; color: #474D52;"></b-icon>
+            <!-- -------Product------- -->
+            <div>
+            <!-- Using modifiers -->
+            <div>
+            <b-button  v-b-toggle.collapse-2 id="toggle-sidebar" class="m-1" ><div class="content-sidebar" style="padding: 0px">
+                <li class="text-sidebar">
+                <b-icon icon="phone-vibrate" style="padding-right: 25px;"></b-icon>
                 <span key="t-calendar">Product</span>
             </li>
             </div>
-            </router-link>
-            <router-link to="/category" style="color: #474D52;">
+            </b-button >
+            </div>
+            <!-- Element to collapse -->
+            <b-collapse id="collapse-2" class="content-sidebar-menu">
+                <!-- ----category---- -->
             <div class="content-sidebar">
+            <router-link to="/product/category" style="color: #474D52;">
                 <li>
-                <b-icon icon="graph-up" style="padding-right: 25px; color: #474D52;"></b-icon>
+                <b-icon icon="calculator-fill" style="padding-right: 25px; color: #474D52;"></b-icon>
                 <span key="t-calendar">Category</span>
             </li>
-            </div>
             </router-link>
-            <!-- <div class="content-sidebar" >
-                <router-link to='/list-user' style="color: #474D52;">
-                        <li>
-                <b-icon icon="person-circle" style="padding-right: 25px; text-decoration: none;"></b-icon>
-                <span key="t-utility">Inventory</span>
-                </li>
-                </router-link>
-            </div> -->
-            <!-- <div class="content-sidebar" >
-                <router-link to='/list-role' style="color: #474D52;">
-                        <li>
-                <b-icon icon="diagram3" style="padding-right: 25px; text-decoration: none;"></b-icon>
-                <span key="t-utility">Management</span>
-                </li>
-                </router-link>
-            </div> -->
+            </div>
+            <!-- ------product info------- -->
             <div class="content-sidebar" >
-                <router-link to='/customer' style="color: #474D52;">
+                <router-link to='/product/product-info' style="color: #474D52;">
                         <li>
-                <b-icon icon="diagram3" style="padding-right: 25px; text-decoration: none;"></b-icon>
-                <span key="t-utility">Customer</span>
+                <b-icon icon="phone" style="padding-right: 25px; text-decoration: none;"></b-icon>
+                <span key="t-utility">Product Info</span>
                 </li>
                 </router-link>
             </div>
+            <!-- ------------Product detail----------- -->
             <div class="content-sidebar" >
-                <router-link to='/supplier' style="color: #474D52;">
+                <router-link to='/product-detail' style="color: #474D52;">
                         <li>
-                <b-icon icon="diagram3" style="padding-right: 25px; text-decoration: none;"></b-icon>
-                <span key="t-utility">Supplier</span>
+                <b-icon icon="telephone" style="padding-right: 25px; text-decoration: none;"></b-icon>
+                <span key="t-utility">Product Detail</span>
                 </li>
                 </router-link>
             </div>
-            <div class="content-sidebar" >
-                <router-link to='/vat' style="color: #474D52;">
+            </b-collapse>
+            </div>
+            <!-- -------End Product------- -->
+
+            <!-- -------Inventory------- -->
+            <div>
+            <!-- Using modifiers -->
+            <div>
+        <b-button  v-b-toggle.collapse-3 id="toggle-sidebar" class="m-1"><div class="content-sidebar" style="padding: 0px">
+                <li class="text-sidebar">
+                <b-icon icon="graph-up" style="padding-right: 25px"></b-icon>
+                <span key="t-calendar">Inventory</span>
+            </li>
+            </div>
+            </b-button >
+            </div>
+            <!-- Element to collapse -->
+            <b-collapse id="collapse-3" class="content-sidebar-menu">
+                <!-- ----VAT---- -->
+                <div class="content-sidebar" >
+                <router-link to='/inventory/vat' style="color: #474D52;">
                         <li>
-                <b-icon icon="diagram3" style="padding-right: 25px; text-decoration: none;"></b-icon>
+                <b-icon icon="card-checklist" style="padding-right: 25px; text-decoration: none;"></b-icon>
                 <span key="t-utility">VAT</span>
                 </li>
                 </router-link>
-            </div>
-            <div class="content-sidebar" >
-                <router-link to='/vat-detail' style="color: #474D52;">
+                </div>
+                <!-- --------Vat Detail--------- -->
+                <div class="content-sidebar" >
+                <router-link to='/inventory/vat-detail' style="color: #474D52;">
                         <li>
-                <b-icon icon="diagram3" style="padding-right: 25px; text-decoration: none;"></b-icon>
+                <b-icon icon="card-list" style="padding-right: 25px; text-decoration: none;"></b-icon>
                 <span key="t-utility">VAT Detail</span>
                 </li>
                 </router-link>
-            </div>
-            <div class="content-sidebar" >
+                </div>
+                <!-- ----------Product----------- -->
+                <div class="content-sidebar" >
+                <router-link to='/product-back-done' style="color: #474D52;">
+                        <li>
+                <b-icon icon="calculator" style="padding-right: 25px; text-decoration: none;"></b-icon>
+                <span key="t-utility">Product</span>
+                </li>
+                </router-link>
+                </div>
+                <!-- -----------Issue--------- -->
+                <div class="content-sidebar" >
                 <router-link to='/issue' style="color: #474D52;">
                         <li>
                 <b-icon icon="diagram3" style="padding-right: 25px; text-decoration: none;"></b-icon>
                 <span key="t-utility">Issue</span>
                 </li>
                 </router-link>
+                </div>
+            </b-collapse>
             </div>
-            <div class="content-sidebar" >
-                <router-link to='/product-info' style="color: #474D52;">
+            <!-- -------End Inventory------- -->
+            
+            <!-- -------Management------- -->
+            <div>
+            <!-- Using modifiers -->
+            <div>
+            <b-button  v-b-toggle.collapse-4 id="toggle-sidebar" class="m-1"><div class="content-sidebar" style="padding: 0px">
+                <li class="text-sidebar">
+                <b-icon icon="bag-dash" style="padding-right: 25px;"></b-icon>
+                <span key="t-calendar">Management</span>
+            </li>
+            </div>
+            </b-button >
+            </div>
+            <!-- Element to collapse -->
+            <b-collapse id="collapse-4" class="content-sidebar-menu">
+                <!-- ----Customer---- -->
+                <div class="content-sidebar" >
+                <router-link to='/customer' style="color: #474D52;">
                         <li>
-                <b-icon icon="diagram3" style="padding-right: 25px; text-decoration: none;"></b-icon>
-                <span key="t-utility">Product Info</span>
+                <b-icon icon="person-circle" style="padding-right: 25px; text-decoration: none;"></b-icon>
+                <span key="t-utility">Customer</span>
                 </li>
                 </router-link>
-            </div>
-            <div class="content-sidebar" >
+                </div>
+                <!-- -------Supplier------- -->
+                <div class="content-sidebar" >
+                <router-link to='/supplier' style="color: #474D52;">
+                        <li>
+                <b-icon icon="cart-plus" style="padding-right: 25px; text-decoration: none;"></b-icon>
+                <span key="t-utility">Supplier</span>
+                </li>
+                </router-link>
+                </div>
+                <!-- -------Role------ -->
+                <div class="content-sidebar" >
                 <router-link to='/list-role' style="color: #474D52;">
                         <li>
                 <b-icon icon="diagram3" style="padding-right: 25px; text-decoration: none;"></b-icon>
                 <span key="t-utility">Role</span>
                 </li>
                 </router-link>
+                </div> 
+                <!-- ---------User---------  -->
+                <div class="content-sidebar" >
+                <router-link to='/list-user' style="color: #474D52;">
+                        <li>
+                <b-icon icon="person-square" style="padding-right: 25px; text-decoration: none;"></b-icon>
+                <span key="t-utility">User</span>
+                </li>
+                </router-link>
             </div>
+            </b-collapse>
+            </div>
+            <!-- -------End Management------- -->
+            
         </div>
         
         
@@ -371,7 +436,7 @@ export default {
 }
 </script>
 
-<style>
+<style >
 .container{
     width: 100%;
     position: absolute;
@@ -593,6 +658,29 @@ justify-content: space-between;
 .title-rule{
     white-space: nowrap;
 }
+.btn-secondary {
+    color: red;
+    background-color: #ffff!important;
+    border-color: #ffff!important;
+    text-align: start;
+}
+.btn-secondary:hover{
+    background-color: #DCDCDC!important;
+}
+.text-sidebar{
+    text-align: start;
+}
+.content-sidebar{
+    color: #474D52;
+    border-radius: 5px;
+    padding-bottom: 10px;
+}
+.content-sidebar:hover{
+    background-color: #DCDCDC!important;
+}
+.content-sidebar-menu{
+    padding-left: 10px;
+}
 @media (max-width: 576px) {
 .container,
 .container-sm {
@@ -611,6 +699,7 @@ display: none!important;;
     width: 230px;
 }
 } 
+
 @media (min-width: 768px) {
 #sidebar-border{
     display: none;
