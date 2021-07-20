@@ -13,7 +13,7 @@
               <div class=" float-right">
                 <!-- <a href="#" class="btn btn-outline-primary" data-toggle="modal" data-target=".Risk_QL-User_edit"><i class='bx bxs-edit'></i> Cập nhật</a> -->
                 <form action="#" @submit.prevent="handleAddRole">
-                  <router-link to="/list-role" class="btn btn-secondary">
+                  <router-link to="/management/list-role" class="btn btn-dark">
                     Hủy bỏ
                   </router-link>
                   <button
@@ -113,7 +113,7 @@
                     </h3>
                   </div>
                   <div class="buttonSubmitLogout">
-                    <router-link to="/list-role">
+                    <router-link to="/management/list-role">
                       <button class="buttonOK mt-3" style="font-size: 13px;">
                         OK
                       </button>

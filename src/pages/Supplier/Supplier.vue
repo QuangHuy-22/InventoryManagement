@@ -4,8 +4,8 @@
 <div class="content-page">
     <div class="main-content">
     <div class="addUser">
-        <h4 class="font-size-18">Danh sách User</h4>
-        <router-link to="/list-user/add-user">
+        <h4 class="font-size-18">Supplier List</h4>
+        <router-link to="/management/list-user/add-user">
         <div
             class="btn-group float-right"
         >
@@ -15,7 +15,7 @@
             style="font-size: 13px;background-color: #EBF6FF;"
             data-toggle="modal"
             data-target=".Risk_QL-User_add"
-            ><b-icon icon="plus-circle"></b-icon> Thêm mới</button
+            ><b-icon icon="plus-circle"></b-icon> Add Supplier</button
             >
         </div>
         </router-link>
@@ -72,7 +72,7 @@
                 </button>
                 <button
                     @click="clearSearch"
-                    class="btn btn-secondary"
+                    class="btn btn-dark"
                     style="font-size: 13px; margin-right: 5px;"
                 >
                     Bỏ lọc

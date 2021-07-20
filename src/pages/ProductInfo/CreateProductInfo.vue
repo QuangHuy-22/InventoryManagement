@@ -16,13 +16,13 @@
             >
                 <router-link
                 to="/product/category"
-                class="btn btn-secondary"
+                class="btn btn-dark"
                 style="font-size: 13px;"
                 >
                 Cancel</router-link
                 >
                 <button
-                class="btn btn-secondary"
+                class="btn btn-dark"
                 style="font-size: 13px;margin-left: 5px;"
                 >
                 Reset

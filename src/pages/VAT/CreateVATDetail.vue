@@ -13,7 +13,7 @@
             <form class="buttonAddUser" @submit.prevent="createAddVAT">
                 <router-link
                 to="/inventory/vat"
-                class="btn btn-secondary"
+                class="btn btn-dark"
                 style="font-size: 13px;"
                 >
                 Cancel</router-link
@@ -21,7 +21,7 @@
                 <router-link to="/produc-info/create-produc-info">
                 </router-link>
                 <button
-                class="btn btn-secondary"
+                class="btn btn-dark"
                 style="font-size: 13px;margin-left: 5px;"
                 >
                 Reset

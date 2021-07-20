@@ -3,6 +3,7 @@
 <index />
 <div class="content-page">
     <div class="main-content">
+  <div class="page-content">
     <div class="addUser">
         <h4 class="font-size-18">Category List</h4>
         <router-link to="/product/category/create-category">
@@ -22,11 +23,12 @@
         </router-link>
     </div>
 
-    <div class="searchInput">
+    <div class="searchInput colorChange">
+      <div class="col-lg-12">
         <form @submit.prevent="submitForm">
         <div class="box-fillter" style="">
             <div class="form-row">
-            <div class="col-md-6 col-sm-6">
+            <div class="col-md-4 col-sm-6">
                 <div class="bf-detail">
                 <input
                     type="text"
@@ -37,7 +39,7 @@
                 />
                 </div>
             </div>
-            <div class="col-md-6 col-sm-6">
+            <div class="col-md-4 col-sm-6">
                 <div class="bf-detail">
                 <input
                     type="text"
@@ -48,38 +50,39 @@
                 />
                 </div>
             </div>
-
-            <div class="col-md-4 col-sm-4" style="padding-top:0px">
+            <div class="col-md-4 col-sm-4" >
             <div class="btn-fillter">
                 <div class="bf-detail" >
                 <button
                     @click.prevent="submitForm"
-                    class="btn btn-info"
+                    class="btn btn-success"
                     style="font-size: 13px; margin-right: 5px; color:white;"
                 >
-                    Filter
+                    <b-icon icon="search"></b-icon>
                 </button>
                 <button
                     @click="clearSearch"
-                    class="btn btn-secondary"
+                    class="btn btn-dark"
                     style="font-size: 13px; margin-right: 5px;"
                 >
-                    Unfiltered
+                    <b-icon icon="x-circle" ></b-icon>
                 </button>
                 </div>
             </div>
             </div>
+
         </div>
         </div>
         </form>
+        </div>
     </div>
 
-    <div class="page-content">
-        <div class="card">
+    <div class="page-content ">
+        <div class="card colorChange">
         <div class="card-body">
             <div class="table-responsive">
             <table class="table table-striped table-bordered mb-0">
-                <thead>
+                <thead class="">
                 <tr>
                     <th style="text-align: center">No.</th>
                     <th>Code</th>
@@ -141,6 +144,7 @@
     </div>
 
     <footer-content />
+</div>
 </div>
 
 <!-- -----------modal permission------- -->
@@ -243,12 +247,21 @@ export default {
 <style scoped>
 .content-page {
   background-color: #ffff;
+    /* background-image: url("../../assets/images/Searchs_002.png"); */
   padding-left: 230px !important;
 }
 .main-content {
-  background-color: #f8f8fb !important;
+  background: linear-gradient(to right, #778899 , #DCDCDC );
+  /* height: 500px; */
   /* padding: 5px; */
   margin-top: 70px !important;
+}
+.box-fillter{
+  background: linear-gradient(to right, #F0F8FF , #FFFAF0 );
+  width: 100%;
+}
+.colorChange {
+  background: linear-gradient(to right, #F0F8FF , #FFFAF0 );
 }
 .list-groups {
   margin: 50px;

@@ -4,85 +4,68 @@
 <div class="content-page">
     <div class="main-content">
     <div class="addUser">
-        <h4 class="font-size-18">VAT Detail List</h4>
+        <h4 class="font-size-18">Product Detail List</h4>
+        <router-link to="/product/product-detail/create-product-detail">
+        <div
+            class="btn-group float-right"
+        >
+            <button
+            type="submit"
+            class="btn btn-outline-primary"
+            style="font-size: 13px;background-color: #EBF6FF;"
+            data-toggle="modal"
+            data-target=".Risk_QL-User_add"
+            >
+            <b-icon icon="plus-circle"></b-icon> Add Product Detail
+            </button>
+        </div>
+        </router-link>
     </div>
 
     <div class="searchInput">
+        <div class="col-lg-12">
         <form @submit.prevent="submitForm">
         <div class="box-fillter" style="">
             <div class="form-row">
-            <div class="col-md-3 col-sm-3">
+            <div class="col-md-4 col-sm-3">
                 <div class="bf-detail">
                 <input
                     type="text"
                     style="font-size: 13px;"
                     class="form-control"
-                    placeholder="Product Info"
-                    v-model.trim="search.productInfo"
+                    placeholder="Imei" 
+                    v-model.trim="search.imei"
                 />
                 </div>
             </div>
-            <div class="col-md-3 col-sm-3">
+            <div class="col-md-4 col-sm-3">
                 <div class="bf-detail">
                 <input
                     type="text"
                     style="font-size: 13px;"
                     class="form-control"
-                    placeholder="Code"
-                    v-model.trim="search.vatCode"
-                />
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-3">
-                <div class="bf-detail">
-                <input
-                    type="text"
-                    style="font-size: 13px;"
-                    class="form-control"
-                    placeholder="Code"
-                    v-model.trim="search.tax"
-                />
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-3">
-                <div class="bf-detail">
-                <input
-                    type="text"
-                    style="font-size: 13px;"
-                    class="form-control"
-                    placeholder="Price Total From"
-                    v-model.trim="search.priceTotalFrom"
-                />
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-3">
-                <div class="bf-detail">
-                <input
-                    type="text"
-                    style="font-size: 13px;"
-                    class="form-control"
-                    placeholder="Price Total To"
-                    v-model.trim="search.priceTotalTo"
+                    placeholder="Name"
+                    v-model.trim="search.name"
                 />
                 </div>
             </div>
 
-            <div class="col-md-4 col-sm-4" style="padding-top:0px">
+            <div class="col-md-4 col-sm-4" >
                 <div class="btn-fillter">
                 <div class="bf-detail">
                     <button
                     @click.prevent="submitForm"
-                    class="btn btn-info"
+                    class="btn btn-success"
                     style="font-size: 13px; margin-right: 5px; color:white;"
                     >
-                    Filter
+                    <b-icon icon="search"></b-icon>
                     </button>
                     <button
                     @click="clearSearch"
-                    class="btn btn-secondary"
+                    class="btn btn-dark"
                     style="font-size: 13px; margin-right: 5px;"
                     >
-                    Unfiltered
+                    <b-icon icon="x-circle" ></b-icon>
                     </button>
                 </div>
                 </div>
@@ -90,10 +73,11 @@
             </div>
         </div>
         </form>
+        </div>
     </div>
 
     <div class="page-content">
-        <div class="card">
+        <div class="card colorChange">
         <div class="card-body">
             <div class="table-responsive">
             <table class="table table-striped table-bordered mb-0">
@@ -101,26 +85,30 @@
                 <tr>
                     <th style="text-align: center">No.</th>
                     <th>ID</th>
-                    <th>Code</th>
-                    <th>Product Info</th>
-                    <th>QTY</th>
-                    <th>Price One</th>
-                    <th>Price Total</th>
+                    <th>Product Name</th>
+                    <th>supplier Name</th>
+                    <th>category Name</th>
+                    <th>imei</th>
+                    <th>shelf Name</th>
+                    <th>price In</th>
+                    <th>price out</th>
                     <th>Action</th>
                 </tr>
                 </thead>
 
                 <tbody>
-                <tr v-for="(vat, index) in dataVAT" :key="index">
+                <tr v-for="(data, index) in dataProductDetail" :key="index">
                     <td style="text-align: center">
                     {{ index + 1 }}
                     </td>
-                    <td>{{ vat.id }}</td>
-                    <td>{{ vat.vatCode }}</td>
-                    <td>{{ vat.productInfo }}</td>
-                    <td>{{ vat.qty }}</td>
-                    <td>{{ vat.priceOne }}</td>
-                    <td>{{ vat.priceTotal }}</td>
+                    <td>{{ data.id }}</td>
+                    <td>{{ data.productName }}</td>
+                    <td>{{ data.supplierName }}</td>
+                    <td>{{ data.categoryName }}</td>
+                    <td>{{ data.imei }}</td>
+                    <td>{{ data.shelfName }}</td>
+                    <td>{{ data.priceIn }}</td>
+                    <td>{{ data.priceOut }}</td>
                     <td>
                     <b-dropdown
                         right
@@ -167,51 +155,20 @@
     <footer-content />
 </div>
 
-<!-- -----------modal permission------- -->
-<b-modal id="bv-modal-example-error-permission" hide-footer hide-header>
-    <b-col class="iconLogout mb-2">
-    <b-icon
-        icon="x-circle"
-        class="iconsBox"
-        style="color: red!important;"
-    ></b-icon>
-    </b-col>
-    <div class="d-block text-center">
-    <h3
-        style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;"
-    >
-        Bạn không có quyền truy cập
-    </h3>
-    </div>
-    <div class="buttonSubmitLogout">
-    <button
-        class="buttonOK mt-3"
-        @click="$bvModal.hide('bv-modal-example-error-permission')"
-        style="font-size: 13px;"
-    >
-        OK
-    </button>
-    </div>
-</b-modal>
-<!-- -----------end modal permission------- -->
 </div>
 </template>
 
 <script>
 import index from "../../components/index.vue";
 import FooterContent from "../../components/FooterContent.vue";
-import { VATService } from "@/services/vat.service.js";
+import { ProducDetailService } from "@/services/productDetail.service.js";
 export default {
 components: { index, FooterContent },
-name: "list-product-detail",
+name: "list-vat-detail",
 data() {
 return {
     token: localStorage.getItem("token"),
-    dataVAT: [],
-    dateRange: {
-    from: null,
-    to: null,
-    },
+    dataProductDetail:[],
     search: {
     page: 1,
     size: 20,
@@ -227,9 +184,9 @@ this.fetchData();
 methods: {
 async fetchData() {
     try {
-    const response = await VATService.getListVATDetail(this.token, this.search);
+    const response = await ProducDetailService.getList(this.token, this.search);
     if (response.status == 200) {
-        this.dataVAT = response.data.listData;
+        this.dataProductDetail = response.data.listData;
         this.pagination.total = response.data.total;
     }
     console.log(response);
@@ -268,7 +225,7 @@ background-color: #ffff;
 padding-left: 230px !important;
 }
 .main-content {
-background-color: #f8f8fb !important;
+background: linear-gradient(to right, #778899 , #DCDCDC );
 margin-top: 70px !important;
 }
 .list-groups {
@@ -337,6 +294,9 @@ font-size: 16px;
 margin: 4px 2px;
 cursor: pointer;
 border-radius: 3px;
+}
+.colorChange {
+  background: linear-gradient(to right, #F0F8FF , #FFFAF0 );
 }
 .buttonFix {
 background-color: #3a3737; /* Green */

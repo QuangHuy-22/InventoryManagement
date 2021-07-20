@@ -8,7 +8,7 @@
             <div class="box-title">
               <h2>Chi tiết giao dịch</h2>
               <div class="float-right">
-                <button @click="$router.go(-1)" class="btn btn-secondary">
+                <button @click="$router.go(-1)" class="btn btn-dark">
                   Quay lại
                 </button>
               </div>

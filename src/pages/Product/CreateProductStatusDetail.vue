@@ -12,14 +12,14 @@
             <div class="btn-group float-right">
             <form class="buttonAddUser" @submit.prevent="createAddProduct">
                 <router-link
-                to="/product"
-                class="btn btn-secondary"
+                to="/inventory/product-status"
+                class="btn btn-dark"
                 style="font-size: 13px;"
                 >
                 Cancel</router-link
                 >
                 <button
-                class="btn btn-secondary"
+                class="btn btn-dark"
                 style="font-size: 13px;margin-left: 5px;"
                 >
                 Reset
@@ -76,7 +76,7 @@
                 <form class="needs-validation">
                     <div class="col-sm-6">
                     <div class="form-group form-erross">
-                        <label for="validationCustom04">Vai trò</label>
+                        <label for="validationCustom04">Product Status</label>
                         <b-select
                         class="form-control select2" v-model="dataProduct.productId" >
                         <option  v-for="data in dataProductInfo" :key="data.id"  :value="data.id">{{data.name}}</option>

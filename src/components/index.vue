@@ -229,7 +229,7 @@
             </div>
             <!-- ------------Product detail----------- -->
             <div class="content-sidebar" >
-                <router-link to='/product-detail' style="color: #474D52;">
+                <router-link to='/product/product-detail' style="color: #474D52;">
                         <li>
                 <b-icon icon="telephone" style="padding-right: 25px; text-decoration: none;"></b-icon>
                 <span key="t-utility">Product Detail</span>
@@ -274,18 +274,18 @@
                 </div>
                 <!-- ----------Product----------- -->
                 <div class="content-sidebar" >
-                <router-link to='/product-back-done' style="color: #474D52;">
+                <router-link to='/inventory/product-status' style="color: #474D52;">
                         <li>
                 <b-icon icon="calculator" style="padding-right: 25px; text-decoration: none;"></b-icon>
-                <span key="t-utility">Product</span>
+                <span key="t-utility">Product Status</span>
                 </li>
                 </router-link>
                 </div>
                 <!-- -----------Issue--------- -->
                 <div class="content-sidebar" >
-                <router-link to='/issue' style="color: #474D52;">
+                <router-link to='/inventory/issue' style="color: #474D52;">
                         <li>
-                <b-icon icon="diagram3" style="padding-right: 25px; text-decoration: none;"></b-icon>
+                <b-icon icon="calendar3-event" style="padding-right: 25px; text-decoration: none;"></b-icon>
                 <span key="t-utility">Issue</span>
                 </li>
                 </router-link>
@@ -310,7 +310,7 @@
             <b-collapse id="collapse-4" class="content-sidebar-menu">
                 <!-- ----Customer---- -->
                 <div class="content-sidebar" >
-                <router-link to='/customer' style="color: #474D52;">
+                <router-link to='/management/customer' style="color: #474D52;">
                         <li>
                 <b-icon icon="person-circle" style="padding-right: 25px; text-decoration: none;"></b-icon>
                 <span key="t-utility">Customer</span>
@@ -319,7 +319,7 @@
                 </div>
                 <!-- -------Supplier------- -->
                 <div class="content-sidebar" >
-                <router-link to='/supplier' style="color: #474D52;">
+                <router-link to='/management/supplier' style="color: #474D52;">
                         <li>
                 <b-icon icon="cart-plus" style="padding-right: 25px; text-decoration: none;"></b-icon>
                 <span key="t-utility">Supplier</span>
@@ -328,7 +328,7 @@
                 </div>
                 <!-- -------Role------ -->
                 <div class="content-sidebar" >
-                <router-link to='/list-role' style="color: #474D52;">
+                <router-link to='/management/list-role' style="color: #474D52;">
                         <li>
                 <b-icon icon="diagram3" style="padding-right: 25px; text-decoration: none;"></b-icon>
                 <span key="t-utility">Role</span>
@@ -337,7 +337,7 @@
                 </div> 
                 <!-- ---------User---------  -->
                 <div class="content-sidebar" >
-                <router-link to='/list-user' style="color: #474D52;">
+                <router-link to='/management/list-user' style="color: #474D52;">
                         <li>
                 <b-icon icon="person-square" style="padding-right: 25px; text-decoration: none;"></b-icon>
                 <span key="t-utility">User</span>
@@ -461,6 +461,7 @@ export default {
     padding: 0 calc(24px / 2) 0 0;
     font-family: Roboto;    
     background-color: #2a3042;
+    background: linear-gradient(to right, #2a3042 , #778899 );
     position: absolute;
     width: 100%;
 }
@@ -521,7 +522,7 @@ padding-left: 15px;
     line-height: 1.5;
     background-clip: padding-box;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
-    background-color: rgba(243,243,249,.07);
+    background: linear-gradient(to right, #F0F8FF , #FFFAF0 );
     color: #fff;
     border-radius: 30px;
     box-shadow: none;

@@ -8,10 +8,10 @@
     <!-- InstanceBeginEditable name="EditRegion1" -->
     <!-- box-title -->
     <div class="box-title">
-        <h2>Quản lý nhóm quyền</h2>
-        <router-link to="/list-role/add-role" >
+        <h2>Role Management</h2>
+        <router-link to="/management/list-role/add-role" >
         <div class="btn-group float-right" >
-            <Button type="submit" class="btn btn-outline-primary" style="font-size: 13px;background-color: #EBF6FF;" data-toggle="modal" data-target=".Risk_QL-User_add"><b-icon icon="plus-circle" ></b-icon> Thêm mới</button>
+            <Button type="submit" class="btn btn-outline-primary" style="font-size: 13px;background-color: #EBF6FF;" data-toggle="modal" data-target=".Risk_QL-User_add"><b-icon icon="plus-circle" ></b-icon> Add Role</button>
         </div>
     </router-link>
     </div>
@@ -37,9 +37,8 @@
     type="submit" 
     class="btn btn-info"  
     style="font-size: 13px; margin-right: 5px; color:white;"
-    >Lọc</v-btn>
-    <v-btn type="button" class="btn btn-gray" @click="handleUnFind" style="font-size: 13px; margin-right: 5px;color:white;background-color: gray;">Bỏ lọc</v-btn>
-    <v-btn type="button" class="btn btn-success" style="font-size: 13px; margin-right: 5px;color: white;"><b-icon icon="file-earmark-excel"  ></b-icon></v-btn>
+    >Filter</v-btn>
+    <v-btn type="button" class="btn btn-gray" @click="handleUnFind" style="font-size: 13px; margin-right: 5px;color:white;background-color: gray;">Unfilter</v-btn>
     </div>
     </div>
     </div>
@@ -190,7 +189,7 @@ methods:{
     watch: {
     'search.page': function () {
         this.$router.push({
-            path: '/list-role',
+            path: '/management/list-role',
             query: this.useInUrlQueryPropList
         })
         this.fetchData()

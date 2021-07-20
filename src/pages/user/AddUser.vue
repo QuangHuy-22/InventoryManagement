@@ -8,11 +8,11 @@
 <!-- InstanceBeginEditable name="EditRegion1" -->
     <!-- box-title -->
     <div class="box-title box-title-fix">
-        <h2>Thêm mới USER</h2>
+        <h2>Create USER</h2>
         <div class="btn-group float-right">
         <form class="buttonAddUser" @submit.prevent="handleAddUser" >
-        <router-link to="/list-user" class="btn btn-secondary" style="font-size: 13px;"> Hủy</router-link>
-        <button @click="submit" type="submit" class="btn btn-primary" data-toggle="modal" data-target=".Risk_Permission_Update" style="font-size: 13px;margin-left: 5px;">Thêm mới</button>
+        <router-link to="/management/list-user" class="btn btn-dark" style="font-size: 13px;"> Cancel</router-link>
+        <button @click="submit" type="submit" class="btn btn-primary" data-toggle="modal" data-target=".Risk_Permission_Update" style="font-size: 13px;margin-left: 5px;">Submit</button>
         <div class="showAddUser" >
         <b-modal id="bv-modal-example-3" hide-footer hide-header >
             <b-col class="iconLogout mb-2">
@@ -27,7 +27,7 @@
         <span style="display: block;word-break: break-word;">{{username}}</span>
         </div>
         <div class="buttonSubmitLogout">
-            <router-link to="/list-user">
+            <router-link to="/management/list-user">
         <button class="buttonOK mt-3"  style="font-size: 13px;">OK</button>
         </router-link>
         <!-- <button class="buttonNo mt-3" @click="$bvModal.hide('bv-modal-example')" style="font-size: 13px;" >Không</button> -->
@@ -44,7 +44,7 @@
 <div class="row">
     <div class="col-sm-12">
         <div class="card-body">
-            <h4 class="card-title mb-3">Thông tin nhân viên</h4>
+            <h4 class="card-title mb-3">User Information</h4>
             <form class="needs-validation" >
             <div class="col-sm-6" >
                 <div class="form-group form-erross">
@@ -140,7 +140,7 @@
                 </b-select>
                 </div>
                 <div class="form-group form-erross">
-                <label for="validationCustom01">Khai báo quyền <span class="text-danger"><sup>*</sup></span></label>
+                <label for="validationCustom01">Role declaration<span class="text-danger"><sup>*</sup></span></label>
                 <div class="form-row">
                 <div class="col-sm-3" v-for="datas in dataRole" :key="datas.id"  >
                 <div class="form-group" >

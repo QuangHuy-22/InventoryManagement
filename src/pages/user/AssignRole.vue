@@ -12,8 +12,8 @@
 <h2>Gán nhóm quyền</h2>
 <div class=" float-right">
 <form action="#" @submit.prevent="handleAssignRole">
-    <router-link to="/list-user">
-<a class="btn btn-secondary"  style="font-size: 13px;"> Hủy </a>
+    <router-link to="/management/list-user">
+<a class="btn btn-dark"  style="font-size: 13px;"> Hủy </a>
 </router-link>
 <button style="margin-left: 5px;font-size: 13px;" type="submit" class="btn btn-primary" data-toggle="modal" >Cập nhật
 </button>
@@ -29,7 +29,7 @@
         style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;">Cập nhật thông tin thành công</h3>
         </div>
         <div class="buttonSubmitLogout">
-            <router-link to="/list-user" >
+            <router-link to="/management/list-user" >
         <button  class="buttonOK mt-3"  style="font-size: 13px;">OK</button>
         </router-link>
         <!-- <button class="buttonNo mt-3" @click="$bvModal.hide('bv-modal-example')" style="font-size: 13px;" >Không</button> -->

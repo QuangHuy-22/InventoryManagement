@@ -8,7 +8,7 @@
             <div class="box-title">
               <h2>Chi tiết USER</h2>
               <div class=" float-right">
-                <router-link to="/list-user" class="btn btn-secondary">
+                <router-link to="/management/list-user" class="btn btn-dark">
                   Quay lại
                 </router-link>
               </div>

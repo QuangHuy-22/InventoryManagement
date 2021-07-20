@@ -7,7 +7,8 @@
         <h4 class="font-size-18">VAT List</h4>
     </div>
 
-    <div class="searchInput">
+    <div class="searchInput colorTable">
+        <div class="col-lg-12">
         <form @submit.prevent="submitForm">
         <div class="box-fillter" style="">
             <div class="form-row">
@@ -58,31 +59,32 @@
 
             <div class="col-md-4 col-sm-4" style="padding-top:0px">
                 <div class="btn-fillter">
-                <div class="bf-detail">
-                    <button
+                <div class="bf-detail" >
+                <button
                     @click.prevent="submitForm"
-                    class="btn btn-info"
+                    class="btn btn-success"
                     style="font-size: 13px; margin-right: 5px; color:white;"
-                    >
-                    Filter
-                    </button>
-                    <button
+                >
+                    <b-icon icon="search"></b-icon>
+                </button>
+                <button
                     @click="clearSearch"
-                    class="btn btn-secondary"
+                    class="btn btn-dark"
                     style="font-size: 13px; margin-right: 5px;"
-                    >
-                    Unfiltered
-                    </button>
+                >
+                    <b-icon icon="x-circle" ></b-icon>
+                </button>
                 </div>
-                </div>
+            </div>
             </div>
             </div>
         </div>
         </form>
+        </div>
     </div>
 
     <div class="page-content">
-        <div class="card">
+        <div class="card colorTable">
         <div class="card-body">
             <div class="table-responsive">
             <table class="table table-striped table-bordered mb-0">
@@ -312,8 +314,15 @@ background-color: #ffff;
 padding-left: 230px !important;
 }
 .main-content {
-background-color: #f8f8fb !important;
+background: linear-gradient(to right, #778899 , #DCDCDC );
 margin-top: 70px !important;
+}
+.box-fillter{
+background: linear-gradient(to right, #F0F8FF , #FFFAF0 );
+width: 100%;
+}
+.colorTable{
+    background: linear-gradient(to right, #F0F8FF , #FFFAF0 );
 }
 .list-groups {
 margin: 50px;

@@ -11,10 +11,10 @@
         <h2>Create Category</h2>
         <div class="btn-group float-right">
         <form class="buttonAddUser"  @submit.prevent="handleAddUser">
-        <router-link to="/product/category" class="btn btn-secondary" style="font-size: 13px;"> Cancel</router-link>
+        <router-link to="/product/category" class="btn btn-dark" style="font-size: 13px;"> Cancel</router-link>
         <router-link to="/produc-info/create-produc-info">
         </router-link>
-        <button class="btn btn-secondary"  style="font-size: 13px;margin-left: 5px;"> Reset</button>
+        <button class="btn btn-dark"  style="font-size: 13px;margin-left: 5px;"> Reset</button>
         <button type="submit" class="btn btn-primary" data-toggle="modal" data-target=".Risk_Permission_Update" style="font-size: 13px;margin-left: 5px;">Submit</button>
         <div class="showAddUser" >
         <b-modal id="bv-modal-example-3" hide-footer hide-header >
@@ -189,9 +189,12 @@ components: {
     
 }
 .main-content{
-    background-color: #F8F8FB!important;
+    background: linear-gradient(to right, #F0F8FF , #FFFAF0 );
     padding:20px!important;
     margin-top: 70px!important;
+}
+.row{
+    background: linear-gradient(to right, #F0F8FF , #FFFAF0 );
 }
 .add-user{
     background-color: #F8F8FB;

@@ -8,10 +8,10 @@
 <!-- InstanceBeginEditable name="EditRegion1" -->
     <!-- box-title -->
     <div class="box-title box-title-fix">
-        <h2>Create VAT</h2>
+        <h2>Create Product Detail</h2>
         <div class="btn-group float-right">
-        <form class="buttonAddUser"  @submit.prevent="handleAddVAT">
-        <router-link to="/management/supplier" class="btn btn-dark" style="font-size: 13px;"> Cancel</router-link>
+        <form class="buttonAddUser"  @submit.prevent="handleAddProductDetail">
+        <router-link to="/management/customer" class="btn btn-dark" style="font-size: 13px;"> Cancel</router-link>
         <router-link to="/produc-info/create-produc-info">
         </router-link>
         <button class="btn btn-dark"  style="font-size: 13px;margin-left: 5px;"> Reset</button>
@@ -28,7 +28,7 @@
         style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;">Adding Successful</h3>
         </div>
         <div class="buttonSubmitLogout">
-            <router-link to="/management/supplier">
+            <router-link to="/management/customer">
         <button class="buttonOK mt-3"  style="font-size: 13px;">OK</button>
         </router-link>
         <!-- <button class="buttonNo mt-3" @click="$bvModal.hide('bv-modal-example')" style="font-size: 13px;" >Không</button> -->
@@ -45,11 +45,11 @@
 <div class="row">
     <div class="col-sm-12">
         <div class="card-body">
-            <h4 class="card-title mb-3">Information VAT</h4>
+            <h4 class="card-title mb-3">Information Product Detail</h4>
             <form class="needs-validation" >
             <div class="col-sm-6" >
                 <div class="form-group form-erross">
-                    <label for="validationCustom01">Code</label>
+                    <label for="validationCustom01">Imei</label>
                     <v-text-field 
                     type="text" 
                     class="form-control" 
@@ -58,11 +58,11 @@
                     placeholder="" 
                     value="" 
                     required
-                    v-model="dataVAT.code">
+                    v-model="dataProductDetail.imei">
                     </v-text-field>
                 </div>
                 <div class="form-group form-erross">
-                    <label for="validationCustom01">TAX</label>
+                    <label for="validationCustom01">Description</label>
                     <v-text-field 
                     type="text" 
                     class="form-control" 
@@ -71,19 +71,26 @@
                     placeholder="" 
                     value="" 
                     required
-                    v-model="dataVAT.tax">
+                    v-model="dataProductDetail.description">
                     </v-text-field>
                 </div>
                 <div class="form-group form-erross">
-                    <label for="validationCustom01">Percent</label>
+                    <label for="validationCustom01">Total</label>
                     <v-text-field 
-                    type="number" 
+                    type="text" 
                     class="form-control" 
                     style="padding: 3px 0px!important;"
                     id="validationCustom01" 
                     placeholder="" 
-                    v-model="dataVAT.percent">
+                    value="" 
+                    v-model="dataProductDetail.total">
                     </v-text-field>
+                </div>
+                <div class="form-group form-erross">
+                    <label for="validationCustom04">Branch Id</label>
+                <b-select class="form-control select2"  v-model="dataProductDetail.branchId">
+                    <option v-for="data in dataBranch" :key="data.id" :value="data.id">{{data.name}}</option>
+                </b-select>
                 </div>
                 </div>
             </form>
@@ -114,45 +121,58 @@
 
 <script>
 import index from '../../components/index.vue'
-import { VATService } from "@/services/vat.service.js";
+import { ProducDetailService } from "@/services/productDetail.service.js";
+import { BranchService } from "@/services/branch.service";
 export default {
-name:"create-VAT",
+name:"create-customer",
 components: { 
     index,
 },
     data(){
         return{
             token: localStorage.getItem("token"),
-            dataVAT:{
-                code:'',
-                tax:'',
-                percent:0,
-                branchId: localStorage.getItem("branchId"),
-                userName: localStorage.getItem("userName")
+            dataProductDetail:{
+                name:"",
+                phone:"",
+                address:"",
             },
             errorMessage:"",
-            idSupplier: this.$route.params.id,
+            dataBranch:{},
+            search:{
+            page:1,
+            size:10
+        }
         }
     },
     methods:{
-    async handleAddVAT(){
-        console.log(this.dataVAT.percent);
+    async handleAddProductDetail(){
         try {
-            const response = await VATService.createVAT(this.token,this.idSupplier, this.dataVAT)
+            const response = await ProducDetailService.createProductDetail(this.token, this.dataProductDetail)
             console.log(response);
             if(response.status == 200){
                 this.$bvModal.show("bv-modal-example-3")
             }
             if (response.status == 400) {
                 this.$bvModal.show('bv-modal-example-error-add-user')
-                this.errorMessage = response.data.name
+                this.errorMessage = response.data
             }
         } catch (error) {
             return error
         }
     },
+    async fetchDataBranch(){
+    try {
+        const response = await BranchService.getList(this.token, this.search)
+        if (response.status == 200) {
+            this.dataBranch = response.data.listData
+        }
+    }catch(error){
+        console.log(error.response);
+    }
+    },
     },
     mounted() {
+        this.fetchDataBranch()
 },
 }
 </script>

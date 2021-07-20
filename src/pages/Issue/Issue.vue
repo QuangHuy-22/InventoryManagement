@@ -5,7 +5,6 @@
     <div class="main-content">
     <div class="addUser">
         <h4 class="font-size-18">Issue List</h4>
-        <router-link to="/customer/create-customer">
         <div
             class="btn-group float-right"
         >
@@ -15,13 +14,12 @@
             style="font-size: 13px;background-color: #EBF6FF;"
             data-toggle="modal"
             data-target=".Risk_QL-User_add"
-            ><b-icon icon="plus-circle"></b-icon> Thêm mới</button
+            ><b-icon icon="plus-circle"></b-icon> Add Issue</button
             >
         </div>
-        </router-link>
     </div>
 
-    <div class="searchInput">
+    <div class="searchInput colorTable">
         <form @submit.prevent="submitForm">
         <div class="box-fillter" style="padding: 2px 14px 2px 14px;">
             <div class="form-row">
@@ -72,7 +70,7 @@
                 </button>
                 <button
                     @click="clearSearch"
-                    class="btn btn-secondary"
+                    class="btn btn-dark"
                     style="font-size: 13px; margin-right: 5px;"
                 >
                     Bỏ lọc
@@ -85,7 +83,7 @@
     </div>
 
     <div class="page-content">
-        <div class="card">
+        <div class="card colorTable">
         <div class="card-body">
             <div class="table-responsive">
             <table class="table table-striped table-bordered mb-0">
@@ -255,9 +253,16 @@ background-color: #ffff;
 padding-left: 230px !important;
 }
 .main-content {
-background-color: #f8f8fb !important;
+background: linear-gradient(to right, #778899 , #DCDCDC );
 /* padding: 5px; */
 margin-top: 70px !important;
+}
+.box-fillter{
+  background: linear-gradient(to right, #F0F8FF , #FFFAF0 );
+  width: 100%;
+}
+.colorTable{
+    background: linear-gradient(to right, #F0F8FF , #FFFAF0 );
 }
 .list-groups {
 margin: 50px;
@@ -432,6 +437,9 @@ border-radius: 4px;
 }
 .pagination {
 justify-content: flex-end !important;
+}
+.card {
+box-shadow: 0 0.75rem 1.5rem rgb(18 38 63 / 3%) !important;
 }
 @media (max-width: 576px) {
 .content-page,

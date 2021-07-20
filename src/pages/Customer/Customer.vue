@@ -4,8 +4,8 @@
 <div class="content-page">
     <div class="main-content">
     <div class="addUser">
-        <h4 class="font-size-18">Danh sách User</h4>
-        <router-link to="/customer/create-customer">
+        <h4 class="font-size-18">Customer List</h4>
+        <router-link to="/management/customer/create-customer">
         <div
             class="btn-group float-right"
         >
@@ -15,7 +15,7 @@
             style="font-size: 13px;background-color: #EBF6FF;"
             data-toggle="modal"
             data-target=".Risk_QL-User_add"
-            ><b-icon icon="plus-circle"></b-icon> Thêm mới</button
+            ><b-icon icon="plus-circle"></b-icon> Add Customer</button
             >
         </div>
         </router-link>
@@ -68,14 +68,14 @@
                     class="btn btn-info"
                     style="font-size: 13px; margin-right: 5px; color:white;"
                 >
-                    Lọc
+                    Filter
                 </button>
                 <button
                     @click="clearSearch"
-                    class="btn btn-secondary"
+                    class="btn btn-dark"
                     style="font-size: 13px; margin-right: 5px;"
                 >
-                    Bỏ lọc
+                    Unfilter
                 </button>
                 </div>
             </div>
@@ -433,6 +433,9 @@ border-radius: 4px;
 }
 .pagination {
 justify-content: flex-end !important;
+}
+.card {
+box-shadow: 0 0.75rem 1.5rem rgb(18 38 63 / 3%) !important;
 }
 @media (max-width: 576px) {
 .content-page,

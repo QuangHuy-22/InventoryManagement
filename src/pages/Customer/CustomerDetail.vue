@@ -6,10 +6,10 @@
     <div class="page-content">
         <div class="container-fluid">
         <div class="box-title">
-            <h2>Chi tiết USER</h2>
+            <h2>Customer Detail</h2>
             <div class=" float-right">
-            <router-link to="/customer" class="btn btn-secondary">
-                Quay lại
+            <router-link to="/management/customer" class="btn btn-dark">
+                Cancel
             </router-link>
             </div>
         </div>

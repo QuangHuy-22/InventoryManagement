@@ -7,11 +7,11 @@
 <!-- <div class="container-fluid"> -->
     <!-- box-title -->
     <div class="box-title box-title-fix" style="font-size:12px">
-        <h2 class="name-page">Thêm mới nhóm quyền</h2>
+        <h2 class="name-page">Create Role</h2>
         <div class="btn-group float-right">
             <form class="buttonAddUser" @submit.prevent="handleAddRole" >
-        <router-link to="/list-role" class="btn btn-secondary" style="font-size: 12px;">Hủy</router-link>
-        <button type="submit" class="btn btn-primary" style="font-size: 13px;margin-left: 5px;">Thêm mới</button>
+        <router-link to="/management/list-role" class="btn btn-dark" style="font-size: 12px;">Hủy</router-link>
+        <button type="submit" class="btn btn-primary" style="font-size: 13px;margin-left: 5px;">Submit</button>
         <div class="showAddUser" >
         <b-modal id="bv-modal-example-add-role" hide-footer hide-header >
             <b-col class="iconLogout mb-2">
@@ -24,7 +24,7 @@
         style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;">Thêm mới thông tin thành công</h3>
         </div>
         <div class="buttonSubmitLogout">
-            <router-link to="/list-role">
+            <router-link to="/management/list-role">
         <button class="buttonOK mt-3"  style="font-size: 13px;">OK</button>
         </router-link>
         </div>
@@ -57,7 +57,7 @@
     <div class="col-sm-6">
 <form class="needs-validation" >
     <div class="form-group">
-        <label for="validationCustom01" style="display: flex;">Tên nhóm quyền <p style="color: red;">*</p></label>
+        <label for="validationCustom01" style="display: flex;">Role Name <p style="color: red;">*</p></label>
         <v-text-field 
         type="text" 
         class="form-control" 
@@ -74,7 +74,7 @@
         </div>
     </div>
     <div class="form-group">
-        <label for="validationCustom01" style="display: flex;">Mô tả<p style="color: red;">*</p></label>
+        <label for="validationCustom01" style="display: flex;">Description<p style="color: red;">*</p></label>
         <v-text-field 
         type="text" 
         class="form-control" 

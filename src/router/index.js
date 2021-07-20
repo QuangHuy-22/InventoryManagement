@@ -25,6 +25,8 @@ import ListCategory from "../pages/Category/ListCategory"
 import CreateCategory from "../pages/Category/CreateCategory"
 import CreateProductInfo from "../pages/ProductInfo/CreateProductInfo.vue"
 import ProductInfo from "../pages/ProductInfo/ProductInfo.vue"
+import ProductDetail from "../pages/ProductDetail/ProductDetail.vue"
+import CreateProductDetail from "../pages/ProductDetail/CreateProductDetail.vue"
 import Customer from "../pages/Customer/Customer.vue"
 import CreateCustomer from "../pages/Customer/CreateCustomer.vue"
 import CustomerDetail from "../pages/Customer/CustomerDetail.vue"
@@ -34,8 +36,8 @@ import VAT from "../pages/VAT/VAT.vue"
 import VATDetail from "../pages/VAT/VATDetail.vue"
 import CreateVATDetail from "../pages/VAT/CreateVATDetail.vue"
 import ListVATCode from "../pages/VAT/ListVATCode.vue"
-import Product from "../pages/Product/Product.vue"
-import CreateProductDetail from "../pages/Product/CreateProductDetail.vue"
+import ProductStatusList from "../pages/Product/ProductStatusList.vue"
+import CreateProductStatusDetail from "../pages/Product/CreateProductStatusDetail.vue"
 import Issue from "../pages/Issue/Issue.vue"
 import CreateIssueDetail from "../pages/Issue/CreateIssueDetail.vue"
 // import health from "./health.js"
@@ -74,23 +76,23 @@ const routes = [{
         }
     },
     {
-        path: '/list-user',
+        path: '/management/list-user',
         name: 'Danh sách User',
         component: ListUser,
     },
     {
-        path: '/list-user/add-user',
+        path: '/management/list-user/add-user',
         name: 'Thêm mới User',
         component: AddUser,
 
     },
     {
-        path: '/list-user/update-user/:id',
+        path: '/management/list-user/update-user/:id',
         name: 'Cập nhật User',
         component: UpdateUser,
     },
     {
-        path: '/list-user/detail-user/:id',
+        path: '/management/list-user/detail-user/:id',
         name: 'Chi Tiết User',
         component: DetailUser,
     },
@@ -115,22 +117,22 @@ const routes = [{
         component: ChangePasswordVerify,
     },
     {
-        path: '/list-role',
+        path: '/management/list-role',
         name: 'Danh sách nhóm quyền',
         component: ListRole,
     },
     {
-        path: '/list-role/add-role',
+        path: '/management/list-role/add-role',
         name: 'Thêm mới nhóm quyền',
         component: AddRole,
     },
     {
-        path: '/list-user/assign-role/:id',
+        path: '/management/list-user/assign-role/:id',
         name: 'Gán nhóm quyền',
         component: AssignRole,
     },
     {
-        path: '/list-role/update-role/:code',
+        path: '/management/list-role/update-role/:code',
         name: 'Cập nhật nhóm quyền',
         component: UpdateRole,
     },
@@ -165,27 +167,37 @@ const routes = [{
         component: ProductInfo,
     },
     {
+        path: '/product/product-detail',
+        name: 'ProductDetail',
+        component: ProductDetail,
+    },
+    {
+        path: '/product/product-detail/create-product-detail',
+        name: 'CreateProductDetail',
+        component: CreateProductDetail,
+    },
+    {
         path: '/product/category/create-category',
         name: 'Create Category',
         component: CreateCategory,
     },
     {
-        path: '/customer',
+        path: '/management/customer',
         name: 'Customer',
         component: Customer,
     },
     {
-        path: '/customer/create-customer',
+        path: '/management/customer/create-customer',
         name: 'CreateCustomer',
         component: CreateCustomer,
     },
     {
-        path: '/supplier',
+        path: '/management/supplier',
         name: 'Supplier',
         component: Supplier,
     },
     {
-        path: '/supplier/create-vat/:id',
+        path: '/management/supplier/create-vat/:id',
         name: 'CreateVAT',
         component: CreateVAT,
     },
@@ -210,27 +222,27 @@ const routes = [{
         component: VATDetail,
     },
     {
-        path: '/product-back-done',
+        path: '/inventory/product-status',
         name: 'Product',
-        component: Product,
+        component: ProductStatusList,
     },
     {
-        path: '/issue',
+        path: '/inventory/issue',
         name: 'Issue',
         component: Issue,
     },
     {
-        path: '/issue/add-issue-detail/:id',
+        path: '/inventory/issue/add-issue-detail/:id',
         name: 'CreateIssueDetail',
         component: CreateIssueDetail,
     },
     {
-        path: '/product/add-product-detail/:id',
+        path: '/inventory/product-status/add-product-detail/:id',
         name: 'CreateProductDetail',
-        component: CreateProductDetail,
+        component: CreateProductStatusDetail,
     },
     {
-        path: '/customer/detail-customer/:id',
+        path: '/management/customer/detail-customer/:id',
         name: 'CustomerDetail',
         component: CustomerDetail,
     },

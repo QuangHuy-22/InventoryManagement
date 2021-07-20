@@ -11,7 +11,7 @@
             <div
                 class="page-title-box d-flex align-items-center justify-content-between"
             >
-                <h4 class="mb-0 font-size-18">Quản lý giao dịch</h4>
+                <h4 class="mb-0 font-size-18">Product Done - Back</h4>
             </div>
             </div>
         </div>
@@ -300,7 +300,7 @@ background-color: #ffff;
 padding-left: 230px;
 }
 .main-content {
-background-color: #f8f8fb !important;
+background: linear-gradient(to right, #778899 , #DCDCDC );
 /* padding: 20px; */
 margin-top: 70px !important;
 }

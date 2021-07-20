@@ -11,10 +11,10 @@
         <h2>Create Customer</h2>
         <div class="btn-group float-right">
         <form class="buttonAddUser"  @submit.prevent="handleAddUser">
-        <router-link to="/customer" class="btn btn-secondary" style="font-size: 13px;"> Cancel</router-link>
+        <router-link to="/management/customer" class="btn btn-dark" style="font-size: 13px;"> Cancel</router-link>
         <router-link to="/produc-info/create-produc-info">
         </router-link>
-        <button class="btn btn-secondary"  style="font-size: 13px;margin-left: 5px;"> Reset</button>
+        <button class="btn btn-dark"  style="font-size: 13px;margin-left: 5px;"> Reset</button>
         <button type="submit" class="btn btn-primary" data-toggle="modal" data-target=".Risk_Permission_Update" style="font-size: 13px;margin-left: 5px;">Submit</button>
         <div class="showAddUser" >
         <b-modal id="bv-modal-example-3" hide-footer hide-header >
@@ -28,7 +28,7 @@
         style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;">Adding Successful</h3>
         </div>
         <div class="buttonSubmitLogout">
-            <router-link to="/customer">
+            <router-link to="/management/customer">
         <button class="buttonOK mt-3"  style="font-size: 13px;">OK</button>
         </router-link>
         <!-- <button class="buttonNo mt-3" @click="$bvModal.hide('bv-modal-example')" style="font-size: 13px;" >Không</button> -->

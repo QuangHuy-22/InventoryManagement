@@ -1,396 +1,172 @@
 <template>
-  <div class="homePages">
-    <index />
-    <div class="content-page">
+<div class="homePages">
+  <index />
+  <div class="content-page">
       <div class="menu-content">
         <div class="main-content">
           <div class="page-content">
-            <!-- start page title -->
-            <div class="row">
-              <div class="col-12">
-                <div
-                  class="page-title-box d-flex align-items-center justify-content-between"
-                >
-                  <h4 class="mb-0 font-size-18">Quản lý giao dịch</h4>
+            <div class="page-text">
+              <div class="">
+              <article>
+                <div>
+                  <readiness />
                 </div>
+              </article>
               </div>
-            </div>
-            <!-- end page title -->
-
-            <div class="row">
-              <div class="col-xl-12">
-                <div class="row">
-                  <div @click="fetchDataDone" class="col-md-6">
-                    <div class="card mini-stats-wid">
-                      <div class="card-body" id="text-media">
-                        <div class="media">
-                          <div class="titleNew media-body">
-                            <p class="titleNew font-weight-medium">
-                              Product Done
-                            </p>
-                            <h4 class="mb-0 new">{{ total.new }}</h4>
-                          </div>
-                          <div class="bg-primary" style=" border-radius: 50%;">
-                            <v-avatar>
-                              <v-icon large class="icon-media">
-                                mdi-folder
-                              </v-icon>
-                            </v-avatar>
-                          </div>
-                        </div>
-                      </div>
+              <div class="x-block d-md-flex justify-content-between" style="margin-top:270px">
+                <div class="flex-item card">
+                <router-link to="/product/product-info">
+                  <a class="link-wrapper">
+                    <div><img src="../assets/images/home-tb1.png" alt="" class="t2"></div>
+                    <div><img src="../assets/images/home-t1.png" alt="" class="t1"></div>
+                    <div class="card-body">
+                      <h3>Product Info</h3>
                     </div>
-                  </div>
-                  <div @click="fetchDataBack" class="col-md-6">
-                    <div class="card mini-stats-wid">
-                      <div class="card-body" id="text-media">
-                        <div class="media">
-                          <div class="titleProcessing media-body">
-                            <p class="titleProcessing font-weight-medium">
-                              Product Back
-                            </p>
-                            <h4 class="mb-0 processing">
-                              {{ total.process }}
-                            </h4>
-                          </div>
-                          <div class="bg-primary" style=" border-radius: 50%;">
-                            <v-avatar>
-                              <v-icon large class="icon-media">
-                                mdi-file
-                              </v-icon>
-                            </v-avatar>
-                          </div>
-                        </div>
-                      </div>
+                  </a>
+                  </router-link>
+                </div>
+                <div class="flex-item card">
+                  <router-link to="/inventory/vat">
+                  <a class="link-wrapper">
+                    <div><img src="../assets/images/home-tb2.png" alt=""></div>
+                    <div><img src="../assets/images/home-t2.png" alt="" class="t1"></div>
+                    <div class="card-body">
+                      <h3>Vat</h3>
                     </div>
-                  </div>
+                  </a>
+                  </router-link>
                 </div>
-              </div>
-              <!-- end row -->
-            </div>
-          </div>
-          <!-- end row -->
-
-          <div class="row">
-            <div class="col-lg-12">
-              <div class="card">
-                <div class="card-body" style="padding: 8px">
-                  <div class="table-responsive">
-                    <table class="table table-centered table-nowrap mb-0">
-                      <thead class="thead-light">
-                        <tr style="font-size: 12px;white-space: nowrap;">
-                          <th>No.</th>
-                          <th>Id</th>
-                          <th>Code</th>
-                          <th>VAT Code</th>
-                          <th>User Name</th>
-                          <th>Price</th>
-                          <th>Create Date</th>
-                          <th>Update Date</th>
-                          <th>Action</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr
-                          style="font-size: 12px"
-                          v-for="(data, index) in dataProduct"
-                          :key="index"
-                        >
-                          <td style="text-align: center">
-                          {{ index + 1}}
-                          </td>
-                          <td>{{data.id}}</td>
-                          <td>
-                            {{data.code}}
-                          </td>
-                          <td>{{data.vatCode}}</td>
-                          <td>{{ data.userName }}</td>
-                          <td>{{ data.price }}</td>
-                          <td>
-                            {{data.createDate}}
-                          </td>
-                          <td>
-                            {{ data.updateDate}}
-                          </td>
-                          <td>
-                            <b-dropdown
-                              right
-                              text=""
-                              variant="none"
-                              class="three-dot"
-                              no-caret
-                            >
-                              <template #button-content>
-                                <b-icon icon="three-dots-vertical"></b-icon>
-                              </template>
-                              <div style="font-size: 13px;">
-                                <b-dropdown-item>
-                                  Product Detail
-                                </b-dropdown-item>
-                              </div>
-                            </b-dropdown>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-
-                  <div class="overflow-auto">
-                    <b-pagination
-                      v-model="params.page"
-                      :total-rows="pagination.total"
-                      :per-page="params.size"
-                      first-text="First"
-                      prev-text="Previous"
-                      next-text="Next"
-                      last-text="Last"
-                      class="pagination mt-4"
-                    ></b-pagination>
-                  </div>
+                <div class="flex-item card">
+                  <router-link to="/product/product-detail">
+                  <a class="link-wrapper">
+                    <div><img src="../assets/images/home-tb3.jpg" alt="" class="t3"></div>
+                    <div class="card-body">
+                      <h3>Product Detail</h3>
+                    </div>
+                  </a>
+                  </router-link>
+                </div>
+                <div class="flex-item card">
+                  <router-link to="/management/customer">
+                  <a class="link-wrapper">
+                    <div><img src="../assets/images/home-tb4.png" alt="" class="t3"></div>
+                    <div class="card-body">
+                      <h3>Customer</h3>
+                    </div>
+                  </a>
+                  </router-link>
                 </div>
               </div>
             </div>
-          </div>
         </div>
-        <!-- End Page-content -->
-
-        <!-- All Modal -->
-
-        <!-- Modal nhận giao dịch thành công -->
-        <b-modal id="bv-modal-set-processing-done" hide-footer hide-header>
-          <b-col class="iconLogout mb-2">
-            <div class="mb-img mb-4">
-              <span><img src="./../assets/images/sussecc.svg" alt=""/></span>
-            </div>
-          </b-col>
-          <div class="d-block text-center">
-            <h3
-              style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;"
-            >
-              Nhận xử lý giao dịch thành công
-            </h3>
-          </div>
-          <div class="buttonSubmitLogout">
-            <button
-              class="buttonOK mt-3"
-              style="font-size: 13px;"
-              @click="$bvModal.hide('bv-modal-set-processing-done')"
-            >
-              OK
-            </button>
-          </div>
-        </b-modal>
-        <!-- End modal nhận giao dịch thành công -->
-
-
-
-        <!-- end modal -->
       </div>
       <footer-content />
     </div>
   </div>
+</div>
 </template>
 
 <script>
-import Index from "../components/index.vue";
 import FooterContent from "../components/FooterContent.vue";
-import { ProducService } from "@/services/product.service";
-import prepareQueryParamsMixin from '../mixins/prepareQueryParamsMixin'
+import Readiness from "../components/Readiness.vue"
+import index from '../components/index.vue'
 export default {
+  components: { index, FooterContent, Readiness },
   name: "home-page",
-  mixins: [prepareQueryParamsMixin],
-  components: {
-    Index,
-    FooterContent,
-  },
   data() {
-    return {
-      dataProduct: [],
-      params: {
-        page: 1,
-        size: 10,
-      },
-      pagination: {
-        total: 0,
-      },
-      search: {},
-      email: localStorage.getItem("email"),
-      DATA_PERMISSION: localStorage.getItem("permission"),
-      reasonTransfer: '',
-      total:{
-        new:"",
-        process:"",
-        done:""
-      },
-      description:"",
-      token: localStorage.getItem("token"),
-      emailHome :localStorage.getItem("email")
-    };
-  },
-  // validations: {
-  //               reasonTransfer: { required },
-  //       },
     
-  created() {
-    this.search.type = 1;
-    this.fetchData();
+  return {
+  }
   },
+}
 
-  methods: {
-    fetchDataDone() {
-      this.search.type = 1;
-      // this.params.page = 1;
-      this.fetchData();
-    },
-
-    fetchDataBack() {
-      this.search.type = 2 ;
-      // this.params.page = 1;
-      this.fetchData();
-    },
-
-
-    async fetchData() {
-      try {
-        const response = await ProducService.getList(this.token,this.search);
-        if (response.status === 200) {
-          this.dataProduct = response.data.listData;
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    },
-
-  },
-
-  computed: {
-    useInUrlQueryPropList () {
-      return this.prepareQueryParamsMixin({
-        page: this.params.page
-      })
-    },
-    buttonDisable(){
-            return this.reasonTransfer.length <=5 
-        }
-  },
-
-  watch: {
-    "params.page": function() {
-      this.$router.push({
-        path: '/home-page',
-        query: this.useInUrlQueryPropList
-      })
-      this.fetchData();
-      this.getListHome();
-    },
-  },
-};
 </script>
 
 <style scoped>
-.content-page {
-  background-color: #ffff;
-  padding-left: 230px;
+.main-content{
+  background: linear-gradient(to right, #F0F8FF , #FFFAF0 );
 }
-.main-content {
-  background-color: #f8f8fb !important;
-  /* padding: 20px; */
-  margin-top: 70px !important;
-}
-.nav {
-  background-color: #fff;
-}
-.pagination {
-  justify-content: flex-end !important;
-}
-.tabs {
-  margin: 0px !important;
-  background-color: #fff;
-}
-.titleNew {
-  color: #008bf4 !important;
-}
-.titleProcessing {
-  color: #fcb63e !important;
-}
-.titleDone {
-  color: #3bb54a !important;
-}
-.form-find {
+article{
   display: flex;
 }
-.btn-fillter {
-  margin-top: 12px;
+.jumrobo{
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+    padding: 32px;
+    margin-bottom: 32px;
+    display: flex;
 }
-
-#example-input {
-  font-size: 13px;
+h2{
+  font-family:Georgia, 'Times New Roman', Times, serif;
 }
-.new {
-  font-size: 20px;
+p{
+  font-family: monospace;
+  word-wrap: break-word;
 }
-.processing {
-  font-size: 20px;
-}
-.done {
-  font-size: 20px;
-}
-.router {
-  color: black !important;
-}
-.rules {
+.link-wrapper{
   display: block;
-  color: #cf232a;
+  overflow: hidden;
+  text-decoration: none;
+  color: #1abc9c;
+    
 }
-#text-media {
-  padding: 15px 25px 15px 30px !important;
+a{
+      background-color: transparent;
 }
-.icon-media {
-  color: #fff;
-  font-size: 25px !important;
-  background-color: #556ee6;
+.card{
+  display: block;
+  overflow: hidden;
+  color: #1abc9c;
+  padding: 10px;
 }
-#text-media:hover {
-  border-bottom: 2px solid #556ee6;
-  transition: all 0.1s ease-in;
+h3{
+  font-family: monospace;
 }
-.icon-media:active {
-  color: red;
+.flex-item{
+  border: 1px solid rgba(0,0,0,.125)!important;
 }
-.current {
-  /* background:#D3D3D3; */
-  border-bottom: 2px solid #556ee6 !important;
+.flex-item:hover{
+  border: 1px solid #1abc9c!important;
 }
-.card {
-  box-shadow: 0 0.75rem 1.5rem rgb(18 38 63 / 3%) !important;
+.t1{
+      position: absolute;
+    display: block;
+    height: 77%;
+    width: 100%;
+    left: 0px;
+    top: 0px;
+    transform: translate3d(0%, 0%, 0px);
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+
 }
-@media (max-width: 576px) {
-  .content-page,
-  .container-sm {
-    max-width: 540px;
-    padding-left: 0px !important;
-  }
-  #sidebar-menu {
-    display: none !important;
-  }
+.t2{
+      position: relative;
+    display: block;
+    height: 100%;
+    width: 100%;
+    left: 0px;
+    top: 0px;
+    transform: translate3d(0.221354%, 4.17928%, 0px);
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
 }
-@media (min-width: 768px) {
+.t3{
+      position: relative;
+    display: block;
+    height: 100%;
+    width: 100%;
+    left: 0px;
+    top: 0px;
+    transform: translate3d(-0.369792%, 6.30677%, 0px);
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
 }
-@media (min-width: 992px) {
-  .container,
-  .container-lg,
-  .container-md,
-  .container-sm {
-    max-width: 960px;
-  }
-}
-@media (min-width: 1200px) {
-  .container,
-  .container-lg,
-  .container-md,
-  .container-sm,
-  .container-xl {
-    max-width: 1140px;
-  }
+img{
+  max-width: 100%;
+  vertical-align: middle;
+    border-style: none;
+        text-align: center;
 }
 </style>

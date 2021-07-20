@@ -19,7 +19,8 @@
             </div>
             <!-- end page title -->
 
-            <div class="searchInput" style="margin: 0px; margin-bottom: 12px;">
+            <div class="searchInput colorChange" style="margin: 0px; margin-bottom: 12px;">
+              <div class="col-lg-12">
               <form class="form-find" @submit.prevent="submitForm">
                 <div class="box-fillter">
                   <div class="form">
@@ -174,7 +175,7 @@
                       </button>
                       <button
                         @click="clearSearch"
-                        class="button-filter btn btn-secondary"
+                        class="button-filter btn btn-dark"
                       >
                         Bỏ lọc
                       </button>
@@ -188,11 +189,12 @@
                   </div>
                 </div>
               </form>
+              </div>
             </div>
 
             <div class="row">
               <div class="col-lg-12">
-                <div class="card">
+                <div class="card colorChange">
                   <div class="card-body" style="padding: 8px!important;">
                     <h4 class="card-title mb-4">
                       Tổng giao dịch: {{ this.pagination.total }}
@@ -677,9 +679,15 @@ export default {
   padding-left: 230px;
 }
 .main-content {
-  background-color: #f8f8fb;
+  background-color: #ffff;
   /* padding:20px; */
   margin-top: 70px !important;
+}
+.colorChange {
+  background: linear-gradient(to right, #F0F8FF , #FFFAF0 );
+}
+.box-fillter {
+  background: linear-gradient(to right, #F0F8FF , #FFFAF0 );
 }
 .nav {
   background-color: #fff;

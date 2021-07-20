@@ -1,13 +1,13 @@
 <template>
-<footer class="footer" style=" color: #74788d;background-color: #f2f2f5;">
+<footer class="footer" >
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-6">
-                {{new Date().getFullYear()}} © Risk.
+                {{new Date().getFullYear()}} © Inventory Management.
             </div>
             <div class="col-sm-6">
                 <div class="text-sm-right d-none d-sm-block">
-                    Design & Develop by Nextpay
+                    Design & Develop by HieuPV
                 </div>
             </div>
         </div>
@@ -28,8 +28,10 @@ data(){
 </script>
 
 <style>
-.buttonOK{
-    font-size: 13px;
-    width: 100px;
+.footer{
+color: #74788d; 
+background: linear-gradient(to right, #F0F8FF , #FFFAF0 );
+border-radius: 5px;
+box-shadow: 0 0.75rem 1.5rem rgb(18 38 63 / 3%) !important;
 }
 </style>
