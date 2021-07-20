@@ -178,7 +178,6 @@ body {
 }
 
 .layer:first-child:after {
-  color: ;
   text-shadow: none;
 }
 
