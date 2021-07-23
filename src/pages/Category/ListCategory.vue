@@ -224,10 +224,8 @@ export default {
     },
 
     clearSearch() {
-      this.dateRange.from = null;
-      this.dateRange.to = null;
       this.search = {
-        page: 0,
+        page: 1,
         size: 20,
       };
       this.fetchData();

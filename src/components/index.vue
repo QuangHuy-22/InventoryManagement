@@ -9,10 +9,10 @@
 
         <router-link to="/home-page" class="logo logo-light">
             <span class="logo-sm" v-show="logo">
-                <img src="../assets/images/favicon.svg" alt="" height="50" >
+                <!-- <img src="../assets/images/your-logo.png" alt="" height="" > -->
             </span>
             <span class="logo-lg" v-show="logoRisk">
-                <img src="../assets/images/risk-white.svg" alt="" height="50" width="130">
+                <img src="../assets/images/your-logo.png" alt="" height="50" width="150">
             </span>
         </router-link>
     </div>
@@ -281,12 +281,38 @@
                 </li>
                 </router-link>
                 </div>
+                <div class="content-sidebar" >
+                <router-link to='/inventory/product-detail-status' style="color: #474D52;">
+                        <li>
+                <b-icon icon="calculator" style="padding-right: 25px; text-decoration: none;"></b-icon>
+                <span key="t-utility">Product Status Detail</span>
+                </li>
+                </router-link>
+                </div>
                 <!-- -----------Issue--------- -->
                 <div class="content-sidebar" >
                 <router-link to='/inventory/issue' style="color: #474D52;">
                         <li>
                 <b-icon icon="calendar3-event" style="padding-right: 25px; text-decoration: none;"></b-icon>
                 <span key="t-utility">Issue</span>
+                </li>
+                </router-link>
+                </div>
+                <!-- -----------Issue Detail--------- -->
+                <div class="content-sidebar" >
+                <router-link to='/inventory/issue-detail' style="color: #474D52;">
+                        <li>
+                <b-icon icon="calendar3-event" style="padding-right: 25px; text-decoration: none;"></b-icon>
+                <span key="t-utility">Issue Detail</span>
+                </li>
+                </router-link>
+                </div>
+                <!-- -----------Shelf--------- -->
+                <div class="content-sidebar" >
+                <router-link to='/inventory/shelf' style="color: #474D52;">
+                        <li>
+                <b-icon icon="calendar3-event" style="padding-right: 25px; text-decoration: none;"></b-icon>
+                <span key="t-utility">Shelf</span>
                 </li>
                 </router-link>
                 </div>
@@ -308,21 +334,12 @@
             </div>
             <!-- Element to collapse -->
             <b-collapse id="collapse-4" class="content-sidebar-menu">
-                <!-- ----Customer---- -->
+                <!-- ----Branch---- -->
                 <div class="content-sidebar" >
-                <router-link to='/management/customer' style="color: #474D52;">
+                <router-link to='/management/branch' style="color: #474D52;">
                         <li>
                 <b-icon icon="person-circle" style="padding-right: 25px; text-decoration: none;"></b-icon>
-                <span key="t-utility">Customer</span>
-                </li>
-                </router-link>
-                </div>
-                <!-- -------Supplier------- -->
-                <div class="content-sidebar" >
-                <router-link to='/management/supplier' style="color: #474D52;">
-                        <li>
-                <b-icon icon="cart-plus" style="padding-right: 25px; text-decoration: none;"></b-icon>
-                <span key="t-utility">Supplier</span>
+                <span key="t-utility">Branch</span>
                 </li>
                 </router-link>
                 </div>
@@ -344,6 +361,24 @@
                 </li>
                 </router-link>
             </div>
+                <!-- ----Customer---- -->
+                <div class="content-sidebar" >
+                <router-link to='/management/customer' style="color: #474D52;">
+                        <li>
+                <b-icon icon="person-circle" style="padding-right: 25px; text-decoration: none;"></b-icon>
+                <span key="t-utility">Customer</span>
+                </li>
+                </router-link>
+                </div>
+                <!-- -------Supplier------- -->
+                <div class="content-sidebar" >
+                <router-link to='/management/supplier' style="color: #474D52;">
+                        <li>
+                <b-icon icon="cart-plus" style="padding-right: 25px; text-decoration: none;"></b-icon>
+                <span key="t-utility">Supplier</span>
+                </li>
+                </router-link>
+                </div>
             </b-collapse>
             </div>
             <!-- -------End Management------- -->

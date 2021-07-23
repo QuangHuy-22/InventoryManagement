@@ -68,7 +68,7 @@ body {
 
 .layer:after {
   font: 130px/0.65 "Pacifico", "Kaushan Script", Futura, "Roboto", "Trebuchet MS", Helvetica, sans-serif;
-  content: "Inventory\a    management!";
+  content: "Inventory\a    Management!";
   white-space: pre;
   text-align: center;
   height: 100%;

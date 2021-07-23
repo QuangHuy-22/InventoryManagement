@@ -3,165 +3,148 @@
 <index />
 <div class="content-page">
     <div class="main-content">
-    <div class="addUser">
-        <h4 class="font-size-18">VAT Detail List</h4>
-    </div>
-
-    <div class="searchInput colorTable">
-        <div class="col-lg-12">
-        <form @submit.prevent="submitForm">
-        <div class="box-fillter" style="">
-            <div class="form-row">
-            <div class="col-md-3 col-sm-3">
-                <div class="bf-detail">
-                <input
-                    type="text"
-                    style="font-size: 13px;"
-                    class="form-control"
-                    placeholder="Product Info" 
-                    v-model.trim="search.productInfo"
-                />
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-3">
-                <div class="bf-detail">
-                <input
-                    type="text"
-                    style="font-size: 13px;"
-                    class="form-control"
-                    placeholder="VatCode"
-                    v-model.trim="search.vatCode"
-                />
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-3">
-                <div class="bf-detail">
-                <input
-                    type="text"
-                    style="font-size: 13px;"
-                    class="form-control"
-                    placeholder="Price Total From"
-                    v-model.trim="search.priceTotalFrom"
-                />
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-3">
-                <div class="bf-detail">
-                <input
-                    type="text"
-                    style="font-size: 13px;"
-                    class="form-control"
-                    placeholder="Price Total To"
-                    v-model.trim="search.priceTotalTo"
-                />
-                </div>
-            </div>
-
-            <div class="col-md-6 col-sm-4" style="padding-top:0px">
-                <div class="btn-fillter">
-                <div class="bf-detail">
-                    <button
-                    @click.prevent="submitForm"
-                    class="btn btn-info"
-                    style="font-size: 13px; margin-right: 5px; color:white;"
-                    >
-                    <b-icon icon="search"></b-icon>
-                    </button>
-                    <button
-                    @click="clearSearch"
-                    class="btn btn-dark"
-                    style="font-size: 13px; margin-right: 5px;"
-                    >
-                    <b-icon icon="x-circle" ></b-icon>
-                    </button>
-                    <button
-                    @click="exportExcel()"
-                    class="button-filter btn btn-success"
-                    >
-                    <b-icon icon="file-earmark-excel"></b-icon>
-                    </button>
-                </div>
-                </div>
-            </div>
-            </div>
-        </div>
-        </form>
-        </div>
-    </div>
-
     <div class="page-content">
-        <div class="card colorTable">
-        <div class="card-body">
+        <div class="addUser">
+        <h4 class="font-size-18">Branch List</h4>
+        <router-link to="/management/branch/create-branch">
+            <div class="btn-group float-right">
+            <button
+                type="submit"
+                class="btn btn-outline-primary"
+                style="font-size: 13px;background-color: #EBF6FF;"
+                data-toggle="modal"
+                data-target=".Risk_QL-User_add"
+            >
+                <b-icon icon="plus-circle"></b-icon> Add Branch
+            </button>
+            </div>
+        </router-link>
+        </div>
+
+        <div class="searchInput colorChange">
+        <div class="col-lg-12">
+            <form @submit.prevent="submitForm">
+            <div class="box-fillter" style="">
+                <div class="form-row">
+                <div class="col-md-4 col-sm-6">
+                    <div class="bf-detail">
+                    <input
+                        type="text"
+                        style="font-size: 13px;"
+                        class="form-control"
+                        placeholder="Name"
+                        v-model.trim="search.name"
+                    />
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="bf-detail">
+                    <input
+                        type="text"
+                        style="font-size: 13px;"
+                        class="form-control"
+                        placeholder="Code"
+                        v-model.trim="search.code"
+                    />
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                    <div class="btn-fillter">
+                    <div class="bf-detail">
+                        <button
+                        @click.prevent="submitForm"
+                        class="btn btn-success"
+                        style="font-size: 13px; margin-right: 5px; color:white;"
+                        >
+                        <b-icon icon="search"></b-icon>
+                        </button>
+                        <button
+                        @click="clearSearch"
+                        class="btn btn-dark"
+                        style="font-size: 13px; margin-right: 5px;"
+                        >
+                        <b-icon icon="x-circle"></b-icon>
+                        </button>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </form>
+        </div>
+        </div>
+
+        <div class="page-content ">
+        <div class="card colorChange">
+            <div class="card-body">
             <div class="table-responsive">
-            <table class="table table-striped table-bordered mb-0">
-                <thead>
-                <tr>
+                <table class="table table-striped table-bordered mb-0">
+                <thead class="">
+                    <tr>
                     <th style="text-align: center">No.</th>
-                    <th>ID</th>
-                    <th>Code</th>
-                    <th>Product Info</th>
-                    <th>QTY</th>
-                    <th>Price One</th>
-                    <th>Price Total</th>
+                    <th>id</th>
+                    <th>Name</th>
+                    <th>Description</th>
                     <th>Action</th>
-                </tr>
+                    </tr>
                 </thead>
 
                 <tbody>
-                <tr v-for="(vat, index) in dataVAT" :key="index">
+                    <tr
+                    v-for="(branch, index) in dataBranch"
+                    :key="index"
+                    >
                     <td style="text-align: center">
-                    {{ index + 1 }}
+                        {{ index + 1 }}
                     </td>
-                    <td>{{ vat.id }}</td>
-                    <td>{{ vat.vatCode }}</td>
-                    <td>{{ vat.productInfo }}</td>
-                    <td>{{ vat.qty }}</td>
-                    <td>{{ vat.priceOne }}</td>
-                    <td>{{ vat.priceTotal }}</td>
+                    <td>{{ branch.id }}</td>
+                    <td>{{ branch.name }}</td>
+                    <td>{{ branch.description }}</td>
                     <td>
-                    <b-dropdown
+                        <b-dropdown
                         right
                         text=""
                         variant="none"
                         class="three-dot"
                         no-caret
-                    >
+                        >
                         <template #button-content>
-                        <b-icon icon="three-dots-vertical"></b-icon>
+                            <b-icon icon="three-dots-vertical"></b-icon>
                         </template>
                         <div style="font-size: 13px;">
-                        <b-dropdown-item>
+                            <b-dropdown-item>
                             Edit
-                        </b-dropdown-item>
-                        <b-dropdown-item>
+                            </b-dropdown-item>
+                            <b-dropdown-item>
                             Delete
-                        </b-dropdown-item>
+                            </b-dropdown-item>
                         </div>
-                    </b-dropdown>
+                        </b-dropdown>
                     </td>
-                </tr>
+                    </tr>
                 </tbody>
-            </table>
+                </table>
             </div>
 
-            <!-- <div class="overflow-auto">
-        <b-pagination
-            v-model="search.page"
-            :total-rows="pagination.total"
-            :per-page="search.size"
-            first-text="First"
-            prev-text="Previous"
-            next-text="Next"
-            last-text="Last"
-            class="pagination mt-4"
-        ></b-pagination>
-        </div> -->
+            <div class="overflow-auto">
+                <b-pagination
+                v-model="search.page"
+                :total-rows="pagination.total"
+                :per-page="search.size"
+                first-text="First"
+                prev-text="Previous"
+                next-text="Next"
+                last-text="Last"
+                class="pagination mt-4"
+                ></b-pagination>
+            </div>
+            </div>
         </div>
         </div>
-    </div>
     </div>
 
     <footer-content />
+    </div>
 </div>
 
 <!-- -----------modal permission------- -->
@@ -197,14 +180,14 @@
 <script>
 import index from "../../components/index.vue";
 import FooterContent from "../../components/FooterContent.vue";
-import { VATService } from "@/services/vat.service.js";
+import { BranchService } from "@/services/branch.service.js";
 export default {
 components: { index, FooterContent },
-name: "list-vat-detail",
+name: "list-categoty",
 data() {
 return {
     token: localStorage.getItem("token"),
-    dataVAT: [],
+    dataBranch: [],
     dateRange: {
     from: null,
     to: null,
@@ -224,16 +207,17 @@ this.fetchData();
 methods: {
 async fetchData() {
     try {
-    const response = await VATService.getListVATDetail(this.token, this.search);
+    const response = await BranchService.getList(this.token, this.search);
     if (response.status == 200) {
-        this.dataVAT = response.data.listData;
-        this.pagination.total = response.data.total;
+        this.dataBranch = response.data.listData;
+        this.pagination.total = response.data.count;
     }
     console.log(response);
     } catch (error) {
     console.log(error.response);
     }
 },
+
 submitForm() {
     this.pagination.page = 1;
     this.fetchData();
@@ -248,17 +232,10 @@ clearSearch() {
     };
     this.fetchData();
 },
-async exportExcel () {
-    try { 
-    await VATService.exportExcel(this.token,this.search)
-    } catch (error) {
-    console.log(error)
-    }
-},
 },
 "search.page": function() {
 this.$router.push({
-    path: "/inventory/vat-detail",
+    path: "/product/category",
     query: this.useInUrlQueryPropList,
 });
 this.fetchData();
@@ -269,24 +246,28 @@ this.fetchData();
 <style scoped>
 .content-page {
 background-color: #ffff;
+/* background-image: url("../../assets/images/Searchs_002.png"); */
 padding-left: 230px !important;
 }
 .main-content {
-background: linear-gradient(to right, #778899 , #DCDCDC );
+background: linear-gradient(to right, #778899, #dcdcdc);
+/* height: 500px; */
+/* padding: 5px; */
 margin-top: 70px !important;
 }
-.box-fillter{
-  background: linear-gradient(to right, #F0F8FF , #FFFAF0 );
-  width: 100%;
+.box-fillter {
+background: linear-gradient(to right, #f0f8ff, #fffaf0);
+width: 100%;
 }
-.colorTable{
-    background: linear-gradient(to right, #F0F8FF , #FFFAF0 );
+.colorChange {
+background: linear-gradient(to right, #f0f8ff, #fffaf0);
 }
 .list-groups {
 margin: 50px;
 }
 .user-only {
 display: flex !important;
+/* align-items: flex-start!important; */
 justify-content: space-between;
 padding: 0px !important;
 }
@@ -298,6 +279,7 @@ background-color: #f8f8fb;
 .searchInput {
 display: flex;
 background-color: white;
+/* margin: 0 13px 8px 15px; */
 margin-bottom: 24px;
 }
 .broadUser {
@@ -319,6 +301,22 @@ text-decoration: none;
 display: inline-block;
 font-size: 16px;
 margin: 4px 2px;
+cursor: pointer;
+border-radius: 3px;
+font-size: 13px;
+}
+.buttonExcel {
+background-color: #3bb54a; /* Green */
+border: none;
+color: white;
+height: 41px !important;
+margin-top: 15px !important;
+padding: 0px;
+width: 72px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 16px;
 cursor: pointer;
 border-radius: 3px;
 font-size: 13px;
@@ -378,6 +376,7 @@ text-align: center;
 text-decoration: none;
 display: inline-block;
 font-size: 16px;
+/* margin: 4px 2px; */
 cursor: pointer;
 border-radius: 3px;
 }
@@ -385,7 +384,12 @@ border-radius: 3px;
 text-align: center;
 display: flex;
 justify-content: space-between;
+/* margin: 10px; */
 font-family: Roboto;
+/* padding-bottom: 10px;
+padding-left: 12px;
+padding-right: 12px;
+margin: 0 10px 0 10px; */
 }
 .addUser h4 {
 margin-top: 12px;
@@ -399,13 +403,17 @@ margin: 10px;
 }
 .table {
 font-family: "Open Sans", sans-serif;
+/* width: 750px; */
 border-collapse: collapse;
+/* border: 3px solid #44475C; */
+/* margin: 10px 10px 0 10px; */
 }
 .table th {
 text-transform: uppercase;
 text-align: left;
 background: #f8f9fa;
 color: black;
+/* padding: 8px; */
 min-width: 30px;
 padding-left: 5px !important;
 }
@@ -413,6 +421,7 @@ padding-left: 5px !important;
 .table td {
 padding: 5px !important;
 text-align: left;
+/* border-right: 2px solid #707070; */
 }
 .table td:last-child {
 border-right: none;

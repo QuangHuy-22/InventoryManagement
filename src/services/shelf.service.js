@@ -6,32 +6,17 @@ const headers = {
     "Access-Control-Allow-Origin": "*",
 }
 
-export class BranchService extends BaseService {
+export class ShelfService extends BaseService {
     static async getList(token, params) {
         try {
             const response = await axios({
                 method: "get",
-                url: `${BASE_URL}/api/branches`,
+                url: `${BASE_URL}/api/shelves`,
                 params,
                 headers: {
                     headers,
                     AuthToken: token
                 }
-            });
-            return response;
-        } catch (error) {
-            return error.response
-        }
-    }
-    static async createBranch(token, data) {
-        try {
-            const response = await axios({
-                method: "post",
-                url: `${BASE_URL}/api/branches`,
-                headers: {
-                    AuthToken: token,
-                },
-                data: data,
             });
             return response;
         } catch (error) {

@@ -4,42 +4,41 @@
 <div class="content-page">
     <div class="main-content">
     <div class="addUser">
-        <h4 class="font-size-18">Product Info List</h4>
-        <router-link to="/product/product-info/create-product-info" >
-        <div class="btn-group float-right" >
-            <Button type="submit" class="btn btn-outline-primary" style="font-size: 13px;background-color: #EBF6FF;" data-toggle="modal" data-target=".Risk_QL-User_add"><b-icon icon="plus-circle" ></b-icon> Add Product Info</button>
+        <h4 class="font-size-18">Shelf List</h4>
+        <router-link to="/product/product-detail/create-product-detail">
+        <div
+            class="btn-group float-right"
+        >
+            <button
+            type="submit"
+            class="btn btn-outline-primary"
+            style="font-size: 13px;background-color: #EBF6FF;"
+            data-toggle="modal"
+            data-target=".Risk_QL-User_add"
+            >
+            <b-icon icon="plus-circle"></b-icon> Add Shelf
+            </button>
         </div>
-    </router-link>
+        </router-link>
     </div>
 
-    <div class="searchInput colorTable">
+    <div class="searchInput">
         <div class="col-lg-12">
         <form @submit.prevent="submitForm">
         <div class="box-fillter" style="">
             <div class="form-row">
-            <div class="col-md-3 col-sm-3">
+            <div class="col-md-4 col-sm-3">
                 <div class="bf-detail">
                 <input
                     type="text"
                     style="font-size: 13px;"
                     class="form-control"
-                    placeholder="Name"
+                    placeholder="Name" 
                     v-model.trim="search.name"
                 />
                 </div>
             </div>
-            <div class="col-md-3 col-sm-3">
-                <div class="bf-detail">
-                <input
-                    type="text"
-                    style="font-size: 13px;"
-                    class="form-control"
-                    placeholder="Category Name"
-                    v-model.trim="search.categoryName"
-                />
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-3">
+            <div class="col-md-4 col-sm-3">
                 <div class="bf-detail">
                 <input
                     type="text"
@@ -50,7 +49,7 @@
                 />
                 </div>
             </div>
-            <div class="col-md-3 col-sm-3">
+            <div class="col-md-4 col-sm-3">
                 <div class="bf-detail">
                 <input
                     type="text"
@@ -61,48 +60,48 @@
                 />
                 </div>
             </div>
-            <div class="col-md-3 col-sm-3">
+            <div class="col-md-4 col-sm-3">
                 <div class="bf-detail">
                 <input
                     type="text"
                     style="font-size: 13px;"
                     class="form-control"
-                    placeholder="Price From"
-                    v-model.trim="search.priceFrom"
+                    placeholder="qQty Rest From"
+                    v-model.trim="search.qtyRestFrom"
                 />
                 </div>
             </div>
-            <div class="col-md-3 col-sm-3">
+            <div class="col-md-4 col-sm-3">
                 <div class="bf-detail">
                 <input
                     type="text"
                     style="font-size: 13px;"
                     class="form-control"
-                    placeholder="Price To"
-                    v-model.trim="search.priceTo"
+                    placeholder="qQty Rest To"
+                    v-model.trim="search.qtyRestTo"
                 />
                 </div>
             </div>
 
             <div class="col-md-4 col-sm-4" >
                 <div class="btn-fillter">
-                <div class="bf-detail" >
-                <button
+                <div class="bf-detail">
+                    <button
                     @click.prevent="submitForm"
                     class="btn btn-success"
                     style="font-size: 13px; margin-right: 5px; color:white;"
-                >
+                    >
                     <b-icon icon="search"></b-icon>
-                </button>
-                <button
+                    </button>
+                    <button
                     @click="clearSearch"
                     class="btn btn-dark"
                     style="font-size: 13px; margin-right: 5px;"
-                >
+                    >
                     <b-icon icon="x-circle" ></b-icon>
-                </button>
+                    </button>
                 </div>
-            </div>
+                </div>
             </div>
             </div>
         </div>
@@ -111,7 +110,7 @@
     </div>
 
     <div class="page-content">
-        <div class="card colorTable">
+        <div class="card colorChange">
         <div class="card-body">
             <div class="table-responsive">
             <table class="table table-striped table-bordered mb-0">
@@ -120,29 +119,27 @@
                     <th style="text-align: center">No.</th>
                     <th>ID</th>
                     <th>Name</th>
-                    <th>Description</th>
-                    <th>Image</th>
-                    <th>Category Name</th>
+                    <th>description</th>
+                    <th>total</th>
                     <th>qty</th>
-                    <th>Price In</th>
-                    <th>Price Out</th>
+                    <th>qty Rest</th>
+                    <th>branchName</th>
                     <th>Action</th>
                 </tr>
                 </thead>
 
                 <tbody>
-                <tr v-for="(producInfo, index) in dataProductInfo" :key="index">
+                <tr v-for="(data, index) in dataProductDetail" :key="index">
                     <td style="text-align: center">
                     {{ index + 1 }}
                     </td>
-                    <td>{{ producInfo.id }}</td>
-                    <td>{{ producInfo.name }}</td>
-                    <td>{{ producInfo.description }}</td>
-                    <td><img  :src="producInfo.imgUrl" /></td>
-                    <td>{{ producInfo.categoryName }}</td>
-                    <td>{{ producInfo.qty }}</td>
-                    <td>{{ producInfo.priceIn }}</td>
-                    <td>{{ producInfo.priceOut }}</td>
+                    <td>{{ data.id }}</td>
+                    <td>{{ data.name }}</td>
+                    <td>{{ data.description }}</td>
+                    <td>{{ data.total }}</td>
+                    <td>{{ data.qty }}</td>
+                    <td>{{ data.qtyRest }}</td>
+                    <td>{{ data.branchName }}</td>
                     <td>
                     <b-dropdown
                         right
@@ -188,20 +185,21 @@
 
     <footer-content />
 </div>
+
 </div>
 </template>
 
 <script>
 import index from "../../components/index.vue";
 import FooterContent from "../../components/FooterContent.vue";
-import { ProducInfoService } from "@/services/producInfo.service.js";
+import { ShelfService } from "@/services/shelf.service.js";
 export default {
 components: { index, FooterContent },
-name: "list-product-info",
+name: "shelf",
 data() {
 return {
     token: localStorage.getItem("token"),
-    dataProductInfo: [],
+    dataProductDetail:[],
     search: {
     page: 1,
     size: 20,
@@ -215,13 +213,14 @@ mounted() {
 this.fetchData();
 },
 methods: {
-    async fetchData() {
-        try {
-            const response = await ProducInfoService.getList(this.token, this.search);
+async fetchData() {
+    try {
+    const response = await ShelfService.getList(this.token, this.search);
     if (response.status == 200) {
-        this.dataProductInfo = response.data.listData;
+        this.dataProductDetail = response.data.listData;
         this.pagination.total = response.data.total;
     }
+    console.log(response);
     } catch (error) {
     console.log(error.response);
     }
@@ -232,8 +231,10 @@ submitForm() {
 },
 
 clearSearch() {
+    this.dateRange.from = null;
+    this.dateRange.to = null;
     this.search = {
-    page: 1,
+    page: 0,
     size: 20,
     };
     this.fetchData();
@@ -241,7 +242,7 @@ clearSearch() {
 },
 "search.page": function() {
 this.$router.push({
-    path: "/product/product-info",
+    path: "/inventory/shelf",
     query: this.useInUrlQueryPropList,
 });
 this.fetchData();
@@ -257,13 +258,6 @@ padding-left: 230px !important;
 .main-content {
 background: linear-gradient(to right, #778899 , #DCDCDC );
 margin-top: 70px !important;
-}
-.box-fillter{
-  background: linear-gradient(to right, #F0F8FF , #FFFAF0 );
-  width: 100%;
-}
-.colorTable{
-    background: linear-gradient(to right, #F0F8FF , #FFFAF0 );
 }
 .list-groups {
 margin: 50px;
@@ -288,7 +282,6 @@ margin: 0 20px 10px 20px;
 background-color: white;
 padding: 10px;
 }
-
 
 .buttonUnfilter {
 background-color: #74788d; /* Green */
@@ -332,6 +325,9 @@ font-size: 16px;
 margin: 4px 2px;
 cursor: pointer;
 border-radius: 3px;
+}
+.colorChange {
+  background: linear-gradient(to right, #F0F8FF , #FFFAF0 );
 }
 .buttonFix {
 background-color: #3a3737; /* Green */
@@ -410,10 +406,6 @@ border-radius: 4px;
 }
 .pagination {
 justify-content: flex-end !important;
-}
-img{
-    height: 120px;
-    width: 120px;
 }
 @media (max-width: 576px) {
 .content-page,

@@ -17,8 +17,7 @@
                 <div class="flex-item card">
                 <router-link to="/product/product-info">
                   <a class="link-wrapper">
-                    <div><img src="../assets/images/home-tb1.png" alt="" class="t2"></div>
-                    <div><img src="../assets/images/home-t1.png" alt="" class="t1"></div>
+                    <div><img src="../assets/images/product-info.webp" alt="" ></div>
                     <div class="card-body">
                       <h3>Product Info</h3>
                     </div>
@@ -28,8 +27,7 @@
                 <div class="flex-item card">
                   <router-link to="/inventory/vat">
                   <a class="link-wrapper">
-                    <div><img src="../assets/images/home-tb2.png" alt=""></div>
-                    <div><img src="../assets/images/home-t2.png" alt="" class="t1"></div>
+                    <div><img src="../assets/images/VAT.jpg" ></div>
                     <div class="card-body">
                       <h3>Vat</h3>
                     </div>
@@ -39,7 +37,7 @@
                 <div class="flex-item card">
                   <router-link to="/product/product-detail">
                   <a class="link-wrapper">
-                    <div><img src="../assets/images/home-tb3.jpg" alt="" class="t3"></div>
+                    <div><img src="../assets/images/product-detail.jpg" ></div>
                     <div class="card-body">
                       <h3>Product Detail</h3>
                     </div>
@@ -49,7 +47,7 @@
                 <div class="flex-item card">
                   <router-link to="/management/customer">
                   <a class="link-wrapper">
-                    <div><img src="../assets/images/home-tb4.png" alt="" class="t3"></div>
+                    <div><img src="../assets/images/customer.jpg" ></div>
                     <div class="card-body">
                       <h3>Customer</h3>
                     </div>
@@ -118,7 +116,7 @@ a{
   display: block;
   overflow: hidden;
   color: #1abc9c;
-  padding: 10px;
+  padding: 2px;
 }
 h3{
   font-family: monospace;
@@ -127,7 +125,7 @@ h3{
   border: 1px solid rgba(0,0,0,.125)!important;
 }
 .flex-item:hover{
-  border: 1px solid #1abc9c!important;
+  border: 2px solid #1abc9c!important;
 }
 .t1{
       position: absolute;
@@ -166,7 +164,9 @@ h3{
 img{
   max-width: 100%;
   vertical-align: middle;
-    border-style: none;
-        text-align: center;
+  border-style: none;
+      text-align: center;
+      height: 250px;
+      width: 250px;
 }
 </style>

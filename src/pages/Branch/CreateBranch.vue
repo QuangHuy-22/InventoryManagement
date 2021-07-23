@@ -10,8 +10,8 @@
     <div class="box-title box-title-fix">
         <h2>Create Category</h2>
         <div class="btn-group float-right">
-        <form class="buttonAddUser"  @submit.prevent="handleAddUser">
-        <router-link to="/product/category" class="btn btn-dark" style="font-size: 13px;"> Cancel</router-link>
+        <form class="buttonAddUser"  @submit.prevent="handleAddBranch">
+        <router-link to="/management/branch" class="btn btn-dark" style="font-size: 13px;"> Cancel</router-link>
         <router-link to="/produc-info/create-produc-info">
         </router-link>
         <button class="btn btn-dark"  style="font-size: 13px;margin-left: 5px;"> Reset</button>
@@ -49,7 +49,7 @@
             <form class="needs-validation" >
             <div class="col-sm-6" >
                 <div class="form-group form-erross">
-                    <label for="validationCustom01">Code</label>
+                    <label for="validationCustom01">Name</label>
                     <v-text-field 
                     type="text" 
                     class="form-control" 
@@ -58,11 +58,11 @@
                     placeholder="" 
                     value="" 
                     required
-                    v-model="dataCategory.code">
+                    v-model="dataBranch.name">
                     </v-text-field>
                 </div>
                 <div class="form-group form-erross">
-                    <label for="validationCustom01">Name</label>
+                    <label for="validationCustom01">Code</label>
                     <v-text-field 
                     type="text" 
                     class="form-control" 
@@ -71,11 +71,11 @@
                     placeholder="" 
                     value="" 
                     required
-                    v-model="dataCategory.name">
+                    v-model="dataBranch.code">
                     </v-text-field>
                 </div>
                 <div class="form-group form-erross">
-                    <label for="validationCustom01">Description</label>
+                    <label for="validationCustom01">Phone</label>
                     <v-text-field 
                     type="text" 
                     class="form-control" 
@@ -83,7 +83,19 @@
                     id="validationCustom01" 
                     placeholder="" 
                     value="" 
-                    v-model="dataCategory.description">
+                    v-model="dataBranch.description">
+                    </v-text-field>
+                </div>
+                <div class="form-group form-erross">
+                    <label for="validationCustom01">Address</label>
+                    <v-text-field 
+                    type="text" 
+                    class="form-control" 
+                    style="padding: 3px 0px!important;"
+                    id="validationCustom01" 
+                    placeholder="" 
+                    value="" 
+                    v-model="dataBranch.address">
                     </v-text-field>
                 </div>
                 </div>
@@ -115,7 +127,7 @@
 
 <script>
 import index from '../../components/index.vue'
-import { CategoryService } from "@/services/category.service.js";
+import { BranchService } from "@/services/branch.service.js";
 import { required, } from "vuelidate/lib/validators";
 export default {
 name:"create-category",
@@ -125,13 +137,8 @@ components: {
     data(){
         return{
             token: localStorage.getItem("token"),
-            dataCategory:{
-                code:"",
-                name:"",
-                description:"",
-            },
+            dataBranch:{},
             errorMessage:"",
-            reg: /^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêếìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂẾưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹý0-9 ]+$/
         }
     },
     validations: {
@@ -141,9 +148,9 @@ components: {
             
         },
     methods:{
-    async handleAddUser(){
+    async handleAddBranch(){
         try {
-            const response = await CategoryService.createCategory(this.token, this.dataCategory)
+            const response = await BranchService.createBranch(this.token, this.dataBranch)
             console.log(response);
             if(response.status == 200){
                 this.$bvModal.show("bv-modal-example-3")

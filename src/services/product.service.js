@@ -26,6 +26,41 @@ export class ProducService extends BaseService {
             return error.response
         }
     }
+    static async getListStatusDetail(token, params) {
+        try {
+            const response = await axios({
+                method: "get",
+                url: `${BASE_URL}/api/product-status-details`,
+                params: {
+                    page: 1,
+                    size: 10,
+                    type: params.type
+                },
+                headers: {
+                    headers,
+                    AuthToken: token
+                }
+            });
+            return response;
+        } catch (error) {
+            return error.response
+        }
+    }
+    static async getCountStatus(token) {
+        try {
+            const response = await axios({
+                method: "get",
+                url: `${BASE_URL}/api/product-status-lists/get-count-records`,
+                headers: {
+                    headers,
+                    AuthToken: token
+                }
+            });
+            return response;
+        } catch (error) {
+            return error.response
+        }
+    }
     static async createProductDetail(token, id, data) {
         try {
             const response = await axios({

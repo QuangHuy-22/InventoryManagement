@@ -11,7 +11,7 @@
             <div
                 class="page-title-box d-flex align-items-center justify-content-between"
             >
-                <h4 class="mb-0 font-size-18">Product Done - Back</h4>
+                <h4 class="mb-0 font-size-18">Product Done - Back Detail</h4>
             </div>
             </div>
         </div>
@@ -26,9 +26,9 @@
                     <div class="media">
                         <div class="titleNew media-body">
                         <p class="titleNew font-weight-medium">
-                            Product Done
+                            Product Detail Done
                         </p>
-                        <h4 class="mb-0 new">{{ dataCountStatus.LIST_DONE }}</h4>
+                        <h4 class="mb-0 new">{{ dataCountStatus.DETAIL_DONE }}</h4>
                         </div>
                         <div class="bg-primary" style=" border-radius: 50%;">
                         <v-avatar>
@@ -47,10 +47,10 @@
                     <div class="media">
                         <div class="titleProcessing media-body">
                         <p class="titleProcessing font-weight-medium">
-                            Product Back
+                            Product Detail Back
                         </p>
                         <h4 class="mb-0 processing">
-                            {{ dataCountStatus.LIST_BACK }}
+                            {{ dataCountStatus.DETAIL_BACK }}
                         </h4>
                         </div>
                         <div class="bg-primary" style=" border-radius: 50%;">
@@ -81,12 +81,12 @@
                     <tr style="font-size: 12px;white-space: nowrap;">
                         <th>No.</th>
                         <th>Id</th>
-                        <th>Code</th>
-                        <th>VAT Code</th>
-                        <th>User Name</th>
-                        <th>Price</th>
-                        <th>Create Date</th>
-                        <th>Update Date</th>
+                        <th>Product Info</th>
+                        <th>Product Status List Code</th>
+                        <th>Price One</th>
+                        <th>Price Total</th>
+                        <th>Qty</th>
+                        <th>Qty Rest</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -101,16 +101,16 @@
                         </td>
                         <td>{{ data.id }}</td>
                         <td>
-                        {{ data.code }}
+                        {{ data.productInfo }}
                         </td>
-                        <td>{{ data.vatCode }}</td>
-                        <td>{{ data.userName }}</td>
-                        <td>{{ data.price }}</td>
+                        <td>{{ data.productStatusListCode }}</td>
+                        <td>{{ data.priceOne }}</td>
+                        <td>{{ data.priceTotal }}</td>
                         <td>
-                        {{ data.createDate }}
+                        {{ data.qty }}
                         </td>
                         <td>
-                        {{ data.updateDate }}
+                        {{ data.qtyRest }}
                         </td>
                         <td>
                         <b-dropdown
@@ -124,9 +124,6 @@
                             <b-icon icon="three-dots-vertical"></b-icon>
                             </template>
                             <div style="font-size: 13px;">
-                            <b-dropdown-item @click="createProductDetail(data.id)">
-                                Create Product Detail
-                            </b-dropdown-item>
                             <b-dropdown-item >
                                 Delete
                             </b-dropdown-item>
@@ -260,7 +257,7 @@ fetchDataBack() {
 
 async fetchData() {
     try {
-    const response = await ProducService.getList(this.token, this.search);
+    const response = await ProducService.getListStatusDetail(this.token, this.search);
     if (response.status === 200) {
         this.dataProduct = response.data.listData;
     }
@@ -278,10 +275,6 @@ async fetchDataCountStatus() {
     console.log(error);
     }
 },
-async createProductDetail(idProduct){
-
-this.$router.push({ name: "CreateProductStatusDetail", params: { id: idProduct } });
-}
 },
 
 computed: {
@@ -298,7 +291,7 @@ buttonDisable() {
 watch: {
 "params.page": function() {
     this.$router.push({
-    path: "/inventory/product-status",
+    path: "/inventory/product-status-detail",
     query: this.useInUrlQueryPropList,
     });
     this.fetchData();

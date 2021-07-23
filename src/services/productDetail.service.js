@@ -24,7 +24,7 @@ export class ProducDetailService extends BaseService {
             return error.response
         }
     }
-    static async createProductDetail(token, data, ) {
+    static async createProductDetail(token, data) {
         try {
             const response = await axios({
                 method: "post",

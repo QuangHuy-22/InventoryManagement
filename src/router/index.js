@@ -37,9 +37,13 @@ import VATDetail from "../pages/VAT/VATDetail.vue"
 import CreateVATDetail from "../pages/VAT/CreateVATDetail.vue"
 import ListVATCode from "../pages/VAT/ListVATCode.vue"
 import ProductStatusList from "../pages/Product/ProductStatusList.vue"
+import ProductStatusDetailList from "../pages/Product/ProductStatusDetailList.vue"
 import CreateProductStatusDetail from "../pages/Product/CreateProductStatusDetail.vue"
 import Issue from "../pages/Issue/Issue.vue"
 import CreateIssueDetail from "../pages/Issue/CreateIssueDetail.vue"
+import Shelf from "../pages/Shelf/Shelf.vue"
+import Branch from "../pages/Branch/Branch.vue"
+import CreateBranch from "../pages/Branch/CreateBranch.vue"
 // import health from "./health.js"
 
 
@@ -217,6 +221,11 @@ const routes = [{
         component: VAT,
     },
     {
+        path: '/inventory/shelf',
+        name: 'Shelf',
+        component: Shelf,
+    },
+    {
         path: '/inventory/vat-detail',
         name: 'VATDetail',
         component: VATDetail,
@@ -225,6 +234,11 @@ const routes = [{
         path: '/inventory/product-status',
         name: 'Product',
         component: ProductStatusList,
+    },
+    {
+        path: '/inventory/product-detail-status',
+        name: 'Product Status Detail',
+        component: ProductStatusDetailList,
     },
     {
         path: '/inventory/issue',
@@ -237,8 +251,8 @@ const routes = [{
         component: CreateIssueDetail,
     },
     {
-        path: '/inventory/product-status/add-product-detail/:id',
-        name: 'CreateProductDetail',
+        path: '/inventory/product-status/add-product-status-detail/:id',
+        name: 'CreateProductStatusDetail',
         component: CreateProductStatusDetail,
     },
     {
@@ -250,6 +264,16 @@ const routes = [{
         path: '/actuator/readiness',
         name: 'Readiness',
         component: Readiness,
+    },
+    {
+        path: '/management/branch',
+        name: 'Branch',
+        component: Branch,
+    },
+    {
+        path: '/management/branch/create-branch',
+        name: 'CreateBranch',
+        component: CreateBranch,
     },
     {
         path: '*',
@@ -265,10 +289,7 @@ const router = new VueRouter({
     routes
 })
 router.beforeEach((to, from, next) => {
-        if (to.name !== 'Đăng nhập' && localStorage.getItem('token') == null && to.name !== 'Quên mật khẩu' && to.name !== 'Xác thực Email') next({ name: 'Đăng nhập' })
-        else next()
-    })
-    // exports.health = function(req, res, next) {
-    //   return res.sendStatus(200);
-    // }
+    if (to.name !== 'Đăng nhập' && localStorage.getItem('token') == null && to.name !== 'Quên mật khẩu' && to.name !== 'Xác thực Email') next({ name: 'Đăng nhập' })
+    else next()
+})
 export default router

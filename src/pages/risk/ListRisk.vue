@@ -200,7 +200,7 @@
                       Tổng giao dịch: {{ this.pagination.total }}
                     </h4>
                     <div class="table-responsive">
-                      <table class="table table-centered table-nowrap mb-0">
+                      <table class="table table-hover table-dark">
                         <thead class="thead-light">
                           <tr style="font-size: 12px;white-space: nowrap;">
                             <th>STT</th>
@@ -679,15 +679,15 @@ export default {
   padding-left: 230px;
 }
 .main-content {
-  background-color: #ffff;
+/* background: linear-gradient(to right, #778899 , #DCDCDC ); */
   /* padding:20px; */
   margin-top: 70px !important;
 }
 .colorChange {
-  background: linear-gradient(to right, #F0F8FF , #FFFAF0 );
+  background: linear-gradient(to right, #000000 , #778899 );
 }
 .box-fillter {
-  background: linear-gradient(to right, #F0F8FF , #FFFAF0 );
+  background: linear-gradient(to right, #000000 , #778899 );
 }
 .nav {
   background-color: #fff;

@@ -20,10 +20,11 @@
     </div>
 
     <div class="searchInput colorTable">
+        <div class="col-lg-12">
         <form @submit.prevent="submitForm">
         <div class="box-fillter" style="padding: 2px 14px 2px 14px;">
             <div class="form-row">
-            <div class="col-md-2 col-sm-4">
+            <div class="col-md-3 col-sm-4">
                 <div class="bf-detail">
                 <input
                     type="text"
@@ -35,7 +36,7 @@
                 </div>
             </div>
 
-            <div class="col-md-2 col-sm-4">
+            <div class="col-md-3 col-sm-4">
                 <div class="bf-detail">
                 <input
                     type="text"
@@ -47,7 +48,7 @@
                 </div>
             </div>
             
-            <div class="col-md-2 col-sm-4">
+            <div class="col-md-3 col-sm-4">
                 <div class="bf-detail">
                 <input
                     type="text"
@@ -66,20 +67,22 @@
                     class="btn btn-info"
                     style="font-size: 13px; margin-right: 5px; color:white;"
                 >
-                    Lọc
+                    <b-icon icon="search"></b-icon>
                 </button>
                 <button
                     @click="clearSearch"
                     class="btn btn-dark"
                     style="font-size: 13px; margin-right: 5px;"
                 >
-                    Bỏ lọc
+                    
+                    <b-icon icon="x-circle" ></b-icon>
                 </button>
                 </div>
             </div>
             </div>
         </div>
         </form>
+        </div>
     </div>
 
     <div class="page-content">
