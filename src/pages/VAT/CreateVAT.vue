@@ -28,7 +28,7 @@
         style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;">Adding Successful</h3>
         </div>
         <div class="buttonSubmitLogout">
-            <router-link to="/management/supplier">
+            <router-link to="/inventory/vat">
         <button class="buttonOK mt-3"  style="font-size: 13px;">OK</button>
         </router-link>
         <!-- <button class="buttonNo mt-3" @click="$bvModal.hide('bv-modal-example')" style="font-size: 13px;" >Không</button> -->
@@ -75,7 +75,7 @@
                     </v-text-field>
                 </div>
                 <div class="form-group form-erross">
-                    <label for="validationCustom01">Percent</label>
+                    <label for="validationCustom01">Percent %</label>
                     <v-text-field 
                     type="number" 
                     class="form-control" 

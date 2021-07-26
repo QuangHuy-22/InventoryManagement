@@ -84,7 +84,7 @@
                     <th style="text-align: center">No.</th>
                     <th>id</th>
                     <th>Name</th>
-                    <th>Description</th>
+                    <th>Address</th>
                     <th>Action</th>
                     </tr>
                 </thead>
@@ -99,7 +99,7 @@
                     </td>
                     <td>{{ branch.id }}</td>
                     <td>{{ branch.name }}</td>
-                    <td>{{ branch.description }}</td>
+                    <td>{{ branch.address }}</td>
                     <td>
                         <b-dropdown
                         right

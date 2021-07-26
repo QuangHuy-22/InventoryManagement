@@ -471,6 +471,7 @@ justify-content: flex-end !important;
 }
 .code-vat {
 color: #008bf4;
+cursor: pointer;
 }
 .code-vat:hover {
 color: #74788d;

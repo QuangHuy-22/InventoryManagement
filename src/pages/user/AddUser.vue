@@ -103,7 +103,6 @@
                             class="form-control"
                             style="padding: 3px 0px!important;"
                             id="validationCustom01" 
-                            :error-messages="emailErrors"
                             placeholder="" 
                             value="" 
                             required 
@@ -122,7 +121,6 @@
                             class="form-control" 
                             style="padding: 3px 0px!important;"
                             id="validationCustom02" 
-                            :error-messages="phoneErrors"
                             placeholder="" 
                             value="" 
                             required 
@@ -183,7 +181,7 @@ import { RoleService } from "@/services/role.service";
 import { UserService } from "@/services/user.service";
 import { BranchService } from "@/services/branch.service";
 import index from '../../components/index.vue'
-import { required, } from "vuelidate/lib/validators";
+// import { required, } from "vuelidate/lib/validators";
 export default {
 name:"add-user",
 components: { 
@@ -219,19 +217,19 @@ components: {
         }
         }
     },
-    validations: {
+    // validations: {
             
-                fullName: { required },
-                phoneNumber: { required },
-                username: { required },
-                position: { required },
+    //             fullName: { required },
+    //             phoneNumber: { required },
+    //             username: { required },
+    //             position: { required },
             
-        },
+    //     },
     methods:{
-        acceptNumber() {
-    var x = this.phoneNumber.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
-    this.phoneNumber = !x[2] ? x[1] : x[1] + ' ' + x[2] + (x[3] ? ' ' + x[3] : '');
-    },
+    //     acceptNumber() {
+    // var x = this.phoneNumber.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
+    // this.phoneNumber = !x[2] ? x[1] : x[1] + ' ' + x[2] + (x[3] ? ' ' + x[3] : '');
+    // },
     submit() {
     this.$v.$touch()
     },
@@ -286,36 +284,27 @@ components: {
     this.fetchDataRole()
     this.fetchDataBranch()
 },
-    computed:{
-        emailErrors() {
-    const errors = [];
-    if (!this.$v.username.$dirty) return errors;
-    return this.username == ""
-        ? "Email bắt buộc nhập"
-        : this.reg.test(this.username) || this.reg1.test(this.username)
-        ? ""
-        : "E-mail sai định dạng";
-    },
-        nameErrors() {
-    const errors = [];
-    if (!this.$v.fullName.$dirty) return errors;
-    return this.fullName == ""
-        ? "Họ và Tên bắt buộc nhập"
-        : this.regName.test(this.fullName)
-        ? ""
-        : "Họ và tên không được có kí tự và số";
-    },
-        phoneErrors() {
-    const errors = [];
-    if (!this.$v.phoneNumber.$dirty) return errors;
-        return this.phoneNumber == "" ? "SĐT bắt buộc nhập" : this.regPhone.test(this.phoneNumber.replace(/ +/g, "")) ? "" : "SĐT chưa hợp lệ";
-    },
-        positonErrors() {
-    const errors = [];
-    if (!this.$v.position.$dirty) return errors;
-        return this.position == "" ? "Trường thông tin không được để trống" : ""
-    },
-    }
+    // computed:{
+    //     emailErrors() {
+    // const errors = [];
+    // if (!this.$v.dataUser.email.$dirty) return errors;
+    // return this.dataUser.email == ""
+    //     ? "Email bắt buộc nhập"
+    //     : this.reg.test(this.dataUser.email) || this.reg1.test(this.dataUser.email)
+    //     ? ""
+    //     : "E-mail sai định dạng";
+    // },
+    //     phoneErrors() {
+    // const errors = [];
+    // if (!this.$v.dataUser.phone.$dirty) return errors;
+    //     return this.dataUser.phone == "" ? "SĐT bắt buộc nhập" : this.regPhone ? "" : "SĐT chưa hợp lệ";
+    // },
+    //     positonErrors() {
+    // const errors = [];
+    // if (!this.$v.position.$dirty) return errors;
+    //     return this.position == "" ? "Trường thông tin không được để trống" : ""
+    // },
+    // }
 }
 </script>
 <style  scoped>

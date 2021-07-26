@@ -36,7 +36,7 @@ export class VATService extends BaseService {
                 data: {
                     code: data.code,
                     tax: data.tax,
-                    percent: Number(data.percent),
+                    percent: Number(data.percent / 100),
                     branchId: data.branchId,
                     userName: data.userName
                 },

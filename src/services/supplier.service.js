@@ -23,4 +23,19 @@ export class SupplierService extends BaseService {
             return error.response
         }
     }
+    static async createSupplier(token, data) {
+        try {
+            const response = await axios({
+                method: "post",
+                url: `${BASE_URL}/api/suppliers`,
+                headers: {
+                    AuthToken: token,
+                },
+                data: data,
+            });
+            return response;
+        } catch (error) {
+            return error.response
+        }
+    }
 }

@@ -5,7 +5,7 @@
     <div class="main-content">
     <div class="addUser">
         <h4 class="font-size-18">Supplier List</h4>
-        <router-link to="/management/list-user/add-user">
+        <router-link to="/management/supplier/create-supplier">
         <div
             class="btn-group float-right"
         >

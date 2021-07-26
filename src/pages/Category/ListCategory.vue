@@ -85,6 +85,7 @@
                 <thead class="">
                 <tr>
                     <th style="text-align: center">No.</th>
+                    <th>ID</th>
                     <th>Code</th>
                     <th>Name</th>
                     <th>Description</th>
@@ -97,6 +98,7 @@
                     <td style="text-align: center">
                     {{index + 1}}
                     </td>
+                    <td>{{ category.id }}</td>
                     <td>{{ category.code }}</td>
                     <td>{{ category.name }}</td>
                     <td>{{ category.description }}</td>

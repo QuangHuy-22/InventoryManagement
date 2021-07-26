@@ -15,7 +15,7 @@
                 @submit.prevent="handleAddProducInfo"
             >
                 <router-link
-                to="/product/category"
+                to="/product/product-info"
                 class="btn btn-dark"
                 style="font-size: 13px;"
                 >
@@ -82,18 +82,18 @@
                 >
                     <div class="col-sm-6">
                     <div class="form-group form-erross">
-                        <label for="validationCustom01">Category</label>
-                        <v-text-field
-                        type="text"
-                        class="form-control"
-                        style="padding: 3px 0px!important;"
-                        id="validationCustom01"
-                        placeholder=""
-                        value=""
-                        required
+                        <label for="validationCustom04">Category</label>
+                        <b-select
+                        class="form-control select2"
                         v-model="dataProducInfo.categoryId"
                         >
-                        </v-text-field>
+                        <option
+                            v-for="data in dataCategory"
+                            :key="data.id"
+                            :value="data.id"
+                            >{{ data.name }}</option
+                        >
+                        </b-select>
                     </div>
                     <div class="form-group form-erross">
                         <label for="validationCustom01">Name</label>
@@ -187,6 +187,7 @@
 import axios from "axios";
 import index from "../../components/index.vue";
 import { required } from "vuelidate/lib/validators";
+import { CategoryService } from "@/services/category.service.js";
 export default {
 name: "create-product-info",
 components: {
@@ -196,13 +197,17 @@ data() {
 return {
     token: localStorage.getItem("token"),
     dataProducInfo: {},
+    dataCategory:{},
     image: '',
     formData: null,
     productInfoData:{},
     File:null,
     someData: "",
     errorMessage: "",
-    reg: /^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêếìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂẾưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹý0-9 ]+$/,
+    search: {
+    page: 1,
+    size: 20,
+    },
 };
 },
 validations: {
@@ -210,6 +215,17 @@ code: { required },
 name: { required },
 },
 methods: {
+async fetchData() {
+    try {
+    const response = await CategoryService.getList(this.token,this.search);
+    if (response.status == 200) {
+        this.dataCategory = response.data.listData;
+    }
+    console.log(response);
+    } catch (error) {
+    console.log(error.response);
+    }
+},
 onFileChange(e) {
     const fileUp = e.target.files[0];
     this.url = URL.createObjectURL(fileUp);
@@ -221,8 +237,6 @@ onFileChange(e) {
     // this.createImage(files[0]);
 },
 createImage(file) {
-    var image = new Image();
-    console.log(image);
     var reader = new FileReader();
     var vm = this;
 
@@ -230,10 +244,6 @@ createImage(file) {
     vm.image = e.target.result;
     };
     reader.readAsDataURL(file);
-},
-removeImage: function (e) {
-    console.log(e);
-    this.image = '';
 },
 handleAddProducInfo() {
     this.formData = new FormData();
@@ -247,7 +257,6 @@ handleAddProducInfo() {
         this.formData.append("description", this.dataProducInfo.description,);
         this.formData.append("categoryId", this.dataProducInfo.categoryId,);
         }
-        console.log(this.File);
     axios({
     method: "post",
     url: "http://localhost:8090/api/products-info/",
@@ -260,13 +269,12 @@ handleAddProducInfo() {
     data: this.formData
     })
     .then((response) => {
-        console.log(response);
         if (response.status == 200) {
         this.$bvModal.show("bv-modal-example-3") 
         }
     })
     .catch((error) => {
-        this.errorMessage == error.response.data.message
+        this.errorMessage = error.response.data
         this.$bvModal.show("bv-modal-example-error-add-user")
     });
 },
@@ -276,6 +284,7 @@ processFile(event) {
 
 },
 mounted() {
+    this.fetchData()
 },
 };
 </script>

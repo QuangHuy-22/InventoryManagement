@@ -31,6 +31,7 @@ import Customer from "../pages/Customer/Customer.vue"
 import CreateCustomer from "../pages/Customer/CreateCustomer.vue"
 import CustomerDetail from "../pages/Customer/CustomerDetail.vue"
 import Supplier from "../pages/Supplier/Supplier.vue"
+import CreateSupplier from "../pages/Supplier/CreateSupplier.vue"
 import CreateVAT from "../pages/VAT/CreateVAT.vue"
 import VAT from "../pages/VAT/VAT.vue"
 import VATDetail from "../pages/VAT/VATDetail.vue"
@@ -199,6 +200,11 @@ const routes = [{
         path: '/management/supplier',
         name: 'Supplier',
         component: Supplier,
+    },
+    {
+        path: '/management/supplier/create-supplier',
+        name: 'CreateSupplier',
+        component: CreateSupplier,
     },
     {
         path: '/management/supplier/create-vat/:id',
