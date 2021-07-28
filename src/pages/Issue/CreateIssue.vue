@@ -8,10 +8,10 @@
 <!-- InstanceBeginEditable name="EditRegion1" -->
     <!-- box-title -->
     <div class="box-title box-title-fix">
-        <h2>Create Shelf</h2>
+        <h2>Create Issue</h2>
         <div class="btn-group float-right">
         <form class="buttonAddUser"  @submit.prevent="handleAddUser">
-        <router-link to="/management/supplier" class="btn btn-dark" style="font-size: 13px;"> Cancel</router-link>
+        <router-link to="/inventory/issue" class="btn btn-dark" style="font-size: 13px;"> Cancel</router-link>
         <button class="btn btn-dark"  style="font-size: 13px;margin-left: 5px;"> Reset</button>
         <button type="submit" class="btn btn-primary" data-toggle="modal" data-target=".Risk_Permission_Update" style="font-size: 13px;margin-left: 5px;">Submit</button>
         <div class="showAddUser" >
@@ -23,10 +23,10 @@
             </b-col>
         <div class="d-block text-center" >
         <h3 
-        style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;">Adding Successful</h3>
+        style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;">Adding Successful!</h3>
         </div>
         <div class="buttonSubmitLogout">
-            <router-link to="/inventory/shelf">
+            <router-link to="/inventory/issue">
         <button class="buttonOK mt-3"  style="font-size: 13px;">OK</button>
         </router-link>
         <!-- <button class="buttonNo mt-3" @click="$bvModal.hide('bv-modal-example')" style="font-size: 13px;" >Không</button> -->
@@ -43,14 +43,21 @@
 <div class="row">
     <div class="col-sm-12">
         <div class="card-body">
-            <h4 class="card-title mb-3">Information Shelf</h4>
+            <h4 class="card-title mb-3">Information Issue</h4>
             <form class="needs-validation" >
             <div class="col-sm-6" >
                 <div class="form-group form-erross">
-                    <label for="validationCustom04">Branch Id</label>
-                <b-select class="form-control select2"  v-model="dataShelf.branchId">
-                    <option v-for="data in dataBranch" :key="data.id" :value="data.id">{{data.name}}</option>
-                </b-select>
+                    <label for="validationCustom01">Code</label>
+                    <v-text-field 
+                    type="text" 
+                    class="form-control" 
+                    style="padding: 3px 0px!important;"
+                    id="validationCustom01" 
+                    placeholder="" 
+                    value="" 
+                    required
+                    v-model="dataCategory.code">
+                    </v-text-field>
                 </div>
                 <div class="form-group form-erross">
                     <label for="validationCustom01">Name</label>
@@ -62,7 +69,7 @@
                     placeholder="" 
                     value="" 
                     required
-                    v-model="dataShelf.name">
+                    v-model="dataCategory.name">
                     </v-text-field>
                 </div>
                 <div class="form-group form-erross">
@@ -74,23 +81,9 @@
                     id="validationCustom01" 
                     placeholder="" 
                     value="" 
-                    required
-                    v-model="dataShelf.description">
+                    v-model="dataCategory.description">
                     </v-text-field>
                 </div>
-                <div class="form-group form-erross">
-                    <label for="validationCustom01">Total</label>
-                    <v-text-field 
-                    type="text" 
-                    class="form-control" 
-                    style="padding: 3px 0px!important;"
-                    id="validationCustom01" 
-                    placeholder="" 
-                    value="" 
-                    v-model="dataShelf.total">
-                    </v-text-field>
-                </div>
-                
                 </div>
             </form>
         </div>
@@ -120,8 +113,8 @@
 
 <script>
 import index from '../../components/index.vue'
-import { ShelfService } from "@/services/shelf.service.js";
-import { BranchService } from "@/services/branch.service";
+import { CategoryService } from "@/services/category.service.js";
+import { required, } from "vuelidate/lib/validators";
 export default {
 name:"create-category",
 components: { 
@@ -130,44 +123,39 @@ components: {
     data(){
         return{
             token: localStorage.getItem("token"),
-            dataShelf:{},
+            dataCategory:{
+                code:"",
+                name:"",
+                description:"",
+            },
             errorMessage:"",
-            dataBranch:{},
-            search:{
-            page:1,
-            size:10
-        }
+            reg: /^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêếìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂẾưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹý0-9 ]+$/
         }
     },
+    validations: {
+            
+                code: { required },
+                name: { required },
+            
+        },
     methods:{
     async handleAddUser(){
         try {
-            const response = await ShelfService.createShelf(this.token, this.dataShelf)
+            const response = await CategoryService.createCategory(this.token, this.dataCategory)
             console.log(response);
             if(response.status == 200){
                 this.$bvModal.show("bv-modal-example-3")
             }
             if (response.status == 400) {
                 this.$bvModal.show('bv-modal-example-error-add-user')
-                this.errorMessage = response.data
+                this.errorMessage = response.data.name
             }
         } catch (error) {
             return error
         }
     },
-     async fetchDataBranch(){
-    try {
-        const response = await BranchService.getList(this.token, this.search)
-        if (response.status == 200) {
-            this.dataBranch = response.data.listData
-        }
-    }catch(error){
-        console.log(error.response);
-    }
-    },
     },
     mounted() {
-        this.fetchDataBranch()
 },
 // computed:{
 //         nameErrors() {

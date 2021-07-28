@@ -1,20 +1,33 @@
 <template>
-<div class="add-user">
-<index />
-<div class="content-page">
-    <div class="main-content">
+<div class="update-user" style="">
+    <index />
+    <div class="content-page">
+<div class="main-content">
+
 <div class="page-content">
 <div class="container-fluid">
 <!-- InstanceBeginEditable name="EditRegion1" -->
-    <!-- box-title -->
-    <div class="box-title box-title-fix">
-        <h2>Create Shelf</h2>
-        <div class="btn-group float-right">
-        <form class="buttonAddUser"  @submit.prevent="handleAddUser">
-        <router-link to="/management/supplier" class="btn btn-dark" style="font-size: 13px;"> Cancel</router-link>
-        <button class="btn btn-dark"  style="font-size: 13px;margin-left: 5px;"> Reset</button>
-        <button type="submit" class="btn btn-primary" data-toggle="modal" data-target=".Risk_Permission_Update" style="font-size: 13px;margin-left: 5px;">Submit</button>
-        <div class="showAddUser" >
+
+<!-- box-title -->
+<div class="box-title box-title-fix">
+    <h2 class="title-page">Update Shelf</h2>
+    <div class="btn-group float-right">
+        <form class="buttonLogout"  @submit.prevent="handleUpdate"  >
+        <router-link to="/inventory/shelf">
+        <b-button  
+        id="show-btn" 
+        style="font-size: 13px; margin-right: 5px;" variant="outline-primary" 
+        v-b-modal.modal-center >
+            Cancel</b-button>
+            </router-link>
+        <b-button  
+        id="show-btn" 
+        type="submit"
+        style="font-size: 13px;" variant="outline-primary" 
+        v-b-modal.modal-center >
+        <b-icon icon="pencil-square" ></b-icon>
+        Update</b-button>
+        <div class="showLogout" >
         <b-modal id="bv-modal-example-3" hide-footer hide-header >
             <b-col class="iconLogout mb-2">
             <div class="mb-img mb-4">
@@ -23,28 +36,28 @@
             </b-col>
         <div class="d-block text-center" >
         <h3 
-        style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;">Adding Successful</h3>
+        style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;">Adding Successful!</h3>
         </div>
         <div class="buttonSubmitLogout">
             <router-link to="/inventory/shelf">
-        <button class="buttonOK mt-3"  style="font-size: 13px;">OK</button>
+        <button  class="buttonOK mt-3"  style="font-size: 13px;">OK</button>
         </router-link>
         <!-- <button class="buttonNo mt-3" @click="$bvModal.hide('bv-modal-example')" style="font-size: 13px;" >Không</button> -->
         </div>
         </b-modal>
         </div>
         </form>
-        </div>
+        
     </div>
-    
-    <!-- box-content -->
+</div>
 
+<!-- box-content -->
 <div class="card form-fix">
-<div class="row">
-    <div class="col-sm-12">
-        <div class="card-body">
-            <h4 class="card-title mb-3">Information Shelf</h4>
-            <form class="needs-validation" >
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card-body">
+                <h4 class="card-title mb-3" style="font-size: 15px;">Information Shelf</h4>
+                <form class="needs-validation" >
             <div class="col-sm-6" >
                 <div class="form-group form-erross">
                     <label for="validationCustom04">Branch Id</label>
@@ -93,46 +106,56 @@
                 
                 </div>
             </form>
+            </div>
         </div>
     </div>
+            
 </div>
-        
-</div>
+<!-- Modal Cập nhật -->
     <!-- ----------modal error-------->
-<b-modal id="bv-modal-example-error-add-user" hide-footer hide-header >
+<b-modal id="bv-modal-example-error-update-user" hide-footer hide-header >
 <b-col class="iconLogout mb-2">
 <b-icon icon="x-circle" class="iconsBox" style="color: red!important;"></b-icon>
 </b-col>
 <div class="d-block text-center" >
+<h3 
+style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;">Error!</h3>
 <span>{{ this.errorMessage }}</span>
 </div>
 <div class="buttonSubmitLogout">
-<button class="buttonOK mt-3" @click="$bvModal.hide('bv-modal-example-error-add-user')"  style="font-size: 13px;">OK</button>
+<!-- <router-link to="/list-role"> -->
+<button class="buttonOK mt-3" @click="$bvModal.hide('bv-modal-example-error-update-user')"  style="font-size: 13px;">OK</button>
+<!-- </router-link> -->
 </div>
 </b-modal>
 <!-- ----------end modal error-------->
+
 </div>
 </div>
+<!-- End Page-content -->
 </div>
-</div>
-</div>
+<!-- end main content-->
+    </div>
+    </div>
+
 </template>
 
 <script>
-import index from '../../components/index.vue'
 import { ShelfService } from "@/services/shelf.service.js";
 import { BranchService } from "@/services/branch.service";
+import index from '../../components/index.vue';
 export default {
-name:"create-category",
-components: { 
-    index,
-},
+components: { index },
+    name:"update-user",
     data(){
         return{
+            idShelf: this.$route.params.id,
+            dataCategory: {},
             token: localStorage.getItem("token"),
-            dataShelf:{},
             errorMessage:"",
+            BASE_URL: this.$store.getters.BASE_URL,
             dataBranch:{},
+            dataShelf:{},
             search:{
             page:1,
             size:10
@@ -140,22 +163,32 @@ components: {
         }
     },
     methods:{
-    async handleAddUser(){
-        try {
-            const response = await ShelfService.createShelf(this.token, this.dataShelf)
-            console.log(response);
+            async handleUpdate(){
+        try{
+            const response = await ShelfService.update(this.token, this.dataShelf, this.idShelf)
             if(response.status == 200){
-                this.$bvModal.show("bv-modal-example-3")
+                this.$bvModal.show('bv-modal-example-3')
             }
-            if (response.status == 400) {
-                this.$bvModal.show('bv-modal-example-error-add-user')
+            else if (response.status == 400) {
+                this.$bvModal.show("bv-modal-example-error-update-user")
                 this.errorMessage = response.data
             }
-        } catch (error) {
-            return error
+            else(
+            this.$bvModal.show("bv-modal-example-error-update-user")
+            )
         }
-    },
-     async fetchDataBranch(){
+        catch(error){
+            return error.response;
+        }
+        },
+    async fetchData(){
+            const response = await ShelfService.getDetail(this.token ,this.idShelf) 
+            if (response.status == 200) {
+                console.log(response);
+                this.dataShelf = response.data
+            }
+        },
+        async fetchDataBranch(){
     try {
         const response = await BranchService.getList(this.token, this.search)
         if (response.status == 200) {
@@ -167,66 +200,29 @@ components: {
     },
     },
     mounted() {
-        this.fetchDataBranch()
+        this.fetchData()
+    this.fetchDataBranch()
+    
 },
-// computed:{
-//         nameErrors() {
-//     const errors = [];
-//     if (!this.$v.username.$dirty) return errors;
-//     return this.username == ""
-//         ? "Name bắt buộc nhập"
-//         : this.reg.test(this.username)
-//         ? ""
-//         : "E-mail sai định dạng";
-//     },
-//         codeErrors() {
-//     const errors = [];
-//     if (!this.$v.fullName.$dirty) return errors;
-//     return this.fullName == ""
-//         ? "Code buộc nhập"
-//         : this.reg.test(this.fullName)
-//         ? ""
-//         : "Họ và tên không được có kí tự và số";
-//     },
-// }
-}
+};
 </script>
-<style  scoped>
+
+<style>
+.theme--light.v-messages{
+    color: #D8000C!important;
+}
+.v-messages {
+    color: #D8000C!important;
+}
 .content-page{
-    background-color: #ffff!important; 
-    padding-left:230px!important;
+    background-color: #ffff; 
+    padding-left:230px
     
 }
 .main-content{
-    background: linear-gradient(to right, #F0F8FF , #FFFAF0 );
-    padding:20px!important;
+    background-color: #F8F8FB!important;
+    padding:20px;
     margin-top: 70px!important;
-}
-.row{
-    background: linear-gradient(to right, #F0F8FF , #FFFAF0 );
-}
-.add-user{
-    background-color: #F8F8FB;
-}
-.page-content{
-box-sizing:border-box;
-color: rgb(73, 80, 87);
-display: block;
-font-family: roboto;
-font-size: 13px;
-font-weight: 400;
-line-height :19.5px;
-text-align: left;
-text-size-adjust: 100%;
-width: 1093px;
--webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-width: 100%;
-}
-.cardAdd{
-    background-color: white;
-}
-.modal-body{
-    padding: 0px!important;
 }
 .buttonOK{
     color: #fff;
@@ -238,18 +234,6 @@ width: 100%;
     padding-bottom: 7.5px;
     border-radius: .25rem
 }
-.buttonAdd{
-font-size: 13px!important;
-color: #008BF4!important;
-border: 1px solid #008BF4!important;
-padding: 7px!important;
-text-transform: none!important;
-font-weight: normal!important;
-}
-.buttonAdd:hover{
-    color: #fff!important;
-    background-color: #008BF4!important;
-}
 @media (max-width: 576px) {
 .content-page,
 .container-sm {
@@ -259,9 +243,8 @@ padding-left: 0px!important;
 #sidebar-menu{
 display: none!important;;
 }
-.name-page, 
-.btn{
-    font-size: 10px;
+.title-page{
+    font-size: 12px!important;
 }
 } 
 @media (min-width: 768px) {
@@ -284,4 +267,4 @@ max-width: 960px;
 max-width: 1140px;
 }
 }
-</style>    
+</style>

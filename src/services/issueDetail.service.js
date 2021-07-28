@@ -6,12 +6,12 @@ const headers = {
     "Access-Control-Allow-Origin": "*",
 }
 
-export class IssueService extends BaseService {
+export class IssueDetailService extends BaseService {
     static async getList(token, params) {
         try {
             const response = await axios({
                 method: "get",
-                url: `${BASE_URL}/api/issues`,
+                url: `${BASE_URL}/api/issue-details`,
                 params,
                 headers: {
                     headers,
@@ -23,27 +23,11 @@ export class IssueService extends BaseService {
             return error.response
         }
     }
-    static async createIssueDetail(token, dataIssue) {
-        try {
-            const response = await axios({
-                method: "post",
-                url: `${BASE_URL}/api/issues/${dataIssue.issueId}/add-items`,
-                headers: {
-                    headers,
-                    AuthToken: token
-                },
-                data: dataIssue
-            })
-            return response
-        } catch (error) {
-            return error.response
-        }
-    }
-    static async delete(token, idIssue) {
+    static async delete(token, idIssueDetail) {
         try {
             const response = await axios({
                 method: "put",
-                url: `${BASE_URL}/api/issues/delete/${idIssue}`,
+                url: `${BASE_URL}/api/issue-details/delete/${idIssueDetail}`,
                 headers: {
                     AuthToken: token,
                 },

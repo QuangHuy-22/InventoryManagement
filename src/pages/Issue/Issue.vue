@@ -5,6 +5,7 @@
     <div class="main-content">
     <div class="addUser">
         <h4 class="font-size-18">Issue List</h4>
+        <router-link to="/inventory/issue/create-issue">
         <div
             class="btn-group float-right"
         >
@@ -14,9 +15,11 @@
             style="font-size: 13px;background-color: #EBF6FF;"
             data-toggle="modal"
             data-target=".Risk_QL-User_add"
-            ><b-icon icon="plus-circle"></b-icon> Add Issue</button
             >
+            <b-icon icon="plus-circle"></b-icon> Add Issue
+            </button>
         </div>
+        </router-link>
     </div>
 
     <div class="searchInput colorTable">
@@ -128,15 +131,30 @@
                         <b-icon icon="three-dots-vertical"></b-icon>
                         </template>
                         <div style="font-size: 13px;">
-                        <b-dropdown-item>
-                            Detail
-                        </b-dropdown-item>
-                        <b-dropdown-item >
-                            Update
+                        <b-dropdown-item @click="$bvModal.show(String(issue.id))">
+                            Delete
                         </b-dropdown-item>
                         <b-dropdown-item @click="CreateIssue(issue.id)">
                             Create Issue Detail
                         </b-dropdown-item>
+
+
+                        <!-- ----modal delete role------- -->
+                        <div class="showDelete" >
+                        <b-modal :id="(String(issue.id))" hide-footer hide-header   >
+                        <b-col class="iconLogout mb-2">
+                        <b-icon icon="exclamation-triangle" class="iconsBox" style="color: red!important;"></b-icon>
+                        </b-col>
+                        <div class="d-block text-center" >
+                        <h3 style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;">Do you want to delete {{ issue.code }}?</h3>
+                        </div>
+                        <div class="buttonSubmitLogout">
+                        <button class="buttonYes mt-3"  @click="deleteData(issue.id)" style="font-size: 13px;">Yes</button>
+                        <button class="buttonNo mt-3" @click="$bvModal.hide(String(issue.id))" style="font-size: 13px;">Skip</button>
+                        </div>
+                        </b-modal>
+                        </div>
+                        <!-- ----end modal delete role------- -->
                         </div>
                     </b-dropdown>
                     </td>
@@ -219,6 +237,13 @@ async fetchData() {
 CreateIssue(issueId){
     this.$router.push({ name: "CreateIssueDetail", params: { id: issueId } });
 },
+async deleteData(idIssue){
+        const response = await IssueService.delete(this.token, idIssue)
+        if (response.status == 200) {
+            this.fetchData()
+            this.$bvModal.hide(idIssue)
+        }
+    },
 submitForm () {
     this.pagination.page = 0
     this.fetchData()

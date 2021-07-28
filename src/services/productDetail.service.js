@@ -39,4 +39,48 @@ export class ProducDetailService extends BaseService {
             return error.response
         }
     }
+
+    static async delete(token, idProductDetail) {
+        try {
+            const response = await axios({
+                method: "put",
+                url: `${BASE_URL}/api/products-detail/delete/${idProductDetail}`,
+                headers: {
+                    AuthToken: token,
+                },
+            });
+            return response;
+        } catch (error) {
+            return error.response
+        }
+    }
+    static async update(token, data, idCategory) {
+        try {
+            const response = await axios({
+                method: "put",
+                url: `${BASE_URL}/api/categories/edit/${idCategory}`,
+                headers: {
+                    AuthToken: token,
+                },
+                data: data,
+            });
+            return response;
+        } catch (error) {
+            return error.response
+        }
+    }
+    static async getDetail(token, idCategory) {
+        try {
+            const response = await axios({
+                method: "get",
+                url: `${BASE_URL}/api/categories/${idCategory}`,
+                headers: {
+                    AuthToken: token,
+                },
+            });
+            return response;
+        } catch (error) {
+            return error.response
+        }
+    }
 }

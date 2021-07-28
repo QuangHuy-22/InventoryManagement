@@ -127,9 +127,26 @@
                             <b-dropdown-item @click="createProductDetail(data.id)">
                                 Create Product Detail
                             </b-dropdown-item>
-                            <b-dropdown-item >
+                            <b-dropdown-item @click="$bvModal.show(String(data.id))" >
                                 Delete
                             </b-dropdown-item>
+
+                        <!-- ----modal delete role------- -->
+                        <div class="showDelete" >
+                        <b-modal :id="(String(data.id))" hide-footer hide-header   >
+                        <b-col class="iconLogout mb-2">
+                        <b-icon icon="exclamation-triangle" class="iconsBox" style="color: red!important;"></b-icon>
+                        </b-col>
+                        <div class="d-block text-center" >
+                        <h3 style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;">Do you want to delete {{ data.code }}?</h3>
+                        </div>
+                        <div class="buttonSubmitLogout">
+                        <button class="buttonYes mt-3"  @click="deleteData(data.id)" style="font-size: 13px;">Yes</button>
+                        <button class="buttonNo mt-3" @click="$bvModal.hide(String(data.id))" style="font-size: 13px;">Skip</button>
+                        </div>
+                        </b-modal>
+                        </div>
+                        <!-- ----end modal delete role------- -->
                             </div>
                         </b-dropdown>
                         </td>
@@ -281,7 +298,14 @@ async fetchDataCountStatus() {
 async createProductDetail(idProduct){
 
 this.$router.push({ name: "CreateProductStatusDetail", params: { id: idProduct } });
-}
+},
+async deleteData(idProductStatus){
+        const response = await ProducService.delete(this.token, idProductStatus)
+        if (response.status == 200) {
+            this.fetchData()
+            this.$bvModal.hide(idProductStatus)
+        }
+    },
 },
 
 computed: {

@@ -135,4 +135,33 @@ export class VATService extends BaseService {
             console.log(error)
         }
     }
+
+    static async delete(token, idVat) {
+        try {
+            const response = await axios({
+                method: "put",
+                url: `${BASE_URL}/api/vats/delete/${idVat}`,
+                headers: {
+                    AuthToken: token,
+                },
+            });
+            return response;
+        } catch (error) {
+            return error.response
+        }
+    }
+    static async deleteVATDetail(token, idVat) {
+        try {
+            const response = await axios({
+                method: "put",
+                url: `${BASE_URL}/api/vat-details/delete/${idVat}`,
+                headers: {
+                    AuthToken: token,
+                },
+            });
+            return response;
+        } catch (error) {
+            return error.response
+        }
+    }
 }

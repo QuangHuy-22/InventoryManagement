@@ -77,4 +77,33 @@ export class ProducService extends BaseService {
             return error.response
         }
     }
+
+    static async delete(token, idProductStatus) {
+        try {
+            const response = await axios({
+                method: "put",
+                url: `${BASE_URL}/api/product-status-lists/delete/${idProductStatus}`,
+                headers: {
+                    AuthToken: token,
+                },
+            });
+            return response;
+        } catch (error) {
+            return error.response
+        }
+    }
+    static async deleteProductDetail(token, idProductStatusDetail) {
+        try {
+            const response = await axios({
+                method: "put",
+                url: `${BASE_URL}/api/product-status-details/delete/${idProductStatusDetail}`,
+                headers: {
+                    AuthToken: token,
+                },
+            });
+            return response;
+        } catch (error) {
+            return error.response
+        }
+    }
 }

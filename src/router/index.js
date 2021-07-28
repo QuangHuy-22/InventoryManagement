@@ -23,10 +23,12 @@ import Readiness from "../components/Readiness.vue"
 import index from "../components/index.vue"
 import ListCategory from "../pages/Category/ListCategory"
 import CreateCategory from "../pages/Category/CreateCategory"
+import UpdateCategory from "../pages/Category/UpdateCategory"
 import CreateProductInfo from "../pages/ProductInfo/CreateProductInfo.vue"
 import ProductInfo from "../pages/ProductInfo/ProductInfo.vue"
 import ProductDetail from "../pages/ProductDetail/ProductDetail.vue"
 import CreateProductDetail from "../pages/ProductDetail/CreateProductDetail.vue"
+import UpdateProductDetail from "../pages/ProductDetail/UpdateProductDetail.vue"
 import Customer from "../pages/Customer/Customer.vue"
 import CreateCustomer from "../pages/Customer/CreateCustomer.vue"
 import CustomerDetail from "../pages/Customer/CustomerDetail.vue"
@@ -41,8 +43,12 @@ import ProductStatusList from "../pages/Product/ProductStatusList.vue"
 import ProductStatusDetailList from "../pages/Product/ProductStatusDetailList.vue"
 import CreateProductStatusDetail from "../pages/Product/CreateProductStatusDetail.vue"
 import Issue from "../pages/Issue/Issue.vue"
+import IssueDetail from "../pages/IssueDetail/IssueDetail.vue"
 import CreateIssueDetail from "../pages/Issue/CreateIssueDetail.vue"
+import CreateIssue from "../pages/Issue/CreateIssue.vue"
 import Shelf from "../pages/Shelf/Shelf.vue"
+import UpdateShelf from "../pages/Shelf/UpdateShelf.vue"
+import CreateShelf from "../pages/Shelf/CreateShelf.vue"
 import Branch from "../pages/Branch/Branch.vue"
 import CreateBranch from "../pages/Branch/CreateBranch.vue"
 // import health from "./health.js"
@@ -162,6 +168,11 @@ const routes = [{
         component: ListCategory,
     },
     {
+        path: '/product/category/update-category/:id',
+        name: 'UpdateCategory',
+        component: UpdateCategory,
+    },
+    {
         path: '/product/product-info/create-product-info',
         name: 'CreateProductInfo',
         component: CreateProductInfo,
@@ -180,6 +191,16 @@ const routes = [{
         path: '/product/product-detail/create-product-detail',
         name: 'CreateProductDetail',
         component: CreateProductDetail,
+    },
+    {
+        path: '/product/product-detail/create-product-detail',
+        name: 'CreateProductDetail',
+        component: CreateProductDetail,
+    },
+    {
+        path: '/product/product-detail/update-product-detail/:id',
+        name: 'UpdateProductDetail',
+        component: UpdateProductDetail,
     },
     {
         path: '/product/category/create-category',
@@ -232,6 +253,16 @@ const routes = [{
         component: Shelf,
     },
     {
+        path: '/inventory/shelf/update-shelf/:id',
+        name: 'UpdateShelf',
+        component: UpdateShelf,
+    },
+    {
+        path: '/inventory/shelf/create-shelf',
+        name: 'CreateShelf',
+        component: CreateShelf,
+    },
+    {
         path: '/inventory/vat-detail',
         name: 'VATDetail',
         component: VATDetail,
@@ -250,6 +281,16 @@ const routes = [{
         path: '/inventory/issue',
         name: 'Issue',
         component: Issue,
+    },
+    {
+        path: '/inventory/issue-detail',
+        name: 'IssueDetail',
+        component: IssueDetail,
+    },
+    {
+        path: '/inventory/issue/create-issue',
+        name: 'CreateIssue',
+        component: CreateIssue,
     },
     {
         path: '/inventory/issue/add-issue-detail/:id',

@@ -5,7 +5,7 @@
     <div class="main-content">
     <div class="addUser">
         <h4 class="font-size-18">Shelf List</h4>
-        <router-link to="/product/product-detail/create-product-detail">
+        <router-link to="/inventory/shelf/create-shelf">
         <div
             class="btn-group float-right"
         >
@@ -152,7 +152,7 @@
                         <b-icon icon="three-dots-vertical"></b-icon>
                         </template>
                         <div style="font-size: 13px;">
-                        <b-dropdown-item>
+                        <b-dropdown-item @click="update(data.id)">
                             Edit
                         </b-dropdown-item>
                         <b-dropdown-item>
@@ -225,6 +225,9 @@ async fetchData() {
     console.log(error.response);
     }
 },
+update(id) {
+        this.$router.push({ name: "UpdateShelf", params: { id: id } });
+    },
 submitForm() {
     this.pagination.page = 1;
     this.fetchData();

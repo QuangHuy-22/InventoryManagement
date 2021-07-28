@@ -114,12 +114,28 @@
                         <b-icon icon="three-dots-vertical"></b-icon>
                         </template>
                         <div style="font-size: 13px;">
-                        <b-dropdown-item >
+                        <b-dropdown-item @click="update(category.id)">
                             Edit
                         </b-dropdown-item>
-                        <b-dropdown-item>
+                        <b-dropdown-item >
                             Delete
                         </b-dropdown-item>
+                        <!-- ----modal delete role------- -->
+                        <!-- <div class="showDelete" >
+                        <b-modal :id="(String(category.id))" hide-footer hide-header   >
+                        <b-col class="iconLogout mb-2">
+                        <b-icon icon="exclamation-triangle" class="iconsBox" style="color: red!important;"></b-icon>
+                        </b-col>
+                        <div class="d-block text-center" >
+                        <h3 style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;">Do you want to delete {{ category.name }}?</h3>
+                        </div>
+                        <div class="buttonSubmitLogout">
+                        <button class="buttonYes mt-3"  @click="deleteData(category.id)" style="font-size: 13px;">Yes</button>
+                        <button class="buttonNo mt-3" @click="$bvModal.hide(String(category.id))" style="font-size: 13px;">Skip</button>
+                        </div>
+                        </b-modal>
+                        </div> -->
+                        <!-- ----end modal delete role------- -->
                         </div>
                     </b-dropdown>
                     </td>
@@ -219,6 +235,16 @@ export default {
         console.log(error.response);
       }
     },
+    update(id) {
+        this.$router.push({ name: "UpdateCategory", params: { id: id } });
+    },
+    // async deleteData(idCategory){
+    //     const response = await CategoryService.delete(this.token, idCategory)
+    //     if (response.status == 200) {
+    //         this.fetchData()
+    //         this.$bvModal.hide(idCategory)
+    //     }
+    // },
 
     submitForm() {
       this.pagination.page = 1;

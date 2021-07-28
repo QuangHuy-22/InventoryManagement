@@ -124,9 +124,26 @@
                             <b-icon icon="three-dots-vertical"></b-icon>
                             </template>
                             <div style="font-size: 13px;">
-                            <b-dropdown-item >
+                            <b-dropdown-item @click="$bvModal.show(String(data.id))" >
                                 Delete
                             </b-dropdown-item>
+
+                            <!-- ----modal delete role------- -->
+                        <div class="showDelete" >
+                        <b-modal :id="(String(data.id))" hide-footer hide-header   >
+                        <b-col class="iconLogout mb-2">
+                        <b-icon icon="exclamation-triangle" class="iconsBox" style="color: red!important;"></b-icon>
+                        </b-col>
+                        <div class="d-block text-center" >
+                        <h3 style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;">Do you want to delete {{ data.code }}?</h3>
+                        </div>
+                        <div class="buttonSubmitLogout">
+                        <button class="buttonYes mt-3"  @click="deleteData(data.id)" style="font-size: 13px;">Yes</button>
+                        <button class="buttonNo mt-3" @click="$bvModal.hide(String(data.id))" style="font-size: 13px;">Skip</button>
+                        </div>
+                        </b-modal>
+                        </div>
+                        <!-- ----end modal delete role------- -->   
                             </div>
                         </b-dropdown>
                         </td>
@@ -156,32 +173,19 @@
 
     <!-- All Modal -->
 
-    <!-- Modal nhận giao dịch thành công -->
-    <b-modal id="bv-modal-set-processing-done" hide-footer hide-header>
-        <b-col class="iconLogout mb-2">
-        <div class="mb-img mb-4">
-            <span><img src="../../assets/images/sussecc.svg" alt=""/></span>
-        </div>
-        </b-col>
-        <div class="d-block text-center">
-        <h3
-            style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;"
-        >
-            Nhận xử lý giao dịch thành công
-        </h3>
-        </div>
-        <div class="buttonSubmitLogout">
-        <button
-            class="buttonOK mt-3"
-            style="font-size: 13px;"
-            @click="$bvModal.hide('bv-modal-set-processing-done')"
-        >
-            OK
-        </button>
-        </div>
-    </b-modal>
-    <!-- End modal nhận giao dịch thành công -->
-
+    <!-- ----------modal error-------->
+<b-modal id="bv-modal-example-error-add-user" hide-footer hide-header >
+<b-col class="iconLogout mb-2">
+<b-icon icon="x-circle" class="iconsBox" style="color: red!important;"></b-icon>
+</b-col>
+<div class="d-block text-center" >
+<span>{{ this.errorMessage }}</span>
+</div>
+<div class="buttonSubmitLogout">
+<button class="buttonOK mt-3" @click="$bvModal.hide('bv-modal-example-error-add-user')"  style="font-size: 13px;">OK</button>
+</div>
+</b-modal>
+<!-- ----------end modal error-------->
     <!-- end modal -->
     </div>
     <footer-content />
@@ -228,6 +232,7 @@ return {
     description: "",
     token: localStorage.getItem("token"),
     emailHome: localStorage.getItem("email"),
+    errorMessage:""
 };
 },
 // validations: {
@@ -275,6 +280,18 @@ async fetchDataCountStatus() {
     console.log(error);
     }
 },
+async deleteData(idProductStatusDetail){
+        const response = await ProducService.delete(this.token, idProductStatusDetail)
+        if (response.status == 200) {
+            this.fetchData()
+            this.$bvModal.hide(idProductStatusDetail)
+        }
+        else{
+            this.errorMessage = response.data.message
+            this.$bvModal.hide(idProductStatusDetail)
+            this.$bvModal.show("bv-modal-example-error-add-user")
+        }
+    },
 },
 
 computed: {
