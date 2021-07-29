@@ -132,7 +132,7 @@
                         <b-dropdown-item @click="$bvModal.show(String(suppliers.id))" >
                             Delete
                         </b-dropdown-item>
-                        <b-dropdown-item >
+                        <b-dropdown-item @click="update(suppliers.id)">
                             Edit
                         </b-dropdown-item>
                         <b-dropdown-item  @click="createVAT( suppliers.id)">
@@ -253,6 +253,9 @@ async deleteData(idSupplier){
             this.fetchData()
             this.$bvModal.hide(idSupplier)
         }
+},
+update(id) {
+        this.$router.push({ name: "UpdateSupplier", params: { id: id } });
     },
 submitForm () {
     this.pagination.page = 0
