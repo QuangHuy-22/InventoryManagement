@@ -38,4 +38,32 @@ export class BranchService extends BaseService {
             return error.response
         }
     }
+    static async delete(token, idBranch) {
+        try {
+            const response = await axios({
+                method: "put",
+                url: `${BASE_URL}/api/branches/delete/${idBranch}`,
+                headers: {
+                    AuthToken: token,
+                },
+            });
+            return response;
+        } catch (error) {
+            return error.response
+        }
+    }
+    static async getDetail(token, idBranch) {
+        try {
+            const response = await axios({
+                method: "get",
+                url: `${BASE_URL}/api/branches/${idBranch}`,
+                headers: {
+                    AuthToken: token,
+                },
+            });
+            return response;
+        } catch (error) {
+            return error.response
+        }
+    }
 }

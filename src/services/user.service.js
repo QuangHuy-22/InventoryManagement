@@ -39,6 +39,20 @@ export class UserService extends BaseService {
             return error.response
         }
     }
+    static async delete(token, idUser) {
+        try {
+            const response = await axios({
+                method: "put",
+                url: `${BASE_URL}/api/users/delete/${idUser}`,
+                headers: {
+                    AuthToken: token,
+                },
+            });
+            return response;
+        } catch (error) {
+            return error.response
+        }
+    }
 
 
 }

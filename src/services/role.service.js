@@ -56,4 +56,18 @@ export class RoleService extends BaseService {
             return error.response
         }
     }
+    static async delete(token, idRole) {
+        try {
+            const response = await axios({
+                method: "put",
+                url: `${BASE_URL}/api/branches/delete/${idRole}`,
+                headers: {
+                    AuthToken: token,
+                },
+            });
+            return response;
+        } catch (error) {
+            return error.response
+        }
+    }
 }

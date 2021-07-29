@@ -38,4 +38,18 @@ export class SupplierService extends BaseService {
             return error.response
         }
     }
+    static async delete(token, idSupplier) {
+        try {
+            const response = await axios({
+                method: "put",
+                url: `${BASE_URL}/api/suppliers/delete/${idSupplier}`,
+                headers: {
+                    AuthToken: token,
+                },
+            });
+            return response;
+        } catch (error) {
+            return error.response
+        }
+    }
 }

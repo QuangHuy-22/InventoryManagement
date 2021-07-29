@@ -32,6 +32,7 @@ import UpdateProductDetail from "../pages/ProductDetail/UpdateProductDetail.vue"
 import Customer from "../pages/Customer/Customer.vue"
 import CreateCustomer from "../pages/Customer/CreateCustomer.vue"
 import CustomerDetail from "../pages/Customer/CustomerDetail.vue"
+import UpdateCustomer from "../pages/Customer/UpdateCustomer.vue"
 import Supplier from "../pages/Supplier/Supplier.vue"
 import CreateSupplier from "../pages/Supplier/CreateSupplier.vue"
 import CreateVAT from "../pages/VAT/CreateVAT.vue"
@@ -51,6 +52,7 @@ import UpdateShelf from "../pages/Shelf/UpdateShelf.vue"
 import CreateShelf from "../pages/Shelf/CreateShelf.vue"
 import Branch from "../pages/Branch/Branch.vue"
 import CreateBranch from "../pages/Branch/CreateBranch.vue"
+import UpdateBranch from "../pages/Branch/UpdateBranch.vue"
 // import health from "./health.js"
 
 
@@ -144,7 +146,7 @@ const routes = [{
     },
     {
         path: '/management/list-role/update-role/:code',
-        name: 'Cập nhật nhóm quyền',
+        name: 'UpdateRole',
         component: UpdateRole,
     },
     {
@@ -216,6 +218,11 @@ const routes = [{
         path: '/management/customer/create-customer',
         name: 'CreateCustomer',
         component: CreateCustomer,
+    },
+    {
+        path: '/management/customer/update-customer/:id',
+        name: 'UpdateCustomer',
+        component: UpdateCustomer,
     },
     {
         path: '/management/supplier',
@@ -316,6 +323,11 @@ const routes = [{
         path: '/management/branch',
         name: 'Branch',
         component: Branch,
+    },
+    {
+        path: '/management/branch/update-branch/:id',
+        name: 'UpdateBranch',
+        component: UpdateBranch,
     },
     {
         path: '/management/branch/create-branch',

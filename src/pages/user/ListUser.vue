@@ -22,6 +22,7 @@
         </div>
 
         <div class="searchInput">
+          <div class="col-lg-12">
           <form @submit.prevent="submitForm">
             <div class="box-fillter" style="padding: 2px 14px 2px 14px;">
               <div class="form-row">
@@ -88,6 +89,7 @@
               </div>
             </div>
           </form>
+          </div>
         </div>
 
         <div class="page-content">
@@ -140,57 +142,25 @@
                             <b-dropdown-item @click="assign(user.id)">
                               Gán Quyền
                             </b-dropdown-item>
-                            <b-dropdown-item
-                              @click="lock(user.id)"
-                              v-if="user.status === 'ACTIVE'"
-                            >
-                              Khóa
+                            <b-dropdown-item  @click="$bvModal.show(String(user.id))">
+                              Delete
                             </b-dropdown-item>
-                            <b-dropdown-item
-                              @click="$bvModal.show(user.id)"
-                              v-if="user.status === 'INACTIVE'"
-                            >
-                              Mở khóa
-                              <!-- ----------modal unlock-------->
-                              <b-modal :id="user.id" hide-footer hide-header>
-                                <b-col class="iconLogout mb-2">
-                                  <b-icon
-                                    icon="exclamation-triangle"
-                                    class="iconsBox"
-                                    style="color: red!important;"
-                                  ></b-icon>
-                                </b-col>
-                                <div class="d-block text-center">
-                                  <h3
-                                    style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;"
-                                  >
-                                    Bạn có muốn mở khóa nhân viên
-                                  </h3>
-                                  <span>{{ user.fullName }}</span>
-                                  <span
-                                    style="display: block;word-break: break-word;"
-                                    >{{ user.username }}</span
-                                  >
-                                </div>
-                                <div class="buttonSubmitLogout">
-                                  <button
-                                    class="buttonOK mt-3"
-                                    @click="unlock(user.id)"
-                                    style="font-size: 13px;"
-                                  >
-                                    OK
-                                  </button>
-                                  <button
-                                    class="buttonOK mt-3"
-                                    @click="$bvModal.hide(user.id)"
-                                    style="font-size: 13px;"
-                                  >
-                                    Hủy
-                                  </button>
-                                </div>
-                              </b-modal>
-                              <!-- ----------end modal unblock-------->
-                            </b-dropdown-item>
+                            <!-- ----modal delete role------- -->
+                            <div class="showDelete" >
+                            <b-modal :id="(String(user.id))" hide-footer hide-header   >
+                            <b-col class="iconLogout mb-2">
+                            <b-icon icon="exclamation-triangle" class="iconsBox" style="color: red!important;"></b-icon>
+                            </b-col>
+                            <div class="d-block text-center" >
+                            <h3 style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;">Do you want to delete {{ user.name }}?</h3>
+                            </div>
+                            <div class="buttonSubmitLogout">
+                            <button class="buttonYes mt-3"  @click="deleteData(user.id)" style="font-size: 13px;">Yes</button>
+                            <button class="buttonNo mt-3" @click="$bvModal.hide(String(user.id))" style="font-size: 13px;">Skip</button>
+                            </div>
+                            </b-modal>
+                            </div>
+                            <!-- ----end modal delete role------- -->
                           </div>
                         </b-dropdown>
                       </td>
@@ -289,10 +259,18 @@ export default {
         const response = await UserService.getList(this.token, this.search);
         if (response.status === 200) {
           this.dataUsers = response.data.listData;
+          this.pagination.total = response.data.count
         }
       } catch (error) {
         console.log(error);
       }
+    },
+    async deleteData(idRole){
+        const response = await UserService.delete(this.token, idRole)
+        if (response.status == 200) {
+            this.fetchData()
+            this.$bvModal.hide(idRole)
+        }
     },
 
     submitForm () {

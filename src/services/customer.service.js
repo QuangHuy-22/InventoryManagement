@@ -70,4 +70,33 @@ export class CustomerService extends BaseService {
             return error.response
         }
     }
+    static async delete(token, idCustomer) {
+        try {
+            const response = await axios({
+                method: "put",
+                url: `${BASE_URL}/api/customers/delete/${idCustomer}`,
+                headers: {
+                    AuthToken: token,
+                },
+            });
+            return response;
+        } catch (error) {
+            return error.response
+        }
+    }
+    static async update(token, data, idCustomer) {
+        try {
+            const response = await axios({
+                method: "put",
+                url: `${BASE_URL}/api/customers/edit/${idCustomer}`,
+                headers: {
+                    AuthToken: token,
+                },
+                data: data,
+            });
+            return response;
+        } catch (error) {
+            return error.response
+        }
+    }
 }

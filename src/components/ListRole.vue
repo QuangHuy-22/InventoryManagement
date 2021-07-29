@@ -25,7 +25,7 @@
             type="text" 
             class="form-control" 
             id="formrow-firstname-input" 
-            placeholder="Tên nhóm quyền"
+            placeholder="Role Name"
             v-model.trim="search.name"
             >
         </div>
@@ -73,16 +73,27 @@
             <div style="font-size: 13px;">
         <b-dropdown-item @click="update(dataRoles.code)">
             <!-- :class=" this.DATA_PERMISSION.includes() ? '' : 'd-none'" -->
-            Cập nhật
+            Update
         </b-dropdown-item>
-        <b-dropdown-item  @click="showDelete(dataRoles.id)"  >
-            <!-- :class=" this.DATA_PERMISSION.includes('DELETE_ROLE') ? '' : 'd-none'" -->
-            Xóa
+        <b-dropdown-item  @click="$bvModal.show(String(dataRoles.id))"  >
+            Delete
             </b-dropdown-item>
         </div>
         <!-- ----modal delete role------- -->
         <div class="showDelete" >
-</div>
+        <b-modal :id="(String(dataRoles.id))" hide-footer hide-header   >
+        <b-col class="iconLogout mb-2">
+        <b-icon icon="exclamation-triangle" class="iconsBox" style="color: red!important;"></b-icon>
+        </b-col>
+        <div class="d-block text-center" >
+        <h3 style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;">Do you want to delete {{ dataRoles.roleName }}?</h3>
+        </div>
+        <div class="buttonSubmitLogout">
+        <button class="buttonYes mt-3"  @click="deleteData(dataRoles.id)" style="font-size: 13px;">Yes</button>
+        <button class="buttonNo mt-3" @click="$bvModal.hide(String(dataRoles.id))" style="font-size: 13px;">Skip</button>
+        </div>
+        </b-modal>
+        </div>
         <!-- ----end modal delete role------- -->
         </b-dropdown>
     </td>
@@ -161,11 +172,23 @@ methods:{
         const response = await RoleService.getList(this.token, this.search)
         if (response.status == 200) {
             this.dataRole = response.data.listData
+            this.pagination = response.data.count
         }
     }catch(error){
         console.log(error.response);
     }
     },
+    async deleteData(idRole){
+        const response = await RoleService.delete(this.token, idRole)
+        if (response.status == 200) {
+            this.fetchData()
+            this.$bvModal.hide(idRole)
+        }
+    },
+    update(id) {
+        this.$router.push({ name: "UpdateRole", params: { id: id } });
+    },
+
     handleUnFind(){
         this.search = {
         page: 1,

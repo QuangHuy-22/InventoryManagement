@@ -22,6 +22,7 @@
     </div>
 
     <div class="searchInput">
+        <div class="col-lg-12">
         <form @submit.prevent="submitForm">
         <div class="box-fillter" style="padding: 2px 14px 2px 14px;">
             <div class="form-row">
@@ -88,6 +89,7 @@
             </div>
         </div>
         </form>
+        </div>
     </div>
 
     <div class="page-content">
@@ -127,8 +129,8 @@
                         <b-icon icon="three-dots-vertical"></b-icon>
                         </template>
                         <div style="font-size: 13px;">
-                        <b-dropdown-item >
-                            Detail
+                        <b-dropdown-item @click="$bvModal.show(String(suppliers.id))" >
+                            Delete
                         </b-dropdown-item>
                         <b-dropdown-item >
                             Edit
@@ -136,6 +138,23 @@
                         <b-dropdown-item  @click="createVAT( suppliers.id)">
                             Create VAT
                         </b-dropdown-item>
+
+                        <!-- ----modal delete role------- -->
+                        <div class="showDelete" >
+                        <b-modal :id="(String(suppliers.id))" hide-footer hide-header   >
+                        <b-col class="iconLogout mb-2">
+                        <b-icon icon="exclamation-triangle" class="iconsBox" style="color: red!important;"></b-icon>
+                        </b-col>
+                        <div class="d-block text-center" >
+                        <h3 style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;">Do you want to delete {{ suppliers.code }}?</h3>
+                        </div>
+                        <div class="buttonSubmitLogout">
+                        <button class="buttonYes mt-3"  @click="deleteData(suppliers.id)" style="font-size: 13px;">Yes</button>
+                        <button class="buttonNo mt-3" @click="$bvModal.hide(String(suppliers.id))" style="font-size: 13px;">Skip</button>
+                        </div>
+                        </b-modal>
+                        </div>
+                        <!-- ----end modal delete role------- -->
                         </div>
                     </b-dropdown>
                     </td>
@@ -228,7 +247,13 @@ async fetchData() {
 createVAT(supplierId){
 this.$router.push({ name: "CreateVAT", params: { id: supplierId } });
 },
-
+async deleteData(idSupplier){
+        const response = await SupplierService.delete(this.token, idSupplier)
+        if (response.status == 200) {
+            this.fetchData()
+            this.$bvModal.hide(idSupplier)
+        }
+    },
 submitForm () {
     this.pagination.page = 0
     this.fetchData()
