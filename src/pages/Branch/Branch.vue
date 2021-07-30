@@ -82,7 +82,6 @@
                 <thead class="">
                     <tr>
                     <th style="text-align: center">No.</th>
-                    <th>id</th>
                     <th>Name</th>
                     <th>Address</th>
                     <th>Action</th>
@@ -97,7 +96,6 @@
                     <td style="text-align: center">
                         {{ index + 1 }}
                     </td>
-                    <td>{{ branch.id }}</td>
                     <td>{{ branch.name }}</td>
                     <td>{{ branch.address }}</td>
                     <td>

@@ -91,7 +91,6 @@
                 <thead>
                 <tr>
                     <th style="text-align: center">No.</th>
-                    <th>ID</th>
                     <th>Code</th>
                     <th>Name</th>
                     <th>TAX</th>
@@ -107,7 +106,6 @@
                     <td style="text-align: center">
                     {{ index + 1 }}
                     </td>
-                    <td>{{ vat.id }}</td>
                     <td @click="vatCode(vat.code)" class="code-vat">
                     {{ vat.code }}
                     </td>

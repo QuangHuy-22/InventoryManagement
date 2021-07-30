@@ -80,7 +80,6 @@
                     <thead class="thead-light">
                     <tr style="font-size: 12px;white-space: nowrap;">
                         <th>No.</th>
-                        <th>Id</th>
                         <th>Product Info</th>
                         <th>Product Status List Code</th>
                         <th>Price One</th>
@@ -99,7 +98,6 @@
                         <td style="text-align: center">
                         {{ index + 1 }}
                         </td>
-                        <td>{{ data.id }}</td>
                         <td>
                         {{ data.productInfo }}
                         </td>

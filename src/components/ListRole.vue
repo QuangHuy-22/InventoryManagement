@@ -52,7 +52,6 @@
         <thead>
             <tr>
                 <th>No.</th>
-                <th>Id</th>
                 <th>Role Name</th>
                 <th>Description</th>
                 <th>Action</th>
@@ -61,7 +60,6 @@
         <tbody>
 <tr v-for="(dataRoles, itemObjKey) in dataRole" :key="dataRoles.id" >
 <td > {{ search.size * (search.page - 1) + itemObjKey + 1 }}</td>
-<td >{{ dataRoles.id}}</td>
 <td >{{ dataRoles.roleName }}</td>
 <td >{{ dataRoles.description}}</td>
 <!-- <td>ba chấm</td> -->

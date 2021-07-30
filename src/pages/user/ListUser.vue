@@ -100,7 +100,6 @@
                   <thead>
                     <tr>
                       <th style="text-align: center">No.</th>
-                      <th>ID</th>
                       <th>User Name</th>
                       <th>Email</th>
                       <th>Name</th>
@@ -115,7 +114,6 @@
                       <td style="text-align: center">
                         {{ search.size * (search.page - 1) + index + 1 }}
                       </td>
-                      <td>{{ user.id }}</td>
                       <td>{{ user.userName }}</td>
                       <td>{{ user.email }}</td>
                       <td>{{ user.name }}</td>

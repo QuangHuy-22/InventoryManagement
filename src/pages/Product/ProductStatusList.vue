@@ -80,7 +80,6 @@
                     <thead class="thead-light">
                     <tr style="font-size: 12px;white-space: nowrap;">
                         <th>No.</th>
-                        <th>Id</th>
                         <th>Code</th>
                         <th>VAT Code</th>
                         <th>User Name</th>
@@ -99,7 +98,6 @@
                         <td style="text-align: center">
                         {{ index + 1 }}
                         </td>
-                        <td>{{ data.id }}</td>
                         <td>
                         {{ data.code }}
                         </td>
@@ -124,7 +122,7 @@
                             <b-icon icon="three-dots-vertical"></b-icon>
                             </template>
                             <div style="font-size: 13px;">
-                            <b-dropdown-item @click="createProductDetail(data.id)">
+                            <b-dropdown-item @click="createProductDetail(data.id)" v-if="search.type == 1">
                                 Create Product Detail
                             </b-dropdown-item>
                             <b-dropdown-item @click="$bvModal.show(String(data.id))" >

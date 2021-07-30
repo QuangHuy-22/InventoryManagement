@@ -84,7 +84,6 @@
                 <thead>
                 <tr>
                     <th style="text-align: center">No.</th>
-                    <th>ID</th>
                     <th>Product Name</th>
                     <th>supplier Name</th>
                     <th>category Name</th>
@@ -92,6 +91,7 @@
                     <th>shelf Name</th>
                     <th>price In</th>
                     <th>price out</th>
+                    <th>Status</th>
                     <th>Action</th>
                 </tr>
                 </thead>
@@ -101,7 +101,6 @@
                     <td style="text-align: center">
                     {{ index + 1 }}
                     </td>
-                    <td>{{ data.id }}</td>
                     <td>{{ data.productName }}</td>
                     <td>{{ data.supplierName }}</td>
                     <td>{{ data.categoryName }}</td>
@@ -109,6 +108,7 @@
                     <td>{{ data.shelfName }}</td>
                     <td>{{ data.priceIn }}</td>
                     <td>{{ data.priceOut }}</td>
+                    <td>{{ data.status }}</td>
                     <td>
                     <b-dropdown
                         right

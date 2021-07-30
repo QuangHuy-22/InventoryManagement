@@ -50,7 +50,7 @@
                     </h3>
                     </div>
                     <div class="buttonSubmitLogout">
-                    <router-link to="/product">
+                    <router-link to="/inventory/product-detail-status">
                         <button
                         class="buttonOK mt-3"
                         style="font-size: 13px;"
@@ -76,7 +76,7 @@
                 <form class="needs-validation">
                     <div class="col-sm-6">
                     <div class="form-group form-erross">
-                        <label for="validationCustom04">Product Status</label>
+                        <label for="validationCustom04">Product</label>
                         <b-select
                         class="form-control select2" v-model="dataProduct.productId" >
                         <option  v-for="data in dataProductInfo" :key="data.id"  :value="data.id">{{data.name}}</option>
@@ -149,8 +149,6 @@ data() {
 return {
     token: localStorage.getItem("token"),
     dataProduct: {
-    productId: "",
-    qty: "",
     },
     // branchId: localStorage.getItem("branchId"),
     // userName: localStorage.getItem("userName"),

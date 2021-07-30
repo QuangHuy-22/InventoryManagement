@@ -118,7 +118,6 @@
                 <thead>
                 <tr>
                     <th style="text-align: center">No.</th>
-                    <th>ID</th>
                     <th>Name</th>
                     <th>Description</th>
                     <th>Image</th>
@@ -135,7 +134,6 @@
                     <td style="text-align: center">
                     {{ index + 1 }}
                     </td>
-                    <td>{{ producInfo.id }}</td>
                     <td>{{ producInfo.name }}</td>
                     <td>{{ producInfo.description }}</td>
                     <td><img  :src="producInfo.imgUrl" /></td>

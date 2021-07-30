@@ -66,7 +66,7 @@
                     type="text"
                     style="font-size: 13px;"
                     class="form-control"
-                    placeholder="qQty Rest From"
+                    placeholder="Qty Rest From"
                     v-model.trim="search.qtyRestFrom"
                 />
                 </div>
@@ -77,7 +77,7 @@
                     type="text"
                     style="font-size: 13px;"
                     class="form-control"
-                    placeholder="qQty Rest To"
+                    placeholder="Qty Rest To"
                     v-model.trim="search.qtyRestTo"
                 />
                 </div>
@@ -117,7 +117,6 @@
                 <thead>
                 <tr>
                     <th style="text-align: center">No.</th>
-                    <th>ID</th>
                     <th>Name</th>
                     <th>description</th>
                     <th>total</th>
@@ -133,7 +132,6 @@
                     <td style="text-align: center">
                     {{ index + 1 }}
                     </td>
-                    <td>{{ data.id }}</td>
                     <td>{{ data.name }}</td>
                     <td>{{ data.description }}</td>
                     <td>{{ data.total }}</td>

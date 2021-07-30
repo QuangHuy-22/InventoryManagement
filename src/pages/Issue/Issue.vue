@@ -96,7 +96,6 @@
                 <thead>
                 <tr>
                     <th style="text-align: center">No.</th>
-                    <th>ID</th>
                     <th>Code</th>
                     <th>User Name</th>
                     <th>Customer Name</th>
@@ -112,7 +111,6 @@
                     <td style="text-align: center">
                     {{index + 1}}
                     </td>
-                    <td>{{ issue.id }}</td>
                     <td>{{ issue.code }}</td>
                     <td>{{ issue.userName }}</td>
                     <td>{{ issue.customerName }}</td>

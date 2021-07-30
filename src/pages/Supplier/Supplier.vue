@@ -100,7 +100,6 @@
                 <thead>
                 <tr>
                     <th style="text-align: center">No.</th>
-                    <th>ID</th>
                     <th>Name</th>
                     <th>Address</th>
                     <th>Phone</th>
@@ -113,7 +112,6 @@
                     <td style="text-align: center">
                     {{index + 1}}
                     </td>
-                    <td>{{ suppliers.id }}</td>
                     <td>{{ suppliers.name }}</td>
                     <td>{{ suppliers.address }}</td>
                     <td>{{ suppliers.phone }}</td>

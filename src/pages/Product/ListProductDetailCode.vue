@@ -4,11 +4,12 @@
 <div class="content-page">
     <div class="main-content">
     <div class="addUser">
-        <h4 class="font-size-18">VAT Detail List</h4>
+        <h4 class="font-size-18">List VAT Code </h4>
+        <div>
+        <router-link to="/inventory/vat" class="btn btn-dark" style="font-size: 13px;"> Cancel</router-link>
+        </div>
     </div>
-
-    <div class="searchInput colorTable">
-        <div class="col-lg-12">
+    <div class="searchInput">
         <form @submit.prevent="submitForm">
         <div class="box-fillter" style="">
             <div class="form-row">
@@ -18,7 +19,18 @@
                     type="text"
                     style="font-size: 13px;"
                     class="form-control"
-                    placeholder="Product Info" 
+                    placeholder="Code"
+                    v-model.trim="search.code"
+                />
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-3">
+                <div class="bf-detail">
+                <input
+                    type="text"
+                    style="font-size: 13px;"
+                    class="form-control"
+                    placeholder="Product Info"
                     v-model.trim="search.productInfo"
                 />
                 </div>
@@ -29,8 +41,8 @@
                     type="text"
                     style="font-size: 13px;"
                     class="form-control"
-                    placeholder="VatCode"
-                    v-model.trim="search.vatCode"
+                    placeholder="QTY"
+                    v-model.trim="search.qty"
                 />
                 </div>
             </div>
@@ -40,8 +52,8 @@
                     type="text"
                     style="font-size: 13px;"
                     class="form-control"
-                    placeholder="Price Total From"
-                    v-model.trim="search.priceTotalFrom"
+                    placeholder="Price One"
+                    v-model.trim="search.priceOne"
                 />
                 </div>
             </div>
@@ -51,13 +63,13 @@
                     type="text"
                     style="font-size: 13px;"
                     class="form-control"
-                    placeholder="Price Total To"
-                    v-model.trim="search.priceTotalTo"
+                    placeholder="Price Total"
+                    v-model.trim="search.priceTotal"
                 />
                 </div>
             </div>
 
-            <div class="col-md-6 col-sm-4" style="padding-top:0px">
+            <div class="col-md-4 col-sm-4" style="padding-top:0px">
                 <div class="btn-fillter">
                 <div class="bf-detail">
                     <button
@@ -65,20 +77,14 @@
                     class="btn btn-info"
                     style="font-size: 13px; margin-right: 5px; color:white;"
                     >
-                    <b-icon icon="search"></b-icon>
+                    Filter
                     </button>
                     <button
                     @click="clearSearch"
                     class="btn btn-dark"
                     style="font-size: 13px; margin-right: 5px;"
                     >
-                    <b-icon icon="x-circle" ></b-icon>
-                    </button>
-                    <button
-                    @click="exportExcel()"
-                    class="button-filter btn btn-success"
-                    >
-                    <b-icon icon="file-earmark-excel"></b-icon>
+                    Unfiltered
                     </button>
                 </div>
                 </div>
@@ -86,17 +92,17 @@
             </div>
         </div>
         </form>
-        </div>
     </div>
 
     <div class="page-content">
-        <div class="card colorTable">
+        <div class="card">
         <div class="card-body">
             <div class="table-responsive">
             <table class="table table-striped table-bordered mb-0">
                 <thead>
                 <tr>
                     <th style="text-align: center">No.</th>
+                    <th>ID</th>
                     <th>Code</th>
                     <th>Product Info</th>
                     <th>QTY</th>
@@ -111,6 +117,7 @@
                     <td style="text-align: center">
                     {{ index + 1 }}
                     </td>
+                    <td>{{ vat.id }}</td>
                     <td>{{ vat.vatCode }}</td>
                     <td>{{ vat.productInfo }}</td>
                     <td>{{ vat.qty }}</td>
@@ -128,26 +135,12 @@
                         <b-icon icon="three-dots-vertical"></b-icon>
                         </template>
                         <div style="font-size: 13px;">
-                        <b-dropdown-item @click="$bvModal.show(String(vat.id))">
+                        <b-dropdown-item>
+                            Edit
+                        </b-dropdown-item>
+                        <b-dropdown-item>
                             Delete
                         </b-dropdown-item>
-
-                        <!-- ----modal delete role------- -->
-                        <div class="showDelete" >
-                        <b-modal :id="(String(vat.id))" hide-footer hide-header   >
-                        <b-col class="iconLogout mb-2">
-                        <b-icon icon="exclamation-triangle" class="iconsBox" style="color: red!important;"></b-icon>
-                        </b-col>
-                        <div class="d-block text-center" >
-                        <h3 style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;">Do you want to delete {{ vat.code }}?</h3>
-                        </div>
-                        <div class="buttonSubmitLogout">
-                        <button class="buttonYes mt-3"  @click="deleteData(vat.id)" style="font-size: 13px;">Yes</button>
-                        <button class="buttonNo mt-3" @click="$bvModal.hide(String(vat.id))" style="font-size: 13px;">Skip</button>
-                        </div>
-                        </b-modal>
-                        </div>
-                        <!-- ----end modal delete role------- -->
                         </div>
                     </b-dropdown>
                     </td>
@@ -176,33 +169,6 @@
     <footer-content />
 </div>
 
-<!-- -----------modal permission------- -->
-<b-modal id="bv-modal-example-error-permission" hide-footer hide-header>
-    <b-col class="iconLogout mb-2">
-    <b-icon
-        icon="x-circle"
-        class="iconsBox"
-        style="color: red!important;"
-    ></b-icon>
-    </b-col>
-    <div class="d-block text-center">
-    <h3
-        style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;"
-    >
-        Bạn không có quyền truy cập
-    </h3>
-    </div>
-    <div class="buttonSubmitLogout">
-    <button
-        class="buttonOK mt-3"
-        @click="$bvModal.hide('bv-modal-example-error-permission')"
-        style="font-size: 13px;"
-    >
-        OK
-    </button>
-    </div>
-</b-modal>
-<!-- -----------end modal permission------- -->
 </div>
 </template>
 
@@ -222,12 +188,14 @@ return {
     to: null,
     },
     search: {
+    code: this.$route.params.code,
     page: 1,
     size: 20,
     },
     pagination: {
     total: 20,
     },
+    codeVAT: this.$route.params.code,
 };
 },
 mounted() {
@@ -236,7 +204,7 @@ this.fetchData();
 methods: {
 async fetchData() {
     try {
-    const response = await VATService.getListVATDetail(this.token, this.search);
+    const response = await VATService.getListVATCode(this.token, this.codeVAT ,this.search);
     if (response.status == 200) {
         this.dataVAT = response.data.listData;
         this.pagination.total = response.data.total;
@@ -246,41 +214,18 @@ async fetchData() {
     console.log(error.response);
     }
 },
-async deleteData(idVat){
-        const response = await VATService.deleteVATDetail(this.token, idVat)
-        if (response.status == 200) {
-            this.fetchData()
-            this.$bvModal.hide(idVat)
-        }
-    },
 submitForm() {
-    this.pagination.page = 1;
+    // this.pagination.page = 1;
     this.fetchData();
 },
-
 clearSearch() {
-    this.dateRange.from = null;
-    this.dateRange.to = null;
     this.search = {
-    page: 0,
+    code: this.$route.params.code,
+    page: 1,
     size: 20,
     };
     this.fetchData();
 },
-async exportExcel () {
-    try { 
-    await VATService.exportExcel(this.token,this.search)
-    } catch (error) {
-    console.log(error)
-    }
-},
-},
-"search.page": function() {
-this.$router.push({
-    path: "/inventory/vat-detail",
-    query: this.useInUrlQueryPropList,
-});
-this.fetchData();
 },
 };
 </script>
@@ -291,15 +236,8 @@ background-color: #ffff;
 padding-left: 230px !important;
 }
 .main-content {
-background: linear-gradient(to right, #778899 , #DCDCDC );
+background-color: #f8f8fb !important;
 margin-top: 70px !important;
-}
-.box-fillter{
-  background: linear-gradient(to right, #F0F8FF , #FFFAF0 );
-  width: 100%;
-}
-.colorTable{
-    background: linear-gradient(to right, #F0F8FF , #FFFAF0 );
 }
 .list-groups {
 margin: 50px;
