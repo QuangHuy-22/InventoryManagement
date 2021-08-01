@@ -66,4 +66,19 @@ export class BranchService extends BaseService {
             return error.response
         }
     }
+    static async update(token, data, idBranch) {
+        try {
+            const response = await axios({
+                method: "put",
+                url: `${BASE_URL}/api/branches/edit/${idBranch}`,
+                headers: {
+                    AuthToken: token,
+                },
+                data: data,
+            });
+            return response;
+        } catch (error) {
+            return error.response
+        }
+    }
 }

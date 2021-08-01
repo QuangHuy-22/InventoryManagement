@@ -12,7 +12,16 @@ export class ShelfService extends BaseService {
             const response = await axios({
                 method: "get",
                 url: `${BASE_URL}/api/shelves`,
-                params,
+                params: {
+                    page: params.page,
+                    size: params.size,
+                    branchId: params.branchId == 99 ? params.branchId = "" : params.branchId,
+                    name: params.name,
+                    qtyFrom: params.qtyFrom,
+                    qtyRestFrom: params.qtyRestFrom,
+                    qtyRestTo: params.qtyRestTo,
+                    qtyTo: params.qtyTo,
+                },
                 headers: {
                     headers,
                     AuthToken: token
@@ -61,6 +70,20 @@ export class ShelfService extends BaseService {
                     AuthToken: token,
                 },
                 data: data,
+            });
+            return response;
+        } catch (error) {
+            return error.response
+        }
+    }
+    static async delete(token, idShelf) {
+        try {
+            const response = await axios({
+                method: "put",
+                url: `${BASE_URL}/api/shelves/delete/${idShelf}`,
+                headers: {
+                    AuthToken: token,
+                },
             });
             return response;
         } catch (error) {

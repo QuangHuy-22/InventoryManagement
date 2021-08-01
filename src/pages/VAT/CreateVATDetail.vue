@@ -20,12 +20,13 @@
                 >
                 <router-link to="/produc-info/create-produc-info">
                 </router-link>
-                <button
+                <div
                 class="btn btn-dark"
                 style="font-size: 13px;margin-left: 5px;"
+                @click="Reset()"
                 >
                 Reset
-                </button>
+                </div>
                 <button
                 type="submit"
                 class="btn btn-primary"
@@ -196,6 +197,13 @@ async fetchDataProductInfo() {
     this.dataProductInfo = response.data.listData;
     }
 },
+Reset(){
+    this.dataVAT= {
+    productId: "",
+    qty: "",
+    priceOne: "",
+    }
+    },
 },
 mounted() {
 this.fetchDataProductInfo();

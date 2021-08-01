@@ -153,9 +153,25 @@
                         <b-dropdown-item @click="update(data.id)">
                             Edit
                         </b-dropdown-item>
-                        <b-dropdown-item>
+                        <b-dropdown-item @click="$bvModal.show(String(data.id))">
                             Delete
                         </b-dropdown-item>
+                        <!-- ----modal delete role------- -->
+                        <div class="showDelete" >
+                        <b-modal :id="(String(data.id))" hide-footer hide-header   >
+                        <b-col class="iconLogout mb-2">
+                        <b-icon icon="exclamation-triangle" class="iconsBox" style="color: red!important;"></b-icon>
+                        </b-col>
+                        <div class="d-block text-center" >
+                        <h3 style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;">Do you want to delete {{ data.name }}?</h3>
+                        </div>
+                        <div class="buttonSubmitLogout">
+                        <button class="buttonYes mt-3"  @click="deleteData(data.id)" style="font-size: 13px;">Confirm</button>
+                        <button class="buttonNo mt-3" @click="$bvModal.hide(String(data.id))" style="font-size: 13px;">Cancel</button>
+                        </div>
+                        </b-modal>
+                        </div>
+                        <!-- ----end modal delete role------- -->
                         </div>
                     </b-dropdown>
                     </td>
@@ -201,6 +217,7 @@ return {
     search: {
     page: 1,
     size: 20,
+    branchId:localStorage.getItem("branchId"), 
     },
     pagination: {
     total: 20,
@@ -230,12 +247,16 @@ submitForm() {
     this.pagination.page = 1;
     this.fetchData();
 },
-
+async deleteData(idShelf){
+        const response = await ShelfService.delete(this.token, idShelf)
+        if (response.status == 200) {
+            this.fetchData()
+            this.$bvModal.hide(idShelf)
+        }
+},
 clearSearch() {
-    this.dateRange.from = null;
-    this.dateRange.to = null;
     this.search = {
-    page: 0,
+    page: 1,
     size: 20,
     };
     this.fetchData();

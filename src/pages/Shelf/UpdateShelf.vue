@@ -62,7 +62,7 @@
                 <div class="form-group form-erross">
                     <label for="validationCustom04">Branch Id</label>
                 <b-select class="form-control select2"  v-model="dataShelf.branchId">
-                    <option v-for="data in dataBranch" :key="data.id" :value="data.id">{{data.name}}</option>
+                    <option v-for="data in dataBranch" :key="data.id" :value="String(data.id)">{{data.name}}</option>
                 </b-select>
                 </div>
                 <div class="form-group form-erross">
@@ -155,7 +155,8 @@ components: { index },
             errorMessage:"",
             BASE_URL: this.$store.getters.BASE_URL,
             dataBranch:{},
-            dataShelf:{},
+            dataShelf:{
+            },
             search:{
             page:1,
             size:10
@@ -193,6 +194,7 @@ components: { index },
         const response = await BranchService.getList(this.token, this.search)
         if (response.status == 200) {
             this.dataBranch = response.data.listData
+            console.log();
         }
     }catch(error){
         console.log(error.response);

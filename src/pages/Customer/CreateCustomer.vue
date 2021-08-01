@@ -14,7 +14,7 @@
         <router-link to="/management/customer" class="btn btn-dark" style="font-size: 13px;"> Cancel</router-link>
         <router-link to="/produc-info/create-produc-info">
         </router-link>
-        <button class="btn btn-dark"  style="font-size: 13px;margin-left: 5px;"> Reset</button>
+        <div class="btn btn-dark"  style="font-size: 13px;margin-left: 5px;" @click="Reset()"> Reset</div>
         <button type="submit" class="btn btn-primary" data-toggle="modal" data-target=".Risk_Permission_Update" style="font-size: 13px;margin-left: 5px;">Submit</button>
         <div class="showAddUser" >
         <b-modal id="bv-modal-example-3" hide-footer hide-header >
@@ -148,6 +148,13 @@ components: {
             return error
         }
     },
+    Reset(){
+        this.dataCustomer={
+                name:"",
+                phone:"",
+                address:"",
+            }
+    }
     },
     mounted() {
 },

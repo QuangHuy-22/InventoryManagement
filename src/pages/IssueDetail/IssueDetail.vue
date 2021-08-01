@@ -5,21 +5,6 @@
     <div class="main-content">
     <div class="addUser">
         <h4 class="font-size-18">Issue Detail List</h4>
-        <router-link to="/inventory/issue/create-issue">
-        <div
-            class="btn-group float-right"
-        >
-            <button
-            type="submit"
-            class="btn btn-outline-primary"
-            style="font-size: 13px;background-color: #EBF6FF;"
-            data-toggle="modal"
-            data-target=".Risk_QL-User_add"
-            >
-            <b-icon icon="plus-circle"></b-icon> Add Issue Detail
-            </button>
-        </div>
-        </router-link>
     </div>
 
     <div class="searchInput colorTable">
@@ -33,8 +18,8 @@
                     type="text"
                     style="font-size: 13px;"
                     class="form-control"
-                    placeholder="Code"
-                    v-model.trim="search.code"
+                    placeholder="Imei"
+                    v-model.trim="search.imei"
                 />
                 </div>
             </div>
@@ -45,8 +30,8 @@
                     type="text"
                     style="font-size: 13px;"
                     class="form-control"
-                    placeholder="Customer Name"
-                    v-model.trim="search.customerName"
+                    placeholder="Issue Code"
+                    v-model.trim="search.issueCode"
                 />
                 </div>
             </div>
@@ -57,8 +42,30 @@
                     type="text"
                     style="font-size: 13px;"
                     class="form-control"
-                    placeholder="User Name"
-                    v-model.trim="search.userName"
+                    placeholder="Price Total From"
+                    v-model.trim="search.priceTotalFrom"
+                />
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-4">
+                <div class="bf-detail">
+                <input
+                    type="text"
+                    style="font-size: 13px;"
+                    class="form-control"
+                    placeholder="Price Total To"
+                    v-model.trim="search.priceTotalTo"
+                />
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-4">
+                <div class="bf-detail">
+                <input
+                    type="text"
+                    style="font-size: 13px;"
+                    class="form-control"
+                    placeholder="Product Info"
+                    v-model.trim="search.productInfo"
                 />
                 </div>
             </div>
@@ -125,13 +132,13 @@
                         <b-icon icon="three-dots-vertical"></b-icon>
                         </template>
                         <div style="font-size: 13px;">
-                        <b-dropdown-item @click="$bvModal.show(issue.issueCode)">
-                            Delete (bug)
+                        <b-dropdown-item @click="$bvModal.show(String(issue.id))">
+                            Delete
                         </b-dropdown-item>
 
                         <!-- ----modal delete role------- -->
                         <div class="showDelete" >
-                        <b-modal :id="issue.issueCode" hide-footer hide-header   >
+                        <b-modal :id="String(issue.id)" hide-footer hide-header   >
                         <b-col class="iconLogout mb-2">
                         <b-icon icon="exclamation-triangle" class="iconsBox" style="color: red!important;"></b-icon>
                         </b-col>
@@ -139,8 +146,8 @@
                         <h3 style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;">Do you want to delete {{ issue.code }}?</h3>
                         </div>
                         <div class="buttonSubmitLogout">
-                        <button class="buttonYes mt-3"  @click="deleteData(issue.issueCode)" style="font-size: 13px;">Yes</button>
-                        <button class="buttonNo mt-3" @click="$bvModal.hide(issue.issueCode)" style="font-size: 13px;">Skip</button>
+                        <button class="buttonYes mt-3"  @click="deleteData(issue.id)" style="font-size: 13px;">Confirm</button>
+                        <button class="buttonNo mt-3" @click="$bvModal.hide(issue.id)" style="font-size: 13px;">Cancel</button>
                         </div>
                         </b-modal>
                         </div>
@@ -202,6 +209,7 @@ return {
     search: {
     page: 1,
     size: 20,
+    branchId: localStorage.getItem("branchId"),
     },
     pagination: {
     total: 20
@@ -223,11 +231,11 @@ async fetchData() {
     console.log(error);
     }
 },
-async deleteData(codeIssue){
-        const response = await IssueDetailService.delete(this.token, codeIssue)
+async deleteData(idIssue){
+        const response = await IssueDetailService.delete(this.token, idIssue)
         if (response.status == 200) {
             this.fetchData()
-            this.$bvModal.hide(codeIssue)
+            this.$bvModal.hide(idIssue)
         }
     },
 submitForm () {

@@ -115,9 +115,6 @@
                         <b-dropdown-item @click="update(category.id)">
                             Edit
                         </b-dropdown-item>
-                        <b-dropdown-item >
-                            Delete
-                        </b-dropdown-item>
                         </div>
                     </b-dropdown>
                     </td>

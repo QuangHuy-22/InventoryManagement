@@ -12,7 +12,7 @@
         <div class="btn-group float-right">
         <form class="buttonAddUser"  @submit.prevent="handleAddUser">
         <router-link to="/management/supplier" class="btn btn-dark" style="font-size: 13px;"> Cancel</router-link>
-        <button class="btn btn-dark"  style="font-size: 13px;margin-left: 5px;"> Reset</button>
+        <div class="btn btn-dark"  style="font-size: 13px;margin-left: 5px;" @click="Reset()"> Reset</div>
         <button type="submit" class="btn btn-primary" data-toggle="modal" data-target=".Risk_Permission_Update" style="font-size: 13px;margin-left: 5px;">Submit</button>
         <div class="showAddUser" >
         <b-modal id="bv-modal-example-3" hide-footer hide-header >
@@ -154,6 +154,10 @@ components: {
         } catch (error) {
             return error
         }
+    },
+    Reset(){
+        this.dataShelf = {
+    }
     },
      async fetchDataBranch(){
     try {

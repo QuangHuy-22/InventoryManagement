@@ -70,6 +70,82 @@
         </div>
         </div>
         <!-- end row -->
+    <div class="searchInput colorTable">
+        <div class="col-lg-12" style="padding:0px;">
+        <form @submit.prevent="submitForm">
+        <div class="box-fillter" style="padding: 2px 14px 2px 14px;">
+            <div class="form-row">
+            <div class="col-md-3 col-sm-4">
+                <div class="bf-detail">
+                <input
+                    type="text"
+                    style="font-size: 13px;"
+                    class="form-control"
+                    placeholder="Product Info"
+                    v-model.trim="search.productInfo"
+                />
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-4">
+                <div class="bf-detail">
+                <input
+                    type="text"
+                    style="font-size: 13px;"
+                    class="form-control"
+                    placeholder="Price Total From"
+                    v-model.trim="search.priceTotalFrom"
+                />
+                </div>
+            </div>
+            
+            <div class="col-md-3 col-sm-4">
+                <div class="bf-detail">
+                <input
+                    type="text"
+                    style="font-size: 13px;"
+                    class="form-control"
+                    placeholder="Price Total To"
+                    v-model.trim="search.priceTotalTo"
+                />
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-4">
+                <div class="bf-detail">
+                <input
+                    type="text"
+                    style="font-size: 13px;"
+                    class="form-control"
+                    placeholder="Product Status List Code"
+                    v-model.trim="search.productStatusListCode"
+                />
+                </div>
+            </div>
+            
+            <div class="btn-fillter">
+                <div class="bf-detail" style="margin-top: 16px">
+                <button
+                    @click.prevent="submitForm"
+                    class="btn btn-info"
+                    style="font-size: 13px; margin-right: 5px; color:white;"
+                >
+                    <b-icon icon="search"></b-icon>
+                </button>
+                <button
+                    @click="clearSearch"
+                    class="btn btn-dark"
+                    style="font-size: 13px; margin-right: 5px;"
+                >
+                    
+                    <b-icon icon="x-circle" ></b-icon>
+                </button>
+                </div>
+            </div>
+            </div>
+        </div>
+        </form>
+        </div>
+    </div>
 
         <div class="row">
         <div class="col-lg-12">
@@ -136,8 +212,8 @@
                         <h3 style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;">Do you want to delete {{ data.code }}?</h3>
                         </div>
                         <div class="buttonSubmitLogout">
-                        <button class="buttonYes mt-3"  @click="deleteData(data.id)" style="font-size: 13px;">Yes</button>
-                        <button class="buttonNo mt-3" @click="$bvModal.hide(String(data.id))" style="font-size: 13px;">Skip</button>
+                        <button class="buttonYes mt-3"  @click="deleteData(data.id)" style="font-size: 13px;">Confirm</button>
+                        <button class="buttonNo mt-3" @click="$bvModal.hide(String(data.id))" style="font-size: 13px;">Cancel</button>
                         </div>
                         </b-modal>
                         </div>
@@ -217,7 +293,8 @@ return {
     search: {
         page:1,
         size:20,
-        type:1
+        type:1,
+        branchId:localStorage.getItem("branchId"), 
     },
     email: localStorage.getItem("email"),
     DATA_PERMISSION: localStorage.getItem("permission"),
@@ -290,6 +367,19 @@ async deleteData(idProductStatusDetail){
             this.$bvModal.show("bv-modal-example-error-add-user")
         }
     },
+    submitForm() {
+    this.pagination.page = 1;
+    this.fetchData();
+},
+    clearSearch() {
+    this.search = {
+    page:1,
+    size:20,
+    type:1,
+    branchId:localStorage.getItem("branchId"), 
+    };
+    this.fetchData();
+},
 },
 
 computed: {

@@ -21,12 +21,13 @@
                 >
                 Cancel</router-link
                 >
-                <button
+                <div
                 class="btn btn-dark"
                 style="font-size: 13px;margin-left: 5px;"
+                @click="Reset()"
                 >
                 Reset
-                </button>
+                </div>
                 <button
                 type="submit"
                 class="btn btn-primary"
@@ -138,10 +139,10 @@
                     type="file"
                     ref="uploadImage"
                     @change="onFileChange"
+                    content="huy"
                     class="inputfile"
                     id="file"
                     />
-                    <label for="file">Chọn ảnh</label>
                     </form>
                     </div>
                 </form>
@@ -231,10 +232,6 @@ onFileChange(e) {
     this.url = URL.createObjectURL(fileUp);
     let file = this.$refs.uploadImage.files[0];
     this.File = file;
-    // var files = e.target.files || e.dataTransfer.files;
-    // if (!files.length)
-    // return;
-    // this.createImage(files[0]);
 },
 createImage(file) {
     var reader = new FileReader();
@@ -278,6 +275,9 @@ handleAddProducInfo() {
         this.$bvModal.show("bv-modal-example-error-add-user")
     });
 },
+Reset(){
+        this.dataProducInfo = {}
+    },
 processFile(event) {
     this.someData = event.target.files[0];
 },

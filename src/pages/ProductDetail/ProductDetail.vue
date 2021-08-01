@@ -121,9 +121,9 @@
                         <b-icon icon="three-dots-vertical"></b-icon>
                         </template>
                         <div style="font-size: 13px;">
-                        <!-- <b-dropdown-item @click="update(data.id)">
+                        <b-dropdown-item @click="update(data.id)">
                             Edit
-                        </b-dropdown-item> -->
+                        </b-dropdown-item>
                         <b-dropdown-item @click="$bvModal.show(String(data.id))">
                             Delete
                         </b-dropdown-item>
@@ -138,8 +138,8 @@
                         <h3 style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;">Do you want to delete {{ data.productName }}?</h3>
                         </div>
                         <div class="buttonSubmitLogout">
-                        <button class="buttonYes mt-3"  @click="deleteData(data.id)" style="font-size: 13px;">Yes</button>
-                        <button class="buttonNo mt-3" @click="$bvModal.hide(String(data.id))" style="font-size: 13px;">Skip</button>
+                        <button class="buttonYes mt-3"  @click="deleteData(data.id)" style="font-size: 13px;">Confirm</button>
+                        <button class="buttonNo mt-3" @click="$bvModal.hide(String(data.id))" style="font-size: 13px;">Cancel</button>
                         </div>
                         </b-modal>
                         </div>

@@ -58,11 +58,16 @@ export class ProducDetailService extends BaseService {
         try {
             const response = await axios({
                 method: "put",
-                url: `${BASE_URL}/api/categories/edit/${idCategory}`,
+                url: `${BASE_URL}/api/products-detail/edit/${idCategory}`,
                 headers: {
                     AuthToken: token,
                 },
-                data: data,
+                data: {
+                    imei: data.imei,
+                    productId: data.productInfoId,
+                    productStatusListId: data.productStatusId,
+                    shelfId: data.shelfId
+                },
             });
             return response;
         } catch (error) {
@@ -73,7 +78,7 @@ export class ProducDetailService extends BaseService {
         try {
             const response = await axios({
                 method: "get",
-                url: `${BASE_URL}/api/categories/${idCategory}`,
+                url: `${BASE_URL}/api/products-detail/${idCategory}`,
                 headers: {
                     AuthToken: token,
                 },

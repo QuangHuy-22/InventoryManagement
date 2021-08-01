@@ -44,4 +44,32 @@ export class ProducInfoService extends BaseService {
             return error.response
         }
     }
+    static async getDetail(token, idCategory) {
+        try {
+            const response = await axios({
+                method: "get",
+                url: `${BASE_URL}/api/products-info/${idCategory}`,
+                headers: {
+                    AuthToken: token,
+                },
+            });
+            return response;
+        } catch (error) {
+            return error.response
+        }
+    }
+    static async delete(token, idProductInfo) {
+        try {
+            const response = await axios({
+                method: "put",
+                url: `${BASE_URL}/api/products-info/delete/${idProductInfo}`,
+                headers: {
+                    AuthToken: token,
+                },
+            });
+            return response;
+        } catch (error) {
+            return error.response
+        }
+    }
 }

@@ -10,10 +10,10 @@
 
 <!-- box-title -->
 <div class="box-title box-title-fix">
-    <h2 class="title-page">Update Product Detail</h2>
+    <h2 class="title-page">Update ProductInfo</h2>
     <div class="btn-group float-right">
-        <form class="buttonLogout"  @submit.prevent="handleUpdateProductDetail"  >
-        <router-link to="/product/product-detail">
+        <form class="buttonLogout"  @submit.prevent="handleUpdate"  >
+        <router-link to="/product/product-info">
         <b-button  
         id="show-btn" 
         style="font-size: 13px; margin-right: 5px;" variant="outline-primary" 
@@ -39,7 +39,7 @@
         style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;">Adding Successful!</h3>
         </div>
         <div class="buttonSubmitLogout">
-            <router-link to="/product/product-detail">
+            <router-link to="/product/product-info">
         <button  class="buttonOK mt-3"  style="font-size: 13px;">OK</button>
         </router-link>
         <!-- <button class="buttonNo mt-3" @click="$bvModal.hide('bv-modal-example')" style="font-size: 13px;" >Không</button> -->
@@ -56,11 +56,28 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="card-body">
-                <h4 class="card-title mb-3" style="font-size: 15px;">Information Product Detail</h4>
-                <form class="needs-validation">
+                <h4 class="card-title mb-3" style="font-size: 15px;">Information Product Info</h4>
+                <form
+                    class="needs-validation"
+                    enctype="multipart/form-data"
+                >
                     <div class="col-sm-6">
                     <div class="form-group form-erross">
-                        <label for="validationCustom01">Imei</label>
+                        <label for="validationCustom04">Category</label>
+                        <b-select
+                        class="form-control select2"
+                        v-model="dataProducInfo.categoryId"
+                        >
+                        <option
+                            v-for="data in dataCategory"
+                            :key="data.id"
+                            :value="data.id"
+                            >{{ data.name }}</option
+                        >
+                        </b-select>
+                    </div>
+                    <div class="form-group form-erross">
+                        <label for="validationCustom01">Name</label>
                         <v-text-field
                         type="text"
                         class="form-control"
@@ -69,52 +86,36 @@
                         placeholder=""
                         value=""
                         required
-                        v-model="dataProductDetail.imei"
+                        v-model="dataProducInfo.name"
                         >
                         </v-text-field>
                     </div>
                     <div class="form-group form-erross">
-                        <label for="validationCustom04">Product Info</label>
-                        <b-select
-                        class="form-control select2"
-                        v-model="dataProductDetail.productInfoId"
+                        <label for="validationCustom01">Description</label>
+                        <v-text-field
+                        type="text"
+                        class="form-control"
+                        style="padding: 3px 0px!important;"
+                        id="validationCustom01"
+                        placeholder=""
+                        value=""
+                        v-model="dataProducInfo.description"
                         >
-                        <option
-                            v-for="data in dataProductInfo"
-                            :key="data.id"
-                            :value="data.id"
-                            >{{ data.name }}</option
-                        >
-                        </b-select>
+                        </v-text-field>
                     </div>
                     <div class="form-group form-erross">
-                        <label for="validationCustom04">Product Status</label>
-                        <b-select
-                        class="form-control select2"
-                        v-model="dataProductDetail.productStatusId"
-                        >
-                        <option
-                            v-for="data in dataProduct"
-                            :key="data.id"
-                            :value="data.id"
-                            >{{ data.code }}</option
-                        >
-                        </b-select>
+                        <img  :src="dataProducInfo.imgUrl" />
                     </div>
-                    <div class="form-group form-erross">
-                        <label for="validationCustom04">Shelf</label>
-                        <b-select
-                        class="form-control select2"
-                        v-model="dataProductDetail.shelfId"
-                        >
-                        <option
-                            v-for="data in dataShelf"
-                            :key="data.id"
-                            :value="data.id"
-                            >{{ data.name }}</option
-                        >
-                        </b-select>
-                    </div>
+                    <form ref="uploadForm" @submit.prevent="submit">
+                    <input
+                    type="file"
+                    ref="uploadImage"
+                    @change="onFileChange"
+                    class="inputfile"
+                    id="file"
+                    />
+                    <label for="file">Chọn ảnh</label>
+                    </form>
                     </div>
                 </form>
             </div>
@@ -152,100 +153,107 @@ style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-
 </template>
 
 <script>
-import { ProducDetailService } from "@/services/productDetail.service.js";
+import axios from "axios"
+import { CategoryService } from "@/services/category.service.js";
 import { ProducInfoService } from "@/services/producInfo.service.js";
-import { ProducService } from "@/services/product.service";
-import { ShelfService } from "@/services/shelf.service";
 import index from '../../components/index.vue';
 export default {
 components: { index },
     name:"update-user",
     data(){
         return{
-            idCategory: this.$route.params.id,
-            dataProductDetail: {},
+            idProductInfo: this.$route.params.id,
+            dataCategory: {},
             token: localStorage.getItem("token"),
             errorMessage:"",
             BASE_URL: this.$store.getters.BASE_URL,
+            dataProducInfo:{},
             search: {
-            page: 1,
-            size: 20,
-            type:1
+                page: 1,
+                size:20
             },
-            searchShelf: {
-            page: 1,
-            size: 20,
-            branchId:localStorage.getItem("branchId"), 
-            },
-            
-            dataProductInfo:{},
-            dataProduct:{},
-            dataShelf:{}
         }
     },
     methods:{
-            async handleUpdateProductDetail(){
-        try{
-            const response = await ProducDetailService.update(this.token, this.dataProductDetail, this.idCategory)
-            if(response.status == 200){
-                this.$bvModal.show('bv-modal-example-3')
-            }
-            else if (response.status == 400) {
-                this.$bvModal.show("bv-modal-example-error-update-user")
-                this.errorMessage = response.data
-            }
-            else(
-            this.$bvModal.show("bv-modal-example-error-update-user")
-            )
+            async handleUpdate(){
+                this.formData = new FormData();
+    if ( this.File == null) {
+        this.formData.append("name", this.dataProducInfo.name,);
+        this.formData.append("description", this.dataProducInfo.description,);
+        this.formData.append("categoryId", this.dataProducInfo.categoryId,);
+        } else {
+        this.formData.append("image", this.File);
+        this.formData.append("name", this.dataProducInfo.name,);
+        this.formData.append("description", this.dataProducInfo.description,);
+        this.formData.append("categoryId", this.dataProducInfo.categoryId,);
         }
-        catch(error){
-            return error.response;
-        }
+    axios({
+    method: "put",
+    url: `http://localhost:8090/api/products-info/edit/${this.idProductInfo}`,
+    headers: {
+        headers:{ 
+            "Access-Control-Allow-Origin": "*",
         },
-        async fetchDataStatus() {
-    try {
-    const response = await ProducService.getList(this.token, this.search);
-    if (response.status === 200) {
-        this.dataProduct = response.data.listData;
-    }
-    } catch (error) {
-    console.log(error);
-    }
+        AuthToken: this.token,
+    },
+    data: this.formData
+    })
+    .then((response) => {
+        if (response.status == 200) {
+        this.$bvModal.show("bv-modal-example-3") 
+        }
+    })
+    .catch((error) => {
+        this.errorMessage = error.response.data
+        this.$bvModal.show("bv-modal-example-error-add-user")
+    });
+        },
+        onFileChange(e) {
+    const fileUp = e.target.files[0];
+    this.url = URL.createObjectURL(fileUp);
+    let file = this.$refs.uploadImage.files[0];
+    this.File = file;
 },
-async fetchDataProductInfo() {
-    const response = await ProducInfoService.getList(this.token, this.search);
-    if (response.status == 200) {
-    this.dataProductInfo = response.data.listData;
-    }
+createImage(file) {
+    var reader = new FileReader();
+    var vm = this;
+
+    reader.onload = (e) => {
+    vm.image = e.target.result;
+    };
+    reader.readAsDataURL(file);
 },
-async fetchDataShelf() {
-    const response = await ShelfService.getList(this.token, this.searchShelf);
-    if (response.status == 200) {
-    this.dataShelf = response.data.listData;
-    }
-},
-    async fetchData(){
-            const response = await ProducDetailService.getDetail(this.token ,this.idCategory) 
+    async fetchDataCategory(){
+            const response = await CategoryService.getList(this.token ,this.search) 
             if (response.status == 200) {
                 console.log(response);
-                this.dataProductDetail = response.data
+                this.dataCategory = response.data.listData
+            }
+        },
+    async fetchData(){
+            const response = await ProducInfoService.getDetail(this.token ,this.idProductInfo) 
+            if (response.status == 200) {
+                console.log(response);
+                this.dataProducInfo = response.data
             }
         }
     },
     mounted() {
-        this.fetchDataStatus()
-        this.fetchDataProductInfo()
-        this.fetchDataShelf() 
-        this.fetchData() 
+        this.fetchDataCategory()
+        this.fetchData()
 
     
 },
 };
 </script>
 
-<style>
+<style scoped>
 .theme--light.v-messages{
     color: #D8000C!important;
+}
+img{
+    width: 150px;
+    height: 150px;
 }
 .v-messages {
     color: #D8000C!important;

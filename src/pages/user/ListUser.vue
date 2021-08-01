@@ -153,8 +153,8 @@
                             <h3 style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;">Do you want to delete {{ user.name }}?</h3>
                             </div>
                             <div class="buttonSubmitLogout">
-                            <button class="buttonYes mt-3"  @click="deleteData(user.id)" style="font-size: 13px;">Yes</button>
-                            <button class="buttonNo mt-3" @click="$bvModal.hide(String(user.id))" style="font-size: 13px;">Skip</button>
+                            <button class="buttonYes mt-3"  @click="deleteData(user.id)" style="font-size: 13px;">Confirm</button>
+                            <button class="buttonNo mt-3" @click="$bvModal.hide(String(user.id))" style="font-size: 13px;">Cancel</button>
                             </div>
                             </b-modal>
                             </div>

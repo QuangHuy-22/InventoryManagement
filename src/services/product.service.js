@@ -13,8 +13,13 @@ export class ProducService extends BaseService {
                 url: `${BASE_URL}/api/product-status-lists`,
                 params: {
                     page: 1,
-                    size: 5,
-                    type: params.type
+                    size: 20,
+                    type: params.type,
+                    branchId: params.branchId == 99 ? params.branchId = "" : params.branchId,
+                    code: params.code,
+                    priceFrom: params.priceFrom,
+                    priceTo: params.priceTo,
+                    vatCode: params.vatCode,
                 },
                 headers: {
                     headers,
@@ -34,7 +39,12 @@ export class ProducService extends BaseService {
                 params: {
                     page: 1,
                     size: 10,
-                    type: params.type
+                    type: params.type,
+                    branchId: params.branchId == 99 ? params.branchId = "" : params.branchId,
+                    productInfo: params.productInfo,
+                    priceTotalFrom: params.priceTotalFrom,
+                    priceTotalTo: params.priceTotalFrom,
+                    productStatusListCode: params.productStatusListCode,
                 },
                 headers: {
                     headers,

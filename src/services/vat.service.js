@@ -13,7 +13,15 @@ export class VATService extends BaseService {
             const response = await axios({
                 method: "get",
                 url: `${BASE_URL}/api/vats`,
-                params,
+                params: {
+                    page: params.page,
+                    size: params.size,
+                    branchId: params.branchId == 99 ? params.branchId = "" : params.branchId,
+                    code: params.code,
+                    supplierName: params.supplierName,
+                    tax: params.tax,
+                    userName: params.userName,
+                },
                 headers: {
                     headers,
                     AuthToken: token
@@ -71,7 +79,15 @@ export class VATService extends BaseService {
                     headers,
                     AuthToken: token
                 },
-                params: params
+                params: {
+                    page: params.page,
+                    size: params.size,
+                    branchId: params.branchId == 99 ? params.branchId = "" : params.branchId,
+                    priceTotalFrom: params.priceTotalFrom,
+                    priceTotalTo: params.priceTotalTo,
+                    productInfo: params.productInfo,
+                    vatCode: params.vatCode,
+                }
             })
             return response
         } catch (error) {

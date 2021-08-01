@@ -80,63 +80,6 @@
             </form>
         </div>
     </div>
-    <div class="dropdown d-inline-block">
-        <button @click="$bvToast.show('example-toast')" type="button" class="btn header-item noti-icon waves-effect" style="padding-top: 20px; color: white;" id="page-header-notifications-dropdown"
-            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span class="badge badge-danger badge-pill" style="position: absolute; top: 12px; right: 4px;">{{ numNotify }}</span>
-            <b-icon icon="bell" ></b-icon>
-        </button>
-        <b-toast id="example-toast" class="list-notify" style="position: absolute;"   static no-auto-hide>
-            <template #toast-title >
-            <span style="margin-right: 22px;">Thông báo</span>
-            <b-form-checkbox style="margin-right: 15px;" v-model="checkNotify" switch  @change="notify">Bật thông báo</b-form-checkbox>
-            <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown "
-            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #fff;padding:0px">
-            <b-dropdown right text="" variant="none" no-caret>
-                <template #button-content>
-            <b-icon icon="three-dots"></b-icon>
-            <!-- <b-icon icon="chevron-down" class="buttonDrops" ></b-icon> -->
-                </template>
-            <b-dropdown-item >
-                </b-dropdown-item>
-            <b-dropdown-item>
-            <div @click="checkReadAllNotify" class="icon-check-notify">
-            <b-icon icon="check2-circle" id="button-1" style="margin-right:5px;"   ></b-icon>
-            <span style="color: #6c757d;">Đọc tất cả</span>
-            </div>
-            </b-dropdown-item>
-            <b-dropdown-item>
-                <b-icon icon="window" style="margin-right:3px;"></b-icon>
-                <span style="color: #6c757d;">Trang thông báo</span>
-            </b-dropdown-item>
-            </b-dropdown>
-        </button>
-            </template>
-            <b-tooltip target="button-1" title="Đọc tất cả!"></b-tooltip>
-        <div class="notify" style="border-bottom: 1px solid #A9A9A9; font-size: 12px" v-for="dataNotify in dataNotification" :key="dataNotify">
-        <div :class="dataNotify.readStatus == 'NOT_READ' ? 'text-white bg-secondary rounded' : '' " id="title-notify">
-        <span>{{dataNotify.methodName}} </span>
-        <span>{{dataNotify.customerIdf}}</span>
-        </div>
-        <div class="time-notify">
-        <span><a>{{ dataNotify.transactionTime.substring(0,10).split("-").reverse().join("/")}} </a><a>{{ dataNotify.transactionTime.substring(11,19)}}</a></span>
-        <span>{{dataNotify.amount.toLocaleString('vi-VN', {style: 'currency',currency: 'VND'})}}</span>
-        </div>
-        <div class="code-notify">
-        <span>Mã Giao Dịch :  </span>
-        <span>{{dataNotify.transactionCode}}</span>
-        </div>
-        <div class="d-flex">
-        <span class="title-rule">Loại rủi ro :  </span>
-        <span class="rule-notify" v-for="dataRule in dataNotify.rulesDescription" :key="dataRule">{{dataRule}}</span>
-        </div>
-        </div>
-        <div class="overflow-auto">
-        <div>
-        </div>
-        </div>
-        </b-toast>
-    </div>
 
     <div class="dropdown d-inline-block">
         <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown "

@@ -12,7 +12,16 @@ export class IssueDetailService extends BaseService {
             const response = await axios({
                 method: "get",
                 url: `${BASE_URL}/api/issue-details`,
-                params,
+                params: {
+                    page: params.page,
+                    size: params.size,
+                    branchId: params.branchId == 99 ? params.branchId = "" : params.branchId,
+                    imei: params.imei,
+                    issueCode: params.issueCode,
+                    priceTotalFrom: params.priceTotalFrom,
+                    priceTotalTo: params.priceTotalTo,
+                    productInfo: params.productInfo,
+                },
                 headers: {
                     headers,
                     AuthToken: token

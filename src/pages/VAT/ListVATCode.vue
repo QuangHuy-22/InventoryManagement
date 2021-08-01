@@ -69,7 +69,7 @@
                 </div>
             </div>
 
-            <div class="col-md-4 col-sm-4" style="padding-top:0px">
+            <div class="col-md-4 col-sm-4" >
                 <div class="btn-fillter">
                 <div class="bf-detail">
                     <button
@@ -102,7 +102,6 @@
                 <thead>
                 <tr>
                     <th style="text-align: center">No.</th>
-                    <th>ID</th>
                     <th>Code</th>
                     <th>Product Info</th>
                     <th>QTY</th>
@@ -117,7 +116,6 @@
                     <td style="text-align: center">
                     {{ index + 1 }}
                     </td>
-                    <td>{{ vat.id }}</td>
                     <td>{{ vat.vatCode }}</td>
                     <td>{{ vat.productInfo }}</td>
                     <td>{{ vat.qty }}</td>
@@ -135,12 +133,35 @@
                         <b-icon icon="three-dots-vertical"></b-icon>
                         </template>
                         <div style="font-size: 13px;">
-                        <b-dropdown-item>
-                            Edit
-                        </b-dropdown-item>
-                        <b-dropdown-item>
+                        <b-dropdown-item @click="$bvModal.show(String(vat.id))">
                             Delete
                         </b-dropdown-item>
+                        <b-dropdown-item @click="createVatDetail(vat.id)">
+                            Create VAT Detail
+                        </b-dropdown-item>
+                        <b-dropdown-item
+                            @click="createProductStatus(vat.id)"
+                        >
+                            Create Product Status List
+                        </b-dropdown-item>
+
+
+                        <!-- ----modal delete role------- -->
+                        <div class="showDelete" >
+                        <b-modal :id="(String(vat.id))" hide-footer hide-header   >
+                        <b-col class="iconLogout mb-2">
+                        <b-icon icon="exclamation-triangle" class="iconsBox" style="color: red!important;"></b-icon>
+                        </b-col>
+                        <div class="d-block text-center" >
+                        <h3 style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;">Do you want to delete {{ vat.code }}?</h3>
+                        </div>
+                        <div class="buttonSubmitLogout">
+                        <button class="buttonYes mt-3"  @click="deleteData(vat.id)" style="font-size: 13px;">Confirm</button>
+                        <button class="buttonNo mt-3" @click="$bvModal.hide(String(vat.id))" style="font-size: 13px;">Cancel</button>
+                        </div>
+                        </b-modal>
+                        </div>
+                        <!-- ----end modal delete role------- -->
                         </div>
                     </b-dropdown>
                     </td>
@@ -148,7 +169,28 @@
                 </tbody>
             </table>
             </div>
-
+  <b-modal id="bv-modal-example-3" hide-footer hide-header>
+    <b-col class="iconLogout mb-2">
+        <div class="mb-img mb-4">
+        <span><img src="@/assets/images/sussecc.svg" alt=""/></span>
+        </div>
+    </b-col>
+    <div class="d-block text-center">
+        <h3
+        style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;"
+        >
+        Adding Successful
+        </h3>
+    </div>
+    <div class="buttonSubmitLogout">
+        <router-link to="/inventory/vat">
+        <button class="buttonOK mt-3" style="font-size: 13px;"  @click="$bvModal.hide('bv-modal-example-3')" >
+            OK
+        </button>
+        </router-link>
+        <!-- <button class="buttonNo mt-3" @click="$bvModal.hide('bv-modal-example')" style="font-size: 13px;" >Không</button> -->
+    </div>
+    </b-modal>
             <!-- <div class="overflow-auto">
         <b-pagination
             v-model="search.page"
@@ -212,6 +254,30 @@ async fetchData() {
     console.log(response);
     } catch (error) {
     console.log(error.response);
+    }
+},
+async deleteData(idVat){
+        const response = await VATService.delete(this.token, idVat)
+        if (response.status == 200) {
+            this.fetchData()
+            this.$bvModal.hide(idVat)
+        }
+    },
+    createVatDetail(VATId) {
+    this.$router.push({ name: "CreateVATDetail", params: { id: VATId } });
+},
+async createProductStatus(id) {
+    try {
+    const response = await VATService.createProductStatus(this.token,id,this.userName);
+    if(response.status == 200) {
+        this.$bvModal.show("bv-modal-example-3");
+    }
+    else{
+        this.errorMessage = response.data
+        this.$bvModal.show("bv-modal-example-error-add-user");
+    }
+    } catch (error) {
+    return error.response;
     }
 },
 submitForm() {

@@ -18,12 +18,13 @@
                 >
                 Cancel</router-link
                 >
-                <button
+                <div
                 class="btn btn-dark"
                 style="font-size: 13px;margin-left: 5px;"
+                @click="Reset()"
                 >
                 Reset
-                </button>
+                </div>
                 <button
                 type="submit"
                 class="btn btn-primary"
@@ -177,6 +178,10 @@ async createAddProduct(){
         return error.response
     }
 },
+Reset(){
+        this.dataProduct= {
+    }
+    },
 async fetchDataProductInfo() {
     const response = await ProducInfoService.getList(this.token, this.search);
     if (response.status == 200) {

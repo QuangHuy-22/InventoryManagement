@@ -12,7 +12,7 @@
         <div class="btn-group float-right">
         <form class="buttonAddUser"  @submit.prevent="handleAddUser">
         <router-link to="/inventory/issue" class="btn btn-dark" style="font-size: 13px;"> Cancel</router-link>
-        <button class="btn btn-dark"  style="font-size: 13px;margin-left: 5px;"> Reset</button>
+        <div class="btn btn-dark"  style="font-size: 13px;margin-left: 5px;" @click="Reset()"> Reset</div>
         <button type="submit" class="btn btn-primary" data-toggle="modal" data-target=".Risk_Permission_Update" style="font-size: 13px;margin-left: 5px;">Submit</button>
         <div class="showAddUser" >
         <b-modal id="bv-modal-example-3" hide-footer hide-header >
@@ -56,7 +56,7 @@
                     placeholder="" 
                     value="" 
                     required
-                    v-model="dataCategory.code">
+                    v-model="dataIssue.code">
                     </v-text-field>
                 </div>
                 <div class="form-group form-erross">
@@ -69,7 +69,7 @@
                     placeholder="" 
                     value="" 
                     required
-                    v-model="dataCategory.name">
+                    v-model="dataIssue.name">
                     </v-text-field>
                 </div>
                 <div class="form-group form-erross">
@@ -81,7 +81,7 @@
                     id="validationCustom01" 
                     placeholder="" 
                     value="" 
-                    v-model="dataCategory.description">
+                    v-model="dataIssue.description">
                     </v-text-field>
                 </div>
                 </div>
@@ -123,7 +123,7 @@ components: {
     data(){
         return{
             token: localStorage.getItem("token"),
-            dataCategory:{
+            dataIssue:{
                 code:"",
                 name:"",
                 description:"",
@@ -141,7 +141,7 @@ components: {
     methods:{
     async handleAddUser(){
         try {
-            const response = await CategoryService.createCategory(this.token, this.dataCategory)
+            const response = await CategoryService.createCategory(this.token, this.dataIssue)
             console.log(response);
             if(response.status == 200){
                 this.$bvModal.show("bv-modal-example-3")
@@ -154,6 +154,13 @@ components: {
             return error
         }
     },
+    Reset(){
+        this.dataIssue={
+                code:"",
+                name:"",
+                description:"",
+            }
+    }
     },
     mounted() {
 },
