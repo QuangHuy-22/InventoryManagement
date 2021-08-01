@@ -153,6 +153,9 @@
                         <b-icon icon="three-dots-vertical"></b-icon>
                         </template>
                         <div style="font-size: 13px;">
+                        <b-dropdown-item @click="detail(producInfo.id)">
+                            Detail
+                        </b-dropdown-item>
                         <b-dropdown-item @click="update(producInfo.id)">
                             Edit
                         </b-dropdown-item>
@@ -243,6 +246,9 @@ methods: {
 update(id) {
         this.$router.push({ name: "UpdateProductInfo", params: { id: id } });
     },
+detail(id) {
+    this.$router.push({ name: "DetailProductInfo", params: { id: id } });
+},
 submitForm() {
     this.pagination.page = 1;
     this.fetchData();

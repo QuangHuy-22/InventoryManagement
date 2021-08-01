@@ -112,6 +112,9 @@
                         <b-icon icon="three-dots-vertical"></b-icon>
                         </template>
                         <div style="font-size: 13px;">
+                        <b-dropdown-item @click="detail(category.id)">
+                            Detail
+                        </b-dropdown-item>
                         <b-dropdown-item @click="update(category.id)">
                             Edit
                         </b-dropdown-item>
@@ -216,6 +219,9 @@ export default {
     },
     update(id) {
         this.$router.push({ name: "UpdateCategory", params: { id: id } });
+    },
+    detail(id) {
+        this.$router.push({ name: "DetailCategory", params: { id: id } });
     },
     // async deleteData(idCategory){
     //     const response = await CategoryService.delete(this.token, idCategory)

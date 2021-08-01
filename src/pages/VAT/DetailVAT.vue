@@ -6,9 +6,9 @@
     <div class="page-content">
         <div class="container-fluid">
         <div class="box-title">
-            <h2>Detail User</h2>
+            <h2>Detail VAT</h2>
             <div class=" float-right">
-            <router-link to="/management/list-user" class="btn btn-dark">
+            <router-link to="/inventory/vat" class="btn btn-dark">
                 Cancel
             </router-link>
             </div>
@@ -35,11 +35,11 @@
                 <label
                     for="horizontal-email-input"
                     class="col-sm-2 col-form-label"
-                    >Name</label
+                    >User Name</label
                 >
                 <div class="col-sm-10">
                     <p class="form-control-plaintext">
-                    {{ dataDetail.name }}
+                    {{ dataDetail.userName }}
                     </p>
                 </div>
                 </div>
@@ -47,11 +47,59 @@
                 <label
                     for="horizontal-password-input"
                     class="col-sm-2 col-form-label"
-                    >Description</label
+                    >Supplier Name</label
                 >
                 <div class="col-sm-10">
                     <p class="form-control-plaintext">
-                    {{ dataDetail.description }}
+                    {{ dataDetail.supplierName }}
+                    </p>
+                </div>
+                </div>
+                <div class="form-group row mb-0">
+                <label
+                    for="horizontal-password-input"
+                    class="col-sm-2 col-form-label"
+                    >Tax</label
+                >
+                <div class="col-sm-10">
+                    <p class="form-control-plaintext">
+                    {{ dataDetail.tax }}
+                    </p>
+                </div>
+                </div>
+                <div class="form-group row mb-0">
+                <label
+                    for="horizontal-password-input"
+                    class="col-sm-2 col-form-label"
+                    >Percent</label
+                >
+                <div class="col-sm-10">
+                    <p class="form-control-plaintext">
+                    {{ dataDetail.percent }}
+                    </p>
+                </div>
+                </div>
+                <div class="form-group row mb-0">
+                <label
+                    for="horizontal-password-input"
+                    class="col-sm-2 col-form-label"
+                    >Price</label
+                >
+                <div class="col-sm-10">
+                    <p class="form-control-plaintext">
+                    {{ dataDetail.price }}
+                    </p>
+                </div>
+                </div>
+                <div class="form-group row mb-0">
+                <label
+                    for="horizontal-password-input"
+                    class="col-sm-2 col-form-label"
+                    >Total</label
+                >
+                <div class="col-sm-10">
+                    <p class="form-control-plaintext">
+                    {{ dataDetail.total }}
                     </p>
                 </div>
                 </div>
@@ -90,7 +138,7 @@
 </template>
 
 <script>
-import { CategoryService } from "@/services/category.service.js";
+import { VATService } from "@/services/vat.service.js";
 import index from "../../components/index.vue";
 export default {
 components: { index, },
@@ -110,7 +158,7 @@ this.fetchData();
 methods: {
 async fetchData() {
     try {
-    const response = await CategoryService.getDetail(this.token, this.idDetail);
+    const response = await VATService.getDetail(this.token, this.idDetail);
     if (response.status == 200) {
         this.dataDetail = response.data;
     }

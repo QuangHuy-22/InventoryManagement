@@ -129,6 +129,9 @@
                         <b-icon icon="three-dots-vertical"></b-icon>
                         </template>
                         <div style="font-size: 13px;">
+                        <b-dropdown-item @click="detail(issue.id)">
+                            Detail
+                        </b-dropdown-item>
                         <b-dropdown-item @click="$bvModal.show(String(issue.id))">
                             Delete
                         </b-dropdown-item>
@@ -234,6 +237,9 @@ async fetchData() {
 },
 CreateIssue(issueId){
     this.$router.push({ name: "CreateIssueDetail", params: { id: issueId } });
+},
+detail(issueId){
+    this.$router.push({ name: "DetailIssue", params: { id: issueId } });
 },
 async deleteData(idIssue){
         const response = await IssueService.delete(this.token, idIssue)

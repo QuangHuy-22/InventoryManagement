@@ -70,4 +70,18 @@ export class RoleService extends BaseService {
             return error.response
         }
     }
+    static async getDetail(token, idRole) {
+        try {
+            const response = await axios({
+                method: "get",
+                url: `${BASE_URL}/api/roles/${idRole}`,
+                headers: {
+                    AuthToken: token,
+                },
+            });
+            return response;
+        } catch (error) {
+            return error.response
+        }
+    }
 }

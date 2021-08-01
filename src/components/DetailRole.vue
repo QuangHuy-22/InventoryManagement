@@ -6,9 +6,9 @@
     <div class="page-content">
         <div class="container-fluid">
         <div class="box-title">
-            <h2>Detail User</h2>
+            <h2>Detail Role</h2>
             <div class=" float-right">
-            <router-link to="/management/list-user" class="btn btn-dark">
+            <router-link to="/management/list-role" class="btn btn-dark">
                 Cancel
             </router-link>
             </div>
@@ -17,7 +17,7 @@
         <!-- box-content -->
         <div class="card">
             <div class="card-body">
-            <h4 class="card-title mb-4">Code/ {{ dataDetail.code }}</h4>
+            <h4 class="card-title mb-4">Role Name/ {{ dataDetail.roleName }}</h4>
             <form class="form-detail">
                 <div class="form-group row mb-0">
                 <label
@@ -39,7 +39,7 @@
                 >
                 <div class="col-sm-10">
                     <p class="form-control-plaintext">
-                    {{ dataDetail.name }}
+                    {{ dataDetail.roleName }}
                     </p>
                 </div>
                 </div>
@@ -90,8 +90,8 @@
 </template>
 
 <script>
-import { CategoryService } from "@/services/category.service.js";
-import index from "../../components/index.vue";
+import { RoleService } from "@/services/role.service";
+import index from "../components/index.vue";
 export default {
 components: { index, },
 name: "detail-user",
@@ -110,7 +110,7 @@ this.fetchData();
 methods: {
 async fetchData() {
     try {
-    const response = await CategoryService.getDetail(this.token, this.idDetail);
+    const response = await RoleService.getDetail(this.token, this.idDetail);
     if (response.status == 200) {
         this.dataDetail = response.data;
     }

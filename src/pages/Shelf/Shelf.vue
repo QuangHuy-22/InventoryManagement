@@ -150,6 +150,9 @@
                         <b-icon icon="three-dots-vertical"></b-icon>
                         </template>
                         <div style="font-size: 13px;">
+                        <b-dropdown-item @click="detail(data.id)">
+                            Detail
+                        </b-dropdown-item>
                         <b-dropdown-item @click="update(data.id)">
                             Edit
                         </b-dropdown-item>
@@ -242,6 +245,9 @@ async fetchData() {
 },
 update(id) {
         this.$router.push({ name: "UpdateShelf", params: { id: id } });
+    },
+detail(id) {
+        this.$router.push({ name: "DetailShelf", params: { id: id } });
     },
 submitForm() {
     this.pagination.page = 1;

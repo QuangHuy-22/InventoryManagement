@@ -127,11 +127,14 @@
                         <b-icon icon="three-dots-vertical"></b-icon>
                         </template>
                         <div style="font-size: 13px;">
-                        <b-dropdown-item @click="$bvModal.show(String(suppliers.id))" >
-                            Delete
+                        <b-dropdown-item @click="detail(suppliers.id)">
+                            Detail
                         </b-dropdown-item>
                         <b-dropdown-item @click="update(suppliers.id)">
                             Edit
+                        </b-dropdown-item>
+                        <b-dropdown-item @click="$bvModal.show(String(suppliers.id))" >
+                            Delete
                         </b-dropdown-item>
                         <b-dropdown-item  @click="createVAT( suppliers.id)">
                             Create VAT
@@ -254,6 +257,9 @@ async deleteData(idSupplier){
 },
 update(id) {
         this.$router.push({ name: "UpdateSupplier", params: { id: id } });
+    },
+detail(id) {
+        this.$router.push({ name: "DetailSupplier", params: { id: id } });
     },
 submitForm () {
     this.pagination.page = 0

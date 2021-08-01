@@ -39,11 +39,11 @@ export class UserService extends BaseService {
             return error.response
         }
     }
-    static async delete(token, idUser) {
+    static async getDetail(token, idRole) {
         try {
             const response = await axios({
-                method: "put",
-                url: `${BASE_URL}/api/users/delete/${idUser}`,
+                method: "get",
+                url: `${BASE_URL}/api/roles/${idRole}`,
                 headers: {
                     AuthToken: token,
                 },

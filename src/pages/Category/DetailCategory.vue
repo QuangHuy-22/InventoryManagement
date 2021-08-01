@@ -6,9 +6,9 @@
     <div class="page-content">
         <div class="container-fluid">
         <div class="box-title">
-            <h2>Detail User</h2>
+            <h2>Detail Category</h2>
             <div class=" float-right">
-            <router-link to="/management/list-user" class="btn btn-dark">
+            <router-link to="/product/category" class="btn btn-dark">
                 Cancel
             </router-link>
             </div>

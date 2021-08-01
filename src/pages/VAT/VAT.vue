@@ -126,6 +126,9 @@
                         <b-icon icon="three-dots-vertical"></b-icon>
                         </template>
                         <div style="font-size: 13px;">
+                        <b-dropdown-item @click="detail(vat.id)">
+                            Detail
+                        </b-dropdown-item>
                         <b-dropdown-item @click="$bvModal.show(String(vat.id))">
                             Delete
                         </b-dropdown-item>
@@ -297,6 +300,9 @@ async createProductStatus(id) {
 vatCode(code) {
     this.$router.push({ name: "ListVATCode", params: { code: code } });
 },
+detail(id) {
+        this.$router.push({ name: "DetailVAT", params: { id: id } });
+    },
 async deleteData(idVat){
         const response = await VATService.delete(this.token, idVat)
         if (response.status == 200) {

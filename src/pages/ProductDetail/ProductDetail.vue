@@ -21,7 +21,54 @@
         </div>
         </router-link>
     </div>
-
+    <div class="row">
+            <div class="col-xl-12">
+            <div class="row">
+                <div @click="fetchDataValid" class="col-md-6">
+                <div class="card mini-stats-wid">
+                    <div class="card-body" id="text-media">
+                    <div class="media">
+                        <div class="titleNew media-body">
+                        <p class="titleNew font-weight-medium">
+                            VALID
+                        </p>
+                        </div>
+                        <div class="bg-primary" style=" border-radius: 50%;">
+                        <v-avatar>
+                            <v-icon large class="icon-media">
+                            mdi-folder
+                            </v-icon>
+                        </v-avatar>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+                <div @click="fetchDataInvalid" class="col-md-6">
+                <div class="card mini-stats-wid">
+                    <div class="card-body" id="text-media">
+                    <div class="media">
+                        <div class="titleProcessing media-body">
+                        <p class="titleProcessing font-weight-medium">
+                            INVALID
+                        </p>
+                        <h4 class="mb-0 processing">
+                        </h4>
+                        </div>
+                        <div class="bg-primary" style=" border-radius: 50%;">
+                        <v-avatar>
+                            <v-icon large class="icon-media">
+                            mdi-file
+                            </v-icon>
+                        </v-avatar>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
     <div class="searchInput">
         <div class="col-lg-12">
         <form @submit.prevent="submitForm">
@@ -121,6 +168,9 @@
                         <b-icon icon="three-dots-vertical"></b-icon>
                         </template>
                         <div style="font-size: 13px;">
+                        <b-dropdown-item @click="detail(data.id)">
+                            Detail
+                        </b-dropdown-item>
                         <b-dropdown-item @click="update(data.id)">
                             Edit
                         </b-dropdown-item>
@@ -190,6 +240,7 @@ return {
     search: {
     page: 1,
     size: 20,
+    status:"VALID"
     },
     pagination: {
     total: 20,
@@ -218,6 +269,17 @@ async deleteData(idProductDetail){
             this.fetchData()
             this.$bvModal.hide(idProductDetail)
         }
+    },
+    fetchDataValid(){
+    this.search.status = "VALID";
+    this.fetchData();
+    },
+    fetchDataInvalid(){
+    this.search.status = "INVALID";
+    this.fetchData();
+    },
+    detail(id) {
+        this.$router.push({ name: "DetailProductDetail", params: { id: id } });
     },
     update(id) {
         this.$router.push({ name: "UpdateProductDetail", params: { id: id } });
@@ -279,7 +341,12 @@ margin: 0 20px 10px 20px;
 background-color: white;
 padding: 10px;
 }
-
+.titleNew {
+color: #008bf4 !important;
+}
+.titleProcessing {
+color: #fcb63e !important;
+}
 .buttonUnfilter {
 background-color: #74788d; /* Green */
 border: none;
@@ -396,6 +463,15 @@ border-right: none;
 }
 .table tbody tr:nth-child(2n) td {
 background: #f8f9fa;
+}
+.icon-media {
+color: #fff;
+font-size: 25px !important;
+background-color: #556ee6;
+}
+#text-media:hover {
+border-bottom: 2px solid #556ee6;
+transition: all 0.1s ease-in;
 }
 .three-dot {
 border: 0.1px solid #f2f2f2;

@@ -6,9 +6,9 @@
     <div class="page-content">
         <div class="container-fluid">
         <div class="box-title">
-            <h2>Detail User</h2>
+            <h2>Detail Supplier</h2>
             <div class=" float-right">
-            <router-link to="/management/list-user" class="btn btn-dark">
+            <router-link to="/management/supplier" class="btn btn-dark">
                 Cancel
             </router-link>
             </div>
@@ -17,7 +17,7 @@
         <!-- box-content -->
         <div class="card">
             <div class="card-body">
-            <h4 class="card-title mb-4">Code/ {{ dataDetail.code }}</h4>
+            <h4 class="card-title mb-4">Name/ {{ dataDetail.name }}</h4>
             <form class="form-detail">
                 <div class="form-group row mb-0">
                 <label
@@ -47,11 +47,23 @@
                 <label
                     for="horizontal-password-input"
                     class="col-sm-2 col-form-label"
-                    >Description</label
+                    >Address</label
                 >
                 <div class="col-sm-10">
                     <p class="form-control-plaintext">
-                    {{ dataDetail.description }}
+                    {{ dataDetail.address }}
+                    </p>
+                </div>
+                </div>
+                <div class="form-group row mb-0">
+                <label
+                    for="horizontal-password-input"
+                    class="col-sm-2 col-form-label"
+                    >Phone</label
+                >
+                <div class="col-sm-10">
+                    <p class="form-control-plaintext">
+                    {{ dataDetail.phone }}
                     </p>
                 </div>
                 </div>
@@ -90,7 +102,7 @@
 </template>
 
 <script>
-import { CategoryService } from "@/services/category.service.js";
+import { SupplierService } from "@/services/supplier.service";
 import index from "../../components/index.vue";
 export default {
 components: { index, },
@@ -110,7 +122,7 @@ this.fetchData();
 methods: {
 async fetchData() {
     try {
-    const response = await CategoryService.getDetail(this.token, this.idDetail);
+    const response = await SupplierService.getDetail(this.token, this.idDetail);
     if (response.status == 200) {
         this.dataDetail = response.data;
     }

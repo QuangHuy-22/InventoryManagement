@@ -116,4 +116,18 @@ export class ProducService extends BaseService {
             return error.response
         }
     }
+    static async getDetail(token, idProductStatus) {
+        try {
+            const response = await axios({
+                method: "get",
+                url: `${BASE_URL}/api/product-status-lists/${idProductStatus}`,
+                headers: {
+                    AuthToken: token,
+                },
+            });
+            return response;
+        } catch (error) {
+            return error.response
+        }
+    }
 }

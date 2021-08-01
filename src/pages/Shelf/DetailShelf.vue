@@ -6,9 +6,9 @@
     <div class="page-content">
         <div class="container-fluid">
         <div class="box-title">
-            <h2>Detail User</h2>
+            <h2>Detail Shelf</h2>
             <div class=" float-right">
-            <router-link to="/management/list-user" class="btn btn-dark">
+            <router-link to="/inventory/shelf" class="btn btn-dark">
                 Cancel
             </router-link>
             </div>
@@ -17,7 +17,7 @@
         <!-- box-content -->
         <div class="card">
             <div class="card-body">
-            <h4 class="card-title mb-4">Code/ {{ dataDetail.code }}</h4>
+            <h4 class="card-title mb-4">Name/ {{ dataDetail.name }}</h4>
             <form class="form-detail">
                 <div class="form-group row mb-0">
                 <label
@@ -40,6 +40,54 @@
                 <div class="col-sm-10">
                     <p class="form-control-plaintext">
                     {{ dataDetail.name }}
+                    </p>
+                </div>
+                </div>
+                <div class="form-group row mb-0">
+                <label
+                    for="horizontal-email-input"
+                    class="col-sm-2 col-form-label"
+                    >Branch Name</label
+                >
+                <div class="col-sm-10">
+                    <p class="form-control-plaintext">
+                    {{ dataDetail.branchName }}
+                    </p>
+                </div>
+                </div>
+                <div class="form-group row mb-0">
+                <label
+                    for="horizontal-email-input"
+                    class="col-sm-2 col-form-label"
+                    >Qty</label
+                >
+                <div class="col-sm-10">
+                    <p class="form-control-plaintext">
+                    {{ dataDetail.qty }}
+                    </p>
+                </div>
+                </div>
+                <div class="form-group row mb-0">
+                <label
+                    for="horizontal-email-input"
+                    class="col-sm-2 col-form-label"
+                    >Qty Rest</label
+                >
+                <div class="col-sm-10">
+                    <p class="form-control-plaintext">
+                    {{ dataDetail.qtyRest }}
+                    </p>
+                </div>
+                </div>
+                <div class="form-group row mb-0">
+                <label
+                    for="horizontal-email-input"
+                    class="col-sm-2 col-form-label"
+                    >Total</label
+                >
+                <div class="col-sm-10">
+                    <p class="form-control-plaintext">
+                    {{ dataDetail.total }}
                     </p>
                 </div>
                 </div>
@@ -90,7 +138,7 @@
 </template>
 
 <script>
-import { CategoryService } from "@/services/category.service.js";
+import { ShelfService } from "@/services/shelf.service.js";
 import index from "../../components/index.vue";
 export default {
 components: { index, },
@@ -110,7 +158,7 @@ this.fetchData();
 methods: {
 async fetchData() {
     try {
-    const response = await CategoryService.getDetail(this.token, this.idDetail);
+    const response = await ShelfService.getDetail(this.token, this.idDetail);
     if (response.status == 200) {
         this.dataDetail = response.data;
     }

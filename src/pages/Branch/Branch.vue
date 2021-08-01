@@ -110,6 +110,9 @@
                             <b-icon icon="three-dots-vertical"></b-icon>
                         </template>
                         <div style="font-size: 13px;">
+                            <b-dropdown-item @click="detail(branch.id)">
+                            Detail
+                            </b-dropdown-item>
                             <b-dropdown-item @click="update(branch.id)">
                             Edit
                             </b-dropdown-item>
@@ -241,6 +244,9 @@ async deleteData(idBranch){
     },
     update(id) {
     this.$router.push({ name: "UpdateBranch", params: { id: id } });
+},
+    detail(id) {
+    this.$router.push({ name: "DetailBranch", params: { id: id } });
 },
 
 submitForm() {

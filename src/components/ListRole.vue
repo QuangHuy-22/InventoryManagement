@@ -69,8 +69,10 @@
         <b-icon icon="three-dots-vertical" ></b-icon>
             </template>
             <div style="font-size: 13px;">
+        <b-dropdown-item @click="detail(dataRoles.id)">
+            Detail
+        </b-dropdown-item>
         <b-dropdown-item @click="update(dataRoles.code)">
-            <!-- :class=" this.DATA_PERMISSION.includes() ? '' : 'd-none'" -->
             Update
         </b-dropdown-item>
         <b-dropdown-item  @click="$bvModal.show(String(dataRoles.id))"  >
@@ -182,6 +184,9 @@ methods:{
             this.fetchData()
             this.$bvModal.hide(idRole)
         }
+    },
+    detail(id) {
+        this.$router.push({ name: "DetailRole", params: { id: id } });
     },
     update(id) {
         this.$router.push({ name: "UpdateRole", params: { id: id } });

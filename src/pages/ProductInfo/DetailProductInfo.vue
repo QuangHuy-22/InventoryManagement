@@ -6,9 +6,9 @@
     <div class="page-content">
         <div class="container-fluid">
         <div class="box-title">
-            <h2>Detail User</h2>
+            <h2>Detail Product Info</h2>
             <div class=" float-right">
-            <router-link to="/management/list-user" class="btn btn-dark">
+            <router-link to="/product/product-info" class="btn btn-dark">
                 Cancel
             </router-link>
             </div>
@@ -17,7 +17,9 @@
         <!-- box-content -->
         <div class="card">
             <div class="card-body">
-            <h4 class="card-title mb-4">Code/ {{ dataDetail.code }}</h4>
+            <h4 class="card-title mb-4">Category Name/ {{ dataDetail.categoryName }}</h4>
+            <div class="col-lg-12" style="display:flex">
+            <div class="col-lg-6">
             <form class="form-detail">
                 <div class="form-group row mb-0">
                 <label
@@ -25,9 +27,9 @@
                     class="col-sm-2 col-form-label"
                     >ID</label
                 >
-                <div class="col-sm-10">
+                <div class="col-sm-5">
                     <p class="form-control-plaintext">
-                    {{ dataDetail.id }}
+                    {{ dataDetail.categoryId }}
                     </p>
                 </div>
                 </div>
@@ -37,7 +39,7 @@
                     class="col-sm-2 col-form-label"
                     >Name</label
                 >
-                <div class="col-sm-10">
+                <div class="col-sm-5">
                     <p class="form-control-plaintext">
                     {{ dataDetail.name }}
                     </p>
@@ -49,7 +51,7 @@
                     class="col-sm-2 col-form-label"
                     >Description</label
                 >
-                <div class="col-sm-10">
+                <div class="col-sm-5">
                     <p class="form-control-plaintext">
                     {{ dataDetail.description }}
                     </p>
@@ -59,9 +61,46 @@
                 <label
                     for="horizontal-password-input"
                     class="col-sm-2 col-form-label"
+                    >Price In</label
+                >
+                <div class="col-sm-5">
+                    <p class="form-control-plaintext">
+                    {{ dataDetail.priceIn }}
+                    </p>
+                </div>
+                </div>
+                <div class="form-group row mb-0">
+                <label
+                    for="horizontal-password-input"
+                    class="col-sm-2 col-form-label"
+                    >Price Out</label
+                >
+                <div class="col-sm-5">
+                    <p class="form-control-plaintext">
+                    {{ dataDetail.priceOut }}
+                    </p>
+                </div>
+                </div>
+                <div class="form-group row mb-0">
+                <label
+                    for="horizontal-password-input"
+                    class="col-sm-2 col-form-label"
+                    >Qty</label
+                >
+                <div class="col-sm-5">
+                    <p class="form-control-plaintext">
+                    {{ dataDetail.qty }}
+                    </p>
+                </div>
+                </div>
+                
+                <div class="form-group row mb-0">
+                <label
+                    for="horizontal-password-input"
+                    class="col-sm-2 col-form-label"
                     >Create Date</label
                 >
-                <div class="col-sm-10">
+                <div class="col-sm-5">
                     <p class="form-control-plaintext">
                     {{ dataDetail.createDate }}
                     </p>
@@ -73,13 +112,20 @@
                     class="col-sm-2 col-form-label"
                     >Update Date</label
                 >
-                <div class="col-sm-10">
+                <div class="col-sm-5">
                     <p class="form-control-plaintext">
                     {{ dataDetail.updateDate }}
                     </p>
                 </div>
                 </div>
             </form>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group row mb-0">
+                <img  :src="dataDetail.imgUrl" />
+                </div>
+            </div>
+            </div>
             </div>
         </div>
         </div>
@@ -90,7 +136,7 @@
 </template>
 
 <script>
-import { CategoryService } from "@/services/category.service.js";
+import { ProducInfoService } from "@/services/producInfo.service.js";
 import index from "../../components/index.vue";
 export default {
 components: { index, },
@@ -110,7 +156,7 @@ this.fetchData();
 methods: {
 async fetchData() {
     try {
-    const response = await CategoryService.getDetail(this.token, this.idDetail);
+    const response = await ProducInfoService.getDetail(this.token, this.idDetail);
     if (response.status == 200) {
         this.dataDetail = response.data;
     }
@@ -141,6 +187,10 @@ padding: 0px !important;
 }
 .col-sm-10 {
 padding: 7px 0px;
+}
+img{
+    width: 300px;
+    height: 300px;
 }
 @media (max-width: 576px) {
 .content-page,

@@ -199,11 +199,14 @@
                             <b-icon icon="three-dots-vertical"></b-icon>
                             </template>
                             <div style="font-size: 13px;">
-                            <b-dropdown-item @click="createProductDetail(data.id)" v-if="search.type == 1">
-                                Create Product Detail
+                            <b-dropdown-item @click="detail(data.id)" >
+                                Detail
                             </b-dropdown-item>
                             <b-dropdown-item @click="$bvModal.show(String(data.id))" >
                                 Delete
+                            </b-dropdown-item>
+                            <b-dropdown-item @click="createProductDetail(data.id)" v-if="search.type == 1">
+                                Create Product Detail
                             </b-dropdown-item>
 
                         <!-- ----modal delete role------- -->
@@ -339,14 +342,12 @@ this.fetchDataCountStatus()
 methods: {
 fetchDataDone() {
     this.search.type = 1;
-    // this.params.page = 1;
     this.fetchData();
     this.fetchDataCountStatus()
 },
 
 fetchDataBack() {
     this.search.type = 2;
-    // this.params.page = 1;
     this.fetchData();
     this.fetchDataCountStatus()
 },
@@ -372,9 +373,11 @@ async fetchDataCountStatus() {
     }
 },
 async createProductDetail(idProduct){
-
 this.$router.push({ name: "CreateProductStatusDetail", params: { id: idProduct } });
 },
+detail(id) {
+        this.$router.push({ name: "DetailProductStatus", params: { id: id } });
+    },
 async deleteData(idProductStatus){
         const response = await ProducService.delete(this.token, idProductStatus)
         if (response.status == 200) {

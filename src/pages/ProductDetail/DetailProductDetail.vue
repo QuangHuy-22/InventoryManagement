@@ -6,9 +6,9 @@
     <div class="page-content">
         <div class="container-fluid">
         <div class="box-title">
-            <h2>Detail User</h2>
+            <h2>Detail Product Detail</h2>
             <div class=" float-right">
-            <router-link to="/management/list-user" class="btn btn-dark">
+            <router-link to="/product/product-detail" class="btn btn-dark">
                 Cancel
             </router-link>
             </div>
@@ -17,7 +17,7 @@
         <!-- box-content -->
         <div class="card">
             <div class="card-body">
-            <h4 class="card-title mb-4">Code/ {{ dataDetail.code }}</h4>
+            <h4 class="card-title mb-4">Product Name/ {{ dataDetail.productName }}</h4>
             <form class="form-detail">
                 <div class="form-group row mb-0">
                 <label
@@ -33,13 +33,61 @@
                 </div>
                 <div class="form-group row mb-0">
                 <label
-                    for="horizontal-email-input"
+                    for="horizontal-firstname-input"
                     class="col-sm-2 col-form-label"
-                    >Name</label
+                    >Imei</label
                 >
                 <div class="col-sm-10">
                     <p class="form-control-plaintext">
-                    {{ dataDetail.name }}
+                    {{ dataDetail.imei }}
+                    </p>
+                </div>
+                </div>
+                <div class="form-group row mb-0">
+                <label
+                    for="horizontal-firstname-input"
+                    class="col-sm-2 col-form-label"
+                    >Product Status Code</label
+                >
+                <div class="col-sm-10">
+                    <p class="form-control-plaintext">
+                    {{ dataDetail.productStatusListCode }}
+                    </p>
+                </div>
+                </div>
+                <div class="form-group row mb-0">
+                <label
+                    for="horizontal-firstname-input"
+                    class="col-sm-2 col-form-label"
+                    >Product Name</label
+                >
+                <div class="col-sm-10">
+                    <p class="form-control-plaintext">
+                    {{ dataDetail.productName }}
+                    </p>
+                </div>
+                </div>
+                <div class="form-group row mb-0">
+                <label
+                    for="horizontal-firstname-input"
+                    class="col-sm-2 col-form-label"
+                    >Shelf Name</label
+                >
+                <div class="col-sm-10">
+                    <p class="form-control-plaintext">
+                    {{ dataDetail.shelfName }}
+                    </p>
+                </div>
+                </div>
+                <div class="form-group row mb-0">
+                <label
+                    for="horizontal-email-input"
+                    class="col-sm-2 col-form-label"
+                    >Status</label
+                >
+                <div class="col-sm-10">
+                    <p class="form-control-plaintext">
+                    {{ dataDetail.status }}
                     </p>
                 </div>
                 </div>
@@ -47,11 +95,11 @@
                 <label
                     for="horizontal-password-input"
                     class="col-sm-2 col-form-label"
-                    >Description</label
+                    >Supplier Name</label
                 >
                 <div class="col-sm-10">
                     <p class="form-control-plaintext">
-                    {{ dataDetail.description }}
+                    {{ dataDetail.supplierName }}
                     </p>
                 </div>
                 </div>
@@ -90,7 +138,7 @@
 </template>
 
 <script>
-import { CategoryService } from "@/services/category.service.js";
+import { ProducDetailService } from "@/services/productDetail.service.js";
 import index from "../../components/index.vue";
 export default {
 components: { index, },
@@ -110,7 +158,7 @@ this.fetchData();
 methods: {
 async fetchData() {
     try {
-    const response = await CategoryService.getDetail(this.token, this.idDetail);
+    const response = await ProducDetailService.getDetail(this.token, this.idDetail);
     if (response.status == 200) {
         this.dataDetail = response.data;
     }

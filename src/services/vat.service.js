@@ -180,4 +180,18 @@ export class VATService extends BaseService {
             return error.response
         }
     }
+    static async getDetail(token, idVAT) {
+        try {
+            const response = await axios({
+                method: "get",
+                url: `${BASE_URL}/api/vats/${idVAT}`,
+                headers: {
+                    AuthToken: token,
+                },
+            });
+            return response;
+        } catch (error) {
+            return error.response
+        }
+    }
 }

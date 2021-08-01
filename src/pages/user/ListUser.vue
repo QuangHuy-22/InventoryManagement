@@ -132,14 +132,11 @@
                           </template>
                           <div style="font-size: 13px;">
                             <b-dropdown-item @click="detail(user.id)">
-                              Chi tiết
+                              Detail
                             </b-dropdown-item>
-                            <b-dropdown-item @click="update(user.id)">
-                              Cập nhật
-                            </b-dropdown-item>
-                            <b-dropdown-item @click="assign(user.id)">
-                              Gán Quyền
-                            </b-dropdown-item>
+                            <!-- <b-dropdown-item @click="update(user.id)">
+                              Update
+                            </b-dropdown-item> -->
                             <b-dropdown-item  @click="$bvModal.show(String(user.id))">
                               Delete
                             </b-dropdown-item>
@@ -262,6 +259,9 @@ export default {
       } catch (error) {
         console.log(error);
       }
+    },
+    detail(id) {
+        this.$router.push({ name: "DetailUser", params: { id: id } });
     },
     async deleteData(idRole){
         const response = await UserService.delete(this.token, idRole)
