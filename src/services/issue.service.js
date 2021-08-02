@@ -74,4 +74,19 @@ export class IssueService extends BaseService {
             return error.response
         }
     }
+    static async getListDetailCode(token, code, params) {
+        try {
+            const response = await axios({
+                method: "get",
+                url: `${BASE_URL}/api/issues/${code}/issue-details`,
+                headers: {
+                    AuthToken: token,
+                },
+                params: params
+            });
+            return response;
+        } catch (error) {
+            return error.response
+        }
+    }
 }

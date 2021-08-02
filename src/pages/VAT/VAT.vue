@@ -56,8 +56,23 @@
                 />
                 </div>
             </div>
+            <div class="col-md-3 col-sm-3" v-if="checkBranchId = 99">
+                <div class="bf-detail">
+                <b-select
+                class="form-control select2"
+                v-model="search.branchId"
+                >
+                <option
+                    v-for="data in dataBranch"
+                    :key="data.id"
+                    :value="data.id"
+                    >{{ data.name }}</option
+                >
+                </b-select>
+                </div>
+            </div>
 
-            <div class="col-md-4 col-sm-4" style="padding-top:0px">
+            <div class="col-md-4 col-sm-4">
                 <div class="btn-fillter">
                 <div class="bf-detail" >
                 <button
@@ -125,7 +140,7 @@
                         <template #button-content>
                         <b-icon icon="three-dots-vertical"></b-icon>
                         </template>
-                        <div style="font-size: 13px;">
+                        <div style="font-size: 13px;"  v-if="roleName == 'ADMIN' || roleName == 'MANAGER'">
                         <b-dropdown-item @click="detail(vat.id)">
                             Detail
                         </b-dropdown-item>
@@ -241,6 +256,7 @@
 import index from "../../components/index.vue";
 import FooterContent from "../../components/FooterContent.vue";
 import { VATService } from "@/services/vat.service.js";
+import { BranchService } from "@/services/branch.service.js";
 export default {
 components: { index, FooterContent },
 name: "list-vat",
@@ -258,14 +274,18 @@ return {
     size: 20,
     branchId: localStorage.getItem("branchId"),
     },
+    checkBranchId: localStorage.getItem("branchId"),
     pagination: {
     total: 20,
     },
-    errorMessage:""
+    errorMessage:"",
+    dataBranch:{},
+    roleName:  localStorage.getItem('roleName'),
 };
 },
 mounted() {
 this.fetchData();
+this.fetchDataBranch();
 },
 methods: {
 async fetchData() {
@@ -275,9 +295,14 @@ async fetchData() {
         this.dataVAT = response.data.listData;
         this.pagination.total = response.data.total;
     }
-    console.log(response);
     } catch (error) {
     console.log(error.response);
+    }
+},
+async fetchDataBranch() {
+    const response = await BranchService.getList(this.token, this.search);
+    if (response.status == 200) {
+        this.dataBranch = response.data.listData;
     }
 },
 createVatDetail(VATId) {
@@ -317,9 +342,9 @@ submitForm() {
 
 clearSearch() {
     this.search = {
-    page: 0,
+    page: 1,
     size: 20,
-    branchName: localStorage.getItem("branchName"),
+    branchId: localStorage.getItem("branchId"),
     };
     this.fetchData();
 },

@@ -30,30 +30,30 @@
                     type="text"
                     style="font-size: 13px;"
                     class="form-control"
+                    placeholder="Price Total From"
+                    v-model.trim="search.priceTotalFrom"
+                />
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-3">
+                <div class="bf-detail">
+                <input
+                    type="text"
+                    style="font-size: 13px;"
+                    class="form-control"
+                    placeholder="Price Total To"
+                    v-model.trim="search.priceTotalTo"
+                />
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-3">
+                <div class="bf-detail">
+                <input
+                    type="text"
+                    style="font-size: 13px;"
+                    class="form-control"
                     placeholder="Product Info"
                     v-model.trim="search.productInfo"
-                />
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-3">
-                <div class="bf-detail">
-                <input
-                    type="text"
-                    style="font-size: 13px;"
-                    class="form-control"
-                    placeholder="QTY"
-                    v-model.trim="search.qty"
-                />
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-3">
-                <div class="bf-detail">
-                <input
-                    type="text"
-                    style="font-size: 13px;"
-                    class="form-control"
-                    placeholder="Price One"
-                    v-model.trim="search.priceOne"
                 />
                 </div>
             </div>
@@ -102,10 +102,10 @@
                 <thead>
                 <tr>
                     <th style="text-align: center">No.</th>
-                    <th>ID</th>
                     <th>Code</th>
                     <th>Product Info</th>
                     <th>QTY</th>
+                    <th>QTY Rest</th>
                     <th>Price One</th>
                     <th>Price Total</th>
                     <th>Action</th>
@@ -117,10 +117,10 @@
                     <td style="text-align: center">
                     {{ index + 1 }}
                     </td>
-                    <td>{{ vat.id }}</td>
-                    <td>{{ vat.vatCode }}</td>
+                    <td>{{ vat.productStatusListCode }}</td>
                     <td>{{ vat.productInfo }}</td>
                     <td>{{ vat.qty }}</td>
+                    <td>{{ vat.qtyRest }}</td>
                     <td>{{ vat.priceOne }}</td>
                     <td>{{ vat.priceTotal }}</td>
                     <td>
@@ -175,7 +175,7 @@
 <script>
 import index from "../../components/index.vue";
 import FooterContent from "../../components/FooterContent.vue";
-import { VATService } from "@/services/vat.service.js";
+import { ProducService } from "@/services/product.service";
 export default {
 components: { index, FooterContent },
 name: "list-vat-detail",
@@ -191,6 +191,7 @@ return {
     code: this.$route.params.code,
     page: 1,
     size: 20,
+    type:1,
     },
     pagination: {
     total: 20,
@@ -204,7 +205,7 @@ this.fetchData();
 methods: {
 async fetchData() {
     try {
-    const response = await VATService.getListVATCode(this.token, this.codeVAT ,this.search);
+    const response = await ProducService.getListDetailCode(this.token, this.codeVAT ,this.search);
     if (response.status == 200) {
         this.dataVAT = response.data.listData;
         this.pagination.total = response.data.total;
@@ -384,6 +385,7 @@ border-radius: 4px;
 .pagination {
 justify-content: flex-end !important;
 }
+
 @media (max-width: 576px) {
 .content-page,
 .container-sm {

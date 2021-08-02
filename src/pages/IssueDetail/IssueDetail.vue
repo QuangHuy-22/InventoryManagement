@@ -69,6 +69,21 @@
                 />
                 </div>
             </div>
+            <div class="col-md-3 col-sm-4" v-if="checkBranchId = 99">
+                <div class="bf-detail">
+                <b-select
+                class="form-control select2"
+                v-model="search.branchId"
+                >
+                <option
+                    v-for="data in dataBranch"
+                    :key="data.id"
+                    :value="data.id"
+                    >{{ data.name }}</option
+                >
+                </b-select>
+                </div>
+            </div>
             
             <div class="btn-fillter">
                 <div class="bf-detail" style="margin-top: 16px">
@@ -193,7 +208,7 @@
 import index from "../../components/index.vue";
 import FooterContent from "../../components/FooterContent.vue";
 import { IssueDetailService } from "@/services/issueDetail.service";
-
+import { BranchService } from "@/services/branch.service.js";
 export default {
 components: { index, FooterContent, },
 name: "issue",
@@ -211,6 +226,8 @@ return {
     size: 20,
     branchId: localStorage.getItem("branchId"),
     },
+    dataBranch:{},
+    checkBranchId: localStorage.getItem("branchId"),
     pagination: {
     total: 20
     },
@@ -218,6 +235,7 @@ return {
 },
 created() {
 this.fetchData();
+this.fetchDataBranch();
 },
 methods: {
 async fetchData() {
@@ -229,6 +247,12 @@ async fetchData() {
     }
     } catch (error) {
     console.log(error);
+    }
+},
+async fetchDataBranch() {
+    const response = await BranchService.getList(this.token, this.search);
+    if (response.status == 200) {
+        this.dataBranch = response.data.listData;
     }
 },
 async deleteData(idIssue){

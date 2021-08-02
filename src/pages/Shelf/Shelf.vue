@@ -27,7 +27,7 @@
         <form @submit.prevent="submitForm">
         <div class="box-fillter" style="">
             <div class="form-row">
-            <div class="col-md-4 col-sm-3">
+            <div class="col-md-3 col-sm-3">
                 <div class="bf-detail">
                 <input
                     type="text"
@@ -38,7 +38,7 @@
                 />
                 </div>
             </div>
-            <div class="col-md-4 col-sm-3">
+            <div class="col-md-3 col-sm-3">
                 <div class="bf-detail">
                 <input
                     type="text"
@@ -49,7 +49,7 @@
                 />
                 </div>
             </div>
-            <div class="col-md-4 col-sm-3">
+            <div class="col-md-3 col-sm-3">
                 <div class="bf-detail">
                 <input
                     type="text"
@@ -60,7 +60,7 @@
                 />
                 </div>
             </div>
-            <div class="col-md-4 col-sm-3">
+            <div class="col-md-3 col-sm-3">
                 <div class="bf-detail">
                 <input
                     type="text"
@@ -71,7 +71,7 @@
                 />
                 </div>
             </div>
-            <div class="col-md-4 col-sm-3">
+            <div class="col-md-3 col-sm-3">
                 <div class="bf-detail">
                 <input
                     type="text"
@@ -82,8 +82,23 @@
                 />
                 </div>
             </div>
+            <div class="col-md-3 col-sm-3" v-if="checkBranchId = 99">
+                <div class="bf-detail">
+                <b-select
+                class="form-control select2"
+                v-model="search.branchId"
+                >
+                <option
+                    v-for="data in dataBranch"
+                    :key="data.id"
+                    :value="data.id"
+                    >{{ data.name }}</option
+                >
+                </b-select>
+                </div>
+            </div>
 
-            <div class="col-md-4 col-sm-4" >
+            <div class="col-md-3 col-sm-4" >
                 <div class="btn-fillter">
                 <div class="bf-detail">
                     <button
@@ -210,6 +225,7 @@
 import index from "../../components/index.vue";
 import FooterContent from "../../components/FooterContent.vue";
 import { ShelfService } from "@/services/shelf.service.js";
+import { BranchService } from "@/services/branch.service.js";
 export default {
 components: { index, FooterContent },
 name: "shelf",
@@ -222,6 +238,8 @@ return {
     size: 20,
     branchId:localStorage.getItem("branchId"), 
     },
+    checkBranchId: localStorage.getItem("branchId"),
+    dataBranch:{},
     pagination: {
     total: 20,
     },
@@ -229,6 +247,7 @@ return {
 },
 mounted() {
 this.fetchData();
+this.fetchDataBranch();
 },
 methods: {
 async fetchData() {
@@ -241,6 +260,12 @@ async fetchData() {
     console.log(response);
     } catch (error) {
     console.log(error.response);
+    }
+},
+async fetchDataBranch() {
+    const response = await BranchService.getList(this.token, this.search);
+    if (response.status == 200) {
+        this.dataBranch = response.data.listData;
     }
 },
 update(id) {

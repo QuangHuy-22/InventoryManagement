@@ -49,10 +49,12 @@ import VATDetail from "../pages/VAT/VATDetail.vue"
 import CreateVATDetail from "../pages/VAT/CreateVATDetail.vue"
 import ListVATCode from "../pages/VAT/ListVATCode.vue"
 import ProductStatusList from "../pages/Product/ProductStatusList.vue"
+import ListProductDetailCode from "../pages/Product/ListProductDetailCode.vue"
 import DetailProductStatus from "../pages/Product/DetailProductStatus.vue"
 import ProductStatusDetailList from "../pages/Product/ProductStatusDetailList.vue"
 import CreateProductStatusDetail from "../pages/Product/CreateProductStatusDetail.vue"
 import Issue from "../pages/Issue/Issue.vue"
+import ListIssueCode from "../pages/Issue/ListIssueCode.vue"
 import IssueDetail from "../pages/IssueDetail/IssueDetail.vue"
 import CreateIssueDetail from "../pages/Issue/CreateIssueDetail.vue"
 import CreateIssue from "../pages/Issue/CreateIssue.vue"
@@ -336,6 +338,11 @@ const routes = [{
             component: ProductStatusList,
         },
         {
+            path: '/inventory/product-status/product-status-code/:code',
+            name: 'ListProductDetailCode',
+            component: ListProductDetailCode,
+        },
+        {
             path: '/inventory/product-detail-status',
             name: 'Product Status Detail',
             component: ProductStatusDetailList,
@@ -349,6 +356,11 @@ const routes = [{
             path: '/inventory/issue',
             name: 'Issue',
             component: Issue,
+        },
+        {
+            path: '/inventory/issue/issue-code/:code',
+            name: 'ListIssueCode',
+            component: ListIssueCode,
         },
         {
             path: '/inventory/issue-detail',

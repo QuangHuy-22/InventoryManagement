@@ -127,6 +127,18 @@
                     </p>
                 </div>
                 </div>
+                <div class="form-group row mb-0">
+                <label
+                    for="horizontal-password-input"
+                    class="col-sm-2 col-form-label"
+                    >Qty Rest</label
+                >
+                <div class="col-sm-10">
+                    <p class="form-control-plaintext">
+                    {{ dataDetail.qtyRest }}
+                    </p>
+                </div>
+                </div>
             </form>
             </div>
         </div>

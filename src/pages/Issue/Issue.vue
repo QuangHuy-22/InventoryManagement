@@ -62,6 +62,21 @@
                 />
                 </div>
             </div>
+            <div class="col-md-3 col-sm-3" v-if="checkBranchId = 99">
+                <div class="bf-detail">
+                <b-select
+                class="form-control select2"
+                v-model="search.branchId"
+                >
+                <option
+                    v-for="data in dataBranch"
+                    :key="data.id"
+                    :value="data.id"
+                    >{{ data.name }}</option
+                >
+                </b-select>
+                </div>
+            </div>
             
             <div class="btn-fillter">
                 <div class="bf-detail" style="margin-top: 16px">
@@ -96,7 +111,7 @@
                 <thead>
                 <tr>
                     <th style="text-align: center">No.</th>
-                    <th>Code</th>
+                    <th >Code</th>
                     <th>User Name</th>
                     <th>Customer Name</th>
                     <th>Price</th>
@@ -111,7 +126,7 @@
                     <td style="text-align: center">
                     {{index + 1}}
                     </td>
-                    <td>{{ issue.code }}</td>
+                    <td @click="issueCode(issue.code)" class="code-vat">{{ issue.code }}</td>
                     <td>{{ issue.userName }}</td>
                     <td>{{ issue.customerName }}</td>
                     <td>{{ issue.price }}</td>
@@ -197,6 +212,7 @@
 import index from "../../components/index.vue";
 import FooterContent from "../../components/FooterContent.vue";
 import { IssueService } from "@/services/issue.service";
+import { BranchService } from "@/services/branch.service.js";
 
 export default {
 components: { index, FooterContent, },
@@ -215,6 +231,8 @@ return {
     size: 20,
     branchId:localStorage.getItem("branchId"), 
     },
+    checkBranchId: localStorage.getItem("branchId"),
+    dataBranch:{},
     pagination: {
     total: 20
     },
@@ -222,6 +240,7 @@ return {
 },
 created() {
 this.fetchData();
+this.fetchDataBranch();
 },
 methods: {
 async fetchData() {
@@ -235,6 +254,15 @@ async fetchData() {
     console.log(error);
     }
 },
+async fetchDataBranch() {
+    const response = await BranchService.getList(this.token, this.search);
+    if (response.status == 200) {
+        this.dataBranch = response.data.listData;
+    }
+},
+issueCode(code){
+    this.$router.push({ name: "ListIssueCode", params: { code: code } });
+    },
 CreateIssue(issueId){
     this.$router.push({ name: "CreateIssueDetail", params: { id: issueId } });
 },
@@ -472,6 +500,10 @@ justify-content: flex-end !important;
 }
 .card {
 box-shadow: 0 0.75rem 1.5rem rgb(18 38 63 / 3%) !important;
+}
+.code-vat {
+color: #008bf4;
+cursor: pointer;
 }
 @media (max-width: 576px) {
 .content-page,

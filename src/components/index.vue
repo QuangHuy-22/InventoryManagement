@@ -22,33 +22,6 @@
     <div class="listChange">
 <b-button  @click="clickSidebar" v-b-toggle.sidebar-border variant="none"><b-icon icon="list" class="" style="color: white; font-size: 25px;" ></b-icon></b-button>
     </div>
-    <!-- show-sidebar -->
-<!-- <b-sidebar class="side" id="sidebar-border" sidebar-class="border-right border-none">
-    <router-link to="/home-page">
-        <div class="content-menu" >
-            <span class="logo-sm">
-                <img src="../assets/images/risk-white.svg" alt="" height="50">
-            </span>
-        </div>
-        </router-link>
-    <router-link to="/list-risk" style="color: #474D52;">
-        <b-icon icon="graph-up" style="padding-right: 25px; color: #474D52;"></b-icon>
-        <span class="name-router" key="t-calendar">Product</span>
-    </router-link>
-            <div class="content-sidebar" :class=" this.DATA_PERMISSION.includes('VIEW_LIST_USER') ? '' : 'd-none'" >
-                <router-link to='/list-user' style="color: #474D52;">
-                <b-icon icon="person-circle" style="padding-right: 25px; text-decoration: none;"></b-icon>
-                <span class="name-router" key="t-utility">Quản lý User</span>
-                </router-link>
-            </div>
-            <div class="content-sidebar" :class=" this.DATA_PERMISSION.includes('VIEW_LIST_ROLE') ? '' : 'd-none'">
-                <router-link to='/list-role' style="color: #474D52;">
-                <b-icon icon="diagram3" style="padding-right: 25px; text-decoration: none;"></b-icon>
-                <span class="name-router" key="t-utility">Quản lý nhóm quyền</span>
-                </router-link>
-            </div>
-</b-sidebar> -->
-        <!-- end show-sidebar -->
 </div>
 <!-- show-sidebar -->
     <!-- App Search-->
@@ -216,7 +189,7 @@
                 </router-link>
                 </div>
                 <!-- ----------Product----------- -->
-                <div class="content-sidebar" >
+                <div class="content-sidebar">
                 <router-link to='/inventory/product-status' style="color: #474D52;">
                         <li>
                 <b-icon icon="calculator" style="padding-right: 25px; text-decoration: none;"></b-icon>
@@ -278,7 +251,7 @@
             <!-- Element to collapse -->
             <b-collapse id="collapse-4" class="content-sidebar-menu">
                 <!-- ----Branch---- -->
-                <div class="content-sidebar" >
+                <div class="content-sidebar"  v-if="roleName == 'ADMIN'" >
                 <router-link to='/management/branch' style="color: #474D52;">
                         <li>
                 <b-icon icon="person-circle" style="padding-right: 25px; text-decoration: none;"></b-icon>
@@ -287,7 +260,7 @@
                 </router-link>
                 </div>
                 <!-- -------Role------ -->
-                <div class="content-sidebar" >
+                <div class="content-sidebar"  v-if="roleName == 'ADMIN'" >
                 <router-link to='/management/list-role' style="color: #474D52;">
                         <li>
                 <b-icon icon="diagram3" style="padding-right: 25px; text-decoration: none;"></b-icon>
@@ -296,7 +269,7 @@
                 </router-link>
                 </div> 
                 <!-- ---------User---------  -->
-                <div class="content-sidebar" >
+                <div class="content-sidebar"  v-if="roleName == 'ADMIN' || roleName == 'MANAGER'" >
                 <router-link to='/management/list-user' style="color: #474D52;">
                         <li>
                 <b-icon icon="person-square" style="padding-right: 25px; text-decoration: none;"></b-icon>
@@ -357,7 +330,7 @@ export default {
         BASE_URL: this.$store.getters.BASE_URL,
         BASE_URL_NOTIFY: this.$store.getters.BASE_URL_NOTIFY,
         BASE_TOKEN_NOTIFY: this.$store.getters.BASE_TOKEN_NOTIFY,
-        DATA_PERMISSION:  localStorage.getItem('permission'),
+        roleName:  localStorage.getItem('roleName'),
         logo:false,
         logoRisk:true,
         user: this.$store.getters.USERNAME,

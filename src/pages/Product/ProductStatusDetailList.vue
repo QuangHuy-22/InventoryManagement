@@ -121,6 +121,21 @@
                 />
                 </div>
             </div>
+            <div class="col-md-3 col-sm-3" v-if="checkBranchId = 99">
+                <div class="bf-detail">
+                <b-select
+                class="form-control select2"
+                v-model="search.branchId"
+                >
+                <option
+                    v-for="data in dataBranch"
+                    :key="data.id"
+                    :value="data.id"
+                    >{{ data.name }}</option
+                >
+                </b-select>
+                </div>
+            </div>
             
             <div class="btn-fillter">
                 <div class="bf-detail" style="margin-top: 16px">
@@ -197,7 +212,7 @@
                             <template #button-content>
                             <b-icon icon="three-dots-vertical"></b-icon>
                             </template>
-                            <div style="font-size: 13px;">
+                            <div style="font-size: 13px;"  v-if="roleName == 'ADMIN' || roleName == 'MANAGER'">
                             <b-dropdown-item @click="$bvModal.show(String(data.id))" >
                                 Delete
                             </b-dropdown-item>
@@ -271,6 +286,7 @@
 import Index from "../../components/index.vue";
 import FooterContent from "../../components/FooterContent.vue";
 import { ProducService } from "@/services/product.service";
+import { BranchService } from "@/services/branch.service.js";
 import prepareQueryParamsMixin from "../../mixins/prepareQueryParamsMixin";
 export default {
 name: "product",
@@ -296,6 +312,8 @@ return {
         type:1,
         branchId:localStorage.getItem("branchId"), 
     },
+    dataBranch:{},
+    checkBranchId: localStorage.getItem("branchId"),
     email: localStorage.getItem("email"),
     DATA_PERMISSION: localStorage.getItem("permission"),
     reasonTransfer: "",
@@ -307,7 +325,8 @@ return {
     description: "",
     token: localStorage.getItem("token"),
     emailHome: localStorage.getItem("email"),
-    errorMessage:""
+    errorMessage:"",
+    roleName:  localStorage.getItem('roleName'),
 };
 },
 // validations: {
@@ -318,6 +337,7 @@ created() {
 this.search.type = 1;
 this.fetchData();
 this.fetchDataCountStatus()
+this.fetchDataBranch();
 },
 
 methods: {
@@ -343,6 +363,12 @@ async fetchData() {
     }
     } catch (error) {
     console.log(error);
+    }
+},
+async fetchDataBranch() {
+    const response = await BranchService.getList(this.token, this.search);
+    if (response.status == 200) {
+        this.dataBranch = response.data.listData;
     }
 },
 async fetchDataCountStatus() {

@@ -121,9 +121,24 @@
                 />
                 </div>
             </div>
+            <div class="col-md-3 col-sm-3" v-if="checkBranchId = 99">
+                <div class="bf-detail">
+                <b-select
+                class="form-control select2"
+                v-model="search.branchId"
+                >
+                <option
+                    v-for="data in dataBranch"
+                    :key="data.id"
+                    :value="data.id"
+                    >{{ data.name }}</option
+                >
+                </b-select>
+                </div>
+            </div>
             
             <div class="btn-fillter">
-                <div class="bf-detail" style="margin-top: 16px">
+                <div class="bf-detail">
                 <button
                     @click.prevent="submitForm"
                     class="btn btn-info"
@@ -175,10 +190,10 @@
                         <td style="text-align: center">
                         {{ index + 1 }}
                         </td>
-                        <td>
+                        <td @click="productStatusCode(data.code)" class="code-vat">
                         {{ data.code }}
                         </td>
-                        <td>{{ data.vatCode }}</td>
+                        <td  >{{ data.vatCode }}</td>
                         <td>{{ data.userName }}</td>
                         <td>{{ data.price }}</td>
                         <td>
@@ -198,7 +213,7 @@
                             <template #button-content>
                             <b-icon icon="three-dots-vertical"></b-icon>
                             </template>
-                            <div style="font-size: 13px;">
+                            <div style="font-size: 13px;"  v-if="roleName == 'ADMIN' || roleName == 'MANAGER'">
                             <b-dropdown-item @click="detail(data.id)" >
                                 Detail
                             </b-dropdown-item>
@@ -292,6 +307,7 @@ import Index from "../../components/index.vue";
 import FooterContent from "../../components/FooterContent.vue";
 import { ProducService } from "@/services/product.service";
 import prepareQueryParamsMixin from "../../mixins/prepareQueryParamsMixin";
+import { BranchService } from "@/services/branch.service.js";
 export default {
 name: "product",
 mixins: [prepareQueryParamsMixin],
@@ -316,6 +332,8 @@ return {
         type:1,
         branchId: localStorage.getItem("branchId"),
     },
+    checkBranchId: localStorage.getItem("branchId"),
+    dataBranch:{},
     email: localStorage.getItem("email"),
     DATA_PERMISSION: localStorage.getItem("permission"),
     reasonTransfer: "",
@@ -327,6 +345,7 @@ return {
     description: "",
     token: localStorage.getItem("token"),
     emailHome: localStorage.getItem("email"),
+    roleName:  localStorage.getItem('roleName'),
 };
 },
 // validations: {
@@ -337,6 +356,7 @@ created() {
 this.search.type = 1;
 this.fetchData();
 this.fetchDataCountStatus()
+this.fetchDataBranch();
 },
 
 methods: {
@@ -362,6 +382,12 @@ async fetchData() {
     console.log(error);
     }
 },
+async fetchDataBranch() {
+    const response = await BranchService.getList(this.token, this.search);
+    if (response.status == 200) {
+        this.dataBranch = response.data.listData;
+    }
+},
 async fetchDataCountStatus() {
     try {
     const response = await ProducService.getCountStatus(this.token);
@@ -384,6 +410,10 @@ async deleteData(idProductStatus){
             this.fetchData()
             this.$bvModal.hide(idProductStatus)
         }
+    },
+
+    productStatusCode(code){
+    this.$router.push({ name: "ListProductDetailCode", params: { code: code } });
     },
     submitForm() {
     this.pagination.page = 1;
@@ -501,6 +531,10 @@ border-bottom: 2px solid #556ee6 !important;
 }
 .card {
 box-shadow: 0 0.75rem 1.5rem rgb(18 38 63 / 3%) !important;
+}
+.code-vat {
+color: #008bf4;
+cursor: pointer;
 }
 @media (max-width: 576px) {
 .content-page,

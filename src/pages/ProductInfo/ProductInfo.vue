@@ -152,7 +152,7 @@
                         <template #button-content>
                         <b-icon icon="three-dots-vertical"></b-icon>
                         </template>
-                        <div style="font-size: 13px;">
+                        <div style="font-size: 13px;"  v-if="roleName == 'ADMIN' || roleName == 'MANAGER'">
                         <b-dropdown-item @click="detail(producInfo.id)">
                             Detail
                         </b-dropdown-item>
@@ -226,6 +226,7 @@ return {
     pagination: {
     total: 20,
     },
+    roleName:  localStorage.getItem('roleName'),
 };
 },
 mounted() {

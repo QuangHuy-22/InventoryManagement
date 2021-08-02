@@ -43,7 +43,7 @@ export class UserService extends BaseService {
         try {
             const response = await axios({
                 method: "get",
-                url: `${BASE_URL}/api/roles/${idRole}`,
+                url: `${BASE_URL}/api/users/${idRole}`,
                 headers: {
                     AuthToken: token,
                 },

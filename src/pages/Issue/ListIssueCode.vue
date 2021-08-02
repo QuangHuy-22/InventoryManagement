@@ -4,11 +4,12 @@
 <div class="content-page">
     <div class="main-content">
     <div class="addUser">
-        <h4 class="font-size-18">VAT Detail List</h4>
+        <h4 class="font-size-18">List Issue Code </h4>
+        <div>
+        <router-link to="/inventory/issue" class="btn btn-dark" style="font-size: 13px;"> Cancel</router-link>
+        </div>
     </div>
-
-    <div class="searchInput colorTable">
-        <div class="col-lg-12">
+    <div class="searchInput">
         <form @submit.prevent="submitForm">
         <div class="box-fillter" style="">
             <div class="form-row">
@@ -18,8 +19,8 @@
                     type="text"
                     style="font-size: 13px;"
                     class="form-control"
-                    placeholder="Product Info" 
-                    v-model.trim="search.productInfo"
+                    placeholder="Code"
+                    v-model.trim="search.code"
                 />
                 </div>
             </div>
@@ -29,8 +30,8 @@
                     type="text"
                     style="font-size: 13px;"
                     class="form-control"
-                    placeholder="VatCode"
-                    v-model.trim="search.vatCode"
+                    placeholder="Imei"
+                    v-model.trim="search.imei"
                 />
                 </div>
             </div>
@@ -56,23 +57,19 @@
                 />
                 </div>
             </div>
-            <div class="col-md-3 col-sm-3" v-if="checkBranchId = 99">
+            <div class="col-md-3 col-sm-3">
                 <div class="bf-detail">
-                <b-select
-                class="form-control select2"
-                v-model="search.branchId"
-                >
-                <option
-                    v-for="data in dataBranch"
-                    :key="data.id"
-                    :value="data.id"
-                    >{{ data.name }}</option
-                >
-                </b-select>
+                <input
+                    type="text"
+                    style="font-size: 13px;"
+                    class="form-control"
+                    placeholder="Product Info"
+                    v-model.trim="search.productInfo"
+                />
                 </div>
             </div>
 
-            <div class="col-md-6 col-sm-4">
+            <div class="col-md-4 col-sm-4" style="padding-top:0px">
                 <div class="btn-fillter">
                 <div class="bf-detail">
                     <button
@@ -80,20 +77,14 @@
                     class="btn btn-info"
                     style="font-size: 13px; margin-right: 5px; color:white;"
                     >
-                    <b-icon icon="search"></b-icon>
+                    Filter
                     </button>
                     <button
                     @click="clearSearch"
                     class="btn btn-dark"
                     style="font-size: 13px; margin-right: 5px;"
                     >
-                    <b-icon icon="x-circle" ></b-icon>
-                    </button>
-                    <button
-                    @click="exportExcel()"
-                    class="button-filter btn btn-success"
-                    >
-                    <b-icon icon="file-earmark-excel"></b-icon>
+                    Unfiltered
                     </button>
                 </div>
                 </div>
@@ -101,36 +92,33 @@
             </div>
         </div>
         </form>
-        </div>
     </div>
 
     <div class="page-content">
-        <div class="card colorTable">
+        <div class="card">
         <div class="card-body">
             <div class="table-responsive">
             <table class="table table-striped table-bordered mb-0">
                 <thead>
                 <tr>
                     <th style="text-align: center">No.</th>
-                    <th>Code</th>
-                    <th>Product Info</th>
-                    <th>QTY</th>
-                    <th>Price One</th>
-                    <th>Price Total</th>
+                    <th>Issue Code</th>
+                    <th>Imei</th>
+                    <th>Price</th>
+                    <th>Product Name</th>
                     <th>Action</th>
                 </tr>
                 </thead>
 
                 <tbody>
-                <tr v-for="(vat, index) in dataVAT" :key="index">
+                <tr v-for="(data, index) in dataListCode" :key="index">
                     <td style="text-align: center">
                     {{ index + 1 }}
                     </td>
-                    <td>{{ vat.vatCode }}</td>
-                    <td>{{ vat.productInfo }}</td>
-                    <td>{{ vat.qty }}</td>
-                    <td>{{ vat.priceOne }}</td>
-                    <td>{{ vat.priceTotal }}</td>
+                    <td>{{ data.issueCode }}</td>
+                    <td>{{ data.imei }}</td>
+                    <td>{{ data.price }}</td>
+                    <td>{{ data.productName }}</td>
                     <td>
                     <b-dropdown
                         right
@@ -142,31 +130,17 @@
                         <template #button-content>
                         <b-icon icon="three-dots-vertical"></b-icon>
                         </template>
-                        <div style="font-size: 13px;"  v-if="roleName == 'ADMIN' || roleName == 'MANAGER'">
-                        <b-dropdown-item @click="$bvModal.show(String(vat.id))">
+                        <div style="font-size: 13px;">
+                        <b-dropdown-item>
+                            Edit
+                        </b-dropdown-item>
+                        <b-dropdown-item>
                             Delete
                         </b-dropdown-item>
-
-                        <!-- ----modal delete role------- -->
-                        <div class="showDelete" >
-                        <b-modal :id="(String(vat.id))" hide-footer hide-header   >
-                        <b-col class="iconLogout mb-2">
-                        <b-icon icon="exclamation-triangle" class="iconsBox" style="color: red!important;"></b-icon>
-                        </b-col>
-                        <div class="d-block text-center" >
-                        <h3 style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;">Do you want to delete {{ vat.code }}?</h3>
-                        </div>
-                        <div class="buttonSubmitLogout">
-                        <button class="buttonYes mt-3"  @click="deleteData(vat.id)" style="font-size: 13px;">Confirm</button>
-                        <button class="buttonNo mt-3" @click="$bvModal.hide(String(vat.id))" style="font-size: 13px;">Cancel</button>
-                        </div>
-                        </b-modal>
-                        </div>
-                        <!-- ----end modal delete role------- -->
                         </div>
                     </b-dropdown>
                     </td>
-                </tr>
+            </tr>
                 </tbody>
             </table>
             </div>
@@ -191,76 +165,44 @@
     <footer-content />
 </div>
 
-<!-- -----------modal permission------- -->
-<b-modal id="bv-modal-example-error-permission" hide-footer hide-header>
-    <b-col class="iconLogout mb-2">
-    <b-icon
-        icon="x-circle"
-        class="iconsBox"
-        style="color: red!important;"
-    ></b-icon>
-    </b-col>
-    <div class="d-block text-center">
-    <h3
-        style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;"
-    >
-        Bạn không có quyền truy cập
-    </h3>
-    </div>
-    <div class="buttonSubmitLogout">
-    <button
-        class="buttonOK mt-3"
-        @click="$bvModal.hide('bv-modal-example-error-permission')"
-        style="font-size: 13px;"
-    >
-        OK
-    </button>
-    </div>
-</b-modal>
-<!-- -----------end modal permission------- -->
 </div>
 </template>
 
 <script>
 import index from "../../components/index.vue";
 import FooterContent from "../../components/FooterContent.vue";
-import { VATService } from "@/services/vat.service.js";
-import { BranchService } from "@/services/branch.service.js";
+import { IssueService } from "@/services/issue.service";
 export default {
 components: { index, FooterContent },
 name: "list-vat-detail",
 data() {
 return {
     token: localStorage.getItem("token"),
-    
-    dataVAT: [],
+    dataListCode: [],
     dateRange: {
     from: null,
     to: null,
     },
     search: {
+    code: this.$route.params.code,
     page: 1,
     size: 20,
-    branchId: localStorage.getItem("branchId"),
     },
-    checkBranchId: localStorage.getItem("branchId"),
     pagination: {
     total: 20,
     },
-    dataBranch:{},
-    roleName:  localStorage.getItem('roleName'),
+    codeVAT: this.$route.params.code,
 };
 },
 mounted() {
 this.fetchData();
-this.fetchDataBranch();
 },
 methods: {
 async fetchData() {
     try {
-    const response = await VATService.getListVATDetail(this.token, this.search);
+    const response = await IssueService.getListDetailCode(this.token, this.codeVAT ,this.search);
     if (response.status == 200) {
-        this.dataVAT = response.data.listData;
+        this.dataListCode = response.data.listData;
         this.pagination.total = response.data.total;
     }
     console.log(response);
@@ -268,45 +210,18 @@ async fetchData() {
     console.log(error.response);
     }
 },
-async fetchDataBranch() {
-    const response = await BranchService.getList(this.token, this.search);
-    if (response.status == 200) {
-        this.dataBranch = response.data.listData;
-    }
-},
-async deleteData(idVat){
-        const response = await VATService.deleteVATDetail(this.token, idVat)
-        if (response.status == 200) {
-            this.fetchData()
-            this.$bvModal.hide(idVat)
-        }
-    },
 submitForm() {
-    this.pagination.page = 1;
+    // this.pagination.page = 1;
     this.fetchData();
 },
-
 clearSearch() {
     this.search = {
+    code: this.$route.params.code,
     page: 1,
     size: 20,
     };
     this.fetchData();
 },
-async exportExcel () {
-    try { 
-    await VATService.exportExcel(this.token,this.search)
-    } catch (error) {
-    console.log(error)
-    }
-},
-},
-"search.page": function() {
-this.$router.push({
-    path: "/inventory/vat-detail",
-    query: this.useInUrlQueryPropList,
-});
-this.fetchData();
 },
 };
 </script>
@@ -317,15 +232,8 @@ background-color: #ffff;
 padding-left: 230px !important;
 }
 .main-content {
-background: linear-gradient(to right, #778899 , #DCDCDC );
+background-color: #f8f8fb !important;
 margin-top: 70px !important;
-}
-.box-fillter{
-  background: linear-gradient(to right, #F0F8FF , #FFFAF0 );
-  width: 100%;
-}
-.colorTable{
-    background: linear-gradient(to right, #F0F8FF , #FFFAF0 );
 }
 .list-groups {
 margin: 50px;
@@ -472,6 +380,7 @@ border-radius: 4px;
 .pagination {
 justify-content: flex-end !important;
 }
+
 @media (max-width: 576px) {
 .content-page,
 .container-sm {

@@ -132,7 +132,7 @@ axios({
     const message = response.status
     const token = response.data.token
     const emailName = response.data.email
-    const menu = response.data.menuSet
+    const roleName = response.data.roleName
     const branchId = response.data.branchId
     const branchName = response.data.branchName
     const userName = response.data.userName
@@ -140,7 +140,7 @@ axios({
     
     if(message === 200){
         localStorage.setItem('token', token);
-        localStorage.setItem('menu', menu);
+        localStorage.setItem('roleName', roleName);
         localStorage.setItem('email', emailName);
         localStorage.setItem('branchId', branchId);
         localStorage.setItem('branchName', branchName);
