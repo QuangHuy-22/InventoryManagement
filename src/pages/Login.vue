@@ -8,8 +8,9 @@
                 <div class="form-row">
                     <div class="col-7"> 
                         <div class="text-login p-4">
-                            <h5 class="pt-3">Đăng nhập Inventory Management</h5>
-                            <p class="m-0">Chào mừng bạn quay trở lại !</p>
+                            <h3 class="pt-3">Login </h3>
+                            <h5>Inventory Management</h5>
+                            <p class="m-0">Welcome Back !</p>
                         </div>
                     </div>
                     <div class="col-5 align-self-end">
@@ -24,7 +25,7 @@
         action="#"  
         @submit.prevent="handleSubmitLogin">
             <div class="form-group">
-                <label for="username">Tài khoản/Email</label>
+                <label for="username">UserName</label>
                 <input 
                 v-model="username"
                 type="text" 
@@ -34,7 +35,7 @@
             </div>
 
             <div class="form-group">
-                <label for="userpassword">Mật khẩu</label>
+                <label for="userpassword">Password</label>
                 <input 
                 v-model="password"
                 type="password" 
@@ -50,14 +51,14 @@
                 :disabled="buttonDisable"
                 class="btnPrimary btn-block waves-effect waves-light"
                 style="color:#fff; font-size: 13px; padding: 7.5px 12px;" 
-                >Đăng nhập
+                >Login
                 </v-btn>
                 
             </div>
 
             <div class="mt-4 text-center">
                 <router-link to="/recover">
-                <a class="text-muted"><b-icon icon="lock-fill"></b-icon> Quên mật khẩu ?</a>
+                <a class="text-muted"><b-icon icon="lock-fill"></b-icon> Forget Password ?</a>
                 </router-link>
             </div>
 <!-- ----------modal error-------->
@@ -83,7 +84,7 @@
         </div>
         <div class="footer mt-5 text-center">
         <footer>
-        <p>@ {{new Date().getFullYear()}} Risk Manager by Nextpay</p>
+        <p>@ {{new Date().getFullYear()}} Inventory Management by HieuPV</p>
         
         </footer>
         </div>

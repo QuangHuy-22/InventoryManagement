@@ -92,6 +92,7 @@
                     <button
                     @click="exportExcel()"
                     class="button-filter btn btn-success"
+                    style="font-size: 13px; margin-right: 5px; color:white;"
                     >
                     <b-icon icon="file-earmark-excel"></b-icon>
                     </button>
@@ -129,8 +130,8 @@
                     <td>{{ vat.vatCode }}</td>
                     <td>{{ vat.productInfo }}</td>
                     <td>{{ vat.qty }}</td>
-                    <td>{{ vat.priceOne }}</td>
-                    <td>{{ vat.priceTotal }}</td>
+                    <td class="price">{{ vat.priceOne }}</td>
+                    <td class="price">{{ vat.priceTotal }}</td>
                     <td>
                     <b-dropdown
                         right

@@ -633,6 +633,10 @@ justify-content: space-between;
 .content-sidebar-menu{
     padding-left: 10px;
 }
+.price{
+    font-size: 16px;
+    color: #1E90FF;
+}
 @media (max-width: 576px) {
 .container,
 .container-sm {

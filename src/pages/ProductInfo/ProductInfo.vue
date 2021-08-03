@@ -139,8 +139,8 @@
                     <td><img  :src="producInfo.imgUrl" /></td>
                     <td>{{ producInfo.categoryName }}</td>
                     <td>{{ producInfo.qty }}</td>
-                    <td>{{ producInfo.priceIn }}</td>
-                    <td>{{ producInfo.priceOut }}</td>
+                    <td class="price">{{ producInfo.priceIn }}</td>
+                    <td class="price">{{ producInfo.priceOut }}</td>
                     <td>
                     <b-dropdown
                         right
@@ -445,6 +445,10 @@ justify-content: flex-end !important;
 img{
     height: 120px;
     width: 120px;
+}
+.price{
+    font-size: 16px;
+    color: #1E90FF;
 }
 @media (max-width: 576px) {
 .content-page,

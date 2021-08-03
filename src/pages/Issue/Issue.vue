@@ -68,6 +68,7 @@
                 class="form-control select2"
                 v-model="search.branchId"
                 >
+                <option :value="checkBranchId">Branch</option>
                 <option
                     v-for="data in dataBranch"
                     :key="data.id"
@@ -129,7 +130,7 @@
                     <td @click="issueCode(issue.code)" class="code-vat">{{ issue.code }}</td>
                     <td>{{ issue.userName }}</td>
                     <td>{{ issue.customerName }}</td>
-                    <td>{{ issue.price }}</td>
+                    <td class="price">{{ issue.price }}</td>
                     <td>{{ issue.createDate }}</td>
                     <td>{{ issue.updateDate }}</td>
                     <td>

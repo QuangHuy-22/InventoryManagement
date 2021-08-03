@@ -6,7 +6,7 @@
     <div class="addUser">
         <h4 class="font-size-18">List VAT Code </h4>
         <div>
-        <router-link to="/inventory/vat" class="btn btn-dark" style="font-size: 13px;"> Cancel</router-link>
+        <router-link to="/inventory/product-status" class="btn btn-dark" style="font-size: 13px;"> Cancel</router-link>
         </div>
     </div>
     <div class="searchInput">
@@ -191,7 +191,7 @@ return {
     code: this.$route.params.code,
     page: 1,
     size: 20,
-    type:1,
+    type: 1,
     },
     pagination: {
     total: 20,
@@ -208,7 +208,6 @@ async fetchData() {
     const response = await ProducService.getListDetailCode(this.token, this.codeVAT ,this.search);
     if (response.status == 200) {
         this.dataVAT = response.data.listData;
-        this.pagination.total = response.data.total;
     }
     console.log(response);
     } catch (error) {

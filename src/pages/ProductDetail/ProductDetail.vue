@@ -131,11 +131,12 @@
                 <thead>
                 <tr>
                     <th style="text-align: center">No.</th>
-                    <th>Product Name</th>
-                    <th>supplier Name</th>
-                    <th>category Name</th>
+                    <th>Product </th>
+                    <th>Image</th>
+                    <th>supplier </th>
+                    <th>category </th>
                     <th>imei</th>
-                    <th>shelf Name</th>
+                    <th>shelf </th>
                     <th>price In</th>
                     <th>price out</th>
                     <th>Status</th>
@@ -149,12 +150,13 @@
                     {{ index + 1 }}
                     </td>
                     <td>{{ data.productName }}</td>
+                    <td><img  :src="data.imgUrl" /></td>
                     <td>{{ data.supplierName }}</td>
                     <td>{{ data.categoryName }}</td>
                     <td>{{ data.imei }}</td>
                     <td>{{ data.shelfName }}</td>
-                    <td>{{ data.priceIn }}</td>
-                    <td>{{ data.priceOut }}</td>
+                    <td class="price">{{ data.priceIn }}</td>
+                    <td class="price">{{ data.priceOut }}</td>
                     <td>{{ data.status }}</td>
                     <td>
                     <b-dropdown
@@ -479,6 +481,14 @@ border-radius: 4px;
 }
 .pagination {
 justify-content: flex-end !important;
+}
+img{
+    height: 120px;
+    width: 120px;
+}
+.price{
+    font-size: 16px;
+    color: #1E90FF;
 }
 @media (max-width: 576px) {
 .content-page,

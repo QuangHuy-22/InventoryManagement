@@ -151,9 +151,15 @@
                     class="btn btn-dark"
                     style="font-size: 13px; margin-right: 5px;"
                 >
-                    
                     <b-icon icon="x-circle" ></b-icon>
                 </button>
+                <button
+                    @click="exportExcel()"
+                    class="button-filter btn btn-success"
+                    style="font-size: 13px; margin-right: 5px; color:white;"
+                    >
+                    <b-icon icon="file-earmark-excel"></b-icon>
+                    </button>
                 </div>
             </div>
             </div>
@@ -193,8 +199,8 @@
                         {{ data.productInfo }}
                         </td>
                         <td>{{ data.productStatusListCode }}</td>
-                        <td>{{ data.priceOne }}</td>
-                        <td>{{ data.priceTotal }}</td>
+                        <td class="price">{{ data.priceOne }}</td>
+                        <td class="price">{{ data.priceTotal }}</td>
                         <td>
                         {{ data.qty }}
                         </td>
@@ -396,6 +402,13 @@ async deleteData(idProductStatusDetail){
     submitForm() {
     this.pagination.page = 1;
     this.fetchData();
+},
+async exportExcel () {
+    try { 
+    await ProducService.exportExcel(this.token,this.search)
+    } catch (error) {
+    console.log(error)
+    }
 },
     clearSearch() {
     this.search = {

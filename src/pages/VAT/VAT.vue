@@ -126,9 +126,9 @@
                     </td>
                     <td>{{ vat.userName }}</td>
                     <td>{{ vat.tax }}</td>
-                    <td>{{ vat.percent }}</td>
-                    <td>{{ vat.price }}</td>
-                    <td>{{ vat.total }}</td>
+                    <td>{{ vat.percent * 100 }}</td>
+                    <td class="price">{{ vat.price }}</td>
+                    <td class="price">{{ vat.total }}</td>
                     <td>
                     <b-dropdown
                         right
@@ -526,6 +526,10 @@ cursor: pointer;
 }
 .code-vat:hover {
 color: #74788d;
+}
+.price{
+    font-size: 16px;
+    color: #008bf4;
 }
 @media (max-width: 576px) {
 .content-page,

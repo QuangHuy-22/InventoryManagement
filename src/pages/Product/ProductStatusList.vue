@@ -195,7 +195,7 @@
                         </td>
                         <td  >{{ data.vatCode }}</td>
                         <td>{{ data.userName }}</td>
-                        <td>{{ data.price }}</td>
+                        <td class="price">{{ data.price }}</td>
                         <td>
                         {{ data.createDate }}
                         </td>

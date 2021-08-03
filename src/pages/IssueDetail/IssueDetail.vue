@@ -99,9 +99,15 @@
                     class="btn btn-dark"
                     style="font-size: 13px; margin-right: 5px;"
                 >
-                    
                     <b-icon icon="x-circle" ></b-icon>
                 </button>
+                <button
+                    @click="exportExcel()"
+                    class="button-filter btn btn-success"
+                    style="font-size: 13px; margin-right: 5px; color:white;"
+                    >
+                    <b-icon icon="file-earmark-excel"></b-icon>
+                    </button>
                 </div>
             </div>
             </div>
@@ -134,7 +140,7 @@
                     <td>{{ issue.issueCode }}</td>
                     <td>{{ issue.productName }}</td>
                     <td>{{ issue.imei }}</td>
-                    <td>{{ issue.price }}</td>
+                    <td class="price">{{ issue.price }}</td>
                     <td>
                     <b-dropdown
                         right
@@ -262,6 +268,13 @@ async deleteData(idIssue){
             this.$bvModal.hide(idIssue)
         }
     },
+    async exportExcel () {
+    try { 
+    await IssueDetailService.exportExcel(this.token,this.search)
+    } catch (error) {
+    console.log(error)
+    }
+},
 submitForm () {
     this.pagination.page = 0
     this.fetchData()

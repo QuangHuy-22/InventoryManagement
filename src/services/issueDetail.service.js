@@ -1,4 +1,5 @@
 import { BaseService } from "./base.service";
+import fileDownload from 'js-file-download'
 import axios from "axios";
 const BASE_URL = process.env.VUE_APP_BASE_URL_USER;
 const headers = {
@@ -44,6 +45,23 @@ export class IssueDetailService extends BaseService {
             return response;
         } catch (error) {
             return error.response
+        }
+    }
+    static async exportExcel(token, data) {
+        try {
+            const response = await axios({
+                method: 'post',
+                url: `${BASE_URL}/api/issue-details/export-excel`,
+                params: data,
+                responseType: 'blob',
+                headers: {
+                    AuthToken: token
+                }
+            })
+            fileDownload(response.data, 'IssueDetail.xlsx')
+            return response
+        } catch (error) {
+            console.log(error)
         }
     }
 }

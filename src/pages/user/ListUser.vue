@@ -61,6 +61,22 @@
                     />
                   </div>
                 </div>
+                <div class="col-md-3 col-sm-3" v-if="checkBranchId = 99">
+                <div class="bf-detail">
+                <b-select
+                class="form-control select2"
+                v-model="search.branchId"
+                >
+                <option :value="checkBranchId">Branch</option>
+                <option
+                    v-for="data in dataBranch"
+                    :key="data.id"
+                    :value="data.id"
+                    >{{ data.name }}</option
+                >
+                </b-select>
+                </div>
+            </div>
               
                 <div class="btn-fillter">
                   <div class="bf-detail" style="margin-top: 16px">
