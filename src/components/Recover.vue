@@ -140,7 +140,7 @@ export default {
             .catch((error)=>{
                 if (error.response) {
             this.$bvModal.show("bv-modal-example-error-recover")
-            this.errorMessage = error.response.data.responseStatusMessage
+            this.errorMessage = error.response.data
                 }
             return error.response;
         })

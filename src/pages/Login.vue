@@ -137,6 +137,7 @@ axios({
     const branchId = response.data.branchId
     const branchName = response.data.branchName
     const userName = response.data.userName
+    const id = response.data.id
     
     
     if(message === 200){
@@ -146,6 +147,7 @@ axios({
         localStorage.setItem('branchId', branchId);
         localStorage.setItem('branchName', branchName);
         localStorage.setItem('userName', userName);
+        localStorage.setItem('userId', id);
         this.email = response.data.username
         this.dataPermission = response.data.listPermission
         this.$store.commit("SET_USERNAME", this.email)

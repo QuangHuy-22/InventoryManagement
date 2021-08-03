@@ -57,7 +57,7 @@
     <div class="dropdown d-inline-block">
         <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown "
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #fff;">
-            
+            <span> {{ branch }}</span>
             <b-dropdown right text="" variant="none" no-caret>
                 <template #button-content>
             <img class="rounded-circle header-profile-user" style="" src="../assets/images/users/avatar-dev.jpg"
@@ -326,6 +326,7 @@ export default {
         showLogout : false,
         token : localStorage.getItem('token'),
         emailName: localStorage.getItem('email'),
+        branch: localStorage.getItem('branchName'),
         userCheck: this.$store.getters.USERNAME,
         BASE_URL: this.$store.getters.BASE_URL,
         BASE_URL_NOTIFY: this.$store.getters.BASE_URL_NOTIFY,

@@ -4,7 +4,7 @@
 <div class="content-page">
     <div class="main-content">
     <div class="addUser">
-        <h4 class="font-size-18">List VAT Code </h4>
+        <h4 class="font-size-18">List Product Status Detail  </h4>
         <div>
         <router-link to="/inventory/product-status" class="btn btn-dark" style="font-size: 13px;"> Cancel</router-link>
         </div>
@@ -69,24 +69,29 @@
                 </div>
             </div>
 
-            <div class="col-md-4 col-sm-4" style="padding-top:0px">
-                <div class="btn-fillter">
-                <div class="bf-detail">
-                    <button
+            <div class="btn-fillter">
+                <div class="bf-detail" style="margin-top: 16px">
+                <button
                     @click.prevent="submitForm"
                     class="btn btn-info"
                     style="font-size: 13px; margin-right: 5px; color:white;"
-                    >
-                    Filter
-                    </button>
-                    <button
+                >
+                    <b-icon icon="search"></b-icon>
+                </button>
+                <button
                     @click="clearSearch"
                     class="btn btn-dark"
                     style="font-size: 13px; margin-right: 5px;"
+                >
+                    <b-icon icon="x-circle" ></b-icon>
+                </button>
+                <button
+                    @click="exportExcel()"
+                    class="button-filter btn btn-success"
+                    style="font-size: 13px; margin-right: 5px; color:white;"
                     >
-                    Unfiltered
+                    <b-icon icon="file-earmark-excel"></b-icon>
                     </button>
-                </div>
                 </div>
             </div>
             </div>
@@ -212,6 +217,13 @@ async fetchData() {
     console.log(response);
     } catch (error) {
     console.log(error.response);
+    }
+},
+async exportExcel () {
+    try { 
+    await ProducService.exportExcel(this.token,this.search)
+    } catch (error) {
+    console.log(error)
     }
 },
 submitForm() {

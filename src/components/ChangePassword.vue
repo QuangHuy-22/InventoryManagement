@@ -13,9 +13,9 @@
             style="font-size: 13px;color: #ffff"
             class="btn btn-primary" 
             data-toggle="modal" 
-            :disabled="buttonDisable"
             >Đổi mật khẩu
             </v-btn>
+            <!-- :disabled="buttonDisable" -->
         </div>
         </form>
         <!-- -------change password------- -->
@@ -27,13 +27,10 @@
             </b-col>
         <div class="d-block text-center" >
         <h3 
-        style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;font-size: 22px;">Đổi mật khẩu thành công</h3>
-        <div class="mb-text ">
-                        <p style="font-size: 13px;" >Bạn đã đổi mật khẩu thành công<br/>Vui lòng đăng nhập lại</p>
-                    </div>
+        style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;font-size: 22px;">Password Changed Successfully!</h3>
         </div>
         <div class="buttonSubmitLogout">
-            <router-link to="/">
+            <router-link to="/home-page">
         <button class="buttonOK mt-3"  style="font-size: 13px;">OK</button>
         </router-link>
         </div>
@@ -146,6 +143,7 @@ data(){
         confirmPass:"",
         BASE_URL: this.$store.getters.BASE_URL,
         token : localStorage.getItem('token'),
+        userId : localStorage.getItem('userId'),
         show1: false,
         show2: false,
         show3: false,
@@ -157,24 +155,25 @@ data(){
 methods:{
     handleChangePass(){
         const data = {
-            newPass: this.confirmPass,
+            newPassOnce: this.newPass,
+            newPassTwice:this.confirmPass,
             oldPass: this.oldPass
         }
         const headers =  {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
         "User-Agent": "Web",
-        Authorization: `Bearer ${this.token}`,
+        AuthToken: this.token,
         }
-            if (this.confirmPass == this.oldPass) {
-                this.$bvModal.show('bv-modal-example-error-change-password')
-            this.errorMessage = "Mật khẩu mới trùng với mật khẩu cũ"
-            }
+            // if (this.confirmPass == this.oldPass) {
+            //     this.$bvModal.show('bv-modal-example-error-change-password')
+            // this.errorMessage = "Mật khẩu mới trùng với mật khẩu cũ"
+            // }
                 // -------end error------//
-            else if ( this.newPass == this.confirmPass ){
+            // else if ( this.newPass == this.confirmPass ){
                 axios({
-                    method:"post",
-                    url:`${this.BASE_URL}/api/auth/change-password`,
+                    method:"put",
+                    url:`${this.BASE_URL}/api/users/change-pass/${this.userId}`,
                     headers: headers,
                     data : data
                 })
@@ -186,27 +185,27 @@ methods:{
             .catch((error) => {
                 if (error.response.status == 400) {
                     this.$bvModal.show('bv-modal-example-error-change-password')
-                    this.errorMessage = error.response.data.responseStatusMessage
+                    this.errorMessage = error.response.data
                 }else{
                     this.$bvModal.show('bv-modal-example-error-change-password')
                 }
             return error.response;
         });
-        }
+        // }
         // -------error------//
-        else if (this.newPass != this.confirmPass) {
-            this.$bvModal.show('bv-modal-example-error-change-password')
-            this.errorMessage = "Mật khẩu không khớp"
-        }
+        // else if (this.newPass != this.confirmPass) {
+        //     this.$bvModal.show('bv-modal-example-error-change-password')
+        //     this.errorMessage = "Mật khẩu không khớp"
+        // }
         // -------end error------//
         
             
     }
 },
 computed:{
-        buttonDisable(){
-            return this.newPass.length <=5 || this.oldPass.length <= 5 || this.confirmPass.length <= 5 || this.newPass != this.confirmPass
-        }
+        // buttonDisable(){
+        //     return this.newPass.length <=0 || this.oldPass.length <= 5 || this.confirmPass.length <= 5 || this.newPass != this.confirmPass
+        // }
     }
 }
 </script>

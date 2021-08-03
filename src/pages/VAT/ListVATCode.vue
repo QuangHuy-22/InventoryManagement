@@ -77,14 +77,21 @@
                     class="btn btn-info"
                     style="font-size: 13px; margin-right: 5px; color:white;"
                     >
-                    Filter
+                    <b-icon icon="search"></b-icon>
                     </button>
                     <button
                     @click="clearSearch"
                     class="btn btn-dark"
                     style="font-size: 13px; margin-right: 5px;"
                     >
-                    Unfiltered
+                    <b-icon icon="x-circle" ></b-icon>
+                    </button>
+                    <button
+                    @click="exportExcel()"
+                    class="button-filter btn btn-success"
+                    style="font-size: 13px; margin-right: 5px; color:white;"
+                    >
+                    <b-icon icon="file-earmark-excel"></b-icon>
                     </button>
                 </div>
                 </div>
@@ -265,6 +272,13 @@ async deleteData(idVat){
     },
     createVatDetail(VATId) {
     this.$router.push({ name: "CreateVATDetail", params: { id: VATId } });
+},
+async exportExcel () {
+    try { 
+    await VATService.exportExcel(this.token,this.search)
+    } catch (error) {
+    console.log(error)
+    }
 },
 async createProductStatus(id) {
     try {

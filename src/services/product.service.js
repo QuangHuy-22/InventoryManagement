@@ -160,7 +160,14 @@ export class ProducService extends BaseService {
             const response = await axios({
                 method: 'post',
                 url: `${BASE_URL}/api/product-status-details/export-excel`,
-                params: data,
+                params: {
+                    productStatusListCode: data.code,
+                    priceTotalFrom: data.priceTotalFrom,
+                    priceTotalTo: data.priceTotalTo,
+                    productInfo: data.productInfo,
+                    type: data.code.includes("DONE") ? data.type = 1 : data.type = 2,
+                    branchId: data.branchId == 99 ? data.branchId = "" : data.branchId,
+                },
                 responseType: 'blob',
                 headers: {
                     AuthToken: token
