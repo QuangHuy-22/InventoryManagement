@@ -29,7 +29,7 @@
                 <p>We have sent you verification email <span style="font-weight: bold;">{{checkMail}}</span>, Please check it</p>
                 <div class="mt-4">
                     <!-- <router-link to="https://mail.google.com/mail/u/0/#inbox"> -->
-                    <a class="btnConfirm btn w-md" href="https://mail.google.com">Xác thực email</a>
+                    <a class="btnConfirm btn w-md" href="https://mail.google.com">Go to Email</a>
                     <!-- </router-link> -->
                 </div>
             </div>
@@ -39,7 +39,7 @@
 </div>
 </div>
 <div class="mt-5 text-center">
-<p>© 2021 Risk Manager by Nextpay</p>
+<p>© 2021 Inventory Management by HieuPV</p>
 </div>
 
 </div>

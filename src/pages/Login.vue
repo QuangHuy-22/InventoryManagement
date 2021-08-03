@@ -136,7 +136,7 @@ axios({
     const roleName = response.data.roleName
     const branchId = response.data.branchId
     const branchName = response.data.branchName
-    const userName = response.data.userName
+    const userName = response.data.name
     const id = response.data.id
     
     

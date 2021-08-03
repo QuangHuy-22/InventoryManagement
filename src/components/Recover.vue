@@ -9,8 +9,8 @@
         <div class="form-row">
             <div class="col-7">
                 <div class="text-primary p-4">
-                    <h5 class="text-primary pt-3" style="font-size: 15px;">Quên mật khẩu !</h5>
-                    <p class="m-0" style="font-size: 13px;" >Nhập email để lấy lại mật khẩu.</p>
+                    <h5 class="text-primary pt-3" style="font-size: 15px;">Forget Password !</h5>
+                    <p class="m-0" style="font-size: 13px;" >Enter email.</p>
                 </div>
             </div>
             <div class="col-5 align-self-end" style="padding: 0px;">
@@ -23,7 +23,7 @@
         
         <div class="p-2">
             <div class="alert alert-success text-center mb-4 p-2" v-show="showSuccess" role="alert"  >
-                Email đã được gửi, vui lòng truy cập email để lấy lại mật khẩu!
+                The new password has sent to + {{username}}
             </div>
             <form class="form-horizontal" action="#" @submit.prevent="handleRecover" >
                 <div class="col-md-12">
@@ -54,7 +54,7 @@
                         type="submit"
                         :disabled="buttonDisable"
                         @click="submit"
-                        >Lấy lại mật khẩu</button>
+                        >Recovery Password</button>
                     </div>
                 </div>
 

@@ -6,14 +6,14 @@
 <div class="page-content">
     <div class="box-title box-title-fix" >
         <form action="#" @submit.prevent="handleChangePass" >
-        <h2>Đổi mật khẩu</h2>
+        <h2>Change Password</h2>
         <div class="float-right">
             <v-btn 
             type="submit" 
             style="font-size: 13px;color: #ffff"
             class="btn btn-primary" 
             data-toggle="modal" 
-            >Đổi mật khẩu
+            >Change
             </v-btn>
             <!-- :disabled="buttonDisable" -->
         </div>
@@ -59,7 +59,7 @@
                     <form class="form-horizontal" action="#"  >
                 <div class="col-md-6" style="padding:0px!important;">
                         <div class="form-group" style="width: 375px;">
-                            <label for="validationCustom01">Mật khẩu cũ</label>
+                            <label for="validationCustom01">Recent Password</label>
                             <v-text-field 
                             class="form-control"
                             style="padding: 1px 0px!important; font-size: 14px; padding-bottom: 0px!important; "
@@ -77,7 +77,7 @@
                             </div>
                         </div>
                         <div class="form-group" style="width: 375px;">
-                            <label for="validationCustom01">Mật khẩu mới</label>
+                            <label for="validationCustom01">New Password</label>
                             <v-text-field 
                             class="form-control"
                             style="padding: 1px 0px!important; font-size: 14px; padding-bottom: 0px!important; "
@@ -95,7 +95,7 @@
                             </div>
                         </div>
                         <div class="form-group" style="width: 375px;">
-                            <label for="validationCustom01">Nhập lại mật khẩu</label>
+                            <label for="validationCustom01">Re-entered Password</label>
                             <v-text-field 
                             class="form-control"
                             style="padding: 1px 0px!important; font-size: 14px; padding-bottom: 0px!important; "

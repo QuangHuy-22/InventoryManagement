@@ -57,24 +57,24 @@
     <div class="dropdown d-inline-block">
         <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown "
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #fff;">
-            <span> {{ branch }}</span>
+            <span style="margin-right:10px;font-weight: initial;"> {{ branch }}</span>
             <b-dropdown right text="" variant="none" no-caret>
                 <template #button-content>
             <img class="rounded-circle header-profile-user" style="" src="../assets/images/users/avatar-dev.jpg"
                 alt="Header Avatar">
-            <span class="name-nav d-none d-xl-inline-block ml-1" key="t-henry">{{emailName}}</span>
+            <span class="name-nav d-none d-xl-inline-block ml-1" key="t-henry">{{userName}}</span>
             <b-icon icon="chevron-down" class="buttonDrops" ></b-icon>
                 </template>
             <b-dropdown-item >
             <router-link to="/change-password" style="color: black!important;">
-                Đổi mật khẩu
+                Change Password
             </router-link>
                 </b-dropdown-item>
             <b-dropdown-divider></b-dropdown-divider>
         <form class="buttonLogout" >
         <b-button id="show-btn" @click="$bvModal.show('bv-modal-example')" style="font-size: 13px;" variant="danger" v-b-modal.modal-center >
             <b-icon icon="power" ></b-icon>
-            Đăng xuất</b-button>
+            Logout</b-button>
         <div class="showLogout" >
         <b-modal id="bv-modal-example" hide-footer hide-header   >
             <b-col class="iconLogout mb-2">
@@ -82,11 +82,11 @@
             </b-col>
         <div class="d-block text-center" >
         <h3 
-        style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;">Bạn có chắc chắn muốn đăng xuất không?</h3>
+        style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;">Do you want to logout?</h3>
         </div>
         <div class="buttonSubmitLogout">
-        <button class="buttonYes mt-3"  @click="handleSubmitLogout" style="font-size: 13px;">Có</button>
-        <button class="buttonNo mt-3" @click="$bvModal.hide('bv-modal-example')" style="font-size: 13px;" >Không</button>
+        <button class="buttonYes mt-3"  @click="handleSubmitLogout" style="font-size: 13px;">Confirm</button>
+        <button class="buttonNo mt-3" @click="$bvModal.hide('bv-modal-example')" style="font-size: 13px;" >Cancel</button>
         </div>
         </b-modal>
         </div>
@@ -326,6 +326,7 @@ export default {
         showLogout : false,
         token : localStorage.getItem('token'),
         emailName: localStorage.getItem('email'),
+        userName: localStorage.getItem('userName'),
         branch: localStorage.getItem('branchName'),
         userCheck: this.$store.getters.USERNAME,
         BASE_URL: this.$store.getters.BASE_URL,
