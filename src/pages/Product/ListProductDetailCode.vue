@@ -197,6 +197,7 @@ return {
     page: 1,
     size: 20,
     type: 1,
+    branchId: localStorage.getItem("branchId"),
     },
     pagination: {
     total: 20,
@@ -221,7 +222,7 @@ async fetchData() {
 },
 async exportExcel () {
     try { 
-    await ProducService.exportExcel(this.token,this.search)
+    await ProducService.exportExcelCode(this.token,this.search)
     } catch (error) {
     console.log(error)
     }

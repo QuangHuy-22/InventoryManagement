@@ -65,6 +65,9 @@
             <span class="name-nav d-none d-xl-inline-block ml-1" key="t-henry">{{userName}}</span>
             <b-icon icon="chevron-down" class="buttonDrops" ></b-icon>
                 </template>
+            <b-dropdown-item @click="detail()">
+                Profile
+                </b-dropdown-item>
             <b-dropdown-item >
             <router-link to="/change-password" style="color: black!important;">
                 Change Password
@@ -327,6 +330,7 @@ export default {
         token : localStorage.getItem('token'),
         emailName: localStorage.getItem('email'),
         userName: localStorage.getItem('userName'),
+        userId: localStorage.getItem('userId'),
         branch: localStorage.getItem('branchName'),
         userCheck: this.$store.getters.USERNAME,
         BASE_URL: this.$store.getters.BASE_URL,
@@ -350,6 +354,9 @@ export default {
         }
     },
     methods:{
+        detail() {
+        this.$router.push({ name: "DetailUser", params: { id: this.userId } });
+    },
         clickSidebar(){
             if (this.logo==false) {
                 this.logo =true,

@@ -9,13 +9,13 @@
 
 <!-- box-title -->
 <div class="box-title">
-<h2>Gán nhóm quyền</h2>
+<h2>Assign Role</h2>
 <div class=" float-right">
 <form action="#" @submit.prevent="handleAssignRole">
     <router-link to="/management/list-user">
-<a class="btn btn-dark"  style="font-size: 13px;"> Hủy </a>
+<a class="btn btn-dark"  style="font-size: 13px;"> Cancel </a>
 </router-link>
-<button style="margin-left: 5px;font-size: 13px;" type="submit" class="btn btn-primary" data-toggle="modal" >Cập nhật
+<button style="margin-left: 5px;font-size: 13px;" type="submit" class="btn btn-primary" data-toggle="modal" >Confirm
 </button>
 </form>
 <b-modal id="bv-modal-example-assign" hide-footer hide-header >
@@ -26,7 +26,7 @@
             </b-col>
         <div class="d-block text-center" >
         <h3 
-        style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;">Cập nhật thông tin thành công</h3>
+        style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;">Update Successful!</h3>
         </div>
         <div class="buttonSubmitLogout">
             <router-link to="/management/list-user" >
@@ -46,8 +46,8 @@
 <form class="needs-validation" novalidate>
 <div class="col-md-6" style="padding: 0px;">
 <div class="form-group" >
-    <label for="validationCustom01">Tên đăng nhập</label>
-    <input type="text" class="form-control" style="font-size: 13px; padding: 0px 5px;" disabled="disabled" placeholder="" v-model="username" required>
+    <label for="validationCustom01">User Name</label>
+    <input type="text" class="form-control" style="font-size: 13px; padding: 0px 5px;" disabled="disabled" placeholder="" v-model="dataDetail.userName" required>
     <div class="invalid-feedback">
         Please provide a valid city.
     </div>
@@ -60,8 +60,8 @@
         <div class="col-sm-3" v-for="datas in dataRole" :key="datas.id">
             <div class="form-group" style="padding:0px;">
                 <div class="custom-control custom-checkbox" >
-                    <input type="checkbox" :id="datas.id" :value="datas.code" v-model="listCodeRole" >
-                    <label style="padding-left:7px;" for="invalidCheck">{{datas.name}}</label>
+                    <input type="checkbox" :id="datas.id" :value="datas.id" v-model="dataDetail.roleIds" >
+                    <label style="padding-left:7px;" for="invalidCheck">{{datas.roleName}}</label>
                 </div>
             </div>
         </div>
@@ -100,27 +100,25 @@ components: { index },
             assignRole:[],
             listPermissions:[],
             listCodeRole:[],
-            roleName:""
+            roleName:"",
+            dataDetail:{},
+            search: {
+            page: 1,
+            size: 10,
+        },
         }
     },
         methods:{
             handleAssignRole(){
-                const data = {
-                listPermissions: [],
-                rolesCodeList: this.listCodeRole
-                }
-                const headers =  {
-                "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "*",
-                "User-Agent": "Web",
-                Authorization: `Bearer ${this.token}`,
-                }
-                
             axios({
                 method:'put',
-                url:`${this.BASE_URL}/api/users/edit-user/${this.idUser}/change-role`,
-                headers: headers,
-                data: data
+                url:`${this.BASE_URL}/api/users/assign-role/${this.idUser}`,
+                headers: {
+                    AuthToken: this.token,
+                },
+                data:{
+                    roleIds: this.dataDetail.roleIds
+                }
             })
             .then((response) => {
                 if (response.status == 200) {
@@ -132,25 +130,25 @@ components: { index },
                 return error.response;
             });
             },
-            async fetchDataUser(){
-                    const response = await UserService.getDetail(this.token ,this.idUser) 
-                    if (response.status == 200) {
-                        this.dataUser = response.data;
-                        this.username = response.data.username
-                        this.listCodeRole = response.data.rolesCodeList
-                    }
-                },
-            async fetchDataRole(){
+            async fetchDataUser() {
             try {
-                const response = await RoleService.getList(this.token, this.roleName)
-                if (response.status == 200) {
-                    this.dataRole = response.data.data;
-                if (this.rolesCodeList == this.dataRole) {
-                    return 'checked'
-                }
-                }
+            const response = await UserService.getDetail(this.token, this.idUser);
+            if (response.status == 200) {
+            this.dataDetail = response.data;
+            }
+            } catch (error) {
+            return error
+            }
+            },
+            async fetchDataRole(){
+                try {
+            const response = await RoleService.getList(this.token, this.search)
+            if (response.status == 200) {
+                this.dataRole = response.data.listData
+                this.pagination = response.data.count
+            }
             }catch(error){
-                console.log(error.response);
+            console.log(error.response);
             }
             },
         },

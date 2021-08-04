@@ -146,14 +146,17 @@
                           <template #button-content>
                             <b-icon icon="three-dots-vertical"></b-icon>
                           </template>
-                          <div style="font-size: 13px;"  v-if="roleName == 'ADMIN'">
+                          <div style="font-size: 13px;">
                             <b-dropdown-item @click="detail(user.id)">
                               Detail
+                            </b-dropdown-item>
+                            <b-dropdown-item @click="assign(user.id)">
+                              Assign Role
                             </b-dropdown-item>
                             <!-- <b-dropdown-item @click="update(user.id)">
                               Update
                             </b-dropdown-item> -->
-                            <b-dropdown-item  @click="$bvModal.show(String(user.id))">
+                            <b-dropdown-item  @click="$bvModal.show(String(user.id))" v-if="roleName == 'ADMIN'">
                               Delete
                             </b-dropdown-item>
                             <!-- ----modal delete role------- -->
@@ -279,6 +282,9 @@ export default {
     },
     detail(id) {
         this.$router.push({ name: "DetailUser", params: { id: id } });
+    },
+    assign(id) {
+        this.$router.push({ name: "AssignRole", params: { id: id } });
     },
     async deleteData(idRole){
         const response = await UserService.delete(this.token, idRole)

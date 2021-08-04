@@ -23,7 +23,7 @@
         
         <div class="p-2">
             <div class="alert alert-success text-center mb-4 p-2" v-show="showSuccess" role="alert"  >
-                The new password has sent to + {{username}}
+                The new password has sent to {{username}}
             </div>
             <form class="form-horizontal" action="#" @submit.prevent="handleRecover" >
                 <div class="col-md-12">
@@ -77,7 +77,7 @@
     </b-modal>
 <!-- --------end error recover-------- -->
 <div class="mt-5 text-center">
-    <p>© 2021 Risk Manager by Nextpay</p>
+    <p>© 2021 Inventory Management by HieuPV</p>
 </div>
 </div>
 </div>

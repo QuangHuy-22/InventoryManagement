@@ -111,11 +111,11 @@
                         <template #button-content>
                         <b-icon icon="three-dots-vertical"></b-icon>
                         </template>
-                        <div style="font-size: 13px;"  v-if="roleName == 'ADMIN' || roleName == 'MANAGER'">
+                        <div style="font-size: 13px;"  >
                         <b-dropdown-item @click="detail(category.id)">
                             Detail
                         </b-dropdown-item>
-                        <b-dropdown-item @click="update(category.id)">
+                        <b-dropdown-item @click="update(category.id)" v-if="roleName == 'ADMIN' || roleName == 'MANAGER'">
                             Edit
                         </b-dropdown-item>
                         </div>

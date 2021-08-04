@@ -32,6 +32,7 @@
                         <p class="titleNew font-weight-medium">
                             VALID
                         </p>
+                        <h4 class="mb-0 new">{{ dataCount.VALID }}</h4>
                         </div>
                         <div class="bg-primary" style=" border-radius: 50%;">
                         <v-avatar>
@@ -52,8 +53,7 @@
                         <p class="titleProcessing font-weight-medium">
                             INVALID
                         </p>
-                        <h4 class="mb-0 processing">
-                        </h4>
+                        <h4 class="mb-0 new">{{ dataCount.INVALID }}</h4>
                         </div>
                         <div class="bg-primary" style=" border-radius: 50%;">
                         <v-avatar>
@@ -247,10 +247,12 @@ return {
     pagination: {
     total: 20,
     },
+    dataCount:{}
 };
 },
 mounted() {
 this.fetchData();
+this.fetchDataCountStatus();
 },
 methods: {
 async fetchData() {
@@ -272,6 +274,16 @@ async deleteData(idProductDetail){
             this.$bvModal.hide(idProductDetail)
         }
     },
+    async fetchDataCountStatus() {
+    try {
+    const response = await ProducDetailService.getCount(this.token);
+    if (response.status === 200) {
+        this.dataCount = response.data;
+    }
+    } catch (error) {
+    console.log(error);
+    }
+},
     fetchDataValid(){
     this.search.status = "VALID";
     this.fetchData();

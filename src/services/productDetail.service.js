@@ -88,4 +88,19 @@ export class ProducDetailService extends BaseService {
             return error.response
         }
     }
+    static async getCount(token) {
+        try {
+            const response = await axios({
+                method: "get",
+                url: `${BASE_URL}/api/products-detail/get-count-records`,
+                headers: {
+                    headers,
+                    AuthToken: token
+                }
+            });
+            return response;
+        } catch (error) {
+            return error.response
+        }
+    }
 }

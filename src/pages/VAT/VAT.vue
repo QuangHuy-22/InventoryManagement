@@ -140,18 +140,19 @@
                         <template #button-content>
                         <b-icon icon="three-dots-vertical"></b-icon>
                         </template>
-                        <div style="font-size: 13px;"  v-if="roleName == 'ADMIN' || roleName == 'MANAGER'">
+                        <div style="font-size: 13px;" >
                         <b-dropdown-item @click="detail(vat.id)">
                             Detail
                         </b-dropdown-item>
-                        <b-dropdown-item @click="$bvModal.show(String(vat.id))">
+                        <b-dropdown-item @click="$bvModal.show(String(vat.id))"  v-if="roleName == 'ADMIN' || roleName == 'MANAGER'">
                             Delete
                         </b-dropdown-item>
-                        <b-dropdown-item @click="createVatDetail(vat.id)">
+                        <b-dropdown-item @click="createVatDetail(vat.id)"  v-if="roleName == 'ADMIN' || roleName == 'MANAGER'">
                             Create VAT Detail
                         </b-dropdown-item>
                         <b-dropdown-item
                             @click="createProductStatus(vat.id)"
+                            v-if="roleName == 'ADMIN' || roleName == 'MANAGER'"
                         >
                             Create Product Status List
                         </b-dropdown-item>

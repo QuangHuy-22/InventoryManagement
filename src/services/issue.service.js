@@ -82,7 +82,16 @@ export class IssueService extends BaseService {
                 headers: {
                     AuthToken: token,
                 },
-                params: params
+                params: {
+                    page: 1,
+                    size: 10,
+                    branchId: params.branchId == 99 ? params.branchId = "" : params.branchId,
+                    imei: params.imei,
+                    issueCodeParam: params.code,
+                    priceTotalFrom: params.priceTotalFrom,
+                    priceTotalTo: params.priceTotalTo,
+                    productInfo: params.productInfo,
+                }
             });
             return response;
         } catch (error) {

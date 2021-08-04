@@ -159,7 +159,7 @@ const routes = [{
         },
         {
             path: '/management/list-user/assign-role/:id',
-            name: 'Gán nhóm quyền',
+            name: 'AssignRole',
             component: AssignRole,
         },
         {
