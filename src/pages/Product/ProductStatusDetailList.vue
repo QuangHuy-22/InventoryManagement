@@ -153,13 +153,13 @@
                 >
                     <b-icon icon="x-circle" ></b-icon>
                 </button>
-                <button
+                <div
                     @click="exportExcel()"
                     class="button-filter btn btn-success"
                     style="font-size: 13px; margin-right: 5px; color:white;"
                     >
                     <b-icon icon="file-earmark-excel"></b-icon>
-                    </button>
+                    </div>
                 </div>
             </div>
             </div>
