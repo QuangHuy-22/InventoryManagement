@@ -1,5 +1,5 @@
 import { BaseService } from "./base.service";
-import fileDownload from 'js-file-download'
+
 import axios from "axios";
 const BASE_URL = process.env.VUE_APP_BASE_URL_USER;
 const headers = {
@@ -148,6 +148,7 @@ export class ProducService extends BaseService {
                     priceTotalTo: params.priceTotalTo,
                     productInfo: params.productInfo,
                     productStatusListCode: params.productStatusListCode,
+                    productStatusListCodeParam: params.code
                 }
             });
             return response;
@@ -155,28 +156,5 @@ export class ProducService extends BaseService {
             return error.response
         }
     }
-    static async exportExcel(token, data) {
-        try {
-            const response = await axios({
-                method: 'post',
-                url: `${BASE_URL}/api/product-status-details/export-excel`,
-                params: {
-                    productStatusListCode: data.code,
-                    priceTotalFrom: data.priceTotalFrom,
-                    priceTotalTo: data.priceTotalTo,
-                    productInfo: data.productInfo,
-                    type: data.code.includes("DONE") ? data.type = 1 : data.type = 2,
-                    branchId: data.branchId == 99 ? data.branchId = "" : data.branchId,
-                },
-                responseType: 'blob',
-                headers: {
-                    AuthToken: token
-                }
-            })
-            fileDownload(response.data, 'ProductStatusDetail.xlsx')
-            return response
-        } catch (error) {
-            console.log(error)
-        }
-    }
+
 }

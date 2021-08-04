@@ -103,7 +103,14 @@ export class VATService extends BaseService {
                     headers,
                     AuthToken: token
                 },
-                params: params
+                params: {
+                    page: 1,
+                    size: 10,
+                    priceTotalFrom: params.priceTotalFrom,
+                    priceTotalTo: params.priceTotalTo,
+                    productInfo: params.productInfo,
+                    vatCodeParam: params.code,
+                }
             })
             return response
         } catch (error) {

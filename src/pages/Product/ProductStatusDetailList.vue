@@ -153,13 +153,13 @@
                 >
                     <b-icon icon="x-circle" ></b-icon>
                 </button>
-                <div
+                <button
                     @click="exportExcel()"
                     class="button-filter btn btn-success"
                     style="font-size: 13px; margin-right: 5px; color:white;"
                     >
                     <b-icon icon="file-earmark-excel"></b-icon>
-                    </div>
+                </button>
                 </div>
             </div>
             </div>
@@ -335,9 +335,6 @@ return {
     roleName:  localStorage.getItem('roleName'),
 };
 },
-// validations: {
-//               reasonTransfer: { required },
-//       },
 
 created() {
 this.search.type = 1;
