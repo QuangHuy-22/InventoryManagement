@@ -5,7 +5,7 @@
       <div class="main-content">
         <div class="addUser">
           <h4 class="font-size-18">User List</h4>
-          <router-link to="/management/list-user/add-user">
+          <router-link to="/management/list-user/add-user" v-if="roleName == 'ADMIN'">
             <div
               class="btn-group float-right"
             >
@@ -153,9 +153,9 @@
                             <b-dropdown-item @click="assign(user.id)">
                               Assign Role
                             </b-dropdown-item>
-                            <!-- <b-dropdown-item @click="update(user.id)">
-                              Update
-                            </b-dropdown-item> -->
+                            <b-dropdown-item @click="update(user.id)">
+                              Edit
+                            </b-dropdown-item>
                             <b-dropdown-item  @click="$bvModal.show(String(user.id))" v-if="roleName == 'ADMIN'">
                               Delete
                             </b-dropdown-item>
@@ -282,6 +282,9 @@ export default {
     },
     detail(id) {
         this.$router.push({ name: "DetailUser", params: { id: id } });
+    },
+    update(id) {
+        this.$router.push({ name: "UpdateUser", params: { id: id } });
     },
     assign(id) {
         this.$router.push({ name: "AssignRole", params: { id: id } });

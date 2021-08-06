@@ -8,9 +8,17 @@
         <div class="box-title">
             <h2>Detail User</h2>
             <div class=" float-right">
-            <router-link to="/management/list-user" class="btn btn-dark">
+            <router-link to="/management/list-user" class="btn btn-dark" style="font-size: 13px;" v-if="userId != idDetail">
                 Cancel
             </router-link>
+            <router-link to="/home-page" class="btn btn-dark" style="font-size: 13px;" v-if="userId == idDetail">
+                Cancel
+            </router-link>
+            <button
+            v-if="userId == idDetail"
+            @click="updateProfile"
+            style="margin-left:5px; font-size: 13px;"
+            class="btn btn-outline-primary"> <b-icon icon="pencil-square"></b-icon> Update Profile</button>
             </div>
         </div>
 
@@ -147,6 +155,7 @@ data() {
 return {
     idDetail: this.$route.params.id,
     token: localStorage.getItem("token"),
+    userId: localStorage.getItem("userId"),
     dataDetail: {},
 };
 },
@@ -165,7 +174,10 @@ async fetchData() {
     } catch (error) {
     return error
     }
-}
+},
+updateProfile() {
+        this.$router.push({ name: "UpdateUser", params: { id: this.userId } });
+    },
 }
 };
 </script>

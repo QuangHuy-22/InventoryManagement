@@ -53,6 +53,21 @@ export class UserService extends BaseService {
             return error.response
         }
     }
+    static async update(token, data, idUser) {
+        try {
+            const response = await axios({
+                method: "put",
+                url: `${BASE_URL}/api/users/edit/${idUser}`,
+                headers: {
+                    AuthToken: token,
+                },
+                data: data
+            });
+            return response;
+        } catch (error) {
+            return error.response
+        }
+    }
 
 
 }

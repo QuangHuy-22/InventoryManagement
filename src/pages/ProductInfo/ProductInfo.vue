@@ -5,7 +5,7 @@
     <div class="main-content">
     <div class="addUser">
         <h4 class="font-size-18">Product Info List</h4>
-        <router-link to="/product/product-info/create-product-info" >
+        <router-link to="/product/product-info/create-product-info"  v-if="roleName == 'ADMIN' || roleName == 'MANAGER'" >
         <div class="btn-group float-right" >
             <Button type="submit" class="btn btn-outline-primary" style="font-size: 13px;background-color: #EBF6FF;" data-toggle="modal" data-target=".Risk_QL-User_add"><b-icon icon="plus-circle" ></b-icon> Add Product Info</button>
         </div>

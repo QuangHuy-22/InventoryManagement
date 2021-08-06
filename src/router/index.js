@@ -119,7 +119,7 @@ const routes = [{
         },
         {
             path: '/management/list-user/update-user/:id',
-            name: 'Cập nhật User',
+            name: 'UpdateUser',
             component: UpdateUser,
         },
         {

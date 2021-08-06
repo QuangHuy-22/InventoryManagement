@@ -5,7 +5,7 @@
     <div class="main-content">
     <div class="addUser">
         <h4 class="font-size-18">Supplier List</h4>
-        <router-link to="/management/supplier/create-supplier">
+        <router-link to="/management/supplier/create-supplier"  v-if="roleName == 'ADMIN' || roleName == 'MANAGER'">
         <div
             class="btn-group float-right"
         >

@@ -6,7 +6,7 @@
   <div class="page-content">
     <div class="addUser">
         <h4 class="font-size-18">Category List</h4>
-        <router-link to="/product/category/create-category">
+        <router-link to="/product/category/create-category"  v-if="roleName == 'ADMIN' || roleName == 'MANAGER'">
         <div
             class="btn-group float-right"
         >
