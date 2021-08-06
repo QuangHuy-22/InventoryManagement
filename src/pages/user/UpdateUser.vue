@@ -12,7 +12,17 @@
             <h2 class="title-page">Update User</h2>
             <div class="btn-group float-right">
             <form class="buttonLogout" @submit.prevent="handleUpdateUser">
-                <router-link to="/management/list-user">
+                <router-link to="/home-page" v-if="userId == idDetail">
+                <b-button
+                    id="show-btn"
+                    style="font-size: 13px; margin-right: 5px;"
+                    variant="outline-primary"
+                    v-b-modal.modal-center
+                >
+                    Cancel</b-button
+                >
+                </router-link>
+                <router-link to="/management/list-user" v-if="userId != idDetail">
                 <b-button
                     id="show-btn"
                     style="font-size: 13px; margin-right: 5px;"
@@ -49,7 +59,15 @@
                     </h3>
                     </div>
                     <div class="buttonSubmitLogout">
-                    <router-link to="/management/list-user">
+                    <router-link to="/home-page" v-if="userId == idDetail">
+                        <button
+                        class="buttonOK mt-3"
+                        style="font-size: 13px;"
+                        >
+                        OK
+                        </button>
+                    </router-link>
+                    <router-link to="/management/list-user" v-if="userId != idDetail">
                         <button
                         class="buttonOK mt-3"
                         style="font-size: 13px;"
@@ -171,7 +189,7 @@
             <h3
                 style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;"
             >
-                Thất bại
+                Error!
             </h3>
             <span>{{ this.errorMessage }}</span>
             </div>
@@ -211,6 +229,7 @@ return {
     dataUser: {},
     token: localStorage.getItem("token"),
     roleName: localStorage.getItem("roleName"),
+    userId: localStorage.getItem("userId"),
     fullName: "",
     username: "",
     errorMessage: "",
