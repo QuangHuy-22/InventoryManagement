@@ -183,7 +183,7 @@ async createAddIssue(){
         if (response.status == 200) {
             this.$bvModal.show("bv-modal-example-3")
         }else{
-            this.errorMessage = response.data.message
+            this.errorMessage = response.data
             this.$bvModal.show("bv-modal-example-error-add-user")
         }
         }

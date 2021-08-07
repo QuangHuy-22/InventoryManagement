@@ -55,7 +55,7 @@
                     <h3
                         style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;"
                     >
-                        Cập nhật thông tin thành công
+                        Update Successful!
                     </h3>
                     </div>
                     <div class="buttonSubmitLogout">

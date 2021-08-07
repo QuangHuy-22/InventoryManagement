@@ -11,7 +11,7 @@
         <h2>Create Shelf</h2>
         <div class="btn-group float-right">
         <form class="buttonAddUser"  @submit.prevent="handleAddUser">
-        <router-link to="/management/supplier" class="btn btn-dark" style="font-size: 13px;"> Cancel</router-link>
+        <router-link to="/inventory/shelf" class="btn btn-dark" style="font-size: 13px;"> Cancel</router-link>
         <div class="btn btn-dark"  style="font-size: 13px;margin-left: 5px;" @click="Reset()"> Reset</div>
         <button type="submit" class="btn btn-primary" data-toggle="modal" data-target=".Risk_Permission_Update" style="font-size: 13px;margin-left: 5px;">Submit</button>
         <div class="showAddUser" >

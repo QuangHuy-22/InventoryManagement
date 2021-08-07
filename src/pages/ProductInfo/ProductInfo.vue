@@ -67,7 +67,7 @@
                     type="text"
                     style="font-size: 13px;"
                     class="form-control"
-                    placeholder="Price From"
+                    placeholder="Price Out From"
                     v-model.trim="search.priceFrom"
                 />
                 </div>
@@ -78,7 +78,7 @@
                     type="text"
                     style="font-size: 13px;"
                     class="form-control"
-                    placeholder="Price To"
+                    placeholder="Price Out To"
                     v-model.trim="search.priceTo"
                 />
                 </div>

@@ -36,7 +36,7 @@
             </b-col>
         <div class="d-block text-center" >
         <h3 
-        style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;">Adding Successful!</h3>
+        style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;">Update Successful!</h3>
         </div>
         <div class="buttonSubmitLogout">
             <router-link to="/product/product-info">
@@ -124,24 +124,33 @@
             
 </div>
 <!-- Modal Cập nhật -->
-    <!-- ----------modal error-------->
-<b-modal id="bv-modal-example-error-update-user" hide-footer hide-header >
-<b-col class="iconLogout mb-2">
-<b-icon icon="x-circle" class="iconsBox" style="color: red!important;"></b-icon>
-</b-col>
-<div class="d-block text-center" >
-<h3 
-style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;">Error!</h3>
-<span>{{ this.errorMessage }}</span>
-</div>
-<div class="buttonSubmitLogout">
-<!-- <router-link to="/list-role"> -->
-<button class="buttonOK mt-3" @click="$bvModal.hide('bv-modal-example-error-update-user')"  style="font-size: 13px;">OK</button>
-<!-- </router-link> -->
-</div>
-</b-modal>
-<!-- ----------end modal error-------->
-
+<!-- ----------modal error-------->
+        <b-modal
+            id="bv-modal-example-error-add-user"
+            hide-footer
+            hide-header
+        >
+            <b-col class="iconLogout mb-2">
+            <b-icon
+                icon="x-circle"
+                class="iconsBox"
+                style="color: red!important;"
+            ></b-icon>
+            </b-col>
+            <div class="d-block text-center">
+            <span>{{ this.errorMessage }}</span>
+            </div>
+            <div class="buttonSubmitLogout">
+            <button
+                class="buttonOK mt-3"
+                @click="$bvModal.hide('bv-modal-example-error-add-user')"
+                style="font-size: 13px;"
+            >
+                OK
+            </button>
+            </div>
+        </b-modal>
+        <!-- ----------end modal error-------->
 </div>
 </div>
 <!-- End Page-content -->
@@ -187,6 +196,11 @@ components: { index },
         this.formData.append("description", this.dataProducInfo.description,);
         this.formData.append("categoryId", this.dataProducInfo.categoryId,);
         }
+        if (this.dataProducInfo.name == "") {
+            this.errorMessage = "Required Name!"
+            this.$bvModal.show("bv-modal-example-error-add-user")
+        }
+        else{
     axios({
     method: "put",
     url: `http://localhost:8090/api/products-info/edit/${this.idProductInfo}`,
@@ -204,9 +218,10 @@ components: { index },
         }
     })
     .catch((error) => {
-        this.errorMessage = error.response.data
+        this.errorMessage = error.response
         this.$bvModal.show("bv-modal-example-error-add-user")
     });
+    }
         },
         onFileChange(e) {
     const fileUp = e.target.files[0];

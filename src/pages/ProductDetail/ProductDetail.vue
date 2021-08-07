@@ -131,7 +131,7 @@
                 <thead>
                 <tr>
                     <th style="text-align: center">No.</th>
-                    <th>Product </th>
+                    <th>Name </th>
                     <th>Image</th>
                     <th>supplier </th>
                     <th>category </th>
@@ -304,11 +304,10 @@ submitForm() {
 },
 
 clearSearch() {
-    this.dateRange.from = null;
-    this.dateRange.to = null;
     this.search = {
-    page: 0,
+    page: 1,
     size: 20,
+    status:"VALID"
     };
     this.fetchData();
 },

@@ -31,16 +31,26 @@
         </div>
     </div>
 
-    <div class="btn-fillter" style="margin-top: 12px;">
-    <div class="bf-detail">
-    <v-btn 
-    type="submit" 
-    class="btn btn-info"  
-    style="font-size: 13px; margin-right: 5px; color:white;"
-    >Filter</v-btn>
-    <v-btn type="button" class="btn btn-gray" @click="handleUnFind" style="font-size: 13px; margin-right: 5px;color:white;background-color: gray;">Unfilter</v-btn>
-    </div>
-    </div>
+    <div class="col-md-4 col-sm-4">
+                <div class="btn-fillter">
+                <div class="bf-detail" >
+                <button
+                    @click.prevent="submitForm"
+                    class="btn btn-success"
+                    style="font-size: 13px; margin-right: 5px; color:white;"
+                >
+                    <b-icon icon="search"></b-icon>
+                </button>
+                <button
+                    @click="handleUnFind"
+                    class="btn btn-dark"
+                    style="font-size: 13px; margin-right: 5px;"
+                >
+                    <b-icon icon="x-circle" ></b-icon>
+                </button>
+                </div>
+            </div>
+            </div>
     </div>
     </div>
     </form>
@@ -72,7 +82,7 @@
         <b-dropdown-item @click="detail(dataRoles.id)">
             Detail
         </b-dropdown-item>
-        <b-dropdown-item @click="update(dataRoles.code)">
+        <b-dropdown-item @click="update(dataRoles.id)">
             Update
         </b-dropdown-item>
         <b-dropdown-item  @click="$bvModal.show(String(dataRoles.id))"  >

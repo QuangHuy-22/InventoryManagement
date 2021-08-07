@@ -197,7 +197,12 @@ return {
     search: {
     page: 1,
     size: 20,
-    type:1
+    },
+    searchStatus: {
+    page: 1,
+    size: 20,
+    type:1,
+    branchId:localStorage.getItem("branchId"),
     },
     dataProductInfo: {},
     dataProduct:{},
@@ -234,7 +239,7 @@ Reset(){
     },
 async fetchData() {
     try {
-    const response = await ProducService.getList(this.token, this.search);
+    const response = await ProducService.getList(this.token, this.searchStatus);
     if (response.status === 200) {
         this.dataProduct = response.data.listData;
     }

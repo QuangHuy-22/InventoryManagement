@@ -62,23 +62,25 @@
                 </div>
             </div>
             
-            <div class="btn-fillter">
-                <div class="bf-detail" style="margin-top: 16px">
+            <div class="col-md-4 col-sm-4">
+                <div class="btn-fillter">
+                <div class="bf-detail" >
                 <button
                     @click.prevent="submitForm"
-                    class="btn btn-info"
+                    class="btn btn-success"
                     style="font-size: 13px; margin-right: 5px; color:white;"
                 >
-                    Filter
+                    <b-icon icon="search"></b-icon>
                 </button>
                 <button
                     @click="clearSearch"
                     class="btn btn-dark"
                     style="font-size: 13px; margin-right: 5px;"
                 >
-                    Unfilter
+                    <b-icon icon="x-circle" ></b-icon>
                 </button>
                 </div>
+            </div>
             </div>
             </div>
         </div>

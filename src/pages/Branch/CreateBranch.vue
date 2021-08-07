@@ -8,7 +8,7 @@
 <!-- InstanceBeginEditable name="EditRegion1" -->
     <!-- box-title -->
     <div class="box-title box-title-fix">
-        <h2>Create Category</h2>
+        <h2>Create Branch</h2>
         <div class="btn-group float-right">
         <form class="buttonAddUser"  @submit.prevent="handleAddBranch">
         <router-link to="/management/branch" class="btn btn-dark" style="font-size: 13px;"> Cancel</router-link>
@@ -45,7 +45,7 @@
 <div class="row">
     <div class="col-sm-12">
         <div class="card-body">
-            <h4 class="card-title mb-3">Information Category</h4>
+            <h4 class="card-title mb-3">Information Branch</h4>
             <form class="needs-validation" >
             <div class="col-sm-6" >
                 <div class="form-group form-erross">
@@ -156,7 +156,7 @@ components: {
                 this.$bvModal.show("bv-modal-example-3")
             }
             if (response.status != 200) {
-                this.errorMessage = response.data.message
+                this.errorMessage = response.data
                 this.$bvModal.show('bv-modal-example-error-add-user')
             }
         } catch (error) {

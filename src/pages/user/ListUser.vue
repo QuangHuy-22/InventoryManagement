@@ -78,30 +78,26 @@
                 </div>
             </div>
               
+                <div class="col-md-3 col-sm-4">
                 <div class="btn-fillter">
-                  <div class="bf-detail" style="margin-top: 16px">
-                    <button
-                      @click.prevent="submitForm"
-                      class="btn btn-info"
-                      style="font-size: 13px; margin-right: 5px; color:white;"
-                    >
-                      Filter
-                    </button>
-                    <button
-                      @click="clearSearch"
-                      class="btn btn-dark"
-                      style="font-size: 13px; margin-right: 5px;"
-                    >
-                      Unfilter
-                    </button>
-                    <!-- <button
-                      class="btn btn-success"
-                      style="font-size: 13px; margin-right: 5px;"
-                    >
-                      Xuất Excel
-                    </button> -->
-                  </div>
+                <div class="bf-detail" >
+                <button
+                    @click.prevent="submitForm"
+                    class="btn btn-success"
+                    style="font-size: 13px; margin-right: 5px; color:white;"
+                >
+                    <b-icon icon="search"></b-icon>
+                </button>
+                <button
+                    @click="clearSearch"
+                    class="btn btn-dark"
+                    style="font-size: 13px; margin-right: 5px;"
+                >
+                    <b-icon icon="x-circle" ></b-icon>
+                </button>
                 </div>
+            </div>
+            </div>
               </div>
             </div>
           </form>

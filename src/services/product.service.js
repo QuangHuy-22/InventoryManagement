@@ -21,6 +21,8 @@ export class ProducService extends BaseService {
                     priceFrom: params.priceFrom,
                     priceTo: params.priceTo,
                     vatCode: params.vatCode,
+                    dateFrom: params.dateFrom,
+                    dateTo: params.dateTo,
                 },
                 headers: {
                     headers,

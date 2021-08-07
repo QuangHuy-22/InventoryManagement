@@ -21,6 +21,8 @@ export class VATService extends BaseService {
                     supplierName: params.supplierName,
                     tax: params.tax,
                     userName: params.userName,
+                    dateFrom: params.dateFrom,
+                    dateTo: params.dateTo,
                 },
                 headers: {
                     headers,

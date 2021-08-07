@@ -69,7 +69,7 @@
                 />
                 </div>
             </div>
-            <div class="col-md-3 col-sm-4" v-if="checkBranchId = 99">
+            <div class="col-md-3 col-sm-4" v-if="roleName == 'ADMIN'">
                 <div class="bf-detail">
                 <b-select
                 class="form-control select2"

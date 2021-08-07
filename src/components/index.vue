@@ -619,13 +619,22 @@ justify-content: space-between;
 .title-rule{
     white-space: nowrap;
 }
-.btn-secondary {
+.collapsed {
     color: red;
     background-color: #ffff!important;
     border-color: #ffff!important;
     text-align: start;
 }
-.btn-secondary:hover{
+.collapsed:hover{
+    background-color: #DCDCDC!important;
+}
+.not-collapsed {
+    color: red;
+    background-color: #ffff!important;
+    border-color: #ffff!important;
+    text-align: start;
+}
+.not-collapsed:hover{
     background-color: #DCDCDC!important;
 }
 .text-sidebar{

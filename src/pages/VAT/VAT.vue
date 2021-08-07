@@ -56,11 +56,66 @@
                 />
                 </div>
             </div>
-            <div class="col-md-3 col-sm-3" v-if="checkBranchId = 99">
+            
+            <div class="col-md-3 col-sm-3 ">
+                <div class="bf-detail">
+                    <b-input-group class="mb-3">
+                    <b-form-input
+                        id="example-input"
+                        class="form-control"
+                        v-model="search.dateFrom"
+                        type="text"
+                        style="height:34px "
+                        placeholder="Date From"
+                        autocomplete="off"
+                    ></b-form-input>
+                    <b-input-group-append>
+                        <b-form-datepicker
+                        v-model="search.dateFrom"
+                        class="date"
+                        button-only
+                        right
+                        style="height:34px "
+                        locale="en-US"
+                        aria-controls="example-input"
+                        ></b-form-datepicker>
+                    </b-input-group-append>
+                    </b-input-group>
+                </div>
+                </div>
+
+            <div class="col-md-3 col-sm-3">
+            <div class="bf-detail">
+                <b-input-group class="mb-3">
+                <b-form-input
+                    id="example-input"
+                    class="form-control"
+                    v-model="search.dateTo"
+                    type="text"
+                    style="height:34px "
+                    placeholder="Date To"
+                    autocomplete="off"
+                ></b-form-input>
+                <b-input-group-append>
+                    <b-form-datepicker
+                    v-model="search.dateTo"
+                    class="date btn-dark"
+                    button-only
+                    right
+                    locale="en-US"
+                    aria-controls="example-input"
+                    style="height:34px "
+                    ></b-form-datepicker>
+                </b-input-group-append>
+                </b-input-group>
+            </div>
+            </div>
+            <div class="col-md-3 col-sm-3" v-if="roleName == 'ADMIN'">
                 <div class="bf-detail">
                 <b-select
                 class="form-control select2"
                 v-model="search.branchId"
+                style="height:34px "
                 >
                 <option
                     v-for="data in dataBranch"
@@ -72,7 +127,7 @@
                 </div>
             </div>
 
-            <div class="col-md-4 col-sm-4">
+            <div class="col-md-3 col-sm-4">
                 <div class="btn-fillter">
                 <div class="bf-detail" >
                 <button
@@ -271,6 +326,7 @@ return {
     to: null,
     },
     search: {
+    dateTo: null,
     page: 1,
     size: 20,
     branchId: localStorage.getItem("branchId"),
@@ -287,10 +343,13 @@ return {
 mounted() {
 this.fetchData();
 this.fetchDataBranch();
+
 },
 methods: {
 async fetchData() {
     try {
+    if (!this.search.dateFrom) delete this.search.dateFrom
+    if (!this.search.dateTo) delete this.search.dateTo
     const response = await VATService.getList(this.token, this.search);
     if (response.status == 200) {
         this.dataVAT = response.data.listData;
@@ -339,6 +398,7 @@ async deleteData(idVat){
 submitForm() {
     this.pagination.page = 1;
     this.fetchData();
+    console.log(this.search.dateTo);
 },
 
 clearSearch() {
@@ -532,6 +592,7 @@ color: #74788d;
     font-size: 16px;
     color: #008bf4;
 }
+
 @media (max-width: 576px) {
 .content-page,
 .container-sm {

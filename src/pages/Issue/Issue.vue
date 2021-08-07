@@ -5,21 +5,6 @@
     <div class="main-content">
     <div class="addUser">
         <h4 class="font-size-18">Issue List</h4>
-        <router-link to="/inventory/issue/create-issue">
-        <div
-            class="btn-group float-right"
-        >
-            <button
-            type="submit"
-            class="btn btn-outline-primary"
-            style="font-size: 13px;background-color: #EBF6FF;"
-            data-toggle="modal"
-            data-target=".Risk_QL-User_add"
-            >
-            <b-icon icon="plus-circle"></b-icon> Add Issue
-            </button>
-        </div>
-        </router-link>
     </div>
 
     <div class="searchInput colorTable">
@@ -62,11 +47,65 @@
                 />
                 </div>
             </div>
-            <div class="col-md-3 col-sm-3" v-if="checkBranchId = 99">
+                        <div class="col-md-3 col-sm-3 ">
+                <div class="bf-detail">
+                    <b-input-group class="mb-3">
+                    <b-form-input
+                        id="example-input"
+                        class="form-control"
+                        v-model="search.dateFrom"
+                        type="text"
+                        style="height:34px "
+                        placeholder="Date From"
+                        autocomplete="off"
+                    ></b-form-input>
+                    <b-input-group-append>
+                        <b-form-datepicker
+                        v-model="search.dateFrom"
+                        class="date"
+                        button-only
+                        right
+                        locale="en-US"
+                        style="height:34px "
+                        aria-controls="example-input"
+                        ></b-form-datepicker>
+                    </b-input-group-append>
+                    </b-input-group>
+                </div>
+                </div>
+
+            <div class="col-md-3 col-sm-3">
+            <div class="bf-detail">
+                <b-input-group class="mb-3">
+                <b-form-input
+                    id="example-input"
+                    class="form-control"
+                    v-model="search.dateTo"
+                    type="text"
+                    style="height:34px "
+                    placeholder="Date To"
+                    autocomplete="off"
+                ></b-form-input>
+                <b-input-group-append>
+                    <b-form-datepicker
+                    v-model="search.dateTo"
+                    class="date btn-dark"
+                    button-only
+                    right
+                    locale="en-US"
+                    aria-controls="example-input"
+                    style="height:34px "
+                    ></b-form-datepicker>
+                </b-input-group-append>
+                </b-input-group>
+            </div>
+            </div>
+            <div class="col-md-3 col-sm-3" v-if="roleName == 'ADMIN'">
                 <div class="bf-detail">
                 <b-select
                 class="form-control select2"
                 v-model="search.branchId"
+                style="height:34px "
                 >
                 <option :value="checkBranchId">Branch</option>
                 <option
@@ -78,7 +117,7 @@
                 </b-select>
                 </div>
             </div>
-            
+
             <div class="btn-fillter">
                 <div class="bf-detail" style="margin-top: 16px">
                 <button
@@ -222,6 +261,7 @@ data() {
 return {
     token: localStorage.getItem("token"),
     userName: localStorage.getItem("userName"),
+    roleName: localStorage.getItem("roleName"),
     dataIssue: [],
     dateRange: {
     from: null,
@@ -246,6 +286,8 @@ this.fetchDataBranch();
 methods: {
 async fetchData() {
     try {
+    if (!this.search.dateFrom) delete this.search.dateFrom
+    if (!this.search.dateTo) delete this.search.dateTo
     const response = await IssueService.getList(this.token, this.search);
     if (response.status === 200) {
         this.dataIssue = response.data.listData;

@@ -271,7 +271,7 @@ handleAddProducInfo() {
         }
     })
     .catch((error) => {
-        this.errorMessage = error.response.data
+        this.errorMessage = error.response
         this.$bvModal.show("bv-modal-example-error-add-user")
     });
 },

@@ -18,7 +18,9 @@ export class IssueService extends BaseService {
                     branchId: params.branchId == 99 ? params.branchId = "" : params.branchId,
                     code: params.code,
                     customerName: params.customerName,
-                    userName: params.userName
+                    userName: params.userName,
+                    dateFrom: params.dateFrom,
+                    dateTo: params.dateTo,
                 },
                 headers: {
                     headers,

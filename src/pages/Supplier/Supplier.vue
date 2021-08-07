@@ -32,8 +32,8 @@
                     type="text"
                     style="font-size: 13px;"
                     class="form-control"
-                    placeholder="Họ và tên"
-                    v-model.trim="search.fullName"
+                    placeholder="Name"
+                    v-model.trim="search.name"
                 />
                 </div>
             </div>
@@ -44,7 +44,7 @@
                     type="text"
                     style="font-size: 13px;"
                     class="form-control"
-                    placeholder="Email"
+                    placeholder="Address"
                     v-model.trim="search.address"
                 />
                 </div>
@@ -56,35 +56,31 @@
                     type="text"
                     style="font-size: 13px;"
                     class="form-control"
-                    placeholder="Điện thoại"
-                    v-model.trim="search.phoneNumber"
+                    placeholder="Phone"
+                    v-model.trim="search.phone"
                 />
                 </div>
             </div>
             
-            <div class="btn-fillter">
-                <div class="bf-detail" style="margin-top: 16px">
+            <div class="col-md-4 col-sm-4">
+                <div class="btn-fillter">
+                <div class="bf-detail" >
                 <button
                     @click.prevent="submitForm"
-                    class="btn btn-info"
+                    class="btn btn-success"
                     style="font-size: 13px; margin-right: 5px; color:white;"
                 >
-                    Lọc
+                    <b-icon icon="search"></b-icon>
                 </button>
                 <button
                     @click="clearSearch"
                     class="btn btn-dark"
                     style="font-size: 13px; margin-right: 5px;"
                 >
-                    Bỏ lọc
+                    <b-icon icon="x-circle" ></b-icon>
                 </button>
-                <!-- <button
-                    class="btn btn-success"
-                    style="font-size: 13px; margin-right: 5px;"
-                >
-                    Xuất Excel
-                </button> -->
                 </div>
+            </div>
             </div>
             </div>
         </div>
@@ -271,7 +267,7 @@ clearSearch () {
     this.dateRange.from = null
     this.dateRange.to = null
     this.search = {
-    page: 0,
+    page: 1,
     size: 10
     }
     this.fetchData()
