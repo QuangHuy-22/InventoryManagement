@@ -54,6 +54,7 @@
                     >
                         Adding Successful
                     </h3>
+                    <span>Need to import {{count}} item more</span>
                     </div>
                     <div class="buttonSubmitLogout">
                     <router-link to="/product/product-detail">
@@ -211,7 +212,8 @@ return {
         branchId:localStorage.getItem("branchId"),
         page:1,
         size:10,
-    }
+    },
+    count:""
 };
 },
 methods: {
@@ -223,6 +225,7 @@ async handleAddProductDetail() {
     );
     console.log(response);
     if (response.status == 200) {
+        this.count = response.data
         this.$bvModal.show("bv-modal-example-3");
     }
     if (response.status == 400) {

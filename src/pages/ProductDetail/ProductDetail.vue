@@ -210,7 +210,7 @@
             ></b-icon>
             </b-col>
             <div class="d-block text-center">
-            <span>{{ this.errorMessage }}</span>
+            <span>{{ errorMessage }}</span>
             </div>
             <div class="buttonSubmitLogout">
             <button
@@ -275,7 +275,7 @@ return {
     total: 20,
     },
     dataCount:{},
-    errorMessage:""
+    errorMessage:"",
 };
 },
 mounted() {
