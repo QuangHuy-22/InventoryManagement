@@ -185,7 +185,33 @@
                 </tbody>
             </table>
             </div>
-
+<!-- ----------modal error-------->
+        <b-modal
+            id="bv-modal-example-error-add-user"
+            hide-footer
+            hide-header
+        >
+            <b-col class="iconLogout mb-2">
+            <b-icon
+                icon="x-circle"
+                class="iconsBox"
+                style="color: red!important;"
+            ></b-icon>
+            </b-col>
+            <div class="d-block text-center">
+            <span>{{ this.errorMessage }}</span>
+            </div>
+            <div class="buttonSubmitLogout">
+            <button
+                class="buttonOK mt-3"
+                @click="$bvModal.hide('bv-modal-example-error-add-user')"
+                style="font-size: 13px;"
+            >
+                OK
+            </button>
+            </div>
+        </b-modal>
+        <!-- ----------end modal error-------->
             <!-- <div class="overflow-auto">
         <b-pagination
             v-model="search.page"
@@ -227,6 +253,7 @@ return {
     total: 20,
     },
     roleName:  localStorage.getItem('roleName'),
+    errorMessage: "",
 };
 },
 mounted() {
@@ -260,6 +287,11 @@ async deleteData(idProductInfo){
             this.fetchData()
             this.$bvModal.hide(idProductInfo)
         } 
+        else{
+            this.errorMessage = response.data
+            this.$bvModal.show("bv-modal-example-error-add-user")
+        }
+        
     },
 
 clearSearch() {

@@ -196,6 +196,33 @@
                         </b-modal>
                         </div>
                         <!-- ----end modal delete role------- -->
+                        <!-- ----------modal error-------->
+        <b-modal
+            id="bv-modal-example-error-add-user"
+            hide-footer
+            hide-header
+        >
+            <b-col class="iconLogout mb-2">
+            <b-icon
+                icon="x-circle"
+                class="iconsBox"
+                style="color: red!important;"
+            ></b-icon>
+            </b-col>
+            <div class="d-block text-center">
+            <span>{{ this.errorMessage }}</span>
+            </div>
+            <div class="buttonSubmitLogout">
+            <button
+                class="buttonOK mt-3"
+                @click="$bvModal.hide('bv-modal-example-error-add-user')"
+                style="font-size: 13px;"
+            >
+                OK
+            </button>
+            </div>
+        </b-modal>
+        <!-- ----------end modal error-------->
                         </div>
                     </b-dropdown>
                     </td>
@@ -247,7 +274,8 @@ return {
     pagination: {
     total: 20,
     },
-    dataCount:{}
+    dataCount:{},
+    errorMessage:""
 };
 },
 mounted() {
@@ -272,6 +300,10 @@ async deleteData(idProductDetail){
         if (response.status == 200) {
             this.fetchData()
             this.$bvModal.hide(idProductDetail)
+        }
+        else{
+            this.errorMessage = response.data
+            this.$bvModal.show("bv-modal-example-error-add-user")
         }
     },
     async fetchDataCountStatus() {
