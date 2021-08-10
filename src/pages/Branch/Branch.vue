@@ -83,6 +83,7 @@
                     <tr>
                     <th style="text-align: center">No.</th>
                     <th>Name</th>
+                    <th>Code</th>
                     <th>Address</th>
                     <th>Action</th>
                     </tr>
@@ -97,6 +98,7 @@
                         {{ index + 1 }}
                     </td>
                     <td>{{ branch.name }}</td>
+                    <td>{{ branch.code }}</td>
                     <td>{{ branch.address }}</td>
                     <td>
                         <b-dropdown

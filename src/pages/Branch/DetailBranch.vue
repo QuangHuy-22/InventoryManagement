@@ -17,7 +17,7 @@
         <!-- box-content -->
         <div class="card">
             <div class="card-body">
-            <h4 class="card-title mb-4">Code/ {{ dataDetail.code }}</h4>
+            <h4 class="card-title mb-4">Code: {{ dataDetail.code }}</h4>
             <form class="form-detail">
                 <div class="form-group row mb-0">
                 <label

@@ -10,10 +10,10 @@
 
 <!-- box-title -->
 <div class="box-title box-title-fix">
-    <h2 class="title-page">Update Category</h2>
+    <h2 class="title-page">Update Role</h2>
     <div class="btn-group float-right">
-        <form class="buttonLogout"  @submit.prevent="handleUpdateCategory"  >
-        <router-link to="/product/category">
+        <form class="buttonLogout"  @submit.prevent="handleUpdate"  >
+        <router-link to="/management/customer">
         <b-button  
         id="show-btn" 
         style="font-size: 13px; margin-right: 5px;" variant="outline-primary" 
@@ -36,10 +36,10 @@
             </b-col>
         <div class="d-block text-center" >
         <h3 
-        style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;">Update Successful!</h3>
+        style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;">Adding Successful!</h3>
         </div>
         <div class="buttonSubmitLogout">
-            <router-link to="/product/category">
+            <router-link to="/management/customer">
         <button  class="buttonOK mt-3"  style="font-size: 13px;">OK</button>
         </router-link>
         <!-- <button class="buttonNo mt-3" @click="$bvModal.hide('bv-modal-example')" style="font-size: 13px;" >Không</button> -->
@@ -56,49 +56,43 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="card-body">
-                <h4 class="card-title mb-3" style="font-size: 15px;">Information Category</h4>
-                <form class="needs-validation" >
-            <div class="col-sm-6" >
-                <div class="form-group form-erross">
-                    <label for="validationCustom01">Code</label>
-                    <v-text-field 
-                    type="text" 
-                    class="form-control" 
-                    style="padding: 3px 0px!important;"
-                    id="validationCustom01" 
-                    placeholder="" 
-                    value="" 
-                    required
-                    v-model="dataCategory.code">
-                    </v-text-field>
-                </div>
-                <div class="form-group form-erross">
-                    <label for="validationCustom01">Name</label>
-                    <v-text-field 
-                    type="text" 
-                    class="form-control" 
-                    style="padding: 3px 0px!important;"
-                    id="validationCustom01"
-                    placeholder="" 
-                    value="" 
-                    required
-                    v-model="dataCategory.name">
-                    </v-text-field>
-                </div>
-                <div class="form-group form-erross">
-                    <label for="validationCustom01">Description</label>
-                    <v-text-field 
-                    type="text" 
-                    class="form-control" 
-                    style="padding: 3px 0px!important;"
-                    id="validationCustom01" 
-                    placeholder="" 
-                    value="" 
-                    v-model="dataCategory.description">
-                    </v-text-field>
-                </div>
-                </div>
-            </form>
+                <h4 class="card-title mb-3" style="font-size: 15px;">Information Role</h4>
+                            <form class="needs-validation" >
+    <div class="form-group">
+        <label for="validationCustom01" style="display: flex;">Role Name <p style="color: red;">*</p></label>
+        <v-text-field 
+        type="text" 
+        class="form-control" 
+        style="padding: 3px 0px!important;"
+        id="validationCustom01" 
+        v-model="dataDetail.roleName"
+        placeholder="" 
+        value="" 
+        required 
+        >
+        </v-text-field>
+        <div class="invalid-feedback">
+            Please provide a valid city.
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="validationCustom01" style="display: flex;">Description<p style="color: red;">*</p></label>
+        <v-text-field 
+        type="text" 
+        class="form-control" 
+        style="padding: 3px 0px!important;"
+        id="validationCustom01" 
+        v-model="dataDetail.description"
+        placeholder="" 
+        value="" 
+        required 
+        >
+        </v-text-field>
+        <div class="invalid-feedback">
+            Please provide a valid city.
+        </div>
+    </div>
+</form>
             </div>
         </div>
     </div>
@@ -134,24 +128,24 @@ style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-
 </template>
 
 <script>
-import { CategoryService } from "@/services/category.service.js";
+import { RoleService } from "@/services/role.service";
 import index from '../components/index.vue';
 export default {
 components: { index },
     name:"update-user",
     data(){
         return{
-            idCategory: this.$route.params.id,
-            dataCategory: {},
+            idDetail: this.$route.params.id,
+            dataDetail: {},
             token: localStorage.getItem("token"),
             errorMessage:"",
             BASE_URL: this.$store.getters.BASE_URL,
         }
     },
     methods:{
-            async handleUpdateCategory(){
+            async handleUpdate(){
         try{
-            const response = await CategoryService.update(this.token, this.dataCategory, this.idCategory)
+            const response = await RoleService.update(this.token, this.dataDetail, this.idDetail)
             if(response.status == 200){
                 this.$bvModal.show('bv-modal-example-3')
             }
@@ -167,13 +161,16 @@ components: { index },
             return error.response;
         }
         },
-    async fetchData(){
-            const response = await CategoryService.getDetail(this.token ,this.idCategory) 
-            if (response.status == 200) {
-                console.log(response);
-                this.dataCategory = response.data
-            }
-        }
+    async fetchData() {
+    try {
+    const response = await RoleService.getDetail(this.token, this.idDetail);
+    if (response.status == 200) {
+        this.dataDetail = response.data;
+    }
+    } catch (error) {
+    return error
+    }
+}
     },
     mounted() {
         this.fetchData()

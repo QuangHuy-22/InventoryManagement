@@ -1,159 +1,257 @@
 <template>
-<div class="detail-user">
-<index />
-<div class="content-page">
-    <div class="main-content">
-    <div class="page-content">
-        <div class="container-fluid">
-        <div class="box-title">
-            <h2>Detail Issue</h2>
-            <div class=" float-right">
-            <router-link to="/inventory/issue" class="btn btn-dark">
-                Cancel
-            </router-link>
-            </div>
-        </div>
+<div class="update-user" style="">
+    <index />
+    <div class="content-page">
+<div class="main-content">
 
-        <!-- box-content -->
-        <div class="card">
+<div class="page-content">
+<div class="container-fluid">
+<!-- InstanceBeginEditable name="EditRegion1" -->
+
+<!-- box-title -->
+<div class="box-title box-title-fix">
+    <h2 class="title-page">Update Shelf</h2>
+    <div class="btn-group float-right">
+        <form class="buttonLogout"  @submit.prevent="handleUpdate"  >
+        <router-link to="/inventory/shelf">
+        <b-button  
+        id="show-btn" 
+        style="font-size: 13px; margin-right: 5px;" variant="outline-primary" 
+        v-b-modal.modal-center >
+            Cancel</b-button>
+            </router-link>
+        <b-button  
+        id="show-btn" 
+        type="submit"
+        style="font-size: 13px;" variant="outline-primary" 
+        v-b-modal.modal-center >
+        <b-icon icon="pencil-square" ></b-icon>
+        Update</b-button>
+        <div class="showLogout" >
+        <b-modal id="bv-modal-example-3" hide-footer hide-header >
+            <b-col class="iconLogout mb-2">
+            <div class="mb-img mb-4">
+                        <span><img src="@/assets/images/sussecc.svg" alt=""></span>
+                    </div>
+            </b-col>
+        <div class="d-block text-center" >
+        <h3 
+        style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;">Update Successful!</h3>
+        </div>
+        <div class="buttonSubmitLogout">
+            <router-link to="/inventory/shelf">
+        <button  class="buttonOK mt-3"  style="font-size: 13px;">OK</button>
+        </router-link>
+        <!-- <button class="buttonNo mt-3" @click="$bvModal.hide('bv-modal-example')" style="font-size: 13px;" >Không</button> -->
+        </div>
+        </b-modal>
+        </div>
+        </form>
+        
+    </div>
+</div>
+
+<!-- box-content -->
+<div class="card form-fix">
+    <div class="row">
+        <div class="col-sm-12">
             <div class="card-body">
-            <h4 class="card-title mb-4">Code/ {{ dataDetail.code }}</h4>
-            <form class="form-detail">
-                <div class="form-group row mb-0">
-                <label
-                    for="horizontal-firstname-input"
-                    class="col-sm-2 col-form-label"
-                    >ID</label
-                >
-                <div class="col-sm-10">
-                    <p class="form-control-plaintext">
-                    {{ dataDetail.id }}
-                    </p>
+                <h4 class="card-title mb-3" style="font-size: 15px;">Information Shelf</h4>
+                <form class="needs-validation" >
+            <div class="col-sm-6" >
+                <div class="form-group form-erross">
+                    <label for="validationCustom04">Branch Id</label>
+                <b-select class="form-control select2"  v-model="dataShelf.branchId">
+                    <option v-for="data in dataBranch" :key="data.id" :value="String(data.id)">{{data.name}}</option>
+                </b-select>
                 </div>
+                <div class="form-group form-erross">
+                    <label for="validationCustom01">Name</label>
+                    <v-text-field 
+                    type="text" 
+                    class="form-control" 
+                    style="padding: 3px 0px!important;"
+                    id="validationCustom01"
+                    placeholder="" 
+                    value="" 
+                    required
+                    v-model="dataShelf.name">
+                    </v-text-field>
                 </div>
-                <div class="form-group row mb-0">
-                <label
-                    for="horizontal-email-input"
-                    class="col-sm-2 col-form-label"
-                    >Name</label
-                >
-                <div class="col-sm-10">
-                    <p class="form-control-plaintext">
-                    {{ dataDetail.name }}
-                    </p>
+                <div class="form-group form-erross">
+                    <label for="validationCustom01">Description</label>
+                    <v-text-field 
+                    type="text" 
+                    class="form-control" 
+                    style="padding: 3px 0px!important;"
+                    id="validationCustom01" 
+                    placeholder="" 
+                    value="" 
+                    required
+                    v-model="dataShelf.description">
+                    </v-text-field>
                 </div>
+                <div class="form-group form-erross">
+                    <label for="validationCustom01">Total</label>
+                    <v-text-field 
+                    type="text" 
+                    class="form-control" 
+                    style="padding: 3px 0px!important;"
+                    id="validationCustom01" 
+                    placeholder="" 
+                    value="" 
+                    v-model="dataShelf.total">
+                    </v-text-field>
                 </div>
-                <div class="form-group row mb-0">
-                <label
-                    for="horizontal-password-input"
-                    class="col-sm-2 col-form-label"
-                    >Description</label
-                >
-                <div class="col-sm-10">
-                    <p class="form-control-plaintext">
-                    {{ dataDetail.description }}
-                    </p>
-                </div>
-                </div>
-                <div class="form-group row mb-0">
-                <label
-                    for="horizontal-password-input"
-                    class="col-sm-2 col-form-label"
-                    >Create Date</label
-                >
-                <div class="col-sm-10">
-                    <p class="form-control-plaintext">
-                    {{ dataDetail.createDate }}
-                    </p>
-                </div>
-                </div>
-                <div class="form-group row mb-0">
-                <label
-                    for="horizontal-password-input"
-                    class="col-sm-2 col-form-label"
-                    >Update Date</label
-                >
-                <div class="col-sm-10">
-                    <p class="form-control-plaintext">
-                    {{ dataDetail.updateDate }}
-                    </p>
-                </div>
+                
                 </div>
             </form>
             </div>
         </div>
-        </div>
     </div>
-    </div>
+            
+</div>
+<!-- Modal Cập nhật -->
+    <!-- ----------modal error-------->
+<b-modal id="bv-modal-example-error-update-user" hide-footer hide-header >
+<b-col class="iconLogout mb-2">
+<b-icon icon="x-circle" class="iconsBox" style="color: red!important;"></b-icon>
+</b-col>
+<div class="d-block text-center" >
+<h3 
+style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;">Error!</h3>
+<span>{{ this.errorMessage }}</span>
+</div>
+<div class="buttonSubmitLogout">
+<!-- <router-link to="/list-role"> -->
+<button class="buttonOK mt-3" @click="$bvModal.hide('bv-modal-example-error-update-user')"  style="font-size: 13px;">OK</button>
+<!-- </router-link> -->
+</div>
+</b-modal>
+<!-- ----------end modal error-------->
+
 </div>
 </div>
+<!-- End Page-content -->
+</div>
+<!-- end main content-->
+    </div>
+    </div>
+
 </template>
 
 <script>
-import { CategoryService } from "@/services/category.service.js";
-import index from "../../components/index.vue";
+import { ShelfService } from "@/services/shelf.service.js";
+import { BranchService } from "@/services/branch.service";
+import index from '../../components/index.vue';
 export default {
-components: { index, },
-name: "detail-user",
-data() {
-return {
-    idDetail: this.$route.params.id,
-    token: localStorage.getItem("token"),
-    dataDetail: {},
-};
-},
-
-created () {
-this.fetchData();
-},
-
-methods: {
-async fetchData() {
+components: { index },
+    name:"update-user",
+    data(){
+        return{
+            idShelf: this.$route.params.id,
+            dataCategory: {},
+            token: localStorage.getItem("token"),
+            errorMessage:"",
+            BASE_URL: this.$store.getters.BASE_URL,
+            dataBranch:{},
+            dataShelf:{
+            },
+            search:{
+            page:1,
+            size:10
+        }
+        }
+    },
+    methods:{
+            async handleUpdate(){
+        try{
+            const response = await ShelfService.update(this.token, this.dataShelf, this.idShelf)
+            if(response.status == 200){
+                this.$bvModal.show('bv-modal-example-3')
+            }
+            else if (response.status == 400) {
+                this.$bvModal.show("bv-modal-example-error-update-user")
+                this.errorMessage = response.data
+            }
+            else(
+            this.$bvModal.show("bv-modal-example-error-update-user")
+            )
+        }
+        catch(error){
+            return error.response;
+        }
+        },
+    async fetchData(){
+            const response = await ShelfService.getDetail(this.token ,this.idShelf) 
+            if (response.status == 200) {
+                console.log(response);
+                this.dataShelf = response.data
+            }
+        },
+        async fetchDataBranch(){
     try {
-    const response = await CategoryService.getDetail(this.token, this.idDetail);
-    if (response.status == 200) {
-        this.dataDetail = response.data;
+        const response = await BranchService.getList(this.token, this.search)
+        if (response.status == 200) {
+            this.dataBranch = response.data.listData
+            console.log();
+        }
+    }catch(error){
+        console.log(error.response);
     }
-    } catch (error) {
-    return error
-    }
-}
-}
+    },
+    },
+    mounted() {
+        this.fetchData()
+    this.fetchDataBranch()
+    
+},
 };
 </script>
 
-<style scoped>
-.content-page {
-background-color: #ffff;
-padding-left: 230px;
+<style>
+.theme--light.v-messages{
+    color: #D8000C!important;
 }
-.main-content {
-background-color: #f8f8fb !important;
-padding: 20px;
-margin-top: 70px !important;
+.v-messages {
+    color: #D8000C!important;
 }
-.card-title {
-font-size: 15px !important;
+.content-page{
+    background-color: #ffff; 
+    padding-left:230px
+    
 }
-.form-control-plaintext {
-font-size: 13px;
-padding: 0px !important;
+.main-content{
+    background-color: #F8F8FB!important;
+    padding:20px;
+    margin-top: 70px!important;
 }
-.col-sm-10 {
-padding: 7px 0px;
+.buttonOK{
+    color: #fff;
+    background-color: #008BF4!important;
+    border-color: #008BF4!important;
+    min-width: 110px;
+    margin: 8px;
+    padding-top: 7.5px;
+    padding-bottom: 7.5px;
+    border-radius: .25rem
 }
 @media (max-width: 576px) {
 .content-page,
 .container-sm {
 max-width: 540px;
-padding-left: 0px !important;
+padding-left: 0px!important;
 }
-#sidebar-menu {
-display: none !important;
+#sidebar-menu{
+display: none!important;;
 }
+.title-page{
+    font-size: 12px!important;
 }
+} 
 @media (min-width: 768px) {
-}
+
+} 
 @media (min-width: 992px) {
 .container,
 .container-lg,

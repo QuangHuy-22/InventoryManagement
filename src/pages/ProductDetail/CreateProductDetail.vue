@@ -54,7 +54,7 @@
                     >
                         Adding Successful
                     </h3>
-                    <span>Need to import {{count}} item more</span>
+                    <span>Need to import {{count}} items more</span>
                     </div>
                     <div class="buttonSubmitLogout">
                     <router-link to="/product/product-detail">

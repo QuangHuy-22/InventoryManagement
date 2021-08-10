@@ -163,7 +163,7 @@ const routes = [{
             component: AssignRole,
         },
         {
-            path: '/management/list-role/update-role/:code',
+            path: '/management/list-role/update-role/:id',
             name: 'UpdateRole',
             component: UpdateRole,
         },

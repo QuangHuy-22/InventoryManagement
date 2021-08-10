@@ -84,4 +84,19 @@ export class RoleService extends BaseService {
             return error.response
         }
     }
+    static async update(token, data, idDetail) {
+        try {
+            const response = await axios({
+                method: "put",
+                url: `${BASE_URL}/api/roles/edit/${idDetail}`,
+                headers: {
+                    AuthToken: token,
+                },
+                data: data,
+            });
+            return response;
+        } catch (error) {
+            return error.response
+        }
+    }
 }

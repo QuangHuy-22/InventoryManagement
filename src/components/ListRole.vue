@@ -82,9 +82,9 @@
         <b-dropdown-item @click="detail(dataRoles.id)">
             Detail
         </b-dropdown-item>
-        <b-dropdown-item @click="update(dataRoles.id)">
+        <!-- <b-dropdown-item @click="update(dataRoles.id)">
             Update
-        </b-dropdown-item>
+        </b-dropdown-item> -->
         <b-dropdown-item  @click="$bvModal.show(String(dataRoles.id))"  >
             Delete
             </b-dropdown-item>
