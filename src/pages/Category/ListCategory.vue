@@ -194,10 +194,10 @@ export default {
       },
       search: {
         page: 1,
-        size:20
+        size:2
       },
       pagination: {
-        total: 20,
+        total: 0,
       },
       roleName:  localStorage.getItem('roleName'),
     };
@@ -212,6 +212,7 @@ export default {
         if (response.status == 200) {
           this.dataCategory = response.data.listData;
           this.pagination.total = response.data.count;
+          console.log(this.pagination.total);
         }
         console.log(response);
       } catch (error) {
