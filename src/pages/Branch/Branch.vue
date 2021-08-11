@@ -95,7 +95,7 @@
                     :key="index"
                     >
                     <td style="text-align: center">
-                        {{ index + 1 }}
+                        {{  search.size * (search.page - 1) + index + 1 }}
                     </td>
                     <td>{{ branch.name }}</td>
                     <td>{{ branch.code }}</td>
@@ -147,7 +147,10 @@
             </div>
 
             <div class="overflow-auto">
-                <b-pagination
+            <div class="d-flex">
+            <div v-for="number in numberSize" :key="number" @click="changeSize(number)"><span class="numberSize" >{{number}}</span></div>
+            </div>
+            <b-pagination
                 v-model="search.page"
                 :total-rows="pagination.total"
                 :per-page="search.size"
@@ -156,7 +159,7 @@
                 next-text="Next"
                 last-text="Last"
                 class="pagination mt-4"
-                ></b-pagination>
+            ></b-pagination>
             </div>
             </div>
         </div>
@@ -201,8 +204,10 @@
 import index from "../../components/index.vue";
 import FooterContent from "../../components/FooterContent.vue";
 import { BranchService } from "@/services/branch.service.js";
+import prepareQueryParamsMixin from '../../mixins/prepareQueryParamsMixin'
 export default {
 components: { index, FooterContent },
+mixins: [prepareQueryParamsMixin],
 name: "list-categoty",
 data() {
 return {
@@ -214,11 +219,12 @@ return {
     },
     search: {
     page: 1,
-    size: 20,
+    size: 5,
     },
     pagination: {
-    total: 20,
+    total: 0,
     },
+    numberSize:[3 , 5, 10 , 15],
 };
 },
 mounted() {
@@ -260,18 +266,35 @@ clearSearch() {
     this.dateRange.from = null;
     this.dateRange.to = null;
     this.search = {
-    page: 0,
-    size: 20,
+    page: 1,
+    size: 5,
+    };
+    this.fetchData();
+},
+changeSize(number){
+    this.search = {
+    page: this.search.page,
+    size: number,
     };
     this.fetchData();
 },
 },
-"search.page": function() {
-this.$router.push({
-    path: "/product/category",
-    query: this.useInUrlQueryPropList,
-});
-this.fetchData();
+computed: {
+useInUrlQueryPropList () {
+    return this.prepareQueryParamsMixin({
+    page: this.search.page
+    })
+}
+},
+
+watch: {
+'search.page': function () {
+    this.$router.push({
+    path: '/management/branch',
+    query: this.useInUrlQueryPropList
+    })
+    this.fetchData()
+}
 },
 };
 </script>
@@ -468,6 +491,11 @@ border-radius: 4px;
 }
 .pagination {
 justify-content: flex-end !important;
+}
+.numberSize{
+padding: 0px 10px 0px 10px;
+color:#A52A2A;
+cursor: pointer;
 }
 @media (max-width: 576px) {
 .content-page,

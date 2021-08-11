@@ -132,7 +132,7 @@
                 <tbody>
                 <tr v-for="(producInfo, index) in dataProductInfo" :key="index">
                     <td style="text-align: center">
-                    {{ index + 1 }}
+                    {{ search.size * (search.page - 1) + index + 1 }}
                     </td>
                     <td>{{ producInfo.name }}</td>
                     <td>{{ producInfo.description }}</td>
@@ -212,18 +212,21 @@
             </div>
         </b-modal>
         <!-- ----------end modal error-------->
-            <!-- <div class="overflow-auto">
-        <b-pagination
-            v-model="search.page"
-            :total-rows="pagination.total"
-            :per-page="search.size"
-            first-text="First"
-            prev-text="Previous"
-            next-text="Next"
-            last-text="Last"
-            class="pagination mt-4"
-        ></b-pagination>
-        </div> -->
+            <div class="overflow-auto">
+            <div class="d-flex">
+            <div v-for="number in numberSize" :key="number" @click="changeSize(number)"><span class="numberSize" >{{number}}</span></div>
+            </div>
+            <b-pagination
+                v-model="search.page"
+                :total-rows="pagination.total"
+                :per-page="search.size"
+                first-text="First"
+                prev-text="Previous"
+                next-text="Next"
+                last-text="Last"
+                class="pagination mt-4"
+            ></b-pagination>
+            </div>
         </div>
         </div>
     </div>
@@ -238,8 +241,10 @@
 import index from "../../components/index.vue";
 import FooterContent from "../../components/FooterContent.vue";
 import { ProducInfoService } from "@/services/producInfo.service.js";
+import prepareQueryParamsMixin from '../../mixins/prepareQueryParamsMixin'
 export default {
 components: { index, FooterContent },
+mixins: [prepareQueryParamsMixin],
 name: "list-product-info",
 data() {
 return {
@@ -247,13 +252,14 @@ return {
     dataProductInfo: [],
     search: {
     page: 1,
-    size: 20,
+    size: 5,
     },
     pagination: {
-    total: 20,
+    total: 0,
     },
     roleName:  localStorage.getItem('roleName'),
     errorMessage: "",
+    numberSize:[3 , 5, 10 , 15],
 };
 },
 mounted() {
@@ -265,7 +271,7 @@ methods: {
             const response = await ProducInfoService.getList(this.token, this.search);
     if (response.status == 200) {
         this.dataProductInfo = response.data.listData;
-        this.pagination.total = response.data.total;
+        this.pagination.total = response.data.count;
     }
     } catch (error) {
     console.log(error.response);
@@ -301,14 +307,32 @@ clearSearch() {
     };
     this.fetchData();
 },
+changeSize(number){
+    this.search = {
+    page: this.search.page,
+    size: number,
+    };
+    this.fetchData();
+}
 },
-"search.page": function() {
-this.$router.push({
-    path: "/product/product-info",
-    query: this.useInUrlQueryPropList,
-});
-this.fetchData();
+computed: {
+useInUrlQueryPropList () {
+    return this.prepareQueryParamsMixin({
+    page: this.search.page
+    })
+}
 },
+
+watch: {
+'search.page': function () {
+    this.$router.push({
+    path: '/product/product-info',
+    query: this.useInUrlQueryPropList
+    })
+    this.fetchData()
+}
+},
+
 };
 </script>
 
@@ -481,6 +505,11 @@ img{
 .price{
     font-size: 16px;
     color: #1E90FF;
+}
+.numberSize{
+  padding: 0px 10px 0px 10px;
+  color:#A52A2A;
+  cursor: pointer;
 }
 @media (max-width: 576px) {
 .content-page,

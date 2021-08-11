@@ -145,9 +145,9 @@
                 </thead>
 
                 <tbody>
-                <tr v-for="(data, index) in dataProductDetail" :key="index">
+                <tr v-for="(data, itemObjKey) in dataProductDetail" :key="itemObjKey">
                     <td style="text-align: center">
-                    {{ index + 1 }}
+                    {{ search.size * (search.page - 1) + itemObjKey + 1 }}
                     </td>
                     <td>{{ data.productName }}</td>
                     <td><img  :src="data.imgUrl" /></td>
@@ -231,18 +231,21 @@
             </table>
             </div>
 
-            <!-- <div class="overflow-auto">
-        <b-pagination
-            v-model="search.page"
-            :total-rows="pagination.total"
-            :per-page="search.size"
-            first-text="First"
-            prev-text="Previous"
-            next-text="Next"
-            last-text="Last"
-            class="pagination mt-4"
-        ></b-pagination>
-        </div> -->
+        <div class="overflow-auto">
+            <div class="d-flex">
+            <div v-for="number in numberSize" :key="number" @click="changeSize(number)"><span class="numberSize" >{{number}}</span></div>
+            </div>
+            <b-pagination
+                v-model="search.page"
+                :total-rows="pagination.total"
+                :per-page="search.size"
+                first-text="First"
+                prev-text="Previous"
+                next-text="Next"
+                last-text="Last"
+                class="pagination mt-4"
+            ></b-pagination>
+            </div>
         </div>
         </div>
     </div>
@@ -258,9 +261,10 @@
 import index from "../../components/index.vue";
 import FooterContent from "../../components/FooterContent.vue";
 import { ProducDetailService } from "@/services/productDetail.service.js";
-
+import prepareQueryParamsMixin from '../../mixins/prepareQueryParamsMixin'
 export default {
 components: { index, FooterContent },
+  mixins: [prepareQueryParamsMixin],
 name: "list-vat-detail",
 data() {
 return {
@@ -268,14 +272,15 @@ return {
     dataProductDetail:[],
     search: {
     page: 1,
-    size: 20,
+    size: 5,
     status:"VALID"
     },
     pagination: {
-    total: 20,
+    total: 0,
     },
     dataCount:{},
     errorMessage:"",
+        numberSize:[3 , 5, 10 , 15],
 };
 },
 mounted() {
@@ -288,7 +293,7 @@ async fetchData() {
     const response = await ProducDetailService.getList(this.token, this.search);
     if (response.status == 200) {
         this.dataProductDetail = response.data.listData;
-        this.pagination.total = response.data.total;
+        this.pagination.total = response.data.count;
     }
     console.log(response);
     } catch (error) {
@@ -343,13 +348,31 @@ clearSearch() {
     };
     this.fetchData();
 },
+changeSize(number){
+    this.search = {
+    page: this.search.page,
+    size: number,
+    status:this.search.status
+    };
+    this.fetchData();
+}
 },
-"search.page": function() {
-this.$router.push({
-    path: "/product/product-detail",
-    query: this.useInUrlQueryPropList,
-});
-this.fetchData();
+computed: {
+useInUrlQueryPropList () {
+    return this.prepareQueryParamsMixin({
+    page: this.search.page
+    })
+}
+},
+
+watch: {
+'search.page': function () {
+    this.$router.push({
+    path: '/product/product-detail',
+    query: this.useInUrlQueryPropList
+    })
+    this.fetchData()
+}
 },
 };
 </script>
@@ -532,6 +555,11 @@ img{
 .price{
     font-size: 16px;
     color: #1E90FF;
+}
+.numberSize{
+  padding: 0px 10px 0px 10px;
+  color:#A52A2A;
+  cursor: pointer;
 }
 @media (max-width: 576px) {
 .content-page,

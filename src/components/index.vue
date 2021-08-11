@@ -221,7 +221,7 @@
                 <div class="content-sidebar" >
                 <router-link to='/inventory/issue-detail' style="color: #474D52;">
                         <li>
-                <b-icon icon="calendar3-event" style="padding-right: 25px; text-decoration: none;"></b-icon>
+                <b-icon icon="card-text" style="padding-right: 25px; text-decoration: none;"></b-icon>
                 <span key="t-utility">Issue Detail</span>
                 </li>
                 </router-link>
@@ -230,7 +230,7 @@
                 <div class="content-sidebar" >
                 <router-link to='/inventory/shelf' style="color: #474D52;">
                         <li>
-                <b-icon icon="calendar3-event" style="padding-right: 25px; text-decoration: none;"></b-icon>
+                <b-icon icon="bookshelf" style="padding-right: 25px; text-decoration: none;"></b-icon>
                 <span key="t-utility">Shelf</span>
                 </li>
                 </router-link>
@@ -257,7 +257,7 @@
                 <div class="content-sidebar"  v-if="roleName == 'ADMIN'" >
                 <router-link to='/management/branch' style="color: #474D52;">
                         <li>
-                <b-icon icon="person-circle" style="padding-right: 25px; text-decoration: none;"></b-icon>
+                <b-icon icon="building" style="padding-right: 25px; text-decoration: none;"></b-icon>
                 <span key="t-utility">Branch</span>
                 </li>
                 </router-link>

@@ -248,17 +248,20 @@
                 </div>
 
                 <div class="overflow-auto">
-                <b-pagination
-                    v-model="params.page"
-                    :total-rows="pagination.total"
-                    :per-page="params.size"
-                    first-text="First"
-                    prev-text="Previous"
-                    next-text="Next"
-                    last-text="Last"
-                    class="pagination mt-4"
-                ></b-pagination>
-                </div>
+            <div class="d-flex">
+            <div v-for="number in numberSize" :key="number" @click="changeSize(number)"><span class="numberSize" >{{number}}</span></div>
+            </div>
+            <b-pagination
+                v-model="search.page"
+                :total-rows="pagination.total"
+                :per-page="search.size"
+                first-text="First"
+                prev-text="Previous"
+                next-text="Next"
+                last-text="Last"
+                class="pagination mt-4"
+            ></b-pagination>
+            </div>
             </div>
             </div>
         </div>
@@ -333,6 +336,7 @@ return {
     emailHome: localStorage.getItem("email"),
     errorMessage:"",
     roleName:  localStorage.getItem('roleName'),
+    numberSize:[3 , 5, 10 , 15],
 };
 },
 
@@ -413,6 +417,15 @@ async exportExcel () {
     size:20,
     type:1,
     branchId:localStorage.getItem("branchId"), 
+    };
+    this.fetchData();
+},
+changeSize(number){
+    this.search = {
+    page: this.search.page,
+    type: this.search.type,
+    size: number,
+    branchId: localStorage.getItem("branchId"),
     };
     this.fetchData();
 },
@@ -519,6 +532,11 @@ border-bottom: 2px solid #556ee6 !important;
 }
 .card {
 box-shadow: 0 0.75rem 1.5rem rgb(18 38 63 / 3%) !important;
+}
+.numberSize{
+padding: 0px 10px 0px 10px;
+color:#A52A2A;
+cursor: pointer;
 }
 @media (max-width: 576px) {
 .content-page,

@@ -95,7 +95,7 @@
                 <tbody>
                 <tr v-for="(category, index) in dataCategory" :key="index">
                     <td style="text-align: center">
-                    {{index + 1}}
+                    {{search.size * (search.page - 1) + index + 1}}
                     </td>
                     <td>{{ category.code }}</td>
                     <td>{{ category.name }}</td>
@@ -127,6 +127,9 @@
             </div>
 
             <div class="overflow-auto">
+              <div class="d-flex">
+              <div v-for="number in numberSize" :key="number" @click="changeSize(number)"><span class="numberSize" >{{number}}</span></div>
+              </div>
             <b-pagination
                 v-model="search.page"
                 :total-rows="pagination.total"
@@ -181,20 +184,23 @@
 import index from "../../components/index.vue";
 import FooterContent from "../../components/FooterContent.vue";
 import { CategoryService } from "@/services/category.service.js";
+import prepareQueryParamsMixin from '../../mixins/prepareQueryParamsMixin'
 export default {
   components: { index, FooterContent },
   name: "list-categoty",
+  mixins: [prepareQueryParamsMixin],
   data() {
     return {
       token: localStorage.getItem("token"),
       dataCategory: [],
+      numberSize:[3 , 5, 10 , 15],
       dateRange: {
         from: null,
         to: null,
       },
       search: {
         page: 1,
-        size:2
+        size:5,
       },
       pagination: {
         total: 0,
@@ -212,9 +218,7 @@ export default {
         if (response.status == 200) {
           this.dataCategory = response.data.listData;
           this.pagination.total = response.data.count;
-          console.log(this.pagination.total);
         }
-        console.log(response);
       } catch (error) {
         console.log(error.response);
       }
@@ -241,18 +245,35 @@ export default {
     clearSearch() {
       this.search = {
         page: 1,
-        size: 20,
+        size: 5,
       };
       this.fetchData();
     },
+    changeSize(number){
+      this.search = {
+        page: this.search.page,
+        size: number,
+      };
+      this.fetchData();
+    }
   },
-  'search.page': function () {
+  computed: {
+    useInUrlQueryPropList () {
+      return this.prepareQueryParamsMixin({
+        page: this.search.page
+      })
+    }
+  },
+
+  watch: {
+    'search.page': function () {
       this.$router.push({
         path: '/product/category',
         query: this.useInUrlQueryPropList
       })
       this.fetchData()
     }
+  },
 
 };
 </script>
@@ -446,6 +467,11 @@ export default {
 .three-dot {
   border: 0.1px solid #f2f2f2;
   border-radius: 4px;
+}
+.numberSize{
+  padding: 0px 10px 0px 10px;
+  color:#A52A2A;
+  cursor: pointer;
 }
 .pagination {
   justify-content: flex-end !important;

@@ -174,7 +174,7 @@
                 <tbody>
                 <tr v-for="(vat, index) in dataVAT" :key="index">
                     <td style="text-align: center">
-                    {{ index + 1 }}
+                    {{ search.size * (search.page - 1) + index + 1 }}
                     </td>
                     <td @click="vatCode(vat.code)" class="code-vat">
                     {{ vat.code }}
@@ -237,18 +237,21 @@
             </table>
             </div>
 
-            <!-- <div class="overflow-auto">
-    <b-pagination
-        v-model="search.page"
-        :total-rows="pagination.total"
-        :per-page="search.size"
-        first-text="First"
-        prev-text="Previous"
-        next-text="Next"
-        last-text="Last"
-        class="pagination mt-4"
-    ></b-pagination>
-    </div> -->
+        <div class="overflow-auto">
+            <div class="d-flex">
+            <div v-for="number in numberSize" :key="number" @click="changeSize(number)"><span class="numberSize" >{{number}}</span></div>
+            </div>
+            <b-pagination
+                v-model="search.page"
+                :total-rows="pagination.total"
+                :per-page="search.size"
+                first-text="First"
+                prev-text="Previous"
+                next-text="Next"
+                last-text="Last"
+                class="pagination mt-4"
+            ></b-pagination>
+            </div>
         </div>
         </div>
     </div>
@@ -313,8 +316,10 @@ import index from "../../components/index.vue";
 import FooterContent from "../../components/FooterContent.vue";
 import { VATService } from "@/services/vat.service.js";
 import { BranchService } from "@/services/branch.service.js";
+import prepareQueryParamsMixin from '../../mixins/prepareQueryParamsMixin'
 export default {
 components: { index, FooterContent },
+mixins: [prepareQueryParamsMixin],
 name: "list-vat",
 data() {
 return {
@@ -326,18 +331,18 @@ return {
     to: null,
     },
     search: {
-    dateTo: null,
     page: 1,
-    size: 20,
+    size: 5,
     branchId: localStorage.getItem("branchId"),
     },
     checkBranchId: localStorage.getItem("branchId"),
     pagination: {
-    total: 20,
+    total: 0,
     },
     errorMessage:"",
     dataBranch:{},
     roleName:  localStorage.getItem('roleName'),
+    numberSize:[3 , 5, 10 , 15],
 };
 },
 mounted() {
@@ -353,7 +358,7 @@ async fetchData() {
     const response = await VATService.getList(this.token, this.search);
     if (response.status == 200) {
         this.dataVAT = response.data.listData;
-        this.pagination.total = response.data.total;
+        this.pagination.total = response.data.count;
     }
     } catch (error) {
     console.log(error.response);
@@ -409,13 +414,30 @@ clearSearch() {
     };
     this.fetchData();
 },
+changeSize(number){
+    this.search = {
+    page: this.search.page,
+    size: number,
+    };
+    this.fetchData();
+}
 },
-"search.page": function() {
-this.$router.push({
-    path: "/inventory/vat",
-    query: this.useInUrlQueryPropList,
-});
-this.fetchData();
+computed: {
+useInUrlQueryPropList () {
+    return this.prepareQueryParamsMixin({
+    page: this.search.page
+    })
+}
+},
+
+watch: {
+'search.page': function () {
+    this.$router.push({
+    path: '/inventory/vat',
+    query: this.useInUrlQueryPropList
+    })
+    this.fetchData()
+}
 },
 };
 </script>
@@ -592,7 +614,11 @@ color: #74788d;
     font-size: 16px;
     color: #008bf4;
 }
-
+.numberSize{
+padding: 0px 10px 0px 10px;
+color:#A52A2A;
+cursor: pointer;
+}
 @media (max-width: 576px) {
 .content-page,
 .container-sm {

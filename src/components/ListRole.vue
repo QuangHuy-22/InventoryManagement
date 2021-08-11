@@ -115,21 +115,24 @@
 <!-- ----- table find role---- -->
 
 <!-- -----end table find role---- -->
-<nav aria-label="Page navigation example" class="mt-3">
-    <div class="pagination justify-content-end mb-0">
-        <div class="overflow-auto">
-                    <b-pagination
-                    v-model="search.page"
-                    :total-rows="pagination.total"
-                    :per-page="search.size"
-                    first-text="First"
-                    prev-text="Previous"
-                    next-text="Next"
-                    last-text="Last"
-                    class="pagination mt-4"
-                    ></b-pagination>
-                </div>
+    <div class="d-flex">
+    <div v-for="number in numberSize" :key="number" @click="changeSize(number)"><span class="numberSize" >{{number}}</span></div>
     </div>
+<nav aria-label="Page navigation example" class="mt-3">
+<div class="pagination justify-content-end mb-0">
+<div class="overflow-auto">
+    <b-pagination
+        v-model="search.page"
+        :total-rows="pagination.total"
+        :per-page="search.size"
+        first-text="First"
+        prev-text="Previous"
+        next-text="Next"
+        last-text="Last"
+        class="pagination mt-4"
+    ></b-pagination>
+    </div>
+</div>
 </nav>
 
 </div>
@@ -166,11 +169,12 @@ components: { index, FooterContent },
         
         search: {
             page: 1,
-            size: 10,
+            size: 5,
         },
         pagination: {
-            total: 20
+            total: 0
         },
+        numberSize:[3 , 5, 10 , 15],
         }
     },
     mounted() {
@@ -182,7 +186,7 @@ methods:{
         const response = await RoleService.getList(this.token, this.search)
         if (response.status == 200) {
             this.dataRole = response.data.listData
-            this.pagination = response.data.count
+            this.pagination.total = response.data.count
         }
     }catch(error){
         console.log(error.response);
@@ -213,6 +217,13 @@ methods:{
         // this.pagination.page = 1
         this.fetchData()
     },
+    changeSize(number){
+    this.search = {
+    page: this.search.page,
+    size: number,
+    };
+    this.fetchData();
+},
 }, 
 
     computed: {
@@ -247,6 +258,11 @@ box-shadow: 0 0.75rem 1.5rem rgb(18 38 63 / 3%) !important;
     background-color: #F8F8FB!important;
     padding:20px;
     margin-top: 70px!important;
+}
+.numberSize{
+padding: 0px 10px 0px 10px;
+color:#A52A2A;
+cursor: pointer;
 }
 @media (max-width: 576px) {
 .content-page,

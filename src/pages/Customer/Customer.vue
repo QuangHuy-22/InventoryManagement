@@ -106,7 +106,7 @@
                 <tbody>
                 <tr v-for="(customer, index) in dataCustomer" :key="index">
                     <td style="text-align: center">
-                    {{index + 1}}
+                    {{ search.size * (search.page - 1) + index + 1}}
                     </td>
                     <td>{{ customer.name }}</td>
                     <td>{{ customer.address }}</td>
@@ -161,6 +161,19 @@
             </div>
 
             <div class="overflow-auto">
+            <div class="d-flex">
+            <div v-for="number in numberSize" :key="number" @click="changeSize(number)"><span class="numberSize" >{{number}}</span></div>
+            </div>
+            <b-pagination
+                v-model="search.page"
+                :total-rows="pagination.total"
+                :per-page="search.size"
+                first-text="First"
+                prev-text="Previous"
+                next-text="Next"
+                last-text="Last"
+                class="pagination mt-4"
+            ></b-pagination>
             </div>
 
         </div>
@@ -196,9 +209,10 @@
 import index from "../../components/index.vue";
 import FooterContent from "../../components/FooterContent.vue";
 import { CustomerService } from "@/services/customer.service";
-
+import prepareQueryParamsMixin from '../../mixins/prepareQueryParamsMixin'
 export default {
 components: { index, FooterContent, },
+mixins: [prepareQueryParamsMixin],
 name: "customer",
 data() {
 return {
@@ -211,11 +225,12 @@ return {
     },
     search: {
     page: 1,
-    size: 10
+    size: 5
     },
     pagination: {
-    total: 20
+    total: 0
     },
+    numberSize:[3 , 5, 10 , 15],
 };
 },
 created() {
@@ -227,7 +242,7 @@ async fetchData() {
     const response = await CustomerService.getList(this.token, this.search);
     if (response.status === 200) {
         this.dataCustomer = response.data.listData;
-        this.pagination.total = response.data.total
+        this.pagination.total = response.data.count
     }
     } catch (error) {
     console.log(error);
@@ -264,7 +279,15 @@ clearSearch () {
     size: 10
     }
     this.fetchData()
-}
+},
+changeSize(number){
+    this.search = {
+    page: this.search.page,
+    size: number,
+    branchId: localStorage.getItem("branchId"),
+    };
+    this.fetchData();
+},
 },
 
 computed: {
@@ -272,6 +295,16 @@ useInUrlQueryPropList () {
     return this.prepareQueryParamsMixin({
     page: this.search.page
     })
+}
+},
+
+watch: {
+'search.page': function () {
+    this.$router.push({
+    path: '/management/customer',
+    query: this.useInUrlQueryPropList
+    })
+    this.fetchData()
 }
 },
 
@@ -469,6 +502,11 @@ justify-content: flex-end !important;
 }
 .card {
 box-shadow: 0 0.75rem 1.5rem rgb(18 38 63 / 3%) !important;
+}
+.numberSize{
+padding: 0px 10px 0px 10px;
+color:#A52A2A;
+cursor: pointer;
 }
 @media (max-width: 576px) {
 .content-page,

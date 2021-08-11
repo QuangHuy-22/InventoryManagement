@@ -180,17 +180,20 @@
               </div>
 
               <div class="overflow-auto">
-                <b-pagination
-                  v-model="search.page"
-                  :total-rows="pagination.total"
-                  :per-page="search.size"
-                  first-text="First"
-                  prev-text="Previous"
-                  next-text="Next"
-                  last-text="Last"
-                  class="pagination mt-4"
-                ></b-pagination>
-              </div>
+            <div class="d-flex">
+            <div v-for="number in numberSize" :key="number" @click="changeSize(number)"><span class="numberSize" >{{number}}</span></div>
+            </div>
+            <b-pagination
+                v-model="search.page"
+                :total-rows="pagination.total"
+                :per-page="search.size"
+                first-text="First"
+                prev-text="Previous"
+                next-text="Next"
+                last-text="Last"
+                class="pagination mt-4"
+            ></b-pagination>
+            </div>
 
             </div>
           </div>
@@ -252,12 +255,13 @@ export default {
       },
       search: {
         page: 1,
-        size: 10
+        size: 5
       },
       pagination: {
-        total: 20
+        total: 0
       },
       roleName:  localStorage.getItem('roleName'),
+      numberSize:[3 , 5, 10 , 15],
     };
   },
   created() {
@@ -301,10 +305,17 @@ export default {
     clearSearch () {
       this.search = {
         page: 1,
-        size: 10
+        size: 5
       }
       this.fetchData()
-    }
+    },
+    changeSize(number){
+    this.search = {
+    page: this.search.page,
+    size: number,
+    };
+    this.fetchData();
+},
   },
 
   computed: {
@@ -515,6 +526,11 @@ export default {
 }
 .pagination {
   justify-content: flex-end !important;
+}
+.numberSize{
+padding: 0px 10px 0px 10px;
+color:#A52A2A;
+cursor: pointer;
 }
 @media (max-width: 576px) {
   .content-page,

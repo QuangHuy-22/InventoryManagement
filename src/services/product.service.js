@@ -13,8 +13,8 @@ export class ProducService extends BaseService {
                 method: "get",
                 url: `${BASE_URL}/api/product-status-lists`,
                 params: {
-                    page: 1,
-                    size: 20,
+                    page: params.page,
+                    size: params.size,
                     type: params.type,
                     branchId: params.branchId == 99 ? params.branchId = "" : params.branchId,
                     code: params.code,
@@ -40,8 +40,8 @@ export class ProducService extends BaseService {
                 method: "get",
                 url: `${BASE_URL}/api/product-status-details`,
                 params: {
-                    page: 1,
-                    size: 10,
+                    page: params.page,
+                    size: params.size,
                     type: params.type,
                     branchId: params.branchId == 99 ? params.branchId = "" : params.branchId,
                     productInfo: params.productInfo,

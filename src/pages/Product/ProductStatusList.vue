@@ -240,7 +240,7 @@
                         :key="index"
                     >
                         <td style="text-align: center">
-                        {{ index + 1 }}
+                        {{  search.size * (search.page - 1) + index + 1}}
                         </td>
                         <td @click="productStatusCode(data.code)" class="code-vat">
                         {{ data.code }}
@@ -300,18 +300,21 @@
                 </table>
                 </div>
 
-                <div class="overflow-auto">
-                <b-pagination
-                    v-model="params.page"
-                    :total-rows="pagination.total"
-                    :per-page="params.size"
-                    first-text="First"
-                    prev-text="Previous"
-                    next-text="Next"
-                    last-text="Last"
-                    class="pagination mt-4"
-                ></b-pagination>
-                </div>
+            <div class="overflow-auto">
+            <div class="d-flex">
+            <div v-for="number in numberSize" :key="number" @click="changeSize(number)"><span class="numberSize" >{{number}}</span></div>
+            </div>
+            <b-pagination
+                v-model="search.page"
+                :total-rows="pagination.total"
+                :per-page="search.size"
+                first-text="First"
+                prev-text="Previous"
+                next-text="Next"
+                last-text="Last"
+                class="pagination mt-4"
+            ></b-pagination>
+            </div>
             </div>
             </div>
         </div>
@@ -380,7 +383,7 @@ return {
     },
     search: {
         page:1,
-        size:20,
+        size:5,
         type:1,
         branchId: localStorage.getItem("branchId"),
     },
@@ -398,6 +401,7 @@ return {
     token: localStorage.getItem("token"),
     emailHome: localStorage.getItem("email"),
     roleName:  localStorage.getItem('roleName'),
+    numberSize:[3 , 5, 10 , 15],
 };
 },
 // validations: {
@@ -431,6 +435,7 @@ async fetchData() {
     const response = await ProducService.getList(this.token, this.search);
     if (response.status === 200) {
         this.dataProduct = response.data.listData;
+        this.pagination.total = response.data.count;
     }
     } catch (error) {
     console.log(error);
@@ -476,13 +481,23 @@ async deleteData(idProductStatus){
     clearSearch() {
     this.search = {
     page:1,
-    size:20,
+    size:5,
     type:1,
     branchId:localStorage.getItem("branchId"), 
     };
     this.fetchData();
 },
+changeSize(number){
+    this.search = {
+    page: this.search.page,
+    type: this.search.type,
+    size: number,
+    branchId: localStorage.getItem("branchId"),
+    };
+    this.fetchData();
 },
+},
+
 
 computed: {
 useInUrlQueryPropList() {
@@ -494,6 +509,7 @@ buttonDisable() {
     return this.reasonTransfer.length <= 5;
 },
 },
+
 
 watch: {
 "params.page": function() {
@@ -588,6 +604,11 @@ box-shadow: 0 0.75rem 1.5rem rgb(18 38 63 / 3%) !important;
 }
 .code-vat {
 color: #008bf4;
+cursor: pointer;
+}
+.numberSize{
+padding: 0px 10px 0px 10px;
+color:#A52A2A;
 cursor: pointer;
 }
 @media (max-width: 576px) {
