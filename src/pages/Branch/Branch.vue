@@ -220,6 +220,7 @@ return {
     search: {
     page: 1,
     size: 5,
+    branchId: localStorage.getItem("branchId"),
     },
     pagination: {
     total: 0,
