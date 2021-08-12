@@ -176,7 +176,7 @@
                         <b-dropdown-item @click="update(data.id)">
                             Edit
                         </b-dropdown-item>
-                        <b-dropdown-item @click="$bvModal.show(String(data.id))">
+                        <b-dropdown-item @click="$bvModal.show(String(data.id))" v-if="search.status == 'VALID'">
                             Delete
                         </b-dropdown-item>
 
@@ -304,10 +304,11 @@ async deleteData(idProductDetail){
         const response = await ProducDetailService.delete(this.token, idProductDetail)
         if (response.status == 200) {
             this.fetchData()
-            this.$bvModal.hide(idProductDetail)
+            this.$bvModal.hide(String(idProductDetail))
         }
         else{
             this.errorMessage = response.data
+            this.$bvModal.hide(String(idProductDetail))
             this.$bvModal.show("bv-modal-example-error-add-user")
         }
     },

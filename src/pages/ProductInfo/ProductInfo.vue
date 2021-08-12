@@ -295,6 +295,7 @@ async deleteData(idProductInfo){
         } 
         else{
             this.errorMessage = response.data
+            this.$bvModal.hide(String(idProductInfo))
             this.$bvModal.show("bv-modal-example-error-add-user")
         }
         
