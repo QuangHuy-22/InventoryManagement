@@ -12,7 +12,13 @@ export class BranchService extends BaseService {
             const response = await axios({
                 method: "get",
                 url: `${BASE_URL}/api/branches`,
-                params,
+                params: {
+                    code: params.code,
+                    name: params.name,
+                    page: params.page,
+                    size: params.size,
+                    branchId: params.branchId == 99 ? params.branchId = "" : params.branchId,
+                },
                 headers: {
                     headers,
                     AuthToken: token
