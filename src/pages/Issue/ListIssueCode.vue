@@ -113,7 +113,6 @@
                     <th>Imei</th>
                     <th>Price</th>
                     <th>Product Name</th>
-                    <th>Action</th>
                 </tr>
                 </thead>
 
@@ -126,27 +125,6 @@
                     <td>{{ data.imei }}</td>
                     <td>{{ data.price }}</td>
                     <td>{{ data.productName }}</td>
-                    <td>
-                    <b-dropdown
-                        right
-                        text=""
-                        variant="none"
-                        class="three-dot"
-                        no-caret
-                    >
-                        <template #button-content>
-                        <b-icon icon="three-dots-vertical"></b-icon>
-                        </template>
-                        <div style="font-size: 13px;">
-                        <b-dropdown-item>
-                            Edit
-                        </b-dropdown-item>
-                        <b-dropdown-item>
-                            Delete
-                        </b-dropdown-item>
-                        </div>
-                    </b-dropdown>
-                    </td>
             </tr>
                 </tbody>
             </table>

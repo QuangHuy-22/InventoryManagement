@@ -128,7 +128,6 @@
                     <th>Product Name</th>
                     <th>imei</th>
                     <th>Price</th>
-                    <th>Action</th>
                 </tr>
                 </thead>
 
@@ -141,41 +140,6 @@
                     <td>{{ issue.productName }}</td>
                     <td>{{ issue.imei }}</td>
                     <td class="price">{{ issue.price }}</td>
-                    <td>
-                    <b-dropdown
-                        right
-                        text=""
-                        variant="none"
-                        class="three-dot"
-                        no-caret
-                    >
-                        <template #button-content>
-                        <b-icon icon="three-dots-vertical"></b-icon>
-                        </template>
-                        <div style="font-size: 13px;">
-                        <b-dropdown-item @click="$bvModal.show(String(issue.id))">
-                            Delete
-                        </b-dropdown-item>
-
-                        <!-- ----modal delete role------- -->
-                        <div class="showDelete" >
-                        <b-modal :id="String(issue.id)" hide-footer hide-header   >
-                        <b-col class="iconLogout mb-2">
-                        <b-icon icon="exclamation-triangle" class="iconsBox" style="color: red!important;"></b-icon>
-                        </b-col>
-                        <div class="d-block text-center" >
-                        <h3 style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;">Do you want to delete {{ issue.code }}?</h3>
-                        </div>
-                        <div class="buttonSubmitLogout">
-                        <button class="buttonYes mt-3"  @click="deleteData(issue.id)" style="font-size: 13px;">Confirm</button>
-                        <button class="buttonNo mt-3" @click="$bvModal.hide(issue.id)" style="font-size: 13px;">Cancel</button>
-                        </div>
-                        </b-modal>
-                        </div>
-                        <!-- ----end modal delete role------- -->
-                        </div>
-                    </b-dropdown>
-                    </td>
                 </tr>
                 </tbody>
             </table>

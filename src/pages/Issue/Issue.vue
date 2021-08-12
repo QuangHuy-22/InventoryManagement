@@ -187,9 +187,9 @@
                         <b-dropdown-item @click="detail(issue.id)">
                             Detail
                         </b-dropdown-item>
-                        <b-dropdown-item @click="$bvModal.show(String(issue.id))">
+                        <!-- <b-dropdown-item @click="$bvModal.show(String(issue.id))">
                             Delete
-                        </b-dropdown-item>
+                        </b-dropdown-item> -->
                         <b-dropdown-item @click="CreateIssue(issue.id)">
                             Create Issue Detail
                         </b-dropdown-item>
