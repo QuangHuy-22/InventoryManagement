@@ -291,7 +291,7 @@ async deleteData(idProductInfo){
         const response = await ProducInfoService.delete(this.token, idProductInfo)
         if (response.status == 200) {
             this.fetchData()
-            this.$bvModal.hide(idProductInfo)
+            this.$bvModal.hide(String(idProductInfo))
         } 
         else{
             this.errorMessage = response.data
