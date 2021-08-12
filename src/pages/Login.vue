@@ -136,7 +136,8 @@ axios({
     const roleName = response.data.roleName
     const branchId = response.data.branchId
     const branchName = response.data.branchName
-    const userName = response.data.name
+    const userName = response.data.userName
+    const name = response.data.name
     const id = response.data.id
     
     
@@ -147,6 +148,7 @@ axios({
         localStorage.setItem('branchId', branchId);
         localStorage.setItem('branchName', branchName);
         localStorage.setItem('userName', userName);
+        localStorage.setItem('name', name);
         localStorage.setItem('userId', id);
         this.email = response.data.username
         this.dataPermission = response.data.listPermission

@@ -62,7 +62,7 @@
                 <template #button-content>
             <img class="rounded-circle header-profile-user" style="" src="../assets/images/users/avatar-dev.jpg"
                 alt="Header Avatar">
-            <span class="name-nav d-none d-xl-inline-block ml-1" key="t-henry">{{userName}}</span>
+            <span class="name-nav d-none d-xl-inline-block ml-1" key="t-henry">{{name}}</span>
             <b-icon icon="chevron-down" class="buttonDrops" ></b-icon>
                 </template>
             <b-dropdown-item @click="detail()">
@@ -203,7 +203,7 @@
                 <div class="content-sidebar" >
                 <router-link to='/inventory/product-detail-status' style="color: #474D52;">
                         <li>
-                <b-icon icon="calculator" style="padding-right: 25px; text-decoration: none;"></b-icon>
+                <b-icon icon="file-spreadsheet" style="padding-right: 25px; text-decoration: none;"></b-icon>
                 <span key="t-utility">Product Status Detail</span>
                 </li>
                 </router-link>
@@ -329,7 +329,7 @@ export default {
         showLogout : false,
         token : localStorage.getItem('token'),
         emailName: localStorage.getItem('email'),
-        userName: localStorage.getItem('userName'),
+        name: localStorage.getItem('name'),
         userId: localStorage.getItem('userId'),
         branch: localStorage.getItem('branchName'),
         userCheck: this.$store.getters.USERNAME,

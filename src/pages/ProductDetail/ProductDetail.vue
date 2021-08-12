@@ -24,12 +24,12 @@
     <div class="row">
             <div class="col-xl-12">
             <div class="row">
-                <div @click="fetchDataValid" class="col-md-6">
-                <div class="card mini-stats-wid">
+                <div @click="fetchDataValid" class="col-md-6" >
+                <div class="card mini-stats-wid" :class="valid">
                     <div class="card-body" id="text-media">
                     <div class="media">
-                        <div class="titleNew media-body">
-                        <p class="titleNew font-weight-medium">
+                        <div class="titleProcessing media-body">
+                        <p class="titleProcessing font-weight-medium">
                             VALID
                         </p>
                         <h4 class="mb-0 new">{{ dataCount.VALID }}</h4>
@@ -45,8 +45,8 @@
                     </div>
                 </div>
                 </div>
-                <div @click="fetchDataInvalid" class="col-md-6">
-                <div class="card mini-stats-wid">
+                <div @click="fetchDataInvalid" class="col-md-6" >
+                <div class="card mini-stats-wid" :class="invalid">
                     <div class="card-body" id="text-media">
                     <div class="media">
                         <div class="titleProcessing media-body">
@@ -362,7 +362,19 @@ useInUrlQueryPropList () {
     return this.prepareQueryParamsMixin({
     page: this.search.page
     })
-}
+},
+valid(){
+    return {
+        active: this.search.status == "VALID",
+        'bg-secondary text-white': this.search.status == "VALID"
+    }
+},
+invalid(){
+            return {
+                active:this.search.status == "INVALID",
+                'bg-secondary':this.search.status == "INVALID"
+            }
+        },
 },
 
 watch: {

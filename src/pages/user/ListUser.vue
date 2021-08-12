@@ -117,7 +117,7 @@
                       <th>Name</th>
                       <th>Phone</th>
                       <th>branch Name</th>
-                      <th>Thao tác</th>
+                      <th>Action</th>
                     </tr>
                   </thead>
 

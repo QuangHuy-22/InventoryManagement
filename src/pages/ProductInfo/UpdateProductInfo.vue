@@ -114,7 +114,6 @@
                     class="inputfile"
                     id="file"
                     />
-                    <label for="file">Chọn ảnh</label>
                     </form>
                     </div>
                 </form>

@@ -398,6 +398,9 @@ async deleteData(idVat){
         if (response.status == 200) {
             this.fetchData()
             this.$bvModal.hide(idVat)
+        }else{
+            this.errorMessage = response.data
+            this.$bvModal.show("bv-modal-example-error-add-user")
         }
     },
 submitForm() {
