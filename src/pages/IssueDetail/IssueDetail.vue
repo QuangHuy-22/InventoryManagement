@@ -217,6 +217,33 @@
         </div>
         </b-modal>
         </div>
+
+         <!-- ----------modal error-------->
+        <b-modal
+            id="bv-modal-example-error-add-user"
+            hide-footer
+            hide-header
+        >
+            <b-col class="iconLogout mb-2">
+            <b-icon
+                icon="x-circle"
+                class="iconsBox"
+                style="color: red!important;"
+            ></b-icon>
+            </b-col>
+            <div class="d-block text-center">
+            <span>{{ this.errorMessage }}</span>
+            </div>
+            <div class="buttonSubmitLogout">
+            <button
+                class="buttonOK mt-3"
+                @click="$bvModal.hide('bv-modal-example-error-add-user')"
+                style="font-size: 13px;"
+            >
+                OK
+            </button>
+            </div>
+        </b-modal>
     <footer-content />
 </div>
 
@@ -253,6 +280,8 @@ return {
     total: 0
     },
     numberSize:[3 , 5, 10 , 15],
+    errorMessage:"",
+    roleName: localStorage.getItem("roleName"),
 };
 },
 created() {
@@ -281,7 +310,11 @@ async deleteData(idIssue){
         const response = await IssueDetailService.delete(this.token, idIssue)
         if (response.status == 200) {
             this.fetchData()
-            this.$bvModal.hide(idIssue)
+            this.$bvModal.hide(String(idIssue))
+        }else{
+            this.errorMessage = response.data
+            this.$bvModal.hide(String(idIssue))
+            this.$bvModal.show("bv-modal-example-error-add-user")
         }
     },
     async exportExcel () {

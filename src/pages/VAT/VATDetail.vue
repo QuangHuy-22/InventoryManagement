@@ -194,7 +194,31 @@
 
     <footer-content />
 </div>
-
+<b-modal
+            id="bv-modal-example-error-add-user"
+            hide-footer
+            hide-header
+        >
+            <b-col class="iconLogout mb-2">
+            <b-icon
+                icon="x-circle"
+                class="iconsBox"
+                style="color: red!important;"
+            ></b-icon>
+            </b-col>
+            <div class="d-block text-center">
+            <span>{{ this.errorMessage }}</span>
+            </div>
+            <div class="buttonSubmitLogout">
+            <button
+                class="buttonOK mt-3"
+                @click="$bvModal.hide('bv-modal-example-error-add-user')"
+                style="font-size: 13px;"
+            >
+                OK
+            </button>
+            </div>
+        </b-modal>
 <!-- -----------modal permission------- -->
 <b-modal id="bv-modal-example-error-permission" hide-footer hide-header>
     <b-col class="iconLogout mb-2">
@@ -255,6 +279,7 @@ return {
     },
     dataBranch:{},
     roleName:  localStorage.getItem('roleName'),
+    errorMessage:""
 };
 },
 mounted() {
@@ -284,7 +309,11 @@ async deleteData(idVat){
         const response = await VATService.deleteVATDetail(this.token, idVat)
         if (response.status == 200) {
             this.fetchData()
-            this.$bvModal.hide(idVat)
+            this.$bvModal.hide(String(idVat))
+        }else{
+            this.errorMessage = response.data
+            this.$bvModal.hide(String(idVat))
+            this.$bvModal.show("bv-modal-example-error-add-user")
         }
     },
 submitForm() {

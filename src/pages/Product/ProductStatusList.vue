@@ -349,6 +349,31 @@
         </div>
     </b-modal>
     <!-- End modal nhận giao dịch thành công -->
+    <b-modal
+            id="bv-modal-example-error-add-user"
+            hide-footer
+            hide-header
+        >
+            <b-col class="iconLogout mb-2">
+            <b-icon
+                icon="x-circle"
+                class="iconsBox"
+                style="color: red!important;"
+            ></b-icon>
+            </b-col>
+            <div class="d-block text-center">
+            <span>{{ this.errorMessage }}</span>
+            </div>
+            <div class="buttonSubmitLogout">
+            <button
+                class="buttonOK mt-3"
+                @click="$bvModal.hide('bv-modal-example-error-add-user')"
+                style="font-size: 13px;"
+            >
+                OK
+            </button>
+            </div>
+        </b-modal>
 
     <!-- end modal -->
     </div>
@@ -402,6 +427,7 @@ return {
     emailHome: localStorage.getItem("email"),
     roleName:  localStorage.getItem('roleName'),
     numberSize:[3 , 5, 10 , 15],
+    errorMessage:""
 };
 },
 // validations: {
@@ -467,7 +493,12 @@ async deleteData(idProductStatus){
         const response = await ProducService.delete(this.token, idProductStatus)
         if (response.status == 200) {
             this.fetchData()
-            this.$bvModal.hide(idProductStatus)
+            this.$bvModal.hide(String(idProductStatus))
+        }
+        else{
+            this.errorMessage = response.data
+            this.$bvModal.hide(String(idProductStatus))
+            this.$bvModal.show("bv-modal-example-error-add-user")
         }
     },
 

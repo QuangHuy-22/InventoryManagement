@@ -214,6 +214,33 @@
                 class="pagination mt-4"
             ></b-pagination>
             </div>
+
+             <!-- ----------modal error-------->
+        <b-modal
+            id="bv-modal-example-error-add-user"
+            hide-footer
+            hide-header
+        >
+            <b-col class="iconLogout mb-2">
+            <b-icon
+                icon="x-circle"
+                class="iconsBox"
+                style="color: red!important;"
+            ></b-icon>
+            </b-col>
+            <div class="d-block text-center">
+            <span>{{ this.errorMessage }}</span>
+            </div>
+            <div class="buttonSubmitLogout">
+            <button
+                class="buttonOK mt-3"
+                @click="$bvModal.hide('bv-modal-example-error-add-user')"
+                style="font-size: 13px;"
+            >
+                OK
+            </button>
+            </div>
+        </b-modal>
         </div>
         </div>
     </div>
@@ -251,6 +278,7 @@ return {
     },
     roleName:  localStorage.getItem('roleName'),
     numberSize:[3 , 5, 10 , 15],
+    errorMessage:""
 };
 },
 mounted() {
@@ -290,7 +318,11 @@ async deleteData(idShelf){
         const response = await ShelfService.delete(this.token, idShelf)
         if (response.status == 200) {
             this.fetchData()
-            this.$bvModal.hide(idShelf)
+            this.$bvModal.hide(String(idShelf))
+        }else{
+            this.errorMessage = response.data
+            this.$bvModal.hide(String(idShelf))
+            this.$bvModal.show("bv-modal-example-error-add-user")
         }
 },
 clearSearch() {

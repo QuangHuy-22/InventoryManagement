@@ -392,11 +392,11 @@ async deleteData(idProductStatusDetail){
         const response = await ProducService.delete(this.token, idProductStatusDetail)
         if (response.status == 200) {
             this.fetchData()
-            this.$bvModal.hide(idProductStatusDetail)
+            this.$bvModal.hide(String(idProductStatusDetail))
         }
         else{
-            this.errorMessage = response.data.message
-            this.$bvModal.hide(idProductStatusDetail)
+            this.errorMessage = response.data
+            this.$bvModal.hide(String(idProductStatusDetail))
             this.$bvModal.show("bv-modal-example-error-add-user")
         }
     },

@@ -400,6 +400,7 @@ async deleteData(idVat){
             this.$bvModal.hide(String(idVat))
         }else{
             this.errorMessage = response.data
+            this.$bvModal.hide(String(idVat))
             this.$bvModal.show("bv-modal-example-error-add-user")
         }
     },
