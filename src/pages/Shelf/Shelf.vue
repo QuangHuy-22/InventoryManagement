@@ -6,7 +6,7 @@
     <div class="addUser">
         <h4 class="font-size-18">Shelf List</h4>
         <router-link to="/inventory/shelf/create-shelf"
-        v-if="roleName == 'ADMIN' || roleName == 'MANAGER'">
+        v-if="roleName.includes('ADMIN')  || roleName.includes('MANAGER')">
         <div
             class="btn-group float-right"
         >
@@ -169,10 +169,10 @@
                         <b-dropdown-item @click="detail(data.id)">
                             Detail
                         </b-dropdown-item>
-                        <b-dropdown-item @click="update(data.id)"   v-if="roleName == 'ADMIN' || roleName == 'MANAGER'">
+                        <b-dropdown-item @click="update(data.id)"  v-if="roleName.includes('ADMIN')  || roleName.includes('MANAGER')">
                             Edit
                         </b-dropdown-item>
-                        <b-dropdown-item @click="$bvModal.show(String(data.id))"   v-if="roleName == 'ADMIN' || roleName == 'MANAGER'">
+                        <b-dropdown-item @click="$bvModal.show(String(data.id))"  v-if="roleName.includes('ADMIN')  || roleName.includes('MANAGER')">
                             Delete
                         </b-dropdown-item>
                         <!-- ----modal delete role------- -->

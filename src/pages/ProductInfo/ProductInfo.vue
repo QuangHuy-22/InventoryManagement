@@ -204,7 +204,7 @@
             <div class="buttonSubmitLogout">
             <button
                 class="buttonOK mt-3"
-                @click="$bvModal.hide('bv-modal-example-error-add-user')"
+                @click="$bvModal.hide('bv-modal-example-error-add-user') "
                 style="font-size: 13px;"
             >
                 OK
