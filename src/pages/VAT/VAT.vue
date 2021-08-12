@@ -397,7 +397,7 @@ async deleteData(idVat){
         const response = await VATService.delete(this.token, idVat)
         if (response.status == 200) {
             this.fetchData()
-            this.$bvModal.hide(idVat)
+            this.$bvModal.hide(String(idVat))
         }else{
             this.errorMessage = response.data
             this.$bvModal.show("bv-modal-example-error-add-user")
