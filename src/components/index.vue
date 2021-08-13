@@ -148,7 +148,7 @@
             </div>
             <!-- ------------Product detail----------- -->
             <div class="content-sidebar" >
-                <router-link to='/product/product-detail' style="color: #474D52;">
+                <router-link to='/product/product-detail' style="color: #474D52;" :class="productDetail">
                         <li>
                 <b-icon icon="telephone" style="padding-right: 25px; text-decoration: none;"></b-icon>
                 <span key="t-utility">Product Detail</span>
@@ -273,7 +273,7 @@
                 </div> 
                 <!-- ---------User---------  -->
                 <div class="content-sidebar"  v-if="roleName == 'ADMIN' || roleName == 'MANAGER'" >
-                <router-link to='/management/list-user' style="color: #474D52;" :class="user">
+                <router-link to='/management/list-user' style="color: #474D52;" :class="userList">
                         <li>
                 <b-icon icon="person-square" style="padding-right: 25px; text-decoration: none;"></b-icon>
                 <span key="t-utility">User</span>
@@ -474,6 +474,30 @@ export default {
             return {
                 active: window.location.pathname.includes("/branch"),
                 'text-primary': window.location.pathname.includes("/branch")
+            }
+        },
+        role(){
+            return {
+                active: window.location.pathname.includes("/list-role"),
+                'text-primary': window.location.pathname.includes("/list-role")
+            }
+        },
+        userList(){
+            return {
+                active: window.location.pathname.includes("/list-user"),
+                'text-primary': window.location.pathname.includes("/list-user")
+            }
+        },
+        customer(){
+            return {
+                active: window.location.pathname.includes("/customer"),
+                'text-primary': window.location.pathname.includes("/customer")
+            }
+        },
+        supplier(){
+            return {
+                active: window.location.pathname.includes("/supplier"),
+                'text-primary': window.location.pathname.includes("/supplier")
             }
         },
     },

@@ -67,7 +67,6 @@
                 class="form-control select2"
                 v-model="search.branchId"
                 >
-                <option :value="checkBranchId">Branch</option>
                 <option
                     v-for="data in dataBranch"
                     :key="data.id"
@@ -237,6 +236,7 @@
 import index from "../../components/index.vue";
 import FooterContent from "../../components/FooterContent.vue";
 import { UserService } from "@/services/user.service";
+import { BranchService } from "@/services/branch.service.js";
 import prepareQueryParamsMixin from '../../mixins/prepareQueryParamsMixin'
 import 'vue2-datepicker/index.css';
 
@@ -262,10 +262,12 @@ export default {
       },
       roleName:  localStorage.getItem('roleName'),
       numberSize:[3 , 5, 10 , 15],
+      dataBranch:{},
     };
   },
   created() {
     this.fetchData();
+    this.fetchDataBranch();
   },
   methods: {
     async fetchData() {
@@ -280,6 +282,12 @@ export default {
         console.log(error);
       }
     },
+    async fetchDataBranch() {
+    const response = await BranchService.getList(this.token, this.search);
+    if (response.status == 200) {
+        this.dataBranch = response.data.listData;
+    }
+},
     detail(id) {
         this.$router.push({ name: "DetailUser", params: { id: id } });
     },

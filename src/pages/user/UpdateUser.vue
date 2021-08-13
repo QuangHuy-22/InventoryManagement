@@ -12,7 +12,7 @@
             <h2 class="title-page">Update User</h2>
             <div class="btn-group float-right">
             <form class="buttonLogout" @submit.prevent="handleUpdateUser">
-                <router-link to="/home-page" v-if="userId == idDetail">
+                <router-link to="/home-page" v-if="userId == idUser">
                 <b-button
                     id="show-btn"
                     style="font-size: 13px; margin-right: 5px;"
@@ -22,7 +22,7 @@
                     Cancel</b-button
                 >
                 </router-link>
-                <router-link to="/management/list-user" v-if="userId != idDetail">
+                <router-link to="/management/list-user" v-if="userId != idUser">
                 <b-button
                     id="show-btn"
                     style="font-size: 13px; margin-right: 5px;"
@@ -59,7 +59,7 @@
                     </h3>
                     </div>
                     <div class="buttonSubmitLogout">
-                    <router-link to="/home-page" v-if="userId == idDetail">
+                    <router-link to="/home-page" v-if="userId == idUser">
                         <button
                         class="buttonOK mt-3"
                         style="font-size: 13px;"
@@ -67,7 +67,7 @@
                         OK
                         </button>
                     </router-link>
-                    <router-link to="/management/list-user" v-if="userId != idDetail">
+                    <router-link to="/management/list-user" v-if="userId != idUser">
                         <button
                         class="buttonOK mt-3"
                         style="font-size: 13px;"

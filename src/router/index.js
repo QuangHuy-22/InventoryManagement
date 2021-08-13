@@ -288,7 +288,7 @@ const routes = [{
             component: CreateVAT,
         },
         {
-            path: '/management/supplier/detail-vat/:id',
+            path: '/inventory/list-vat/detail-vat/:id',
             name: 'DetailVAT',
             component: DetailVAT,
         },
