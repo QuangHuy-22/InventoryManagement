@@ -293,17 +293,17 @@ const routes = [{
             component: DetailVAT,
         },
         {
-            path: '/inventory/vat/create-vat-detail/:id',
+            path: '/inventory/list-vat/create-vat-detail/:id',
             name: 'CreateVATDetail',
             component: CreateVATDetail,
         },
         {
-            path: '/inventory/vat/vat-code/:code',
+            path: '/inventory/list-vat/vat-code/:code',
             name: 'ListVATCode',
             component: ListVATCode,
         },
         {
-            path: '/inventory/vat',
+            path: '/inventory/list-vat',
             name: 'VAT',
             component: VAT,
         },
@@ -333,12 +333,12 @@ const routes = [{
             component: VATDetail,
         },
         {
-            path: '/inventory/product-status',
+            path: '/inventory/list-product-status',
             name: 'Product',
             component: ProductStatusList,
         },
         {
-            path: '/inventory/product-status/product-status-code/:code',
+            path: '/inventory/list-product-status/product-status-code/:code',
             name: 'ListProductDetailCode',
             component: ListProductDetailCode,
         },
@@ -348,17 +348,17 @@ const routes = [{
             component: ProductStatusDetailList,
         },
         {
-            path: '/inventory/product-status/detail-product-status/:id',
+            path: '/inventory/list-product-status/detail-product-status/:id',
             name: 'DetailProductStatus',
             component: DetailProductStatus,
         },
         {
-            path: '/inventory/issue',
+            path: '/inventory/list-issue',
             name: 'Issue',
             component: Issue,
         },
         {
-            path: '/inventory/issue/issue-code/:code',
+            path: '/inventory/list-issue/issue-code/:code',
             name: 'ListIssueCode',
             component: ListIssueCode,
         },
@@ -368,22 +368,22 @@ const routes = [{
             component: IssueDetail,
         },
         {
-            path: '/inventory/issue/create-issue',
+            path: '/inventory/list-issue/create-issue',
             name: 'CreateIssue',
             component: CreateIssue,
         },
         {
-            path: '/inventory/issue/detail-issue/:id',
+            path: '/inventory/list-issue/detail-issue/:id',
             name: 'DetailIssue',
             component: DetailIssue,
         },
         {
-            path: '/inventory/issue/add-issue-detail/:id',
+            path: '/inventory/list-issue/add-issue-detail/:id',
             name: 'CreateIssueDetail',
             component: CreateIssueDetail,
         },
         {
-            path: '/inventory/product-status/add-product-status-detail/:id',
+            path: '/inventory/list-product-status/add-product-status-detail/:id',
             name: 'CreateProductStatusDetail',
             component: CreateProductStatusDetail,
         },

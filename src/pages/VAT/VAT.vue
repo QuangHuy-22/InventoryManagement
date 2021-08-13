@@ -298,7 +298,7 @@
         </h3>
     </div>
     <div class="buttonSubmitLogout">
-        <router-link to="/inventory/vat">
+        <router-link to="/inventory/list-vat">
         <button class="buttonOK mt-3" style="font-size: 13px;"  @click="$bvModal.hide('bv-modal-example-3')" >
             OK
         </button>
@@ -437,7 +437,7 @@ useInUrlQueryPropList () {
 watch: {
 'search.page': function () {
     this.$router.push({
-    path: '/inventory/vat',
+    path: '/inventory/list-vat',
     query: this.useInUrlQueryPropList
     })
     this.fetchData()

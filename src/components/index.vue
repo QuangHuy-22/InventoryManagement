@@ -175,7 +175,7 @@
             <b-collapse id="collapse-3" class="content-sidebar-menu">
                 <!-- ----VAT---- -->
                 <div class="content-sidebar" >
-                <router-link to='/inventory/vat' style="color: #474D52;" :class="vat">
+                <router-link to='/inventory/list-vat' style="color: #474D52;" :class="vat">
                         <li>
                 <b-icon icon="card-checklist" style="padding-right: 25px; text-decoration: none;"></b-icon>
                 <span key="t-utility">VAT</span>
@@ -193,7 +193,7 @@
                 </div>
                 <!-- ----------Product----------- -->
                 <div class="content-sidebar">
-                <router-link to='/inventory/product-status' style="color: #474D52;" :class="productStatus">
+                <router-link to='/inventory/list-product-status' style="color: #474D52;" :class="productStatus">
                         <li>
                 <b-icon icon="calculator" style="padding-right: 25px; text-decoration: none;"></b-icon>
                 <span key="t-utility">Product Status</span>
@@ -210,7 +210,7 @@
                 </div>
                 <!-- -----------Issue--------- -->
                 <div class="content-sidebar" >
-                <router-link to='/inventory/issue' style="color: #474D52;" :class="issue">
+                <router-link to='/inventory/list-issue' style="color: #474D52;" :class="issue">
                         <li>
                 <b-icon icon="calendar3-event" style="padding-right: 25px; text-decoration: none;"></b-icon>
                 <span key="t-utility">Issue</span>
@@ -424,8 +424,8 @@ export default {
         },
         vat(){
             return {
-                active: window.location.pathname == "/inventory/vat",
-                'text-primary': window.location.pathname == "inventory/vat"
+                active: window.location.pathname.includes('/list-vat'),
+                'text-primary': window.location.pathname.includes('/list-vat')
             }
         },
         vatDetail(){
@@ -436,20 +436,20 @@ export default {
         },
         productStatus(){
             return {
-                active: window.location.pathname.includes("/product-status"),
-                'text-primary': window.location.pathname.includes("/product-status")
+                active: window.location.pathname.includes("/list-product-status"),
+                'text-primary': window.location.pathname.includes("/list-product-status")
             }
         },
         productStatusDetail(){
             return {
-                active: window.location.pathname.includes("/product-status-detail"),
-                'text-primary': window.location.pathname.includes("/product-status-detail")
+                active: window.location.pathname.includes("/product-detail-status"),
+                'text-primary': window.location.pathname.includes("/product-detail-status")
             }
         },
         issue(){
             return {
-                active: window.location.pathname.includes("/issue"),
-                'text-primary': window.location.pathname.includes("/issue")
+                active: window.location.pathname.includes("/list-issue"),
+                'text-primary': window.location.pathname.includes("/list-issue")
             }
         },
         issueDetail(){

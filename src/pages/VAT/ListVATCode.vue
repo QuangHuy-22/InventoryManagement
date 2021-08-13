@@ -6,7 +6,7 @@
     <div class="addUser">
         <h4 class="font-size-18">List VAT Code </h4>
         <div>
-        <router-link to="/inventory/vat" class="btn btn-dark" style="font-size: 13px;"> Cancel</router-link>
+        <router-link to="/inventory/list-vat" class="btn btn-dark" style="font-size: 13px;"> Cancel</router-link>
         </div>
     </div>
     <div class="searchInput colorTable">
@@ -190,7 +190,7 @@
         </h3>
     </div>
     <div class="buttonSubmitLogout">
-        <router-link to="/inventory/vat">
+        <router-link to="/inventory/list-vat">
         <button class="buttonOK mt-3" style="font-size: 13px;"  @click="$bvModal.hide('bv-modal-example-3')" >
             OK
         </button>

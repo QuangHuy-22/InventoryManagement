@@ -401,7 +401,7 @@ useInUrlQueryPropList () {
 watch: {
 'search.page': function () {
     this.$router.push({
-    path: '/inventory/issue',
+    path: '/inventory/list-issue',
     query: this.useInUrlQueryPropList
     })
     this.fetchData()

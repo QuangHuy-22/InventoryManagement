@@ -28,7 +28,7 @@
         style="font-size: 1.21875rem; color: rgb(73, 80, 87); margin-bottom: .5rem;font-weight: 500;line-height: 1.2;">Adding Successful</h3>
         </div>
         <div class="buttonSubmitLogout">
-            <router-link to="/inventory/vat">
+            <router-link to="/inventory/list-vat">
         <button class="buttonOK mt-3"  style="font-size: 13px;">OK</button>
         </router-link>
         <!-- <button class="buttonNo mt-3" @click="$bvModal.hide('bv-modal-example')" style="font-size: 13px;" >Không</button> -->

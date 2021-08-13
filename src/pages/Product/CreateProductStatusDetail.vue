@@ -12,7 +12,7 @@
             <div class="btn-group float-right">
             <form class="buttonAddUser" @submit.prevent="createAddProduct">
                 <router-link
-                to="/inventory/product-status"
+                to="/inventory/list-product-status"
                 class="btn btn-dark"
                 style="font-size: 13px;"
                 >

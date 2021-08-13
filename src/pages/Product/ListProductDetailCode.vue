@@ -6,7 +6,7 @@
     <div class="addUser">
         <h4 class="font-size-18">List Product Status Detail  </h4>
         <div>
-        <router-link to="/inventory/product-status" class="btn btn-dark" style="font-size: 13px;"> Cancel</router-link>
+        <router-link to="/inventory/list-product-status" class="btn btn-dark" style="font-size: 13px;"> Cancel</router-link>
         </div>
     </div>
     <div class="searchInput">

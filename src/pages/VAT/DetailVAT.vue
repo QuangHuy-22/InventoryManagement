@@ -8,7 +8,7 @@
         <div class="box-title">
             <h2>Detail VAT</h2>
             <div class=" float-right">
-            <router-link to="/inventory/vat" class="btn btn-dark">
+            <router-link to="/inventory/list-vat" class="btn btn-dark">
                 Cancel
             </router-link>
             </div>

@@ -25,7 +25,7 @@
                   </router-link>
                 </div>
                 <div class="flex-item card">
-                  <router-link to="/inventory/vat">
+                  <router-link to="/inventory/list-vat">
                   <a class="link-wrapper">
                     <div><img src="../assets/images/VAT.jpg" ></div>
                     <div class="card-body">

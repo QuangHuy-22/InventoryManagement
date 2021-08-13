@@ -557,7 +557,7 @@ back(){
 watch: {
 "params.page": function() {
     this.$router.push({
-    path: "/inventory/product-status",
+    path: "/inventory/list-product-status",
     query: this.useInUrlQueryPropList,
     });
     this.fetchData();

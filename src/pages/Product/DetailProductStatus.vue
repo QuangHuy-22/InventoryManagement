@@ -8,7 +8,7 @@
         <div class="box-title">
             <h2>Detail Product Status</h2>
             <div class=" float-right">
-            <router-link to="/inventory/product-status" class="btn btn-dark">
+            <router-link to="/inventory/list-product-status" class="btn btn-dark">
                 Cancel
             </router-link>
             </div>
