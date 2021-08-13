@@ -73,7 +73,7 @@
             <div class="row">
             <div class="col-sm-12">
                 <div class="card-body">
-                <h4 class="card-title mb-3">Information VAT</h4>
+                <h4 class="card-title mb-3">Information Product Status Detail</h4>
                 <form class="needs-validation">
                     <div class="col-sm-6">
                     <div class="form-group form-erross">

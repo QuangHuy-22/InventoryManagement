@@ -149,8 +149,8 @@ components: {
                 this.$bvModal.show("bv-modal-example-3")
             }
             if (response.status == 400) {
-                this.$bvModal.show('bv-modal-example-error-add-user')
                 this.errorMessage = response.data
+                this.$bvModal.show('bv-modal-example-error-add-user')
             }
         } catch (error) {
             return error

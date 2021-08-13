@@ -222,11 +222,11 @@ components: { index },
     });
     }
         },
-        onFileChange(e) {
-    const fileUp = e.target.files[0];
-    this.url = URL.createObjectURL(fileUp);
-    let file = this.$refs.uploadImage.files[0];
-    this.File = file;
+    onFileChange(e) {
+const fileUp = e.target.files[0];
+this.url = URL.createObjectURL(fileUp);
+let file = this.$refs.uploadImage.files[0];
+this.File = file;
 },
 createImage(file) {
     var reader = new FileReader();

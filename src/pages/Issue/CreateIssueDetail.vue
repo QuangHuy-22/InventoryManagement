@@ -80,7 +80,7 @@
                     <div class="col-sm-6">
                     <div class="form-group form-erross">
                         <label for="validationCustom01">Issue Id</label>
-                        <v-text-field
+                        <input
                         type="text"
                         class="form-control"
                         style="padding: 3px 0px!important;"
@@ -88,9 +88,9 @@
                         placeholder=""
                         value=""
                         required
+                        disabled="disable"
                         v-model="dataIssue.issueId"
                         >
-                        </v-text-field>
                     </div>
                     <div class="form-group form-erross">
                         <label for="validationCustom04">Product Info</label>

@@ -119,7 +119,7 @@
             <!-- Using modifiers -->
             <div>
             <b-button  v-b-toggle.collapse-2 id="toggle-sidebar" class="m-1" ><div class="content-sidebar" style="padding: 0px">
-                <li class="text-sidebar">
+                <li class="text-sidebar" :class="product" >
                 <b-icon icon="phone-vibrate" style="padding-right: 25px;"></b-icon>
                 <span key="t-calendar">Product</span>
             </li>
@@ -130,16 +130,16 @@
             <b-collapse id="collapse-2" class="content-sidebar-menu">
                 <!-- ----category---- -->
             <div class="content-sidebar">
-            <router-link to="/product/category" style="color: #474D52;">
+            <router-link to="/product/category" style="color: #474D52;" :class="category">
                 <li>
-                <b-icon icon="calculator-fill" style="padding-right: 25px; color: #474D52;"></b-icon>
+                <b-icon icon="calculator-fill" style="padding-right: 25px;"></b-icon>
                 <span key="t-calendar">Category</span>
             </li>
             </router-link>
             </div>
             <!-- ------product info------- -->
             <div class="content-sidebar" >
-                <router-link to='/product/product-info' style="color: #474D52;">
+                <router-link to='/product/product-info' style="color: #474D52;" :class="productInfo">
                         <li>
                 <b-icon icon="phone" style="padding-right: 25px; text-decoration: none;"></b-icon>
                 <span key="t-utility">Product Info</span>
@@ -164,7 +164,7 @@
             <!-- Using modifiers -->
             <div>
         <b-button  v-b-toggle.collapse-3 id="toggle-sidebar" class="m-1"><div class="content-sidebar" style="padding: 0px">
-                <li class="text-sidebar">
+                <li class="text-sidebar" :class="inventory">
                 <b-icon icon="graph-up" style="padding-right: 25px"></b-icon>
                 <span key="t-calendar">Inventory</span>
             </li>
@@ -175,7 +175,7 @@
             <b-collapse id="collapse-3" class="content-sidebar-menu">
                 <!-- ----VAT---- -->
                 <div class="content-sidebar" >
-                <router-link to='/inventory/vat' style="color: #474D52;">
+                <router-link to='/inventory/vat' style="color: #474D52;" :class="vat">
                         <li>
                 <b-icon icon="card-checklist" style="padding-right: 25px; text-decoration: none;"></b-icon>
                 <span key="t-utility">VAT</span>
@@ -184,7 +184,7 @@
                 </div>
                 <!-- --------Vat Detail--------- -->
                 <div class="content-sidebar" >
-                <router-link to='/inventory/vat-detail' style="color: #474D52;">
+                <router-link to='/inventory/vat-detail' style="color: #474D52;" :class="vatDetail">
                         <li>
                 <b-icon icon="card-list" style="padding-right: 25px; text-decoration: none;"></b-icon>
                 <span key="t-utility">VAT Detail</span>
@@ -193,7 +193,7 @@
                 </div>
                 <!-- ----------Product----------- -->
                 <div class="content-sidebar">
-                <router-link to='/inventory/product-status' style="color: #474D52;">
+                <router-link to='/inventory/product-status' style="color: #474D52;" :class="productStatus">
                         <li>
                 <b-icon icon="calculator" style="padding-right: 25px; text-decoration: none;"></b-icon>
                 <span key="t-utility">Product Status</span>
@@ -201,7 +201,7 @@
                 </router-link>
                 </div>
                 <div class="content-sidebar" >
-                <router-link to='/inventory/product-detail-status' style="color: #474D52;">
+                <router-link to='/inventory/product-detail-status' style="color: #474D52;" :class="productStatusDetail">
                         <li>
                 <b-icon icon="file-spreadsheet" style="padding-right: 25px; text-decoration: none;"></b-icon>
                 <span key="t-utility">Product Status Detail</span>
@@ -210,7 +210,7 @@
                 </div>
                 <!-- -----------Issue--------- -->
                 <div class="content-sidebar" >
-                <router-link to='/inventory/issue' style="color: #474D52;">
+                <router-link to='/inventory/issue' style="color: #474D52;" :class="issue">
                         <li>
                 <b-icon icon="calendar3-event" style="padding-right: 25px; text-decoration: none;"></b-icon>
                 <span key="t-utility">Issue</span>
@@ -219,7 +219,7 @@
                 </div>
                 <!-- -----------Issue Detail--------- -->
                 <div class="content-sidebar" >
-                <router-link to='/inventory/issue-detail' style="color: #474D52;">
+                <router-link to='/inventory/issue-detail' style="color: #474D52;" :class="issueDetail">
                         <li>
                 <b-icon icon="card-text" style="padding-right: 25px; text-decoration: none;"></b-icon>
                 <span key="t-utility">Issue Detail</span>
@@ -228,7 +228,7 @@
                 </div>
                 <!-- -----------Shelf--------- -->
                 <div class="content-sidebar" >
-                <router-link to='/inventory/shelf' style="color: #474D52;">
+                <router-link to='/inventory/shelf' style="color: #474D52;" :class="shelf">
                         <li>
                 <b-icon icon="bookshelf" style="padding-right: 25px; text-decoration: none;"></b-icon>
                 <span key="t-utility">Shelf</span>
@@ -244,7 +244,7 @@
             <!-- Using modifiers -->
             <div>
             <b-button  v-b-toggle.collapse-4 id="toggle-sidebar" class="m-1"><div class="content-sidebar" style="padding: 0px">
-                <li class="text-sidebar">
+                <li class="text-sidebar" :class="management">
                 <b-icon icon="bag-dash" style="padding-right: 25px;"></b-icon>
                 <span key="t-calendar">Management</span>
             </li>
@@ -255,7 +255,7 @@
             <b-collapse id="collapse-4" class="content-sidebar-menu">
                 <!-- ----Branch---- -->
                 <div class="content-sidebar"  v-if="roleName == 'ADMIN'" >
-                <router-link to='/management/branch' style="color: #474D52;">
+                <router-link to='/management/branch' style="color: #474D52;" :class="branchList">
                         <li>
                 <b-icon icon="building" style="padding-right: 25px; text-decoration: none;"></b-icon>
                 <span key="t-utility">Branch</span>
@@ -264,7 +264,7 @@
                 </div>
                 <!-- -------Role------ -->
                 <div class="content-sidebar"  v-if="roleName == 'ADMIN'" >
-                <router-link to='/management/list-role' style="color: #474D52;">
+                <router-link to='/management/list-role' style="color: #474D52;" :class="role">
                         <li>
                 <b-icon icon="diagram3" style="padding-right: 25px; text-decoration: none;"></b-icon>
                 <span key="t-utility">Role</span>
@@ -273,7 +273,7 @@
                 </div> 
                 <!-- ---------User---------  -->
                 <div class="content-sidebar"  v-if="roleName == 'ADMIN' || roleName == 'MANAGER'" >
-                <router-link to='/management/list-user' style="color: #474D52;">
+                <router-link to='/management/list-user' style="color: #474D52;" :class="user">
                         <li>
                 <b-icon icon="person-square" style="padding-right: 25px; text-decoration: none;"></b-icon>
                 <span key="t-utility">User</span>
@@ -282,7 +282,7 @@
             </div>
                 <!-- ----Customer---- -->
                 <div class="content-sidebar" >
-                <router-link to='/management/customer' style="color: #474D52;">
+                <router-link to='/management/customer' style="color: #474D52;" :class="customer">
                         <li>
                 <b-icon icon="person-circle" style="padding-right: 25px; text-decoration: none;"></b-icon>
                 <span key="t-utility">Customer</span>
@@ -291,7 +291,7 @@
                 </div>
                 <!-- -------Supplier------- -->
                 <div class="content-sidebar" >
-                <router-link to='/management/supplier' style="color: #474D52;">
+                <router-link to='/management/supplier' style="color: #474D52;" :class="supplier">
                         <li>
                 <b-icon icon="cart-plus" style="padding-right: 25px; text-decoration: none;"></b-icon>
                 <span key="t-utility">Supplier</span>
@@ -390,6 +390,92 @@ export default {
             })
         },
 
+    },
+    computed:{
+        product(){
+            return {
+                active: window.location.pathname.includes("/product/category") || window.location.pathname.includes("/product/product-info") || window.location.pathname.includes("/product/product-detail"),
+                'text-primary': window.location.pathname.includes("/product/category") || window.location.pathname.includes("/product/product-info") || window.location.pathname.includes("/product/product-detail")
+            }
+        },
+        category(){
+            return {
+                active: window.location.pathname.includes("/category"),
+                'text-primary': window.location.pathname.includes("/category")
+            }
+        },
+        productInfo(){
+            return {
+                active: window.location.pathname.includes("/product-info"),
+                'text-primary': window.location.pathname.includes("/product-info")
+            }
+        },
+        productDetail(){
+            return {
+                active: window.location.pathname.includes("/product-detail"),
+                'text-primary': window.location.pathname.includes("/product-detail")
+            }
+        },
+        inventory(){
+            return {
+                active: window.location.pathname.includes("/inventory"),
+                'text-primary': window.location.pathname.includes("/inventory")
+            }
+        },
+        vat(){
+            return {
+                active: window.location.pathname == "/inventory/vat",
+                'text-primary': window.location.pathname == "inventory/vat"
+            }
+        },
+        vatDetail(){
+            return {
+                active: window.location.pathname.includes("/vat-detail"),
+                'text-primary': window.location.pathname.includes("/vat-detail")
+            }
+        },
+        productStatus(){
+            return {
+                active: window.location.pathname.includes("/product-status"),
+                'text-primary': window.location.pathname.includes("/product-status")
+            }
+        },
+        productStatusDetail(){
+            return {
+                active: window.location.pathname.includes("/product-status-detail"),
+                'text-primary': window.location.pathname.includes("/product-status-detail")
+            }
+        },
+        issue(){
+            return {
+                active: window.location.pathname.includes("/issue"),
+                'text-primary': window.location.pathname.includes("/issue")
+            }
+        },
+        issueDetail(){
+            return {
+                active: window.location.pathname.includes("/issue-detail"),
+                'text-primary': window.location.pathname.includes("/issue-detail")
+            }
+        },
+        shelf(){
+            return {
+                active: window.location.pathname.includes("/shelf"),
+                'text-primary': window.location.pathname.includes("/shelf")
+            }
+        },
+        management(){
+            return {
+                active: window.location.pathname.includes("/management"),
+                'text-primary': window.location.pathname.includes("/management")
+            }
+        },
+        branchList(){
+            return {
+                active: window.location.pathname.includes("/branch"),
+                'text-primary': window.location.pathname.includes("/branch")
+            }
+        },
     },
     mounted(){
     }

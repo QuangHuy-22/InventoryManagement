@@ -21,11 +21,11 @@
             <div class="col-xl-12">
             <div class="row">
                 <div @click="fetchDataDone" class="col-md-6">
-                <div class="card mini-stats-wid">
+                <div class="card mini-stats-wid"  :class="done">
                     <div class="card-body" id="text-media">
                     <div class="media">
-                        <div class="titleNew media-body">
-                        <p class="titleNew font-weight-medium">
+                        <div class="titleProcessing media-body">
+                        <p class="titleProcessing font-weight-medium">
                             Product Done
                         </p>
                         <h4 class="mb-0 new">{{ dataCountStatus.LIST_DONE }}</h4>
@@ -42,7 +42,7 @@
                 </div>
                 </div>
                 <div @click="fetchDataBack" class="col-md-6">
-                <div class="card mini-stats-wid">
+                <div class="card mini-stats-wid"  :class="back">
                     <div class="card-body" id="text-media">
                     <div class="media">
                         <div class="titleProcessing media-body">
@@ -539,6 +539,18 @@ useInUrlQueryPropList() {
 buttonDisable() {
     return this.reasonTransfer.length <= 5;
 },
+done(){
+            return {
+                active:this.search.type == 1,
+                'bg-secondary':this.search.type == 1
+            }
+        },
+back(){
+            return {
+                active:this.search.type == 2,
+                'bg-secondary':this.search.type == 2
+            }
+        },
 },
 
 

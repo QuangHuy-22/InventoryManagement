@@ -123,17 +123,6 @@
                         >
                         </v-text-field>
                     </div>
-                    <!-- <div class="form-group form-erross">
-                        <label for="validationCustom01">Image</label>
-                        <div v-if="!image">
-                        <h2>Select an image</h2>
-                        <input type="file" @change="onFileChange">
-                        </div>
-                        <div v-else>
-                        <img :src="image" />
-                        <button @click="removeImage">Remove image</button>
-                        </div>
-                    </div> -->
                     <form ref="uploadForm" @submit.prevent="submit">
                     <input
                     type="file"

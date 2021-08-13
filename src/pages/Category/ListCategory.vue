@@ -95,7 +95,7 @@
                 <tbody>
                 <tr v-for="(category, index) in dataCategory" :key="index">
                     <td style="text-align: center">
-                    {{search.size * (search.page - 1) + index + 1}}
+                    {{ search.size * (search.page - 1) + index + 1}}
                     </td>
                     <td>{{ category.code }}</td>
                     <td>{{ category.name }}</td>
