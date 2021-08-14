@@ -171,6 +171,7 @@
             </div>
         </b-modal>
         <!-- ----------end modal error-------->
+
         </div>
     </div>
     </div>
@@ -229,11 +230,11 @@ async handleAddProductDetail() {
     }
     else if (response.status == 400) {
         this.errorMessage = response.data
-        this.$bvModal.show("bv-modal-example-error-update-user")
+        this.$bvModal.show("bv-modal-example-error-add-user")
     }
     else{
         this.errorMessage = response.data.message
-        this.$bvModal.show("bv-modal-example-error-update-user")
+        this.$bvModal.show("bv-modal-example-error-add-user")
     }
     } catch (error) {
     return error;
