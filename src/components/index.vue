@@ -375,7 +375,6 @@ export default {
             this.$router.push({ path: '/' })
         },
         handleSubmitLogout(){
-            console.log(this.token)
             axios({
                 method:'get',
                 url:`${this.BASE_URL}/api/logout`,
