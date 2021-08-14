@@ -191,12 +191,13 @@ components: { index },
                 this.$bvModal.show('bv-modal-example-3')
             }
             else if (response.status == 400) {
-                this.$bvModal.show("bv-modal-example-error-update-user")
                 this.errorMessage = response.data
+                this.$bvModal.show("bv-modal-example-error-update-user")
             }
-            else(
-            this.$bvModal.show("bv-modal-example-error-update-user")
-            )
+            else{
+                this.errorMessage = response.data
+                this.$bvModal.show("bv-modal-example-error-update-user")
+            }
         }
         catch(error){
             return error.response;
