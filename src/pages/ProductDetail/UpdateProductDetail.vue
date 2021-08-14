@@ -190,13 +190,14 @@ components: { index },
             if(response.status == 200){
                 this.$bvModal.show('bv-modal-example-3')
             }
-            else if (response.status == 400) {
-                this.$bvModal.show("bv-modal-example-error-update-user")
+            else if (response.status == 403) {
                 this.errorMessage = response.data
+                this.$bvModal.show('bv-modal-example-error-add-user')
             }
-            else(
-            this.$bvModal.show("bv-modal-example-error-update-user")
-            )
+            else{
+                this.errorMessage = response.data.message
+                this.$bvModal.show('bv-modal-example-error-add-user')
+            }
         }
         catch(error){
             return error.response;
