@@ -227,13 +227,13 @@ async handleAddProductDetail() {
         this.count = response.data
         this.$bvModal.show("bv-modal-example-3");
     }
-    else if (response.status == 403) {
+    else if (response.status == 400) {
         this.errorMessage = response.data
-        this.$bvModal.show('bv-modal-example-error-add-user')
+        this.$bvModal.show("bv-modal-example-error-update-user")
     }
     else{
         this.errorMessage = response.data.message
-        this.$bvModal.show('bv-modal-example-error-add-user')
+        this.$bvModal.show("bv-modal-example-error-update-user")
     }
     } catch (error) {
     return error;

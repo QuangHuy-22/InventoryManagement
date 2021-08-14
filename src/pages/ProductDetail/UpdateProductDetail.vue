@@ -195,7 +195,7 @@ components: { index },
                 this.$bvModal.show("bv-modal-example-error-update-user")
             }
             else{
-                this.errorMessage = response.data
+                this.errorMessage = response.data.message
                 this.$bvModal.show("bv-modal-example-error-update-user")
             }
         }
