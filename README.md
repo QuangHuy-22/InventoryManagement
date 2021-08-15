@@ -1,4 +1,3 @@
-# risk-management
 
 ## Project setup
 ```
