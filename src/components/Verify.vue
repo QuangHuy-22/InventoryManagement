@@ -5,7 +5,7 @@
 <div class="col-lg-12">
 <div class="text-center mb-5 text-muted">
 <a href="index.html" class="d-block auth-logo">
-    <img src="../assets/images/risk-color.svg" alt="" height="60" class="auth-logo-dark mx-auto">
+    <img src="../assets/images/images-removebg-preview.png" alt="" height="60" class="auth-logo-dark mx-auto">
 </a>
 </div>
 </div>
