@@ -401,7 +401,7 @@ return {
     dataCountStatus:[],
     params: {
     page: 1,
-    size: 10,
+    size: 5,
     },
     pagination: {
     total: 0,
@@ -533,7 +533,7 @@ changeSize(number){
 computed: {
 useInUrlQueryPropList() {
     return this.prepareQueryParamsMixin({
-    page: this.params.page,
+    page: this.search.page,
     });
 },
 buttonDisable() {
@@ -555,7 +555,7 @@ back(){
 
 
 watch: {
-"params.page": function() {
+"search.page": function() {
     this.$router.push({
     path: "/inventory/list-product-status",
     query: this.useInUrlQueryPropList,

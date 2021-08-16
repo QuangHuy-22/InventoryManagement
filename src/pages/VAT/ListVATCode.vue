@@ -143,14 +143,6 @@
                         <b-dropdown-item @click="$bvModal.show(String(vat.id))">
                             Delete
                         </b-dropdown-item>
-                        <b-dropdown-item @click="createVatDetail(vat.id)">
-                            Create VAT Detail
-                        </b-dropdown-item>
-                        <b-dropdown-item
-                            @click="createProductStatus(vat.id)"
-                        >
-                            Create Product Status List
-                        </b-dropdown-item>
 
 
                         <!-- ----modal delete role------- -->

@@ -310,14 +310,14 @@ return {
     dataCountStatus:[],
     params: {
     page: 1,
-    size: 10,
+    size: 5,
     },
     pagination: {
     total: 0,
     },
     search: {
         page:1,
-        size:20,
+        size:5,
         type:1,
         branchId:localStorage.getItem("branchId"), 
     },
@@ -367,6 +367,8 @@ async fetchData() {
     const response = await ProducService.getListStatusDetail(this.token, this.search);
     if (response.status === 200) {
         this.dataProduct = response.data.listData;
+        this.pagination.total = response.data.count;
+        console.log(this.pagination.total);
     }
     } catch (error) {
     console.log(error);
@@ -414,7 +416,7 @@ async exportExcel () {
     clearSearch() {
     this.search = {
     page:1,
-    size:20,
+    size:5,
     type:1,
     branchId:localStorage.getItem("branchId"), 
     };
@@ -432,10 +434,10 @@ changeSize(number){
 },
 
 computed: {
-useInUrlQueryPropList() {
+useInUrlQueryPropList () {
     return this.prepareQueryParamsMixin({
-    page: this.params.page,
-    });
+    page: this.search.page
+    })
 },
 buttonDisable() {
     return this.reasonTransfer.length <= 5;
@@ -455,9 +457,9 @@ back(){
 },
 
 watch: {
-"params.page": function() {
+"search.page": function() {
     this.$router.push({
-    path: "/inventory/product-status-detail",
+    path: "/inventory/product-detail-status",
     query: this.useInUrlQueryPropList,
     });
     this.fetchData();
