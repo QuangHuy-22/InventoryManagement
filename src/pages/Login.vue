@@ -96,7 +96,7 @@
 </template>
 
 <script scoped>
-import axios from "axios"
+// import axios from "axios"
 export default {
 name:"Login",
 props: {
@@ -115,54 +115,54 @@ props: {
     },
     methods:{
 handleSubmitLogin(){
-const headers = {
-'Content-Type': 'application/json',
-"User-Agent":"Web"
-}
-axios({
-    method:'post',
-    url:`${this.BASE_URL}/api/doLogin`,
-    headers: {
-        headers: headers
-    },
-    data:{
-    userName: this.username,
-    passWord: this.password
-    }
-    }).then((response)=>{
-    const message = response.status
-    const token = response.data.token
-    const emailName = response.data.email
-    const roleName = response.data.roleName
-    const branchId = response.data.branchId
-    const branchName = response.data.branchName
-    const userName = response.data.userName
-    const name = response.data.name
-    const id = response.data.id
+// const headers = {
+// 'Content-Type': 'application/json',
+// "User-Agent":"Web"
+// }
+// axios({
+//     method:'post',
+//     url:`${this.BASE_URL}/api/doLogin`,
+//     headers: {
+//         headers: headers
+//     },
+//     data:{
+//     userName: this.username,
+//     passWord: this.password
+//     }
+//     }).then((response)=>{
+//     const message = response.status
+//     const token = response.data.token
+//     const emailName = response.data.email
+//     const roleName = response.data.roleName
+//     const branchId = response.data.branchId
+//     const branchName = response.data.branchName
+//     const userName = response.data.userName
+//     const name = response.data.name
+//     const id = response.data.id
     
     
-    if(message === 200){
-        localStorage.setItem('token', token);
-        localStorage.setItem('roleName', roleName);
-        localStorage.setItem('email', emailName);
-        localStorage.setItem('branchId', branchId);
-        localStorage.setItem('branchName', branchName);
-        localStorage.setItem('userName', userName);
-        localStorage.setItem('name', name);
-        localStorage.setItem('userId', id);
-        this.email = response.data.username
-        this.dataPermission = response.data.listPermission
-        this.$store.commit("SET_USERNAME", this.email)
+//     if(message === 200){
+//         localStorage.setItem('token', token);
+//         localStorage.setItem('roleName', roleName);
+//         localStorage.setItem('email', emailName);
+//         localStorage.setItem('branchId', branchId);
+//         localStorage.setItem('branchName', branchName);
+//         localStorage.setItem('userName', userName);
+//         localStorage.setItem('name', name);
+//         localStorage.setItem('userId', id);
+//         this.email = response.data.username
+//         this.dataPermission = response.data.listPermission
+//         this.$store.commit("SET_USERNAME", this.email)
             this.$router.push('/home-page')
-    }
-    })
-    .catch((error) => {
-        if (error.response.status) {
-            this.$bvModal.show("bv-modal-example-error-login")
-            this.errorMessage = error.response.data.message
-        }
-        return error.response;
-    });
+    // }
+    // })
+    // .catch((error) => {
+    //     if (error.response.status) {
+    //         this.$bvModal.show("bv-modal-example-error-login")
+    //         this.errorMessage = error.response.data.message
+    //     }
+    //     return error.response;
+    // });
 },
     },
     computed:{

@@ -12,7 +12,7 @@
                 <!-- <img src="../assets/images/your-logo.png" alt="" height="" > -->
             </span>
             <span class="logo-lg" v-show="logoRisk">
-                <img src="../assets/images/your-logo.png" alt="" height="50" width="150">
+                <img src="../assets/images/logo-fn.png" alt="" height="60" width="200">
             </span>
         </router-link>
     </div>
@@ -25,7 +25,7 @@
 </div>
 <!-- show-sidebar -->
     <!-- App Search-->
-    <form class="app-search d-none d-lg-block ">
+    <form class="app-search d-none d-lg-block align-center">
         <div class="position-relative d-flex">
             <!-- <b-icon icon="search"></b-icon> -->
             <input type="text" class="find form-control" placeholder="Search..." >
@@ -121,123 +121,73 @@
             <b-button  v-b-toggle.collapse-2 id="toggle-sidebar" class="m-1" ><div class="content-sidebar" style="padding: 0px">
                 <li class="text-sidebar" :class="product" >
                 <b-icon icon="phone-vibrate" style="padding-right: 25px;"></b-icon>
-                <span key="t-calendar">Product</span>
+                <span key="t-calendar">Sản phẩm</span>
+            </li>
+            </div>
+        </b-button >
+    </div>
+            <!-- ------------------------------- -->
+            <div>
+            <b-button  v-b-toggle.collapse-2 id="toggle-sidebar" class="m-1" ><div class="content-sidebar" style="padding: 0px">
+                <li class="text-sidebar" :class="product" >
+                <b-icon icon="card-checklist" style="padding-right: 25px;"></b-icon>
+                <span key="t-calendar">Nhà cung cấp</span>
+            </li>
+            </div>
+            </b-button >
+            </div>
+            <!-- ------------------------------- -->
+            <div>
+            <b-button  v-b-toggle.collapse-2 id="toggle-sidebar" class="m-1" ><div class="content-sidebar" style="padding: 0px">
+                <li class="text-sidebar" :class="product" >
+                <b-icon icon="bag-dash" style="padding-right: 25px;"></b-icon>
+                <span key="t-calendar">Đơn hàng</span>
+            </li>
+            </div>
+            </b-button >
+            </div>
+            <!-- ------------------------------- -->
+            <div>
+            <b-button  v-b-toggle.collapse-2 id="toggle-sidebar" class="m-1" ><div class="content-sidebar" style="padding: 0px">
+                <li class="text-sidebar" :class="product" >
+                <b-icon icon="cart-plus"  style="padding-right: 25px;"></b-icon>
+                <span key="t-calendar">Giỏ hàng</span>
+            </li>
+            </div>
+            </b-button >
+            </div>
+            <!-- ------------------------------- -->
+            <div>
+            <b-button  v-b-toggle.collapse-2 id="toggle-sidebar" class="m-1" ><div class="content-sidebar" style="padding: 0px">
+                <li class="text-sidebar" :class="product" >
+                <b-icon icon="card-list " style="padding-right: 25px;"></b-icon>
+                <span key="t-calendar">Danh mục</span>
+            </li>
+            </div>
+            </b-button >
+            </div>
+            <!-- ------------------------------- -->
+            <div>
+            <b-button  v-b-toggle.collapse-2 id="toggle-sidebar" class="m-1" ><div class="content-sidebar" style="padding: 0px">
+                <li class="text-sidebar" :class="product" >
+                <b-icon icon="person-square" style="padding-right: 25px;"></b-icon>
+                <span key="t-calendar">Người dùng</span>
+            </li>
+            </div>
+            </b-button >
+            </div>
+            <div>
+            <b-button  v-b-toggle.collapse-2 id="toggle-sidebar" class="m-1" ><div class="content-sidebar" style="padding: 0px">
+                <li class="text-sidebar" :class="product" >
+                <b-icon icon="diagram3"  style="padding-right: 25px;"></b-icon>
+                <span key="t-calendar">Quyền chức năng</span>
             </li>
             </div>
             </b-button >
             </div>
             <!-- Element to collapse -->
-            <b-collapse id="collapse-2" class="content-sidebar-menu">
-                <!-- ----category---- -->
-            <div class="content-sidebar">
-            <router-link to="/product/category" style="color: #474D52;" :class="category">
-                <li>
-                <b-icon icon="calculator-fill" style="padding-right: 25px;"></b-icon>
-                <span key="t-calendar">Category</span>
-            </li>
-            </router-link>
             </div>
-            <!-- ------product info------- -->
-            <div class="content-sidebar" >
-                <router-link to='/product/product-info' style="color: #474D52;" :class="productInfo">
-                        <li>
-                <b-icon icon="phone" style="padding-right: 25px; text-decoration: none;"></b-icon>
-                <span key="t-utility">Product Info</span>
-                </li>
-                </router-link>
-            </div>
-            <!-- ------------Product detail----------- -->
-            <div class="content-sidebar" >
-                <router-link to='/product/product-detail' style="color: #474D52;" :class="productDetail">
-                        <li>
-                <b-icon icon="telephone" style="padding-right: 25px; text-decoration: none;"></b-icon>
-                <span key="t-utility">Product Detail</span>
-                </li>
-                </router-link>
-            </div>
-            </b-collapse>
-            </div>
-            <!-- -------End Product------- -->
 
-            <!-- -------Inventory------- -->
-            <div>
-            <!-- Using modifiers -->
-            <div>
-        <b-button  v-b-toggle.collapse-3 id="toggle-sidebar" class="m-1"><div class="content-sidebar" style="padding: 0px">
-                <li class="text-sidebar" :class="inventory">
-                <b-icon icon="graph-up" style="padding-right: 25px"></b-icon>
-                <span key="t-calendar">Inventory</span>
-            </li>
-            </div>
-            </b-button >
-            </div>
-            <!-- Element to collapse -->
-            <b-collapse id="collapse-3" class="content-sidebar-menu">
-                <!-- ----VAT---- -->
-                <div class="content-sidebar" >
-                <router-link to='/inventory/list-vat' style="color: #474D52;" :class="vat">
-                        <li>
-                <b-icon icon="card-checklist" style="padding-right: 25px; text-decoration: none;"></b-icon>
-                <span key="t-utility">VAT</span>
-                </li>
-                </router-link>
-                </div>
-                <!-- --------Vat Detail--------- -->
-                <div class="content-sidebar" >
-                <router-link to='/inventory/vat-detail' style="color: #474D52;" :class="vatDetail">
-                        <li>
-                <b-icon icon="card-list" style="padding-right: 25px; text-decoration: none;"></b-icon>
-                <span key="t-utility">VAT Detail</span>
-                </li>
-                </router-link>
-                </div>
-                <!-- ----------Product----------- -->
-                <div class="content-sidebar">
-                <router-link to='/inventory/list-product-status' style="color: #474D52;" :class="productStatus">
-                        <li>
-                <b-icon icon="calculator" style="padding-right: 25px; text-decoration: none;"></b-icon>
-                <span key="t-utility">Product Status</span>
-                </li>
-                </router-link>
-                </div>
-                <div class="content-sidebar" >
-                <router-link to='/inventory/product-detail-status' style="color: #474D52;" :class="productStatusDetail">
-                        <li>
-                <b-icon icon="file-spreadsheet" style="padding-right: 25px; text-decoration: none;"></b-icon>
-                <span key="t-utility">Product Status Detail</span>
-                </li>
-                </router-link>
-                </div>
-                <!-- -----------Issue--------- -->
-                <div class="content-sidebar" >
-                <router-link to='/inventory/list-issue' style="color: #474D52;" :class="issue">
-                        <li>
-                <b-icon icon="calendar3-event" style="padding-right: 25px; text-decoration: none;"></b-icon>
-                <span key="t-utility">Issue</span>
-                </li>
-                </router-link>
-                </div>
-                <!-- -----------Issue Detail--------- -->
-                <div class="content-sidebar" >
-                <router-link to='/inventory/issue-detail' style="color: #474D52;" :class="issueDetail">
-                        <li>
-                <b-icon icon="card-text" style="padding-right: 25px; text-decoration: none;"></b-icon>
-                <span key="t-utility">Issue Detail</span>
-                </li>
-                </router-link>
-                </div>
-                <!-- -----------Shelf--------- -->
-                <div class="content-sidebar" >
-                <router-link to='/inventory/shelf' style="color: #474D52;" :class="shelf">
-                        <li>
-                <b-icon icon="bookshelf" style="padding-right: 25px; text-decoration: none;"></b-icon>
-                <span key="t-utility">Shelf</span>
-                </li>
-                </router-link>
-                </div>
-            </b-collapse>
-            </div>
-            <!-- -------End Inventory------- -->
             
             <!-- -------Management------- -->
             <div>
@@ -246,7 +196,7 @@
             <b-button  v-b-toggle.collapse-4 id="toggle-sidebar" class="m-1"><div class="content-sidebar" style="padding: 0px">
                 <li class="text-sidebar" :class="management">
                 <b-icon icon="bag-dash" style="padding-right: 25px;"></b-icon>
-                <span key="t-calendar">Management</span>
+                <span key="t-calendar">Địa chỉ</span>
             </li>
             </div>
             </b-button >
@@ -254,29 +204,29 @@
             <!-- Element to collapse -->
             <b-collapse id="collapse-4" class="content-sidebar-menu">
                 <!-- ----Branch---- -->
-                <div class="content-sidebar"  v-if="roleName == 'ADMIN'" >
+                <div class="content-sidebar"   >
                 <router-link to='/management/branch' style="color: #474D52;" :class="branchList">
                         <li>
                 <b-icon icon="building" style="padding-right: 25px; text-decoration: none;"></b-icon>
-                <span key="t-utility">Branch</span>
+                <span key="t-utility">Tỉnh/ Thành phố</span>
                 </li>
                 </router-link>
                 </div>
                 <!-- -------Role------ -->
-                <div class="content-sidebar"  v-if="roleName == 'ADMIN'" >
+                <div class="content-sidebar"   >
                 <router-link to='/management/list-role' style="color: #474D52;" :class="role">
                         <li>
                 <b-icon icon="diagram3" style="padding-right: 25px; text-decoration: none;"></b-icon>
-                <span key="t-utility">Role</span>
+                <span key="t-utility">Quận/ Huyện</span>
                 </li>
                 </router-link>
                 </div> 
                 <!-- ---------User---------  -->
-                <div class="content-sidebar"  v-if="roleName == 'ADMIN' || roleName == 'MANAGER'" >
+                <div class="content-sidebar"  >
                 <router-link to='/management/list-user' style="color: #474D52;" :class="userList">
                         <li>
-                <b-icon icon="person-square" style="padding-right: 25px; text-decoration: none;"></b-icon>
-                <span key="t-utility">User</span>
+                <b-icon icon="joystick" style="padding-right: 25px; text-decoration: none;"></b-icon>
+                <span key="t-utility">Xã Phường</span>
                 </li>
                 </router-link>
             </div>
@@ -284,17 +234,8 @@
                 <div class="content-sidebar" >
                 <router-link to='/management/customer' style="color: #474D52;" :class="customer">
                         <li>
-                <b-icon icon="person-circle" style="padding-right: 25px; text-decoration: none;"></b-icon>
-                <span key="t-utility">Customer</span>
-                </li>
-                </router-link>
-                </div>
-                <!-- -------Supplier------- -->
-                <div class="content-sidebar" >
-                <router-link to='/management/supplier' style="color: #474D52;" :class="supplier">
-                        <li>
-                <b-icon icon="cart-plus" style="padding-right: 25px; text-decoration: none;"></b-icon>
-                <span key="t-utility">Supplier</span>
+                <b-icon icon="recycle" style="padding-right: 25px; text-decoration: none;"></b-icon>
+                <span key="t-utility">Đường</span>
                 </li>
                 </router-link>
                 </div>

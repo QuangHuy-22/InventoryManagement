@@ -3,7 +3,7 @@
   <index />
   <div class="content-page">
       <div class="menu-content">
-        <div class="main-content">
+        <div class="main-content" style="height: 100vh;">
           <div class="page-content">
             <div class="page-text">
               <div class="">
@@ -13,13 +13,13 @@
                 </div>
               </article>
               </div>
-              <div class="x-block d-md-flex justify-content-between" style="margin-top:270px">
+              <!-- <div class="x-block d-md-flex justify-content-between" style="margin-top:270px">
                 <div class="flex-item card">
                 <router-link to="/product/product-info">
                   <a class="link-wrapper">
                     <div><img src="../assets/images/product-info.webp" alt="" ></div>
                     <div class="card-body">
-                      <h3>Product Info</h3>
+                      <h3>Product Info22</h3>
                     </div>
                   </a>
                   </router-link>
@@ -54,7 +54,7 @@
                   </a>
                   </router-link>
                 </div>
-              </div>
+              </div> -->
             </div>
         </div>
       </div>
